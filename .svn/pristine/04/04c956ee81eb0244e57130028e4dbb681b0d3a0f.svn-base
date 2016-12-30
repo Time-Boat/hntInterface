@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20130114" releaseVersion="7.0.4">
+<TableDataMap>
+<TableData name="ds_T_Type" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[T_Type]A]]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2743200,4343400,6019800,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" s="0">
+<O>
+<![CDATA[id]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="0" s="0">
+<O>
+<![CDATA[类型编号]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="0" s="0">
+<O>
+<![CDATA[类型名称]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="0" s="0">
+<O>
+<![CDATA[新增]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="0" s="0">
+<O>
+<![CDATA[删除]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_T_Type" columnName="id"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ValueHighlightAction">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=row() - 1]]></Attributes>
+</O>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand dir="0"/>
+</C>
+<C c="1" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_T_Type" columnName="typeid"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="2" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_T_Type" columnName="typename"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="3" r="1">
+<Widget class="com.fr.report.web.ui.impl.write.AppendRowButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[插入行]]></Text>
+<IconName>
+<![CDATA[add]]></IconName>
+<FixCell row="1" col="0"/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="1">
+<Widget class="com.fr.report.web.ui.impl.write.DeleteRowButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[删除行]]></Text>
+<IconName>
+<![CDATA[delete]]></IconName>
+<FixCell row="1" col="0"/>
+</Widget>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting/>
+</ReportSettings>
+</ReportAttrSet>
+<ReportWriteAttr>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL1">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_Type"/>
+<ColumnConfig name="typeid" isKey="true" skipUnmodified="true">
+<ColumnRow column="1" row="1"/>
+</ColumnConfig>
+<ColumnConfig name="typename" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="1"/>
+</ColumnConfig>
+</DMLConfig>
+</Submiter>
+</ReportWriteAttr>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="1">
+<IM>
+<![CDATA[lO<9(kN.ld@UNU%p%320!n'b-/BYg<,j0G'R/e[g!1sg(hcUmbkA>4,]A#Jgf\q&HQh5@CJR^
+#%qcDHC$>CC+d&"1&_H-0lsXsFK1T_"mO*([&S\i>FDge*$X+HSAEjI.<+:*)B&0KHFSAts#
+%:\MsqC6!%F+WLpd(!M1$r_!8pcf"'QkH`A^Ta:]A~
+]]></IM>
+</Background>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAE"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

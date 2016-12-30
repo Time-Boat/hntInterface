@@ -1,0 +1,352 @@
+package com.shtoone.qms.controller.bhz;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.jeecgframework.core.common.controller.BaseController;
+import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
+import org.jeecgframework.core.common.model.json.AjaxJson;
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.constant.Globals;
+import org.jeecgframework.core.util.ResourceUtil;
+import org.jeecgframework.core.util.StringUtil;
+import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.web.system.service.SystemService;
+import org.jeecgframework.core.util.MyBeanUtils;
+
+import com.shtoone.qms.entity.bhz.HntbhzziduancfgViewEntity;
+import com.shtoone.qms.entity.bhz.HunnintuchaobiaoViewEntity;
+import com.shtoone.qms.entity.bhz.TopRealMaxhunnintuViewEntity;
+import com.shtoone.qms.entity.bhz.XiangxixxjieguoEntity;
+import com.shtoone.qms.service.bhz.HunnintuchaobiaoViewServiceI;
+import com.shtoone.qms.service.bhz.TopRealMaxhunnintuViewServiceI;
+import com.shtoone.qms.service.bhz.XiangxixxjieguoServiceI;
+import com.shtoone.qms.util.GetDate;
+
+/**   
+ * @Title: Controller
+ * @Description: 混凝土超标视图
+ * @author zhangdaihao
+ * @date 2015-06-19 14:37:10
+ * @vehntchaobiaoViewion V1.0   
+ *
+ */
+@Controller
+@RequestMapping("/hunnintuchaobiaoViewController")
+public class HunnintuchaobiaoViewController extends BaseController {
+
+	@Autowired
+	private HunnintuchaobiaoViewServiceI hunnintuchaobiaoViewService;
+	
+	@Autowired
+	private SystemService systemService;
+	
+	@Autowired
+	private TopRealMaxhunnintuViewServiceI topRealMaxhunnintuViewService;
+	
+	@Autowired
+	private XiangxixxjieguoServiceI xiangxixxjieguoService;
+	
+	private String message;
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+
+	/**
+	 * 混凝土超标视图列表 页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "hunnintuchaobiaoView")
+	public ModelAndView hunnintuchaobiaoView(HttpServletRequest request) {
+		return new ModelAndView("com/shtoone/qms/entity/bhz/hunnintuchaobiaoViewList");
+	}
+
+	/**
+	 * easyui AJAX请求数据
+	 * 
+	 * @param request
+	 * @param response
+	 * @param dataGrid
+	 * @param user
+	 */
+
+	@RequestMapping(params = "datagrid")
+	public void datagrid(HunnintuchaobiaoViewEntity hunnintuchaobiaoView,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+		CriteriaQuery cq = new CriteriaQuery(HunnintuchaobiaoViewEntity.class, dataGrid);
+		//查询条件组装器
+		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, hunnintuchaobiaoView, request.getParameterMap());
+		this.hunnintuchaobiaoViewService.getDataGridReturn(cq, true);
+		TagUtil.datagrid(response, dataGrid);
+	}
+
+	/**
+	 * 删除混凝土超标视图
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "del")
+	@ResponseBody
+	public AjaxJson del(HunnintuchaobiaoViewEntity hunnintuchaobiaoView, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		hunnintuchaobiaoView = systemService.getEntity(HunnintuchaobiaoViewEntity.class, hunnintuchaobiaoView.getId());
+		message = "混凝土超标视图删除成功";
+		hunnintuchaobiaoViewService.delete(hunnintuchaobiaoView);
+		systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+		
+		j.setMsg(message);
+		return j;
+	}
+
+
+	/**
+	 * 添加混凝土超标视图
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(params = "save")
+	@ResponseBody
+	public AjaxJson save(HunnintuchaobiaoViewEntity hunnintuchaobiaoView, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		if (StringUtil.isNotEmpty(hunnintuchaobiaoView.getId())) {
+			message = "混凝土超标视图更新成功";
+			HunnintuchaobiaoViewEntity t = hunnintuchaobiaoViewService.get(HunnintuchaobiaoViewEntity.class, hunnintuchaobiaoView.getId());
+			try {
+				MyBeanUtils.copyBeanNotNull2Bean(hunnintuchaobiaoView, t);
+				hunnintuchaobiaoViewService.saveOrUpdate(t);
+				systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
+			} catch (Exception e) {
+				e.printStackTrace();
+				message = "混凝土超标视图更新失败";
+			}
+		} else {
+			message = "混凝土超标视图添加成功";
+			hunnintuchaobiaoViewService.save(hunnintuchaobiaoView);
+			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
+		}
+		j.setMsg(message);
+		return j;
+	}
+
+	/**
+	 * 混凝土超标视图列表页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "addorupdate")
+	public ModelAndView addorupdate(HunnintuchaobiaoViewEntity hunnintuchaobiaoView, HttpServletRequest req) {
+		if (StringUtil.isNotEmpty(hunnintuchaobiaoView.getId())) {
+			hunnintuchaobiaoView = hunnintuchaobiaoViewService.getEntity(HunnintuchaobiaoViewEntity.class, hunnintuchaobiaoView.getId());
+			req.setAttribute("hunnintuchaobiaoViewPage", hunnintuchaobiaoView);
+		}
+		return new ModelAndView("com/shtoone/qms/entity/bhz/hunnintuchaobiaoView");
+	}
+	
+	
+	
+	@RequestMapping(params = "hntxiangxicaocha")
+	public ModelAndView hntxiangxicaocha(TopRealMaxhunnintuViewEntity topRealMaxhunnintuView, HttpServletRequest req) {
+		
+		Integer jieguoid=new Integer(req.getParameter("jieguoid"));
+		if (StringUtil.isNotEmpty(jieguoid)) {
+			//Integer xxid=new Integer(topRealMaxhunnintuView.getId());//接触信息编号
+			Integer xxid=new Integer(req.getParameter("xxid"));
+			String shebeibianhao=req.getParameter("shebeibianhao");
+			String operationType=req.getParameter("operationType");//操作类型 1：查看  2：处理  3：审批
+			req.setAttribute("operationType", operationType);
+			System.out.println(topRealMaxhunnintuView.getId()+">>>>>结果编号"+jieguoid+">>>>>>信息编号："+xxid+">>>>设备编号："+shebeibianhao);
+
+			if (xxid > 0) {
+				
+				HntbhzziduancfgViewEntity hbfield = topRealMaxhunnintuViewService.hntfieldnamefindBybh(shebeibianhao);
+				req.setAttribute("hntbhzField", hbfield);//字段配置
+				HunnintuchaobiaoViewEntity hntchaobiaoView=hunnintuchaobiaoViewService.getEntity(HunnintuchaobiaoViewEntity.class, xxid);
+				
+				try {
+					hntchaobiaoView.setFenliao5_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getFenliao5_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setFenliao5_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getFenliao5_lilunzhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setFenliao6_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getFenliao6_shijizhi())));
+				} catch (Exception e) {						
+				}
+				try {
+					hntchaobiaoView.setFenliao6_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getFenliao6_lilunzhi())));
+				} catch (Exception e) {						
+				}
+				try {
+					hntchaobiaoView.setSha2_shijizhi(String.format("%1$.0f", new Float(hntchaobiaoView.getSha2_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setSha2_lilunzhi(String.format("%1$.0f", new Float(hntchaobiaoView.getSha2_lilunzhi())));
+				} catch (Exception e) {}
+				
+				try {
+					hntchaobiaoView.setSha1_shijizhi(String.format("%1$.0f", new Float(hntchaobiaoView.getSha1_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setSha1_lilunzhi(String.format("%1$.0f", new Float(hntchaobiaoView.getSha1_lilunzhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setShi1_shijizhi(String.format("%1$.0f", new Float(hntchaobiaoView.getShi1_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setShi1_lilunzhi(String.format("%1$.0f", new Float(hntchaobiaoView.getShi1_lilunzhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setShi2_shijizhi(String.format("%1$.0f", new Float(hntchaobiaoView.getShi2_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setShi2_lilunzhi(String.format("%1$.0f", new Float(hntchaobiaoView.getShi2_lilunzhi())));
+				} catch (Exception e) {}
+				
+				try {
+					hntchaobiaoView.setShui2_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getShui2_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setShui2_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getShui2_lilunzhi())));
+				} catch (Exception e) {}
+				
+				try {
+					hntchaobiaoView.setShui1_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getShui1_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setShui1_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getShui1_lilunzhi())));
+				} catch (Exception e) {}
+				
+				try {
+					hntchaobiaoView.setWaijiaji1_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getWaijiaji1_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setWaijiaji1_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getWaijiaji1_lilunzhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setWaijiaji2_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getWaijiaji2_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setWaijiaji2_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getWaijiaji2_lilunzhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setWaijiaji3_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getWaijiaji3_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setWaijiaji3_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getWaijiaji3_lilunzhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setWaijiaji4_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getWaijiaji4_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setWaijiaji4_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getWaijiaji4_lilunzhi())));
+				} catch (Exception e) {}
+				
+				
+				try {
+					hntchaobiaoView.setGuliao5_shijizhi(String.format("%1$.0f", new Float(hntchaobiaoView.getGuliao5_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setGuliao5_lilunzhi(String.format("%1$.0f", new Float(hntchaobiaoView.getGuliao5_lilunzhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setShuini1_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getShuini1_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setShuini1_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getShuini1_lilunzhi())));
+				} catch (Exception e) {}
+				
+				try {
+					hntchaobiaoView.setShuini2_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getShuini2_shijizhi())));
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setShuini2_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getShuini2_lilunzhi())));
+				} catch (Exception e) {}
+				
+				try {
+					hntchaobiaoView.setKuangfen3_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getKuangfen3_shijizhi())));
+				} catch (Exception e) {}
+				
+				try {
+					hntchaobiaoView.setKuangfen3_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getKuangfen3_lilunzhi())));
+				} catch (Exception e) {}
+				
+				try {
+					hntchaobiaoView.setFeimeihui4_shijizhi(String.format("%1$.2f", new Float(hntchaobiaoView.getFeimeihui4_shijizhi())));	
+				} catch (Exception e) {}
+				try {
+					hntchaobiaoView.setFeimeihui4_lilunzhi(String.format("%1$.2f", new Float(hntchaobiaoView.getFeimeihui4_lilunzhi())));	
+				} catch (Exception e) {}
+				
+				req.setAttribute("hunnintuchaobiaoView", hntchaobiaoView);
+				//XiangxixxjieguoEntity xiangxixxjieguo=xiangxixxjieguoService.findByxinxibianhao(xxid);
+				XiangxixxjieguoEntity xiangxixxjieguo=xiangxixxjieguoService.getEntity(XiangxixxjieguoEntity.class, jieguoid);
+				req.setAttribute("xiangxijieguovalue", xiangxixxjieguo);
+			}
+			
+		}
+		return new ModelAndView("com/shtoone/qms/bhz/hntxiangxicaocha");
+	}
+	
+	
+	@RequestMapping(params = "savecbchuzhi")
+	@ResponseBody
+	public AjaxJson savecbchuzhi(HunnintuchaobiaoViewEntity hunnintuchaobiaoView, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		String jieguobianhao=request.getParameter("hunnintuchaobiaoView.jieguobianhao");
+		if (StringUtil.isNotEmpty(jieguobianhao)) {
+			message = "混凝土超标处置成功";
+			String operationType=request.getParameter("operationType");
+			if(operationType.equals("1")){
+				message="混凝土超标信息查看";
+			}else if(operationType.equals("2")){
+				message="混凝土超标处置成功";
+				String wentiyuanyin=request.getParameter("xiangxijieguovalue.wentiyuanyin");//问题原因
+				String chulifangshi=request.getParameter("xiangxijieguovalue.chulifangshi");//处理方式
+				String chulijieguo=request.getParameter("xiangxijieguovalue.chulijieguo");//处理结果
+				String beizhu=request.getParameter("xiangxijieguovalue.beizhu");//备注
+				XiangxixxjieguoEntity tempObj=xiangxixxjieguoService.getEntity(XiangxixxjieguoEntity.class, new Integer(jieguobianhao));
+				tempObj.setWentiyuanyin(wentiyuanyin);
+				tempObj.setChulifangshi(chulifangshi);
+				tempObj.setChulijieguo(chulijieguo);
+				tempObj.setChulishijian(GetDate.getNowTime("yyyy-MM-dd HH:mm:ss"));
+				tempObj.setBeizhu(beizhu);
+				//HttpSession session = request.getSession();
+				//String fullname=(String) session.getAttribute("fullname");//获取系统当前登录用户
+				tempObj.setChuliren(ResourceUtil.getSessionUserName().getRealName());
+				xiangxixxjieguoService.saveOrUpdate(tempObj);
+				systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
+			}else if(operationType.equals("3")){
+				message="混凝土超标审批成功";
+				String jianlishenpi=request.getParameter("xiangxijieguovalue.jianlishenpi");//建立审批
+				String jianliresult=request.getParameter("xiangxijieguovalue.jianliresult");//建立结果
+				XiangxixxjieguoEntity tempObj=xiangxixxjieguoService.getEntity(XiangxixxjieguoEntity.class, new Integer(jieguobianhao));
+				tempObj.setJianlishenpi(jianlishenpi);
+				tempObj.setJianliresult(jianliresult);
+				tempObj.setShenpidate(GetDate.getNowTime("yyyy-MM-dd HH:mm:ss"));
+				tempObj.setConfirmdate(GetDate.getNowTime("yyyy-MM-dd HH:mm:ss"));
+				tempObj.setShenpiren(ResourceUtil.getSessionUserName().getRealName());//审批人获取当前登录用户
+				tempObj.setFasongcishu(1);//审批完成后发送次数置为1
+				xiangxixxjieguoService.saveOrUpdate(tempObj);
+				systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
+			}
+		}else{
+			message = "混凝土超标处置失败";
+		}
+		j.setMsg(message);
+		return j;
+	}
+	
+	
+}

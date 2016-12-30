@@ -1,0 +1,15 @@
+package com.shtoone.qms.service.bhz;
+
+import net.sf.json.JSONObject;
+
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.common.service.CommonService;
+
+import com.shtoone.qms.entity.bhz.ChuliaokouTemperaturedataViewEntity;
+
+public interface ChuliaokouTemperaturedataViewServiceI extends CommonService{
+	public JSONObject getDatagrid3(ChuliaokouTemperaturedataViewEntity chuliaokouTemperaturedataView,
+			DataGrid dataGrid,String startTime,String endTime,Integer userlft,Integer userrgt,String shebeibianhao);
+	
+	public String getChuliaokouXml(JSONObject jObject, String shebeibianhao);
+}

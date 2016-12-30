@@ -1,0 +1,3964 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20130114" releaseVersion="7.0.4">
+<TableDataMap>
+<TableData name="ds_shiyanshi" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="shiyanshi_guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="loginsysid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[ShiyanshiInfo]A where 1=2 ${if(len(loginsysid)!=0&&len(shiyanshi_guid)==0," or shiyanshi_guid = '"+loginsysid+"'",'')} ${if(len(shiyanshi_guid)==0,""," or shiyanshi_guid = '"+shiyanshi_guid+"'")}
+]]></Query>
+</TableData>
+<TableData name="ds_shiyanshi1" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[ShiyanshiInfo]A]]></Query>
+</TableData>
+<TableData name="ds_testrec" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="rec_guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[T_USER_TEST_REC]A where 1=2 ${if(len(rec_guid)==0,""," or rec_guid = '"+rec_guid+"'")}]]></Query>
+</TableData>
+<TableData name="ds_T_T100007" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="rec_guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[T_T100007]A where 1=2 ${if(len(rec_guid)==0,""," or rec_guid='"+rec_guid+"'")}]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebWriteContent>
+<Listener event="writesuccess">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[window.location.href="${contextPath}/ReportServer?reportlet=T_ConsignList.cpt&op=write";]]></Content>
+</JavaScript>
+</Listener>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.ui.impl.write.Submit">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Utils-Submit')}]]></Text>
+<IconName>
+<![CDATA[submit]]></IconName>
+<Verify failVerifySubmit="false"/>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.write.Verify">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Verify-Data_Verify')}]]></Text>
+<IconName>
+<![CDATA[verify]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.FlashPrint">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Utils-Print[Client]A')}]]></Text>
+<IconName>
+<![CDATA[flashprint]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.Print">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Print')}]]></Text>
+<IconName>
+<![CDATA[print]]></IconName>
+<PrintButtons/>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Export')}]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="true" excelO="true" excelS="true" word="true" image="true" html="true"/>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.Email">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Email')}]]></Text>
+<IconName>
+<![CDATA[email]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.write.AppendColumnRow">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Add')}${i18n('Record')}]]></Text>
+<IconName>
+<![CDATA[appendcolumn]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.write.ShowCellValue">
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="false"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue/>
+</Widget>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<SelectedColor/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="试验任务委托单">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[1152000,800100,762000,1152000,288000,1440000,1440000,1440000,1440000,1440000,1440000,1440000,2160000,1440000,1440000,1440000,1440000,3600000,3600000,1440000,1440000,1440000,1440000,1524000,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2362200,3657600,4991100,1143000,3771900,2743200,2743200,2247900,5638800,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="8" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshi" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="0">
+<O>
+<![CDATA[试验rec_guid]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="0" r="1" s="1">
+<O>
+<![CDATA[]]></O>
+<NameJavaScriptGroup>
+<NameJavaScript name="网络报表1">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<Parameters/>
+<TargetFrame>
+<![CDATA[_blank]]></TargetFrame>
+<Features width="600" height="400"/>
+<ReportletName showPI="true">
+<![CDATA[$list]]></ReportletName>
+</JavaScript>
+</JavaScript>
+</NameJavaScript>
+</NameJavaScriptGroup>
+<Expand/>
+</C>
+<C c="1" r="1">
+<Expand/>
+</C>
+<C c="2" r="1" cs="3" rs="2" s="2">
+<O>
+<![CDATA[试验任务委托单]]></O>
+<NameJavaScriptGroup>
+<NameJavaScript name="网络报表1">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<Parameters/>
+<TargetFrame>
+<![CDATA[_self]]></TargetFrame>
+<Features width="600" height="400"/>
+<ReportletName showPI="true">
+<![CDATA[/T_ConsignList.cpt&op=write]]></ReportletName>
+</JavaScript>
+</JavaScript>
+</NameJavaScript>
+</NameJavaScriptGroup>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="1" cs="3">
+<O>
+<![CDATA[表号：铁建试通管 02]]></O>
+<Expand/>
+</C>
+<C c="8" r="1">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(nr==1 && len(rec_guid)==0,CreateGuid($fr_username,sessionID,TODAY(),"100007"),ds_testrec.select(rec_guid))]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="0" r="2">
+<Expand/>
+</C>
+<C c="1" r="2">
+<Expand/>
+</C>
+<C c="5" r="2" cs="3">
+<O>
+<![CDATA[批准文号：铁建设函[2009]A27号]]></O>
+<Expand/>
+</C>
+<C c="0" r="3">
+<O>
+<![CDATA[委托单位]]></O>
+<Expand/>
+</C>
+<C c="1" r="3" cs="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_WTDW"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="4" r="3" s="4">
+<O>
+<![CDATA[委托编号  ]]></O>
+<Expand/>
+</C>
+<C c="5" r="3" cs="3" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_WTBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="5" cs="2" s="5">
+<O>
+<![CDATA[样品名称]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="5" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="YPMC"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="0" r="6" cs="2" s="5">
+<O>
+<![CDATA[送样编号]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="6" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="SYBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="7" cs="2" s="5">
+<O>
+<![CDATA[产地厂名]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="7" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_YPCD"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="8" cs="2" s="5">
+<O>
+<![CDATA[试样数量]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="8" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="SYSULiang"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="9" cs="2" s="6">
+<O>
+<![CDATA[规格种类]]></O>
+<Expand/>
+</C>
+<C c="2" r="9" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_SDXDJ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="10" cs="2" s="5">
+<O>
+<![CDATA[代表数量]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="10" cs="6" s="7">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_DBSL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="0" r="11" cs="2" s="5">
+<O>
+<![CDATA[取样地点]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="11" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="QYDD"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="12" cs="2" s="5">
+<O>
+<![CDATA[样品描述]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="12" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="YPMS"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="13" cs="2" s="5">
+<O>
+<![CDATA[取样日期]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="13" cs="6" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="QYRQ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="14" cs="2" s="5">
+<O>
+<![CDATA[工程名称]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="14" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_GCMC"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="15" cs="2" s="5">
+<O>
+<![CDATA[施工部位]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="15" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_SGBW"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="16" cs="2" s="5">
+<O>
+<![CDATA[检验标准]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="16" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="JYBZ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="17" cs="2" s="5">
+<O>
+<![CDATA[试验项目]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="17" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="SYXMMC"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="18" cs="2" s="5">
+<O>
+<![CDATA[试样验收意见]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="18" cs="6" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="YSYJ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="19" cs="2" s="5">
+<O>
+<![CDATA[收样日期]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="19" cs="6" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="SYRQ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="20" cs="2" s="5">
+<O>
+<![CDATA[取样人]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="20" cs="2" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="QYR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="4" r="20" s="5">
+<O>
+<![CDATA[取样见证人]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="20" cs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="QYJZR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="21" cs="2" s="5">
+<O>
+<![CDATA[委托人]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="21" cs="2" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="WTR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="4" r="21" s="5">
+<O>
+<![CDATA[委托单位负责人]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="21" cs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="WTFZR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="22" cs="2" s="5">
+<O>
+<![CDATA[住址及邮编]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="22" cs="2" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="ZZYB"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="4" r="22" s="5">
+<O>
+<![CDATA[联系电话]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="22" cs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="LLDH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="23" cs="2" s="5">
+<O>
+<![CDATA[收样人]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="23" cs="2" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="SYR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="4" r="23" s="5">
+<O>
+<![CDATA[预计报告发出日期]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="23" cs="3" s="10">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100007" columnName="YJBGRQ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<Margin top="2880000" left="3600000" bottom="2880000" right="2880000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL1">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_Consign"/>
+<ColumnConfig name="version" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WTID" isKey="true" skipUnmodified="false">
+<ColumnRow column="7" row="1"/>
+</ColumnConfig>
+<ColumnConfig name="shiyanshi_guid" isKey="false" skipUnmodified="true">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi_guid]]></Attributes>
+</O>
+</ColumnConfig>
+<ColumnConfig name="WTBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="WTDW" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="YPMC" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="SYBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="CDCM" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="SYSL" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="GGZL" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="DDSL" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="QYDD" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="YPMS" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="QYRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="GCMC" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="SGBW" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="JYBZ" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="SYXM" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="YSYJ" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="SYRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="QYR" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="QYJZR" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="WTR" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="WTFZR" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="ZZYB" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="LLDH" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="SYR" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="YJBGRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="23"/>
+</ColumnConfig>
+</DMLConfig>
+</Submiter>
+</ReportWriteAttr>
+</Report>
+<Report class="com.fr.report.worksheet.WorkSheet" name="粒化高炉矿渣粉试验记录(一)">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[1152000,952500,864000,1008000,1008000,1008000,1008000,457200,1440000,792000,792000,792000,792000,792000,792000,792000,720000,792000,792000,720000,792000,792000,792000,720000,720000,792000,1181100,792000,792000,792000,792000,792000,792000,792000,792000,792000,792000,792000,792000,792000,792000,723900,723900,1143000,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[1238400,1238400,1104900,1238400,1104900,1295400,1219200,1238400,1238400,1219200,1238400,1238400,1409700,1333500,952500,1104900,1219200,1447800,1257300,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="19" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshi" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="0" r="1" cs="13" s="11">
+<O>
+<![CDATA[用于水泥和混凝土中的粒化高炉矿渣粉]]></O>
+<NameJavaScriptGroup>
+<NameJavaScript name="网络报表1">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<Parameters/>
+<TargetFrame>
+<![CDATA[_self]]></TargetFrame>
+<Features width="600" height="400"/>
+<ReportletName showPI="true">
+<![CDATA[/F_SYJZBList.cpt&op=write]]></ReportletName>
+</JavaScript>
+</JavaScript>
+</NameJavaScript>
+</NameJavaScriptGroup>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="1" cs="6" s="12">
+<O>
+<![CDATA[表号：铁建试录019]]></O>
+<Expand/>
+</C>
+<C c="0" r="2" cs="13" s="0">
+<O>
+<![CDATA[           试验记录（一）]]></O>
+<Expand/>
+</C>
+<C c="13" r="2" cs="6" s="13">
+<O>
+<![CDATA[批准文号：铁建设 [2009]A027号]]></O>
+<Expand/>
+</C>
+<C c="0" r="3" cs="2" s="14">
+<O>
+<![CDATA[试样编号]]></O>
+<Expand/>
+</C>
+<C c="2" r="3" cs="8" s="15">
+<Expand/>
+</C>
+<C c="10" r="3" cs="2" s="14">
+<O>
+<![CDATA[记录编号]]></O>
+<Expand/>
+</C>
+<C c="12" r="3" cs="7" s="15">
+<Expand/>
+</C>
+<C c="0" r="4" cs="2" s="14">
+<O>
+<![CDATA[样品产地]]></O>
+<Expand/>
+</C>
+<C c="2" r="4" cs="8" s="15">
+<Expand/>
+</C>
+<C c="10" r="4" cs="2" s="14">
+<O>
+<![CDATA[代表数量]]></O>
+<Expand/>
+</C>
+<C c="12" r="4" cs="7" s="16">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="5" cs="2" s="14">
+<O>
+<![CDATA[规格种类]]></O>
+<Expand/>
+</C>
+<C c="2" r="5" cs="8" s="15">
+<Expand/>
+</C>
+<C c="10" r="5" cs="2" s="14">
+<O>
+<![CDATA[委托编号]]></O>
+<Expand/>
+</C>
+<C c="12" r="5" cs="7" s="17">
+<Expand/>
+</C>
+<C c="0" r="6" cs="2" s="14">
+<O>
+<![CDATA[委托日期]]></O>
+<Expand/>
+</C>
+<C c="2" r="6" cs="8" s="15">
+<Expand/>
+</C>
+<C c="10" r="6" cs="2" s="14">
+<O>
+<![CDATA[试验日期]]></O>
+<Expand/>
+</C>
+<C c="12" r="6" cs="7" s="18">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="8" cs="3" rs="5" s="5">
+<O>
+<![CDATA[仪器设备及环境条件]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="8" cs="4" s="5">
+<O>
+<![CDATA[仪器设备名称]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="8" cs="2" s="5">
+<O>
+<![CDATA[型号]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="8" cs="2" s="5">
+<O>
+<![CDATA[管理编号]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="8" cs="2" s="5">
+<O>
+<![CDATA[示值范围]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="8" cs="2" s="5">
+<O>
+<![CDATA[分辨力]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="8" cs="2" s="5">
+<O>
+<![CDATA[温度(℃)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="17" r="8" cs="2" s="5">
+<O>
+<![CDATA[相对湿度(%)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="9" cs="4" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="9" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="9" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="9" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="9" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="9" cs="2" rs="4" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="17" r="9" cs="2" rs="4" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="10" cs="4" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="10" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="10" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="10" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="10" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="11" cs="4" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="11" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="11" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="11" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="11" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="12" cs="4" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="12" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="12" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="12" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="12" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="13" cs="3" s="5">
+<O>
+<![CDATA[样品状态描述]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="13" cs="8" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="13" cs="2" s="5">
+<O>
+<![CDATA[采用标准]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="13" cs="6" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="14" cs="19" s="19">
+<O>
+<![CDATA[（1） 含水率]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="15" cs="6" s="5">
+<O>
+<![CDATA[烘干前试样的质量m<sub>1</sub>（g）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="15" cs="5" s="5">
+<O>
+<![CDATA[烘干后试样的质量m<sub>0</sub>（g）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="15" cs="8" s="5">
+<O>
+<![CDATA[含水率W（%）：W=［（m<sub>1</sub>- m<sub>0</sub>）/m<sub>0</sub>］×100]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="16" cs="6" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="16" cs="5" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="16" cs="8" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="17" cs="19" s="19">
+<O>
+<![CDATA[（2） 烧失量]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="18" cs="6" s="5">
+<O>
+<![CDATA[水泥试样质量m（g）]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="18" cs="5" s="5">
+<O>
+<![CDATA[灼烧后试样质量m<sub>1</sub>（g）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="18" cs="8" s="5">
+<O>
+<![CDATA[烧失量X（%）：X=［（m－m<sub>1</sub>）/m］×100]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="19" cs="6" s="5">
+<O>
+<![CDATA[]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="19" cs="5" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="19" cs="8" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="20" cs="19" s="19">
+<O>
+<![CDATA[（3） 三氧化硫]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="21" cs="2" rs="2" s="5">
+<O>
+<![CDATA[序号]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="21" cs="4" rs="2" s="5">
+<O>
+<![CDATA[试样质量m（g）]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="21" cs="4" rs="2" s="5">
+<O>
+<![CDATA[灼烧后沉淀的质量m<sub>1</sub>(g)]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="21" cs="9" s="5">
+<O>
+<![CDATA[三氧化硫含量Xso<sub>3</sub>(%)：Xso<sub>3</sub>=（m<sub>1</sub>×0.343/m）×100]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="22" cs="5" s="5">
+<O>
+<![CDATA[单   值]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="22" cs="4" s="5">
+<O>
+<![CDATA[平均值]]></O>
+<Expand/>
+</C>
+<C c="0" r="23" cs="2" s="5">
+<O t="I">
+<![CDATA[1]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="23" cs="4" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="23" cs="4" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="23" cs="5" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="23" cs="4" rs="2" s="9">
+<Expand/>
+</C>
+<C c="0" r="24" cs="2" s="5">
+<O t="I">
+<![CDATA[2]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="24" cs="4" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="24" cs="4" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="24" cs="5" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="25" cs="19" s="20">
+<O>
+<![CDATA[（4） 密度]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="26" cs="2" rs="2" s="5">
+<O>
+<![CDATA[序号]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="26" cs="3" s="21">
+<O>
+<![CDATA[试样质量 ]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="26" cs="4" rs="2" s="5">
+<O>
+<![CDATA[李氏瓶中未加试样时无水煤油弯月面第一次读数V<sub>1</sub>（ml）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="26" cs="4" rs="2" s="5">
+<O>
+<![CDATA[李氏瓶中加入试样后无水煤油弯月面第二次读数V<sub>2</sub>（ml）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="26" cs="6" s="5">
+<O t="Image">
+<IM>
+<![CDATA[!LF@2mtjk97h#eD$31&+%7s)Y;?-[sCB+>7*XDfI!!&fMG:<Ll&7.pr5u`*_]Aik`(<TTL[Y?
+u4L7V8#1ULl>31bil8XE(DA.Et1>RM\p>_'Ln",f?QX&Hu^55VaStP"Af-R*\)W[ZH"F.5Sf
+5M$pUHMhAn__.N#HU%e<<h>V9*F3]A3#%Q.`9MWRt6IJ;RZ^\@cRGL$$0\^,?[\nJ4NNhRrX@
+uS7X>'ni/;CXi-s#,n[+L8q*lu5"G>@Us?>\n*oI!&'YZ&>ssSIVntBg0^$\WtVIBCa?&JT(
+'8God&`L7A"$V/?.N\0ru>0^!7;HaM6k`M$36V`J,==4")\PHrKl#i--rj'E=Ws+-)P%bM(?
+=9h,7?jU.P#5(*0)!@]AMI,C9MLmRb@rq7IN#W@&:JKTKm8nJ0IrQkVCR!6)mO&L$&TO?7MKM
+e*tXorc!!+BdO3hP?:I%Ff_*'^f/I0!#qj*T\]AFf"8LqW;dWI4gjb\=GM\U/S:p3r]AK.<5UC
+`k0*gjP`u0.o($h&Zb1Oq<)ci<[NLUZ178REPa.NUR93s[>Yb!sr4j(10EN9>d:f9WirY;jN
+!$M^C2#YQh`jgAnKa--l\m.@1>R%bh6u3YWS8H_;8PR#$PO8&bBmn.9a;*_Z*39A:92"!qpi
+lL3B)HUX?BeE^l<u&9n3WOh"(J7:u%-pY))4CCr3WrMRArSN3Il:5Y<Xnlhkid$::VWaiE>4
+MdlHAUM)ro+B3XU#YodFaIt9BG&&_["j;?jM]AqKoS>Q%7jZi1s"32B8;fmF]AQ6Cm2To:rpGT
+Yp4i&?)WhE,BLi(%bd37iVs<L;=f*Djl!dJ6:/>W?::TEH?8T,%)';E-/QLo8FM6968t]A&;Y
+tdaAhR*gf&H')0@pUc9>D-BPFJhF[H8Ci!irOog9Kdlr<$f,j+$&I3[#kC<1]AB7**::_V/$N
+$aUG>sZ!&\m=8OR>&1RLiZQHX&mlTE3;8PFPM/nKC)r>ju4E&:m_FQqPO_;$WmZ=^dS`5<`T
+Q`fM:[s#"mPa7a!cq#D5K["P,$HAq4cE8_2)#c+BP6fY-C3#nt)!*_Lt.II**TSi>.d*2pAY
+dc=Hl)OgX!pE"LhDb\K_#]APSN2:#?2Eoe$;h0@-(LSnc@_ro@9]AqOT/_of[Ia+(3e;O:=Ohq
+kq^h--127m2o/s).4m9p4?;.[0K8K#AP'";Ir"1#TJSljEssMPKqr+SJ;Z?#WP&T,6tI'EOE
+-VIG&=YY'i"6A-e"bD/n0<QE_j@_kF<(S.GPr5PLYa8NoHq<"nXhscIq5'j1)FLuUt]A`(YLB
+Bsa?rbo!R`9#_P=L\,&:Q>1RrJ)jmNiDj9VRFC_4uU&_p7-p3*BS5fjYn5uMP$Ip'<Z?,QQM
+.lb7HCJkmP\sI"+EpQ`W@L#RYO<F6_.lcZEB]A'W<17Up(3d!1(-BR[![[$RT&D,QkK&S=p>L
+A1lnBj?oB-Mr4E^in6-fUUH!lCpskBY.ONd4g!G/cB#Yb9LEH6VfN64e7.45AW,0T\C?q:bF
+_774F*ZMkc!ecgKj]AjpVpMtiahr#K;Xb@s-oKR[.CCV]AU_tT"hn5AmGb&,:T"<7Sc:\E6"=n
+29>umldqf,BJLPOC\GZ^^)i7-'^3iI$%(oCd-O==t6%lBJ>]Af&'kJ$Q7]AHo-tNa?@f<j,V[U
+RjDTor=@KNpGU"j18=$G8aQUM\XQcD]AW*t;=[i4nNA*M^V6]A'FW>/+IaglV:[L3qG$sMKIt+
+[Waidf(TH&Fh0<D=F1\W>0@d>WtJnLq31l%l39?@Iq,77:E:8A:i&gq!*7mU]AT8Z'EVa`psl
+`%#qIHj%L`^%KgEpHK(h'r&-sk1rrWQir4:82GVEs)Q#>Q9L,=*LjNC4K,pW<*MZ]AmbdW*UP
+H:=\E&i$RS;J0L9!gNeCA^"E6EeUQeh<5.@0(aj>/)/Gd.VuIcOj:XfAd>bM^5\fO)RI=csd
+(0B&)69hF+h:U(L/1nro\e,cO7W:13/(Q1>Ec:th3rhHU_f&bnajk<A2XRn!T9Y"4_CiR_>m
+m"EV8HpjhX&gj*%4[-Xe##<KqsEFWm)>U0p?tKN`Fpt!RSR0Lio4BQa[`KPqmgmB<"Rjh@P_
+n'L"<m)rTB2g&rnUbJj<$s+]A.B`'Z)&n2.OEi:bP6qbpRuR@3K-jN%7<CK8.;a$B-s-E),)@
+fGL0\5<S)gQaaE<?XLQde,#&e0QYr"XPVS5b%$)1=hE.N;j:K\JEK6f&hoFMd`QBm67h]A3':
+[)0\;MdYf2!=b\[T$6_1#@:`n:aB5q+Ai%j%6q3=0tF[Rkm*`=APRGk!3I&`%9%9rOn!cs0O
+)JgAEq,ms/2O!!.?q3r$>TCLR6[HgD,kB+W=NN4tOGtJ.9U[jg0G+=YMlWs?[1aX"h:l0bO>
+bu*l>rZKnP]Aq>a_0$0gU-G9-#9XLC`;Hh(Vgn)]A<qcVfdW(@J@_`7G-),q2,mpY&&NWM:#O`
+-6$1eDf%h'C7g@GLXp<%<amcNqng'Y(m;$@;nXVG!!il4Jo#j"_l0/A\OUjir<M+GP]AI\*3D
+I?)MB&Oa1Y(D=P@$]AEA'-$PeLYePZD7SjaY=fgmb1fu38!//RY<=T`YJ[-hIaP0;>J9Wsg$5
+t+H@i*)3MP8$X/df*;PLP:PR'Y:P#XN;e[H>jgG@-#j=t"#tE#nW96u8KF"O.1i<rn++B$rJ
+piTa_s`@7(%.0Il"dRe;6"#c)U-P@*HS=sQCVrH9[+m25K(0CoGgqGO808]A`2G>[eII^-5s;
+?b++Y:NACn-sU&TWAd^a+#G%LB73uYVe30]AH_)HV0s)X:uo4M=i:#F:X/Ee*(%eMAWmu^6%k
+DlE?\*a*+]AC\X(+RLLfJI#3g5@b"YH9`kUqI[U+%"k9);WUe;4ARpp?#OR:r'l4/-P"NAreV
+c;,0rIup:RFIuDW$=u%_E>40qA2?@K*$dM&N@ZkMQ3N(=_@q&mMU<Jp60,B(_+>js7'6&cl;
+P9UP!0HWYp.-=*`fp1NXC2$4NjiA\JGT*SKqm$3RcW:BRCKY)A'qth)K=I+K\cJPo;JNA&_(
+.(+D/`1O1l("\h+H<>%5&#DddJ6d1=IeD<1g4":1+buooIAf!F9WC_0N:CRn7>OHgk]AJKB8?
+e^r"/+lLaatNUlpZe5trpq$A>4FfEW^^4%]AX`OL]A0X7ldUTT4jq<u*-(Z^b!Ud@mB'$75BuV
+\!d\QaI:-\Eif?5r+*>9LX<^d-C_9+)<"9EXhmIFmQYKX$eH->udU$.n'rK1N[2h(]A"LdM2u
+56W)-iT/oW`5-neOnK)C>sPN8-eg\B7?3Hm7I+_u.R\%/N,O2UoLDD.Zns!bp*oaf+1ljT]A)
+SQ+'SW&0aQcEb0(&&nFZ'^!oEgZ?AP9Gp&sRU)D$-[CeOuP3b#c=$X]AAAMAG="AqLE\(F:sJ
+QY)/3D#1Pshk#PI5hKm5u4j:b),6t)0Gb9+Ml``;iq37;W4(ebjZTrq`mXn$70(sd68*\8Xd
+q;[P_]AQe:c:&_36.'"K]A+/ZVrTMDHk11;f/KCm!;-UMP)cK*iRc1$F&21/c[`)d:4:XY%N!=
+kjcR<2-pp_?mnaj03B?m%KJqk]A*]AOT!]AY$QBRTPY9/[PtO\6\M>N@<G;ppD,CN.59L.DqFZ)
+qgpR\p/u"f%iWtJs87)ME!)+DW4KJDj*@JsNH7khgjRdeb=as8)dqPGY@PSYVglLE*lrF_Hi
+!`rn(LUONd:pa"9ki.-_2)H2970?HEuf-T"TmjK_QLA?&$5>PXncZ=p/oM;sdu:[&4tK=p`.
+-'+IGJ/6\9W/cHCd3J'4B#ZA_O^\u5@CL16dR,!gf8"TOuP,K5H8W&6*T2.a-b0neb2hDWG$
+#p(]AQ6$`:F)`!N_WFPu?;OEBiYYG<1$5X'3Dk:iXij1>p\*__$s@Jae4IO`l=%.sr)V+==i7
+rHqY$$B,s*Z2AH3$g&=G+%O&[ohi%B#)F/Nj,p=5#oCk$*tWP&8lgmPjdAukbrPX#iF,SIus
+?nRq99&meD4VJmh\`3[M:7F8O/aU\[rPS"?T.]A(MVl>pj"G.8O0QkJf+</Q1!\3ISs,XVu.e
+U(qm4tME"rnUDCYk,>7QtgmIcmZW2n!qB*5)F<G1"_1cRlYDioC;8La5]AB8;JQbQMW"+-]A1e
+1jT4^5d7E&M/9-d41u^u/P\V7[eMW?R_9*RDqe"Xo%"%QthM[/J*.,S?q+qbch*.X.RI$"r[
+`*qPTDm>7ND3j+MDal#pV&gmkd?,lQ]A7CpH_EhjlL[nF1o1;*+<Eb2/P/Pkl\O_GZ^B;jGs*
+Qo3J<$$bK/rAP=Kfpjf"5YhK>3TdG<)d>WDDG5@+0WECQ%t93:0$]Api>V,8V^5P4Xa1%rX4k
+/-RJr'p6)^\^og6]A0H1H0E1*X]A4T:_#ur<!GeRdplKt2:fV?VjYGtp@\srlFoRC5p,qgr0(t
+rs*`3*=bNSEr+h5pE:%?%lJC[8Ft/=93B/_(NWP:K_nA^>]AM+d4,"Q'Gu-#ZA0_G>TO*Ik9G
+mn[21=0p))r2Y93+j:aJ"k,-/l<f0D\m:3?0lr[mBl<B@q8&aS1)qHT*dF<K>AgQh9_M,$/=
+.68PAcX/2NTNoMh:>;m+#i-t;s%j?08>_A4V1:K\,E"<s#XL`+qK&5n;+Y$Vjb'.qSMF1FN<
+Gis"2P0J]A(4,DV;Jka]AX[.f<+!WNaAi"]Ao!>!esunp0p%<O8Lb(1as$RjHV3R^P2@@#q*74+
+?-kV/d;O;AAR=%t7+-E0hA=j!,6#_mn[",i8T'AY.Y<rL@/pEo-']AQk;;bjFMQ4XJ#@H0;92
+Ua--r^3mMZ::i?KU"Z:f5%o2(=*.$4klg]ABk<<_hU0n;:UV-$#,(5XkUR"hYa:FZD"jMWX%.
+AB8>5\+:t=j<eQ4YOOgZe()?c[9Inf'Ma23i_]ABNhW)ilLaLgqlhqbUkOa]AtLn:`nPLUg;>M
+>6-8^.`8gO\e1H)FtP"<mI&$FDJXf[^PJ?Qe"c@O!p!d^dO;nm8)d7R]A)GIceP)RPQ`DJrTY
+JR3<-Uh$"Fm7=H[?KJO!&N"b%-QdaD56UIh0cB[TJgAi,bj>_oDU5,Mp>og)+QURI#IS18#Q
+9HYJd5kuS?)8gE7PWoV(5g4/"Pn_LU^EA56?8-.%rt(o8hD:(ceIjV:"*kg-[<W,,@WLl]AjB
+YPoe9oN;=,cX'Dr:P3@+hsPTZTcY!N:pY8q'??Mn]A6a?]AA:Ac_!Y>)<hh<o^`eD6;)V)O:0m
+LT<p;OV<l6"nKj#Br]A3XFM[VL$?mrECaiUb0L[t!["\L(WQ6&JU1@gG-ekLTD6bc&VaN['mR
+P61`*50U4&)8W!LN+mifhW360b2g)+1V4ZVOL5I5To=Zz8OZBBY!QNJ~
+]]></IM>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="27" cs="3" s="22">
+<O>
+<![CDATA[G（g）]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="27" cs="3" s="5">
+<O>
+<![CDATA[单值]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="16" r="27" cs="3" s="5">
+<O>
+<![CDATA[平均值]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="28" cs="2" s="9">
+<Expand/>
+</C>
+<C c="2" r="28" cs="3" s="9">
+<Expand/>
+</C>
+<C c="5" r="28" cs="4" s="9">
+<Expand/>
+</C>
+<C c="9" r="28" cs="4" s="9">
+<Expand/>
+</C>
+<C c="13" r="28" cs="3" s="9">
+<Expand/>
+</C>
+<C c="16" r="28" cs="3" rs="2" s="9">
+<Expand/>
+</C>
+<C c="0" r="29" cs="2" s="9">
+<Expand/>
+</C>
+<C c="2" r="29" cs="3" s="9">
+<Expand/>
+</C>
+<C c="5" r="29" cs="4" s="9">
+<Expand/>
+</C>
+<C c="9" r="29" cs="4" s="9">
+<Expand/>
+</C>
+<C c="13" r="29" cs="3" s="9">
+<Expand/>
+</C>
+<C c="0" r="30" cs="19" s="19">
+<O>
+<![CDATA[（5） 需水量比/流动度比]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="31" cs="2" rs="2" s="23">
+<O>
+<![CDATA[胶砂种类]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="31" cs="2" rs="2" s="23">
+<O>
+<![CDATA[水泥(g)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="31" cs="2" rs="2" s="23">
+<O>
+<![CDATA[标准砂(g)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="31" cs="2" rs="2" s="23">
+<O>
+<![CDATA[矿渣粉(g)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="31" cs="4" s="23">
+<O>
+<![CDATA[需水量比]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="31" cs="7" s="23">
+<O>
+<![CDATA[流动度比]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="32" cs="2" s="23">
+<O>
+<![CDATA[用水量(ml)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="32" cs="2" s="23">
+<O>
+<![CDATA[W<sub>1</sub>/225(%)]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="32" cs="2" s="23">
+<O>
+<![CDATA[用水量]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="14" r="32" cs="3" s="23">
+<O>
+<![CDATA[流动度(mm)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="17" r="32" cs="2" s="23">
+<O t="Image">
+<IM>
+<![CDATA[!G2S)pk_gB7h#eD$31&+%7s)Y;?-[s3<0$Z&I8F<!!)5:PDK8>#;&M85u`*_<E=$W<7M_uFH
+\Q/&mG<0^N@I+S`rg0__ALjA"c=`Zp6_"d[!)uQ,9=0^m5M><`B,t)1ds6'$(7XM[9LlBSD#
+b;1Uu:L8(Do;)C[7@[bPRGMg./mbcK7c@$X>BD9[-oBnd9GCK;Ah`8OR=E*14J1=`aJ7AsZP
+L\VW"2nSe!h*s]A"GK5>nm]AL;*Tt6&8:bbsN+H^D!F-4RP+@Ag9G'g,!usT`$<Eq&+=9>6Q$5
+rOO[C3&5`rMgA47=BLK:[,'1Z_T(Ao\\,)V'Z>0C-Sg)F/ADInY(,KY+fbt2E':1_8\Nou(a
+Sq/17'X0*GE!-,@Q?L3M2IM>(6t:4C^_9,A2eZ]Ak@JG^/O\XkYbSW[R*Y;J!EY<R&.t2%`Jq
+p+DM-%V_&]A]A!&7Rl*cR_h!Y)g7pf2oOujI&fDsk_E;6r(DmNo.cCuOU8h0^ooA*'peo_(B[^
+\#daat=/UK1Z1W(<o1WA\5lSh1(AUbO'&kmHW+*+IB:;132`Oabp&Q(+6pj;dRE0G'*ra3LB
+gWDC<:IO3_EgSKj/`:'CSW_MTGI,I!0mX,`LJluPc/(oPE-&5<a'#sI"%(&1ABHmdUb[_nK@
+$8]A#q6Einb)pcH)AL@fQiHJ/F4W:dfcZ*"oHt85T+N2><(H6<)gug3"%1N]A5FM_ROjaGg5;f
+=-j5UWc%&`);gD'NFCr(d'<2t?of1b6Rg5M.-*_8LDUps]AYpF\=LmLtF\UI*.p=^A([eF?eQ
+(YAs8AO"k>s9Apu\,STC@hY^"rWoAIpPlPb<)S7mLBd3r=\^h>?aS7g=A%S@INNl&D_;gu;I
+8p:U6F5@*4n6'IOR-*23-=t*BI;-CKRf"Wk2<M@)O.Ck(*:J;=/os6`7(aqfN1ZutGGMrUV\
+_k]A8O`:p\2.PL;;s3%Zq>@mn%h9JDof>@YjpFqp1k4e7g5[-p@)`ikc3D\[Y*S69IQ$Z8P?L
+"C%$]AhjN.DuG+JXZ^7Rlp$4Kg_7Lp%^=N%T]A2JB^@Ol%/Jm]A(O;MABnG-ld,b*+3r6U_RfSt
+#@?-S7eaHmo,l4U?5<HE\%(gtYCGMRJ8ts9O.K]A8mCPGAh\\o0"Wt"+Mq>0,?[_qu`4ZOkr#
+gF_UusV$FOcW'8YR]ApYtCuus/^4KXJ-^7#k8WRe$'lk?A;joTK[(.BrGh&2FuI!MlrTi<]A=n
+8-EP*T>1PSqrJ.9BXqcq5,@nn;HEl_^B=86<^4Oim*.[%FAMY_&3:Qd;kEQ_j2-c_:ID.\"O
+n?ki5,i,nd32i6fh%>P[IW[QP&_G_FR.+@.[@k`?;ZlkE^foMJF;Z<CKS/Vo9ZiTHKX1Xq;'
+c%+i\i0mAYgfldP7uQTj4\b#mE,2QU)sh(sl_MSbm9nDa[N^Xq7i'\DCE3\5fujl)N&4X>I@
+g4C1U?Te6iL9HE\U"0BVQ3<^Q*hc#-OM$r*jf.f+9Qu._,sY&Qrd`0a!T`@&oXal8[e:<%rZ
+eNa=$GA2=RGU/^TH2!Ia-I9Y#Wg:ot5ID2m6n.:3]A4PVtJ$#,r=s^G9%Xn.YrsoK$QXJ3HXU
+^9"Nfu-kpM=LU5*f_B96;(7;-j(.+W7"s]A5ib00!h8h+agS01BmPh$pCLfb03f&nt(5+269m
+"stJCPV.@B,fDQhR@FDM:6*d1A;AQ79Om5O7h9%^\4MU=4Y2!MO,,DnGV_pYOLAtf</@^nSn
+H`h1r.Erb"c5L)/?6g%4c#:&mH0qa'$_F&0JlFSX)@,#u'nq+;gE[d#N8!\P7"'e*jV(BX"3
+@%7f'%nNb3(<E(K>G%pBEr?!1Ot,UCrJLp<rQgn4=5L]AAqUCWear=Ph>C5L3pICj'538]AK7q
+8RcUouPJU0LnYM=e3g>*Rp$Xt,4Yh9qm4h2cC5j5JnnCg&^1'kN3&6APp_U1<qp3C!PkXC'8
+aI'%>'P%B2qhu@E^#^7Z;1!4;H.uP[6'a:[dcAY@.jK@XQGEA+dGj(!D55Y4AHKX-HWc"l=3
+d^j8`)iZ,ap3-O^V+C[4`C>c?*5iLqZ.L2=i-C\73!*X<ru)1-l-u#Fj+<%6<dnD@1*Y=JK*
+r>e[=l(5<eH"CY[E%;M<cSNEJFoPLOomJ_7(Q9IRsK84:uo-7(g^PV\F[(+D20M<GgfA4WOO
+\N*2n;6XQ&@sG$WmHm6AB*?:&9$,lkocZdO'q^&_mcZb:-3nuWBA1;G',N9*?<)F*]A'$MYe6
+P/jO,m9JV5[KBK#.C2[U$U]AZ''p9N_F`@.?CkTX4X4%^2S[^HqtP''Z0->W=kp<<_/[M><Xs
+E:J%1S\A_&)L;)(0PT8I6-nR)hFOM0:2p]A7d@>ld0hY\IaFmnRk6<H&E!!!!j78?7R6=>B~
+]]></IM>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="33" cs="2" s="23">
+<O>
+<![CDATA[对比胶砂]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="33" cs="2" s="23">
+<O t="I">
+<![CDATA[450]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="33" cs="2" s="23">
+<O t="I">
+<![CDATA[1350]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="33" cs="2" s="23">
+<O>
+<![CDATA[—]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="33" cs="2" s="23">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="33" cs="2" s="23">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="33" cs="2" s="23">
+<O t="I">
+<![CDATA[225]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="14" r="33" s="23">
+<O>
+<![CDATA[Lm]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="33" cs="2" s="23">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="17" r="33" cs="2" rs="2" s="23">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="34" cs="2" s="23">
+<O>
+<![CDATA[试验胶砂]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="34" cs="2" s="23">
+<O t="I">
+<![CDATA[225]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="34" cs="2" s="23">
+<O t="I">
+<![CDATA[1350]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="34" cs="2" s="23">
+<O t="I">
+<![CDATA[75]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="34" cs="2" s="23">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="34" cs="2" s="23">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="34" cs="2" s="23">
+<O t="I">
+<![CDATA[225]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="14" r="34" s="23">
+<O>
+<![CDATA[L]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="34" cs="2" s="23">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="35" cs="19" s="19">
+<O>
+<![CDATA[(6) 氯离子含量]]></O>
+<Expand/>
+</C>
+<C c="0" r="36" cs="2" rs="3" s="5">
+<O>
+<![CDATA[序号]]></O>
+<Expand/>
+</C>
+<C c="2" r="36" cs="2" rs="3" s="5">
+<O>
+<![CDATA[水泥试样质量m（g）]]></O>
+<Expand/>
+</C>
+<C c="4" r="36" cs="4" rs="3" s="5">
+<O>
+<![CDATA[每ml硝酸汞准溶液相当于氯的毫克数T<sub>CL</sub>(mg/ml)]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="36" cs="4" rs="3" s="5">
+<O>
+<![CDATA[空白试验消耗硝酸汞标准溶液的体积V<sub>1</sub>（mL）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="36" cs="3" rs="3" s="5">
+<O>
+<![CDATA[滴定时消耗硝酸汞标准溶液的体积V<sub>2</sub>（mL）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="36" cs="4" rs="2" s="9">
+<O t="Image">
+<IM>
+<![CDATA[!FuV.o8-:=7h#eD$31&+%7s)Y;?-[sIfKHK-3sYQ!!$J7dsD&p$nFn;5u`*_m9<eQ,Y8`rWp
+4qh5==p3:`ipSIt.eKqP'&1MsmD.3hu"e_1dS3E>BS8<<ea(pWWrjdHP*'R<;Vr`?2=&4uq(
+R4l','QcP-TMtjTl4rme^mB@mmgIY7Q77Kb:ps(223H;&)B4"rrl+:e:[HkP@)YNaZB<UnU?
+e:5&Q9B96i>[jE3+uh-51QL%]AZJ/pMn70rF5E-mM4sHZYts^'4?i"2QO(A4?0Jrb7&NS:>oN
+0c9X^Z=#j5R6L$2armAfpq9?JY-6$u:nB![n:<E3$#M[SIh\upfj'0Gne,=^V(H8k/_OZ=6A
+@8D80Y4I5U^WL9[D#ucBbF/k'Vk+p8?0`,c('._7d<e=>8l1j,/(@3<:AAEN@Sr?1W3]AT;Ff
+8SN)+f!Xc=m)_Hi\)`jd:K?`]AbOll&Gi%\K9P'od?u`G"NTU,hc9n/I`R^hNR;!TQ!gD`Fq*
+VpVt3BOY26!"VqJ5]AC&+XL(Y9q(!ATh'seH\X7*R]AeDp(D17@&>pZq/2pg.0/'-^IbA]A-nJD
+.=T4kb/,BX:*nSC$TN7S^q1$(&V'8*[(U'2&RdG2HOk]Ag>(K%2k\!Fp]A`-K!,Vm$TLFs!<O/
+i6/_Voe7^0g-Hdi<&cn1^R6k;8NH`Kp[;_^K42!N-k$cZ7t&SA/&[OBuG)9\`(TJ$Tt&OK*g
+&H]A+'PZ`lhcdcbe/X$"Ip@^B_EMH#DD)dOU!Z0OaH,4<W:JS,u-Mu4p>[(E:6^c1-\gE]A<X+
+`L<U6a<,jhV,a%l`7:;iqYX\`Q[a,<6e4W0ZjFlL>=[_$VbMW#ShJFCA(87#M,%`AkKA]A8L[
+?VCkG]ADrlCcMkViR-*3)<bb4,X1ebc>7oVInZ82&(aqPi;%Sa']A?r-&1g*K.Qi_6_e*m5(9(
+oL#M7dM9-Zs]A&:c)^iRQU=2B#n@F[M2WdqpCq?'X4m@_]A,,[Cd6_rVTO9AZQC+,CFS1qi6s*
+IIAdeRFHbHL@<[d\2-]AsimV]A82G^i0Yn\<bV)L\6]A"PZnN6Ui8sY5)Dip^8$`2S]Ag*kf4H+"
+]AQ%_N;9qI:S[`DigH%Q";-#%@,b5S^!itJ;'f2bW@Rq.-XrJh#8UuYEni;&87YVs]AXtdY-Z,
+2<Dd?#p_ZhL3Mej-u"BD?I^n*X';n3Z1"jsT#-c%p`K+'PkP#)`Ya<h$LEC<"`6RhqhQ6nDD
+J6a9Do!l?Nt[l^qoT?LF^Jskq]A8+Q1)46*DYb8&0iEG&o3Zi3>.[#S0$D4a"cgUhP$A"WPG_
+5qC7#'`2%*M,<dn'c_.-VEF?'@HRd.JAn[>FF<VFs$mRGf^-Mgi-c)kb/+7p.R;.n^<dt<XW
+<WT!2cC''#R>T,$S3-.S<.pFh#L`a-:K*0@dUrRIZ(+MbruLk-A2d5(d2WUmY-aog/5!s15r
+@Q!@JqQ/-t#\`#$*D%#c6QSe*WL/QQ'sHA_8m\qe%m;GO9-Iue'_HqnhJ6"X!&Abk)(s2"^U
+`2@+40Gjr5t!hZ_gL'hZmMklDc;\pW;u6*0+b-I)ZNEkUSi(%Jj8:k)dF@,)IFH8/^!^GZaB
+"(9C)&!QWX,Lu)$Q%!-t_MIZ%6_F_0%U!:uD0U8V5pX]A=\E9YNSTA@9Vk%O(5TD??j+Y;)'O
+lrb$/u<D&4DdkaSMhp[;/>c/X-%fa5eAZ1)N\O:8cu0h8J8EkB*ekNX;JUk]A(F]ADcG?BAQSL
+kE\6:6,ROO`YOG(cFqXR5I<V11?0QdD?(%$H,o.INcT<=ba3KD9tBo7cD4j:c,/IsJjFfg<P
+^Lm)(k?jVc%Y`^CmP[&1BtIgM3_L>n&&]Af'los<NlPu`?gFlLM+R$&rfV>V3aWGB\P5<W00"
+(.N!cDSTs*o>LYBc:0o-)GlWPa5_H68m]A5BL2*Iu4.NqNoe[qNpDQ?C0ljYL0hWTP)769-\f
+=09)-2)FWsNL`ZhI=U6gbX3%(oN6d#,X+a\;9,?`*C5%=uZSHiCr,mJ1P>\!idq/g((S@^?6
+Ru*TVmbO!`n=LNT;A1$+_BGFN=aDaFAcNlC=WRA,T9Th9N5[4*oeZU('I6IgE_q'A]ANoM317
+Wo).8*a@?@\!]AV,b)*/^;ZkHP]ATaXgRtarsuq"d,`dSZla^k9M4*8Yk>)Q0o-[cX`?ack(Dj
+e$\57%*L+'dron^#m!P+NlrJb%TP!KJ$Q$En\qcg.0H<>A1QT*>=l2mSXh=tA9#*#AEDaJTr
+Q=6\P?7m_,o2oR9*]A=8JsH;L'1I94-Ck,$"_CT&;SB8@?/fKHUacmeLaX9ebrt1\*#_ZE,]A=
+9XciF\XXt+)`+O6KCuNPmiu,-b1U'e^`%uZDZZW"(m2VponsC;+1]Aen=;&P24^T'am#=5e5F
+*Njaf<mF]AVmL-po.9)+kjIlAKRsFO>RVZ&S]AaAQCGF3G:X@aV"en^`>E-'POU:Jq1iWf)Df0
+Gr/e73!,l;m.`+qE>AGDH#PdGL8=RDfR##SfaXZ"BKi'3D'bV!NCYM*0RBW"t$:pW\5*?A]Al
+HRS[_&_EZf<3Dua^YCN2SZK2_EZd)ACAmN#]AiAa(W>%)AfHgH!:-0s:!&CS3iZl+]AcLK:Bkk
+@UEI>MkYe))>(^3f=YCtd7.H.jJs?A\<!7*"QnoU7^Vs/usqA^/@8dL(mUo-YcS^:Qh-*2]Am
+mHA]A8u^?/g#IZeGdi%)o7PJXd$8f]AQ%3EFur;]Aqc-'4dN/;tAm=BBB@'ctk)N%Rd]APAKG6ql
+uoJ##i>=97`5<jp0:-l`%a+=dnK5fhuE19T6]A%B@_?!*;EZ3"N#,CYidjrX]A5V?Fk+OpJjWU
+S4rSVT9qT-\f/#VAE9GU4iTlY'X9@b1mGEW0kA8S)aj_oYEj/o'N`q(iX;sb$1Dng$oql[dT
+7Bq\nPE[nNGA_j"R86%2S:QE<OgTsYCm29B.qr;*3^lpMR?samN3Z"*p!R9PI:QJl>O:U`(_
+\d1%6^g]A5IT/)GZ7)9D9C[o0qc1'kKi))M_A=TY.f)NNHYl$EcD__C9/RZN=IJ55kub:UUT^
+iIWnaRpY?YDRf2<ebpQ55V3PF8e=$a@&bmA0[a+9AO26?'GS@Z<LA"tmr8GI8'IX99n._B@&
+4!dnHse_`#S+1n):c-e?(Xkrc@ShH)RCoh.ZY1sJ6(RIO0(?@J\U#NQJ2;2:MB,(`?/mA![A
+Gr=l-)h]A:e4NCAjl'I;LaVB72ARFV:`^?[lY`pgG,n&:Src[=]AgMHsC!biop^_T;lYGPP&CL
+%b"o^depMF^YDNoJAn;3rSlu*&!,m=YYBUF&GkITdG-#E>mk-W+eHF>_e6aXlL/URC4gXOb3
+;2t*@K7kNcm.G%C!A<eW$')=k=Sal^H&;N]A0]A4<!cV'LXEMp@QN9o?m0^e?Q845ShBF]ABS=J
+7V^i2GBR>(FDild*'9.0BAYc6(kr_WOL7H<LU:,O:c2I%;il*!eDf9P)2Wo-gqF[jk(k3b,;
+L'<is*an_4TB>*\U+;CIh^r9c[PkO]Ag;-8a*NrsQo:iqR#OS^73RYHb^T3/YJTjXrV;d&qq*
+Wnlh['J,l9b_-FJipBXda81b.([IcpUWWlAt5:PIUM/ZkusD_Q4doMn/V,L<)_lXDFT/Mi.?
+gP-N%D#$:*CZ;\83:sD1+X`>!Dbp.J:":&*FX^2oiSDrV`F$?=s1CqZ\g1C[\3e[5.ir"mlZ
+eBEp`BC4rcLT?:IKMPcr,+%@Y35q%+ShngJJlWVT3i;dr?r=W$=*eL/(%78Fo-I4IsgBRB;+
+EaR5[#St2]AeZ7(B$PkFliZ)*GqD7snsT4au%9;5.`+I-*qLcPHm,AM+:5AHo4?V+o2^Jo>]A2
+_?u=8.aM<LY)T9>t3ph$=)nllN/M1cpuk)4LB>r2Go)ff/:sC\At;4K))bFH<%D9?bRf:7%Y
+Duf2b9]A6V<X63II!7&;A6F5GGZO5IiBE[n-di;F=S):Y$^m?CDY*<\5?chjR1#1#LZ(\GuU0
+!(fUS7'8jaJc~
+]]></IM>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="38" cs="2" s="5">
+<O>
+<![CDATA[单值]]></O>
+<Expand/>
+</C>
+<C c="17" r="38" cs="2" s="5">
+<O>
+<![CDATA[平均值]]></O>
+<Expand/>
+</C>
+<C c="0" r="39" cs="2" s="5">
+<O t="I">
+<![CDATA[1]]></O>
+<Expand/>
+</C>
+<C c="2" r="39" cs="2" s="5">
+<Expand/>
+</C>
+<C c="4" r="39" cs="4" s="5">
+<Expand/>
+</C>
+<C c="8" r="39" cs="4" s="5">
+<Expand/>
+</C>
+<C c="12" r="39" cs="3" s="5">
+<Expand/>
+</C>
+<C c="15" r="39" cs="2" s="5">
+<Expand/>
+</C>
+<C c="17" r="39" cs="2" rs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="40" cs="2" s="5">
+<O t="I">
+<![CDATA[2]]></O>
+<Expand/>
+</C>
+<C c="2" r="40" cs="2" s="5">
+<Expand/>
+</C>
+<C c="4" r="40" cs="4" s="5">
+<Expand/>
+</C>
+<C c="8" r="40" cs="4" s="5">
+<Expand/>
+</C>
+<C c="12" r="40" cs="3" s="5">
+<Expand/>
+</C>
+<C c="15" r="40" cs="2" s="5">
+<Expand/>
+</C>
+<C c="0" r="41" cs="19" s="24">
+<O>
+<![CDATA[附注:]]></O>
+<Expand/>
+</C>
+<C c="0" r="42" cs="19" s="25">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="43" cs="2" s="26">
+<O>
+<![CDATA[试验]]></O>
+<Expand/>
+</C>
+<C c="2" r="43" cs="3" s="15">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="7" r="43" cs="2" s="26">
+<O>
+<![CDATA[计算]]></O>
+<Expand/>
+</C>
+<C c="9" r="43" cs="3" s="15">
+<Expand/>
+</C>
+<C c="14" r="43" cs="2" s="26">
+<O>
+<![CDATA[复核]]></O>
+<Expand/>
+</C>
+<C c="16" r="43" cs="3" s="15">
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<Margin top="2880000" left="3600000" bottom="2880000" right="2880000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+</Report>
+<Report class="com.fr.report.worksheet.WorkSheet" name="粒化高炉矿渣粉试验记录(二)">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[1152000,864000,952500,1008000,1008000,1008000,1008000,266700,1008000,864000,864000,864000,1008000,1008000,1008000,2590800,1066800,1008000,1008000,1008000,1066800,720000,1008000,1008000,1008000,1008000,1008000,2781300,800100,1008000,1008000,800100,1790700,1371600,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[1249920,1249920,1181100,1104900,1066800,1066800,952500,1249920,1181100,1249920,1209600,1209600,1209600,1195200,1195200,1195200,1195200,1181100,1249920,1333500,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="20" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshi" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="0" r="1" cs="14" s="27">
+<O>
+<![CDATA[         用于水泥和混凝土中的粉煤灰]]></O>
+<NameJavaScriptGroup>
+<NameJavaScript name="网络报表1">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<Parameters/>
+<TargetFrame>
+<![CDATA[_self]]></TargetFrame>
+<Features width="600" height="400"/>
+<ReportletName showPI="true">
+<![CDATA[/F_SYJZBList.cpt&op=write]]></ReportletName>
+</JavaScript>
+</JavaScript>
+</NameJavaScript>
+</NameJavaScriptGroup>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="14" r="1" cs="6" s="12">
+<O>
+<![CDATA[表号：铁建试录020]]></O>
+<Expand/>
+</C>
+<C c="0" r="2" cs="14" s="0">
+<O>
+<![CDATA[           试验记录（二）]]></O>
+<Expand/>
+</C>
+<C c="14" r="2" cs="6" s="13">
+<O>
+<![CDATA[批准文号：铁建设 [2009]A027号]]></O>
+<Expand/>
+</C>
+<C c="0" r="3" cs="2" s="14">
+<O>
+<![CDATA[试样编号]]></O>
+<Expand/>
+</C>
+<C c="2" r="3" cs="8" s="15">
+<Expand/>
+</C>
+<C c="10" r="3" cs="2" s="14">
+<O>
+<![CDATA[记录编号]]></O>
+<Expand/>
+</C>
+<C c="12" r="3" cs="8" s="15">
+<Expand/>
+</C>
+<C c="0" r="4" cs="2" s="14">
+<O>
+<![CDATA[样品产地]]></O>
+<Expand/>
+</C>
+<C c="2" r="4" cs="8" s="15">
+<Expand/>
+</C>
+<C c="10" r="4" cs="2" s="14">
+<O>
+<![CDATA[代表数量]]></O>
+<Expand/>
+</C>
+<C c="12" r="4" cs="8" s="16">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="5" cs="2" s="14">
+<O>
+<![CDATA[规格种类]]></O>
+<Expand/>
+</C>
+<C c="2" r="5" cs="8" s="15">
+<Expand/>
+</C>
+<C c="10" r="5" cs="2" s="14">
+<O>
+<![CDATA[委托编号]]></O>
+<Expand/>
+</C>
+<C c="12" r="5" cs="8" s="17">
+<Expand/>
+</C>
+<C c="0" r="6" cs="2" s="14">
+<O>
+<![CDATA[委托日期]]></O>
+<Expand/>
+</C>
+<C c="2" r="6" cs="8" s="15">
+<Expand/>
+</C>
+<C c="10" r="6" cs="2" s="14">
+<O>
+<![CDATA[试验日期]]></O>
+<Expand/>
+</C>
+<C c="12" r="6" cs="8" s="18">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="8" cs="20" s="19">
+<O>
+<![CDATA[（7） MgO含量]]></O>
+<Expand/>
+</C>
+<C c="0" r="9" cs="2" rs="3" s="5">
+<O>
+<![CDATA[序号]]></O>
+<Expand/>
+</C>
+<C c="2" r="9" cs="3" rs="3" s="5">
+<O>
+<![CDATA[测定溶液中氧化镁的浓度c<sub>1</sub>(mg/ml)]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="9" cs="3" rs="3" s="5">
+<O>
+<![CDATA[测定溶液的体积V(ml)]]></O>
+<Expand/>
+</C>
+<C c="8" r="9" cs="2" rs="3" s="5">
+<O>
+<![CDATA[水泥试样质量m(g)]]></O>
+<Expand/>
+</C>
+<C c="10" r="9" cs="4" rs="3" s="5">
+<O>
+<![CDATA[全部试样溶液与所分取试样溶液的体积比n]]></O>
+<Expand/>
+</C>
+<C c="14" r="9" cs="6" s="21">
+<O>
+<![CDATA[氧化镁的质量百分数X<sub>Mgo</sub>（%）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="14" r="10" cs="6" s="22">
+<O>
+<![CDATA[X<sub>Mgo</sub>=（cX<sub>1</sub>×V×n×0.1）/m]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="14" r="11" cs="3" s="5">
+<O>
+<![CDATA[单值]]></O>
+<Expand/>
+</C>
+<C c="17" r="11" cs="3" s="5">
+<O>
+<![CDATA[平均值]]></O>
+<Expand/>
+</C>
+<C c="0" r="12" cs="2" s="5">
+<O t="I">
+<![CDATA[1]]></O>
+<Expand/>
+</C>
+<C c="2" r="12" cs="3" s="5">
+<Expand/>
+</C>
+<C c="5" r="12" cs="3" s="9">
+<Expand/>
+</C>
+<C c="8" r="12" cs="2" s="5">
+<Expand/>
+</C>
+<C c="10" r="12" cs="4" s="5">
+<Expand/>
+</C>
+<C c="14" r="12" cs="3" s="5">
+<Expand/>
+</C>
+<C c="17" r="12" cs="3" rs="2" s="5">
+<Expand/>
+</C>
+<C c="0" r="13" cs="2" s="5">
+<O t="I">
+<![CDATA[2]]></O>
+<Expand/>
+</C>
+<C c="2" r="13" cs="3" s="5">
+<Expand/>
+</C>
+<C c="5" r="13" cs="3" s="9">
+<Expand/>
+</C>
+<C c="8" r="13" cs="2" s="5">
+<Expand/>
+</C>
+<C c="10" r="13" cs="4" s="5">
+<Expand/>
+</C>
+<C c="14" r="13" cs="3" s="5">
+<Expand/>
+</C>
+<C c="0" r="14" cs="20" s="19">
+<O>
+<![CDATA[（8） 比表面积]]></O>
+<Expand/>
+</C>
+<C c="0" r="15" cs="2" rs="2" s="5">
+<O>
+<![CDATA[序号]]></O>
+<Expand/>
+</C>
+<C c="2" r="15" cs="2" rs="2" s="5">
+<O>
+<![CDATA[试料层体积V(cm³)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="15" cs="2" rs="2" s="5">
+<O>
+<![CDATA[试样质量W(g)]]></O>
+<Expand/>
+</C>
+<C c="6" r="15" cs="3" rs="2" s="5">
+<O>
+<![CDATA[标准试样比表面积Ss (m²/kg)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="15" cs="3" rs="2" s="5">
+<O>
+<![CDATA[标准试样试验时间Ts(s)]]></O>
+<Expand/>
+</C>
+<C c="12" r="15" cs="3" rs="2" s="5">
+<O>
+<![CDATA[被测试样试验时间T(s)]]></O>
+<Expand/>
+</C>
+<C c="15" r="15" cs="5" s="5">
+<O>
+<![CDATA[比表面积S(m²/kg)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="16" cs="3" s="5">
+<O>
+<![CDATA[单块值]]></O>
+<Expand/>
+</C>
+<C c="18" r="16" cs="2" s="5">
+<O>
+<![CDATA[组值]]></O>
+<Expand/>
+</C>
+<C c="0" r="17" cs="2" s="5">
+<O t="I">
+<![CDATA[1]]></O>
+<Expand/>
+</C>
+<C c="2" r="17" cs="2" s="5">
+<Expand/>
+</C>
+<C c="4" r="17" cs="2" s="5">
+<Expand/>
+</C>
+<C c="6" r="17" cs="3" s="5">
+<Expand/>
+</C>
+<C c="9" r="17" cs="3" s="5">
+<Expand/>
+</C>
+<C c="12" r="17" cs="3" s="5">
+<Expand/>
+</C>
+<C c="15" r="17" cs="3" s="5">
+<Expand/>
+</C>
+<C c="18" r="17" cs="2" rs="2" s="5">
+<Expand/>
+</C>
+<C c="0" r="18" cs="2" s="5">
+<O t="I">
+<![CDATA[2]]></O>
+<Expand/>
+</C>
+<C c="2" r="18" cs="2" s="5">
+<Expand/>
+</C>
+<C c="4" r="18" cs="2" s="5">
+<Expand/>
+</C>
+<C c="6" r="18" cs="3" s="5">
+<Expand/>
+</C>
+<C c="9" r="18" cs="3" s="5">
+<Expand/>
+</C>
+<C c="12" r="18" cs="3" s="5">
+<Expand/>
+</C>
+<C c="15" r="18" cs="3" s="5">
+<Expand/>
+</C>
+<C c="0" r="19" cs="20" s="19">
+<O>
+<![CDATA[（9） 活性指数]]></O>
+<Expand/>
+</C>
+<C c="0" r="20" cs="2" rs="2" s="5">
+<O>
+<![CDATA[胶砂种类]]></O>
+<Expand/>
+</C>
+<C c="2" r="20" cs="2" s="21">
+<O>
+<![CDATA[水泥]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="20" cs="2" s="21">
+<O>
+<![CDATA[掺和料]]></O>
+<Expand/>
+</C>
+<C c="6" r="20" cs="2" s="21">
+<O>
+<![CDATA[标准砂]]></O>
+<Expand/>
+</C>
+<C c="8" r="20" cs="2" s="21">
+<O>
+<![CDATA[水]]></O>
+<Expand/>
+</C>
+<C c="10" r="20" cs="3" s="21">
+<O>
+<![CDATA[28d破坏荷载]]></O>
+<Expand/>
+</C>
+<C c="13" r="20" cs="4" s="21">
+<O>
+<![CDATA[28d抗压强度]]></O>
+<Expand/>
+</C>
+<C c="17" r="20" cs="3" rs="2" s="9">
+<O t="Image">
+<IM>
+<![CDATA[!B(M2mtjk97h#eD$31&+%7s)Y;?-[s?N:'+1^F-_!!$LLF#s@%&,f'f5u`*_m94jY<RmL%+U
+JZV6r7'XG-#IR4.Wh6g31InA#l0#94uU##drBtg9G4SC-b4PJr2fC7`Hl*3"SJC69njTQql1
+(;$[[e]AVN1C":;7C&sD%>Hgc7Ha4^(]Ap33gQ>jQr^R6U+BaiujCm/?>?qgIp]Aj-ep"QS5NJ5
+nTY33^n.JkS2DnU/OJClkRRG]A>:>Ojq4GSS)`r4Q'AS)#ZgI8pWE7/!r>b.3DqskIuCIF4-6
+RP`!OP1i?et#HjV%P*8D?\'a0(T+Wj`YE*Kgk?44(76l_Fs#TY9-K]A,]AhG3d`(o=U6L&nY>#
+X/rC]A`T'b,A\@SF`[W%J%DQA?bKJ'p!KR54Vk"RBhOe_LT0,0mWFsPKHs^&\ML3ZUq.AWF"l
+h-`^BK5bFpF9%('lZugb@)K&9$7'GT;'=%NrY3:hI#r>Oa(Z402#o+'A!g]At91j//%R!8nQc
+3@t@Tsd-J=Op0ps3&/f&7:03B9/ipS*;'6L)B5>A^_hIQMr%J7s7U2#pUgP#7TnK>K\+6nHH
+XV-R6Qc6Z[Erp?YdDW#NugIT`Gf5eT9p.VqXj$iO834_!81U0`t0p:8=mq6(bah"X&gs-A1V
+9$q;t"tSdT6o&-1:Q0.49U:UcDjErZQe=al=fOhJY<CjIXCIb$%=5/u(i>s@mdZ/0JooR+tG
+h_/4Oi`4]A=:4=QKbNoWbh^-T=V!Fb=YBK)$mXgAY=$TM=(LeLC`srS$R*R1b8MXG'f]A>Ds$s
+.U-RTS;ZF-b!>q:[>1M=V,G4[-D3A2N-@a6"qGi.,uWaUsNMYU^FYUKA=!a&rk,%.M:TQbt<
+Fae^,L:OWXp!S)l@Q_+#8iQ+O6W<"hA*6VW0_lBkA%6@<fG`EK`E=-.Ua(C++X--R=/qOrTf
+MmEc@]Aerhn-Chg,F/<P/4!VICHB35rIiR,L0Rhh_oYt/>71*sc34P?F=tRc9[gBi/l[BQLGg
+cd3Vm.==j;X-bSRcirn&if"YMKRQ97Chk9k1+#CbaqR$liZjS.kSCHMl4]AR]A,7?fc[u@m/]AM
+i=(9->l)cbOdrc^U?37jr9>r7Uj2`94<#iG;adO>:(a$@3lT:9F)F-l+*W`s="$U94Q*R;lP
+TQHGjImnB>6ssg5]AW1cqc4_LujaZB9QkC6;!j*0uf@f,I(Meg3juC9Hqbp`n2:n?_*bP[Rjd
+s92$a,<h8&>S0K%o+q*K&N)V'T@W%#p;G0I,KG*Z;)le$CBqqM1U.AlYk%G&%+gjRfBu7["d
+[!GXR!,5cN5i%m)3^1f\f%?$71ia!PV=;6q%4hsdmc57SP_kK2Q"G1563Jq1<2]Aadc=k1!IJ
+NH'W_f65m'MW-I>Co+j`V(DH9VUcH;:r]Ajl5d&Zs8j^lZMQ'=BTW[T"QM4HNN/'<XCAk$%:U
+0lXk^]Al)lbgUDgY[TL^`98a:B-Ph=?Ui`=?N.Y1CNMF;lDslk8]AfiPhR5a0VeSTJM'EnW?TP
+Z"@$96&Y9cM]AeYMY>Jm"`'"kAn2W/,*Yi\aCk%8t2\K6AQ]A2_Q5TIR,nX6aO7"Ua',jWMRGX
+`p;<D\!);%_8&pZ.2X9O@/W&uVj9OF'e$#ZN<`Z\>O)Oi.35"F3I_EmM>eK%/*U`\&[UV]AX;
+J9iBJfE+'Bf0_[mEtU!qneIh7l0+`RU7F[-GrqtL!6ce?kS?-L3@XV/sPYuVB`\Bg2#$)G^m
+WN2m323T]A>FHhC;Z3gOuhb6>&/)df5pW0=5pkUlVm4_rn5FT)N-RL=K@RF5VTZU25FOPjP_5
+,7u5>)8V+7*l*b0ASF^RGS=bp+A1"3.:o?h'fMa+JPl=8g#Ja-LF54A7T?Z?GP[mQrb,g?G2
+*V>o9O2FeK.,fhgKGAc@)+@eBgL*[<6"&8N$W2+u*l[(Q<s*)\[Zt0q_V*@t*j1dGS<p:^NQ
+Q`[S#GUb84J0().VadA>U^AICe5Q3)3hZ)Q[Dqm1Jfsg9T1bs`tK\?YldeJsILaZ?:?p=J(O
+Z`pk]A)P8i[iX2:qhB[>NWfR!%7=P<#@t$Cm6SXG/QX@qKVZM9fT^XBFq8h`n@UL\1%a^qd93
+4TXf2'!d8_u,-o/0E^NS^U6[h]A6pG2F.kQdD*RBu%hpMRV;_(7=/HZIX*q9/dsD2%W'KN(Jc
+.a2o)0f#bYB?e*RdsplcHOmTUaX4ic!i7^SG`iE&bl#Msmt.Icdb\:hcRZtQs5-M?6#f>*QH
+XcVp>oH8oo[;7N10A_1mYJ2&WhU;,dCg+LslTimb,6/-<CbbB23`#aa>XhlESa3.UP/ff+dS
+9[89;`''*^W%Wa*-Ku&/$$h2T/GpR]A8d`nQ<<@:fo&:"jaK&)?cTDI[Ek>NX3o:d$KN1O:FV
+Y7dhNEP;^4Z.9Fqun;lc"ePrDloR5ojHmG7UoVUnT&&A;l1*OQmF4C;I^fNBP_LrnN43JS@S
+]AYL(:P=S;)[L(0OK+`B+7>I)$`;dkDbmQ)=$KqlL\-lrE&14ZTbS;7VsN9A8;rQ3N8_r5^5!
+c"jbe'P%VpS/ONNN`+38aR^a>Rj^@><ZH<M+DhrBB-_tc1g*T-=t[eOM"4UR*U<ukJa!"HHN
+hcYqc:t@I'foBd"tN1\R<Q5.qbHiX0D,T1WDO?l*9Cf0)k["\\R'4Nj"g+H.:>h%Ch,ZfUOI
+gn-Pa1D3R9YOU;r'=*jCRK8+-oId6Ep5MbLcJ%YbrVc+&FRQp/j\,Rbf#J@BllbMuF?&#isJ
+P*'3P[$6Bakn#me:(rW/[sSVoMk=flY\i6g^:EL+917t(NoW+[9j3n:*/9,kGl`*[]AKC*CUP
+6E)4DB(Y(D3Afl;-&k*p8'[4r\,pZ6ls2`@/pF<!2GF7kk`s2>r26bW5h_u27Uqp/XL9&LdQ
+G%B@hh95]Afm'h;q_,^cf.M^/Ul$F_T;&%V+O_0sK0Oi@DePD,D5II%YDQKE&e0E;j:^kJf=Y
+oBq'.ZTO[cZ,&<=:SsE17WhW#Yf\$Ot\&4[E8)66l%A'lI?aHI]AldT`2uUhnT,]Aqk0e>lMll
+#l-U4j(B89tN0gHD=L)u?)k.Wrs-#T&(.P31;^".[_AJM[@en32*daUgNt79gZa=lf%!1j<l
+)).jo&8Q.Q<2CZjnY_\QIW+n1O%O,]A2&3D<rImG=4F[!mYd-%H4CqpWoD-c[>Tu)ZZu1bM\[
+o$Y]A\je$'T#GSM0rcY9*P^d\YD.]AJB/^7B>]A[htkdiei&`<P(>ka*:iV%9u380S0TK&#g%G^
+)`:V?-VP[OFR-)(J%0(:cR<7Y1Qt;`^%A_$f/IXHmZ?D'-db,\iht7,r1T85:1OHs;-=%3rV
+IOg%3%U<;eBXfTC_A?P;"5Y:_N2$s&T)Ye`iagZWDPB^;3$(:!so?5SE;^M$bjVRbZ!iL>KI
+ab9:P5_hLlQLCDII&rk,<]A%-KH.u\3ARfT-!3p6TtP;s"XD+pKE'+Re;jK<u:>JCt2hd+"Ur
+k%SP_QS:`dAGF@<gA$9i\qQA<+a1*Q.pJr'oM]A<??tARJIf.lT-Xr5PS6BgN5CMW8=#L)"qd
+]AECnum$fY=e>_RSd/)_"a#Q"t['q`i`FA]AKT'G5gg0hej*97`Rk#&)F^CkE,iO^4#TI+PU^\
+b*/'N:rm5*hmgu'HN!f/^F<BVa&`[>dGaaHIq$h^f&sqn^L%nKP`.Dfhqg3NcMKP:r@#kN-`
+&Cs+4?7#i"1:?XLmYDl%V8pA5OC[5'p<0nig-FC'u3'49#P!)L_X\[B%p81M#/7GQ0dBk">c
+qI<`diQ^(i]Air-bRDJo#>jJTb5omm%5pVb/3/aZ(&2XJ3I5:_sm4e(%SM*uCrB'N^++$=N;g
+79Ui\kD>[3!uX(&J9mD!L4g9`E#;Og/bjC^+Wqn[m#jJI[TMm`]A^s1Q^1ru=l6gXgB25#NCO
+I`et]AnP7=C<_@3(K4Rlm/f[ILSfCEoi)\__*0,:\hP0E'D+RQ8,i?E7&*VKUOV:$W`.SsV9]A
+8PUX5VP&eDIn*lRd9?Ct?K0TbmD^_I[k4VJ[rU/2'=BB\2na\#Q@fXGaqkl'gXo2s)Z,UGY^
+oVJOb+dhH"$BPYLU?j='%WKR48?Y=6@_/<\k]A:!J=VAhEACKpr$m)g,ZQ2EG&c)N%:630X=C
+[<]A:nA-6pS@"]Ab.+91d?3'jH@!TG!(fFf78okQKVf;Kb*dF!9@AMbR,A/1-=X.'o&Fo'*E75
+2+imdYl:AH`gY`b>'oTD,5=,_BRJf!Gg&8!QQTdAW)C@N#?W=rGJuHe_&9K@n3`d5JZT6l'p
+El9\GqQKn=\5+\;:8+8\QeB_o=kYQ"B"s.q`u55=mtTE)$_qTS#T&,,b^h>Pd9rRTI?b]A`\S
+jPmFF1-fuVD&(0te:N@:)WcORP!4C7,"*`n>pL.#g,;^cD"jjD>1O2d0<kD=m0dB-e-%rB+%
+Srhl4>6GB6q^tTo=':$^]A*u&P&oE(/FHo@L0@cpI!LSI,a#J#XtS,#m/uo0W_]A_1:FNnbl`&
+\%8\OO5(JACg=A/9pV=6n;MgN)kZ(2!isYi:D-<nsGH2Je.XJHtkpp?U[?MAb#T_P0"B.n`B
+a[ZVMnhpl3)K(:UdYq>\<WB2:5*79U1dtOTgPlKTEkW7$-^;oJ:k/7\^RRs6pX@f,0P+aADB
+^U`$QF+.'ndlK95rUC`3^rC+cm4=eht(hhCmW,NsV23%f;b+D;(0$bB2l5FkXp-^,<"MX=_A
+8Y6Fo5:rfu2YK?i/\@*/<jK&pPZh4Kpq$u0Kp)jCSA=P=*GRht9pMBon1mG[6f\C7d?h9rer
+$"9Jl"!g#g@EfVLV.h^aX8V3p^7fC"nd!&uht@iRbLs0JXSY!Z=XRp3;.W;pqs7]A-(mK/.Rc
+#(^QfS8IqAi&<\dT7GiV)Y9Vu#"`:;0Qr7JTO0nRCFg2g5M*<p[C.Jh4PYP9L(I(TZg0!*SH
+P+G/bs"ral@fpj7&_oH"bj0pOqksPN9l7m.3@DoW0JZn5VA19UX3[;1H?tjPSL`WaA+=p:n=
+L6Q3VYlDelMON0\k&6nUeNgbIHV+$k@=*5S;EYQcM-j:mGTLF>,t4!A&]A7>\+r54)'W-GjZ#
+fjsG.@S5AdA\620Z$JjaioM1rEK&N>\L1f8#pn:GH(B:MUuTCl3Y.bOB'.@hZ-e71@-8M4,o
+#pq`X9.Ipk]AA[klQJ"*7St`h:X0"T$Mi/s,W\"IMN_q:5e;X7<JMifDbro^rVZ/S6$7%!!!!
+j78?7R6=>B~
+]]></IM>
+</O>
+<Expand/>
+</C>
+<C c="2" r="21" cs="2" s="22">
+<O>
+<![CDATA[(g)]]></O>
+<Expand/>
+</C>
+<C c="4" r="21" cs="2" s="22">
+<O>
+<![CDATA[(g)]]></O>
+<Expand/>
+</C>
+<C c="6" r="21" cs="2" s="22">
+<O>
+<![CDATA[(g)]]></O>
+<Expand/>
+</C>
+<C c="8" r="21" cs="2" s="22">
+<O>
+<![CDATA[(ml)]]></O>
+<Expand/>
+</C>
+<C c="10" r="21" cs="3" s="22">
+<O>
+<![CDATA[(KN)]]></O>
+<Expand/>
+</C>
+<C c="13" r="21" cs="4" s="22">
+<O>
+<![CDATA[(MPa)]]></O>
+<Expand/>
+</C>
+<C c="0" r="22" cs="2" rs="2" s="5">
+<O>
+<![CDATA[对比胶砂 R0 ]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="22" cs="2" rs="2" s="5">
+<Expand/>
+</C>
+<C c="4" r="22" cs="2" rs="2" s="5">
+<Expand/>
+</C>
+<C c="6" r="22" cs="2" rs="2" s="5">
+<Expand/>
+</C>
+<C c="8" r="22" cs="2" rs="2" s="5">
+<Expand/>
+</C>
+<C c="10" r="22" s="5">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="11" r="22" s="5">
+<Expand/>
+</C>
+<C c="12" r="22" s="5">
+<Expand/>
+</C>
+<C c="13" r="22" s="5">
+<Expand/>
+</C>
+<C c="14" r="22" s="5">
+<Expand/>
+</C>
+<C c="15" r="22" s="5">
+<Expand/>
+</C>
+<C c="16" r="22" rs="2" s="5">
+<Expand/>
+</C>
+<C c="17" r="22" cs="3" rs="4" s="5">
+<Expand/>
+</C>
+<C c="10" r="23" s="5">
+<Expand/>
+</C>
+<C c="11" r="23" s="5">
+<Expand/>
+</C>
+<C c="12" r="23" s="5">
+<Expand/>
+</C>
+<C c="13" r="23" s="5">
+<Expand/>
+</C>
+<C c="14" r="23" s="5">
+<Expand/>
+</C>
+<C c="15" r="23" s="5">
+<Expand/>
+</C>
+<C c="0" r="24" cs="2" rs="2" s="5">
+<O>
+<![CDATA[ 试验胶砂 R]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="24" cs="2" rs="2" s="5">
+<Expand/>
+</C>
+<C c="4" r="24" cs="2" rs="2" s="5">
+<Expand/>
+</C>
+<C c="6" r="24" cs="2" rs="2" s="5">
+<Expand/>
+</C>
+<C c="8" r="24" cs="2" rs="2" s="5">
+<Expand/>
+</C>
+<C c="10" r="24" s="5">
+<Expand/>
+</C>
+<C c="11" r="24" s="5">
+<Expand/>
+</C>
+<C c="12" r="24" s="5">
+<Expand/>
+</C>
+<C c="13" r="24" s="5">
+<Expand/>
+</C>
+<C c="14" r="24" s="5">
+<Expand/>
+</C>
+<C c="15" r="24" s="5">
+<Expand/>
+</C>
+<C c="16" r="24" rs="2" s="5">
+<Expand/>
+</C>
+<C c="10" r="25" s="5">
+<Expand/>
+</C>
+<C c="11" r="25" s="5">
+<Expand/>
+</C>
+<C c="12" r="25" s="5">
+<Expand/>
+</C>
+<C c="13" r="25" s="5">
+<Expand/>
+</C>
+<C c="14" r="25" s="5">
+<Expand/>
+</C>
+<C c="15" r="25" s="5">
+<Expand/>
+</C>
+<C c="0" r="26" cs="20" s="19">
+<O>
+<![CDATA[(8) 碱含量]]></O>
+<Expand/>
+</C>
+<C c="0" r="27" rs="2" s="5">
+<O>
+<![CDATA[序号]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="27" cs="2" rs="2" s="5">
+<O>
+<![CDATA[水泥试样质量m（g）]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="27" cs="3" rs="2" s="5">
+<O>
+<![CDATA[按火焰光度计使用规程进行测定，在工作曲线上查出100mL测定溶液中氧化钾的含量m<sub>1</sub>(g)]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="27" cs="3" rs="2" s="5">
+<O>
+<![CDATA[按火焰光度计使用规程进行测定，在工作曲线上查出100mL测定溶液中氧化钠的含量m<sub>2</sub>(g)]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="27" cs="4" s="5">
+<O t="Image">
+<IM>
+<![CDATA[!Q5L1n;0t:7h#eD$31&+%7s)Y;?-[s?N:'+.0otT!!(eS@X\:W%uX"I5u`*_NEU[f*G#tXqq
+U#UK#Jo@KKqpj+;G;aj!.ER,*-Jr4K=R3(_QkE6t.iI')jTa7J'pr$AuL7;H%%&L_3HUKo4t
+<iE;k]A>?Z4)h<s.?4MJj\cM*egp[$\K\"-4%F(`5_^2nbdID1QNpN`>lkNFS%ESulVBoKm9>
+gR_2XWBh7-BY9T39W[ub04lr^EQHnJN5S61ec0PNQo@5RIgC4LEA.=55-\Vl16angSmtbSqL
+b,<AYNgLho'C/MN6Th/7H39mK/Kd08CD@S)^g-NYT+Y#'a4pkcI6*e.`Bk!$sF%J2GMmP9tf
+T4b$fKCaVR90=Ga#Ef?IcaO?,83j"kKq6B19@0ZB!<H5-&D>K[/]Ae?=qI^eg)EUV`UfG@@XC
+*lX(k<FmQY+fX-d""?:Tn;#gnWb0&hrl797+W]A/e9FDkb2Y=QI%nGC87cnc6s0Z8oQ(3(U,$
+n@H@UonjmgZ/1A(_moIYumYFFE/&+cIVC"l?P0tj-c+8VsptQ_t]AF<WACq.Np1J9K5aoV#\K
+,UC-*_5E0i=$f3WYeN]Aoh@,-1K;`>I19*Y;!hpGC9IZ'CO$;X#C@ULS.'?p!BM(Y*G0I5DTJ
+Ip^QH)@71i36msseS^TRs<1%:+GAlJU/Hm_)*h?UqJnr``^YUgs'M8IYX[rG9Kf-_mlC:+ra
+K7Ke<J?>]AU$E)f/!jZ-VSlXdr@Ic5]Ak%>#C02.AWTL_B[fE3RC1`?fIO`$'3kbgZPDM;NY"P
+D8A+g]AQAK"F98/(/jJW\hK78P`Qm(*"):'_.'u;K8VEBq4jM+DFTF2RAELFW+lq@ADCcbOYh
+,KkuS3MY[k1&W]AR!$p,h^%A\N"Lmh]Aae,b?CD_NV:'"=YH^-(JU5V*BNW/:)f85V30K^M)BE
+`%'p$KGqscIgc*5R,N4(,^0VQaL!ap`]AacdNYTO0ak>:?a:LG-,q'T4dph7qW'sU+8ckLK_`
+ao?GYs7(0lCRRTPjqcsJM0b`#Qe[><,FQNo%aCe>2)r&"X,dN'Em+<&5G6nMSCBW)39i["h9
+=Umbq\=s?T$c/DE&;m+PQUZQQ+9Db?/Ds$C,Q@3=,/ST9l,j*a#aHN(F;%:XkE*OPZ5UJei-
+UR;E4Bpkq3TWe``UBA/>FGj9MS>DFl4STH(Y2$#E+37T>DP%6;W7g&<n%UI#+,<JlPo'p^r:
+`B;UArUng=";)Cg52SpW?'\(#l[@6cM"=B-1G=ZdGI9]A;Gl!3Fp4f=/aW^X.qHIP]AQ$qonc'
+7(dXNs*0&=$!70r1P6DddfTg!`#!:!p;T[C0Lcf!j9%;Xf&j=%lan*=;l`k/"5\-:8W8V%bo
+gp/X!k7!C:+hR0>Wn-5h(NdqH%9EF!"0]A-\ttVH1R1G.Y`)+BlFN(^4jjp(3]Ab)hea'm;sMG
+L3XC8/DKY1.]AJU\EJi+)nKq_+GQf!26'FbF^3FBeJ&D+9IW!t%j=Ge"_[jk.c9:WJGBQcc>.
+s'nB<U\J4EYK;;1m9$):G&qKP<imZ9X9-MU?B?K5i$&0[^+S4[QNMRj<1I`:1nLPdC`L8M:C
+n&o.Pe^^dSX.T'n("q4%>U&?3qVcCfZd2Q<hI-9(qh"/l7mb.<Pp4^&%bEg2O]A(W`0B'6YlG
+^8&Mc_lf)bXD,[l;+"ed^sY\OU)`U5hMW&8"3]A`Sp$jf8jsPLa\(P;jet.KaZ]A`h7!.2e_]Af
+;q5U\m.Xltd)F[8NpARqS"hRi59DDGCc3Ioc\kbCr1H.RK#1k52CI9RfNhD8,=OcS_5-:t?[
+]AL]A.J-QN>3bS&OIkR8hs3cKlbMjG/eb)F97ph\pmDI<<qcCVulV2!E=X7Sjml*]A[%:BWlF%U
+i(5%mTQQftFTGEl7X!m*@fmlpnKHG4R:MfsC_*[XZ'i`:iB8.AhA_MF6[hR=JlqRDOj8>_E<
+i/5;rF;Caa>"=uur_QC`mBGMp,V&2!pZkZ1_i@LcXbFT<$Us+)LaqbKKaQ\H&0#%;8+.[E"a
+^hQp[&-m,=S;=[*QK4N_KcrHC:;1^K1P7i=dkh+]A>Y*(#_#9UK;8!NjH5T^6f1;0.Z(Q49Rm
+>pEQi[T$ZU_$)?+;E>FaK]A0iXcd,c?TUCrZ]A2A!LJ-(/,LjTg9C-;En,R+/).G/fKONh4PU+
+81IX0WMA=PN#up>N`hTQ;,o$BBVA?l0g.u,c@5q>jM;]AScfh0uPct0dI["H>pg"p]A%$Itdj!
+op/^10-2>o!J[YMJfUj.udNgD!.o\<LeDQ5-DofB[RhYf`+[.C_Xc6U\s/a*lY*E#uGJMViE
+b6b->'"^MQFL]AXoi4*<_iBp@hi;.[CX8.KhYQ9Ao3DG_4Mj:*Denns9^$q6<t>?5)&YJ8HE`
+i7.Xh_E@Do'#:t3n.A[SPiR*_+O`,-H5;X?DW-6B"VXi\pQXZF'`*VPkL:O70K+i<TdpHV<f
+M)#+&J%6Gpk6l'LRW>]A3F?9r7^5\fd#92oBT5Mmq]Ata,`_@8$BFm(NuM:RCZXLTS8:M&&[L\
+2-r3KGn\&NFIXjb)kje2+lk6$n$pYW-.H]AQZm'08d(:*Z:=-<F:d'9WQGY+mDup_u?p06W%T
+i"Cr4m\F\-kHD(\8lE1X,;I^E\UfhR'$<=rYMkSFtaY.!m$'+q&?=\'Us(-1B.0&]A.J08<$q
+p%N:brd+Km,+&k$ri#DSr\kOs:0h7$Q__+3h-9Eeh\>;R)P"Nq:KoTJFn)9OqA0p+A&2m`b-
+g7sr@;G-TZHn<TQ^,-^aN-io&N@%^`2mjcX$`/N^#"D\F5SWibX[W:Q+B7rZ)'uO#)HA8I4,
+\^'b<GTKABjJ8c]Aj&A>D:,[S(^9RI]A!]AlK#5aFbH+cR\]AVY]A@gj(9&pnuXYII!,nu;8>1"u4
+8nj>!"B]AYirIqJ`@#OE=@V"?aEA*kPF;';2m5(MS8Y[Lj@:_64]AEa8b#)f:]AdN5O#P+t^DNu
+/6SqM":H+JUcGOOq?Ka;FcmG*P&CTIf/4qSj1\h2IO]AkF=lZ"l60sQNfd4*4I;h1R\YP3YrV
+DN>>&rVdU9qU5qs!UCKEi7iHFNcuXQdR^d`[J;t/Z<6UUAKBK)bc:m3!.ZR[-4)%cVZ&,EbP
+LjQWW)fdi>Y8Y5I5JO.TfJj5aT.u0.i)*IZ,HS%5VoEo,*O]A7Vk.uS;=jD6DmN%#8>j=K"Af
+$aT+dEhp<:dpT2MeVpUgkDgt0nA??.ZT=jleGp1okgkdZ3(B[jOh5]AIKt-,f=?#`]A9R(H/4Y
+4XEE&3^o?2<e+0nU+7!s`"Y\BR:s"OfUXt2?X\!0nS.1W.lQ2[^a?Y,o'9Yns%f+5==$,FF5
+)1F7*RTiekFCCb]A@\_-kQVJn*9Se'jX`#2)J)#C!b5+,\tSr@o@;#=YjlEE"el/Q`Sh:bd/o
+67l33_-i7L'=+&@k\34&\G^6Dg=)fDRj\mKV$(6T,+;!'GnUjk0(A>>/To%7"[od4ciS7/rI
+UgF005[6@#W))E;\*/SmIc,94X>)0r;>=4XZ:h+d,I>@0>\ug[kV$d(/`ZG6Q0f/;9JZu5$J
+pdPt_N)6]A8+7aHMu77#8Q\SSk<8o(:D"^<(]AXFKbVrQQ*?*;2o`uS"OhCe`unl(=N6p-i'Rm
+Bbo67ILm`0\)3kb*&UqWm6hYrUM*)s*gh!]A:qC(F+Z(/VU8ZWKCo+[FaHP3t^?:hif_FJE-?
+.:^^"Y0NjP,%X3?(kdpNQW*U(;\=h3isa!?FcYqB6fTjkKGHB0[dOFbUiGK:H3cl/>"_Z2(.
+R=&h.lIGkQ.#-I.a(.+BZ6Jhp/Eg1PH!?88-L2F<A%3bid<:np<LQWfqd/@"I:5#jbAFUrD[
+B@D22FJPJ$iS6$.d:QpDXd"No6L2pK>7B(\nc3?*RNKKlg[p!qYY.+Jr`[umYc"U]ADC$jF5=
+Ah5NpcTLVB.n6Bl(L!1Ck45'\%o@5kl+BuoQ$.='YogMe5$&saJ(6g)Ii2LK,m78m,`;,hIs
+gnWF\+('BZAQM->U57T91TIq=`uI0&^W>P8`XB!Ho-#]A-.&1JtQ<8*:m96m$leSm2I.DCBn4
+]AFA;Q(icDVA$4PInB83u,/D@]A'1fk!/i[h:4Hta.oNpG&KVFe*CYpO<V_bo%KZC:-<%<^4UL
+'h]A^h74MV1VGb3BNZuKt(88L/P864(td*NmjTVZ"K.<]A*0OZ%)Oengoi!;HN]AY"(BehK[k#(
+1X]AMZ>]A)Wk.a"Wp!U1m]ARY%LQ52bA0>="!XC&Qj*(VVc&c(r82G%X\ij1)>XSI,,4V,2JG]An
+i?%f=L-B&*rS7T$s4Uodf!JQ=!khq>VgkCo7=I$Xi;1GAZSdhUcQEL'347arE*ma^oi5P;gc
+cAZCXd_\?SBIlY:?RCGoE=`1CLiS4.GUf2,ebsXaYV*=9`hj9I8hF4fg]ApD(]A!9$Jd]A4/Hm"
++E?c'ob!D%IctJ^CDX&BUdnT^fkN>[kgu;Fi"&90rD@p?:?,]AlIfdq_4tuUH%Q2(2[2Xo!]At
+DEQNTGk1=PHeq8JOCYkJmB)T]A`^@,JcU<rRRo<5g7p*6L&ffr,)BAWGD]AL<4;MMN=fZV!!RF
+Ji8[kWKf_nh_tPP^)N8qR#+8<_PB=m[uWEcYIId]A(,Wdc8fD%M'nh%Dh$pl:Hea5c8TtYhZF
+JR<PJ`M>a0<2/=)8D-k9#g21r)D`JGKFYL7PtIt.LdG[V,,aiS\'`@%B'&;6G7qnBtV@^qd(
+c7:QN=hQS*[=<A?*>BVeph-`imJBt7GCoQFlI!b>e(lX.X"UoB1B[nR,l2paf(`GOP6rM>9`
+e.%O%aK6!+n!?*mYqBH+A1u=)Ye>V[ZguE,$F-78oiRjC^Q&f.W?_eDRsi_=tEkY!o<FK7#W
+!N^'Sd>oNE=%_hT3.9!9B^[V/LH0A:^"=H0+-fq)E"2AQs/CV^hQdB45U*mm,JcJOZVS)G,4
+hBsY$13`s7gfY*8RhQFMBk!B:DItd-4sMb4L.7"h6>,uPR2ckdk;'#d\)=M;(%tl/sdnW1P+
+?h01#-c\2]A.MS#akn$bnL=*fIESinMZe-n/4+q[g3AnPI>gQW>aamZ0L0&"*7X%96,3%KHJ/
+!(fUS7'8jaJc~
+]]></IM>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="27" cs="4" s="5">
+<O t="Image">
+<IM>
+<![CDATA[!AtG2mtjk97h#eD$31&+%7s)Y;?-[s@/p9-.0otT!!'$;d.IA=&,]A!e5u`*_V-85)>t#VqpU
+.VLW>#u=7-%@)0n]AfJMPc5-)dC+dfH?p9pl@lW?[lGh)T<C"@#U0a@ZaJZbG.ik:lL&lBM3'
+_[ZsnrJVm!&\*\?Q]AC#$7SB&jDj7ggeS8[T9h7[$8EcZDIc9-UJ]AtY4k=Vca#ArAC`X)o,i9
+%+LSU-ai2P#+Rr,sCcjH5^#C=&bnBEei+BCJC(+Ze7>F4l\NiR+Z$Bf2e06K;_236)@_92ec
+mj^KehWPF`JlYS6b2J3S-61qAC3[)i73ot'n?4TObL=R,YtS"OZOP7&T"Eb?5FDR)!BMfp!T
+[6cpfehib+Ah44NWA&?iE-Io-ih;!j^nV;3G[9OS/Zi'sI7;IkpMJt<4*)A&@bb\Rc(M4VE>
+KA2:bhc=79<<IQ*NX(NNF.d(gV`V'rb&*!T7uZ6>sD7oLl)1*XZq.O&2ZJ6blOHiXr8M*L?E
+_:>hmmj8eR?A>ruu15:@96E3$_ASi90S4-D6F^53GC#+7@qF=APQI1B.gn*@3b@)_4C01kBd
+8[UaRE_QNAP4CKhL/L"'tB&R;CZ;0dKN+>:IcT?KJm,hj?\>,J]AD-M9b7G5kQp4F:Sgr$7*q
+W2Xie$!=g#j+`,`ETb(>"F5u>!9Ybe7qVc5.nZrG(4_?e,_J=pSW8b+g;*?ueNjBa;=KsBiN
+>0VYYa#"]AoS;pk8Ue\NN9i:,9OIC3+3f1nZoVtrm\_KS)/dI5X!mm<lL^SXp(#^c(M79uWg4
+2\b,`UgeWu$l.\G-mq(;7Dp33NT7>S8&FB\^Q]AVZg-kaPjaeD3lm1r_s+7@<kZMXY!L;7Bck
+Z;Ki:/YaEeO`EU1h&.:qUoTa/e\Qm*?o[JTcDu17dd0rjZFGk0M=q5VbB+Z;KmhiN+K;l>MN
+@5bSe%?MK+qm6"?_MsP5a2lLfNni\'l[kaZj7,pdfr-nZm'VuMGgiNG3.Fe5q/b^WaL)j!(9
+_%ka*#b^kDP72?<Q'\pIGa-uQN]AL-06JnA=^7D`E8oX7@q61G2'T64P?o:=P4$1c'9oiNWqP
+l;AC++nqD*hB8J_;A\p[Qa.C(-u&o$TN3:2X`bBK8WlX>Y?\3>r9HQ.FL43tB4=rF;2at;=@
+aMo0\r=I%j$4Glm\u-3t7NDJoEt(=9:"!2^G67^E8`T^-8_>$`Qf57_O3b2Ne\<U[=*a&BAT
+nB5CBKV/kkf:j*>.-LsIHOdoD,4+Z@C1XH+_L+=pqb]A,?M>(]AYhUspT/SHo[n$RAI;d^?3q$
+UGk9fnjB4*BPT'o[KU1(!.X8goA=sT)iB&cR>4*!lUD?Gc5;DC4AJ$:9lgK_USa17^.U470K
+b_PNCoSKJ-S:'E/'0\?a4&!Ru[n80tf*=$6lUH*X&C_)=!.9<^*h=C[SI>&S]ANc&6c5g31pS
+2\'YMk1*`jdk]AP$S%nEoG<\"OS85:>[[Era,U4KVMG5,a5@_\AgcaI5p*4D;$6NW/NK9-q.f
+hs5'8mGHes4_6M"A6u'M&N9MHCH@8M88!@<k0hM]AX>-N29fq8>qUHB.>;7lSknJIa>3h=M<j
+l@j>3e]AGS)sSli>eLU[<Eha`aofJC$SE%b?[&S"d?3k'NFNkc-T"MiF'C6=D_4NEnN>qQJ%O
+2e\O+_!l`9H@A,jq=4X`i_U\@q/_P<=0`0#,3@#J=q]AMRF#8<8XYAgWmlWIn,(A"b:]A\IF6?
+l_W/kiPZK'o!+"%PFkPb@K?ee6RSHotJ<%>M7/gc7Gn8-o=?L'HA5np&tAN]AA.26pMYNT&7G
+32%jr>lk]AqljT%b=s5p=U)k>K&_N4e:Da[#a+fA*)il!\>4Lc?SU\J$cO;p_a3X38I-gX"fC
+j'2osNH#;9/j_(d?oa(7V!<df)>AlYbi//1W`2QoS%V^(;g7ds;(lFFsl99O4H`3$L?pPo'c
+hg$GsNhP@D'nJIn4q51!<h>$?B)\uD`:Ce%1hlPPW4g1A3o+T`)G!XV'gj+FY(4ZskBD5*Q4
+r$>'cf0F@gistGl/oriKULpNQ0t6M9]A`9O46M8]A@C<ZYN&YXL/Wmu2/<'pifMGLFB8Iu38aJ
++T;NDMR_CSWnGGCqYLemcE4gW"J;n\K2Mo8V+6:c`hE.SC[3b&.'L]AgJqFo.fZKVN[+)6">!
+7cJ?48!p<))N7(E@#LU"NX?\1FPo`CgkZ_NT>!+QgKA24p*tsJ-)eoe1,]A?2'q7RL&M]AQ*@8
+6GA\Sg+>9#PM(SP^F8?DqMbp7QcFd>LSBnK!s9`-[d[&mOi,XDXE&96#_[^aP.$r2M_-b:!A
+_-uAHt'!`[3PU.g]A-t]A'(%&+1VECb"HD8_#"gmUghVkG@"lGZZ7TIlS-Y,J,,(obr8VmlA!G
+D"P;QP@NOePZXD#`6>G$S>$lqB56cJ2<M7;?j(67p=A2V/_D5(0>h)d;[-smF1Zq`2_YG\G/
+[:#$55W$5Dr/B5i0sJ>^T3nDP&":2CX-!IVnI>ukiZ`fV"``WAOn1=ii%G[b-Z-5/=5Za@k%
+'S:;/G9pSm1jZ9fkrcZC$"F8m\9HqM_DB+W'f;M@'E9+)#+4u&LWP1QM+rh?)m3b&BPa+kJ;
+%,?&Q#:oU2cp&:;u3^ke6[0,<8!XF32AN9kUVo-9\o;ot'=`KKR5dC.g9a,(`mi($F('<.(,
+f?j0K)FJp`[%@tJ>mms1^O9cCc>eZf0"<KY7jq"77`9joFFeQk$A4^ujjQ3r16@'6HP`LS_/
+%/uV;Mm::bA7`OC+4=;@n?$tSuH]Af&.2J/:-BmmP,k:=Xq9h;-4uRDTt"9UWg&>J"SHspR[.
+:>4EtIfaJ6TI:GW[K>^qkFTVEit'U\qM7n#bhfNA5n8]Ae.(_@=\c)b-B$D"e>\`QgU-R2<s>
+cJ80$m+*d,F7YjmG7eF\=Nt&a%0[8.DG61\[/s#!&"8Z@"-Zi7[4'BX3C;)\\*?YfU:?&D1G
+A1oSO>XJ5WEUb?I3/DOO.!$,H2D:jCa,k$;;[R_&OsR/B%ml/@$L#=@Q.33>)h73W9[m4E]Ar
+=1`1M1!4Wn>O_=]ATZkgR'9+Z6^..tEa*c.jnqIrDhLH;M@3_Ds5CJ-5P@g@UE/@?gu&]ANPX,
+c!a:g6P?^7[0&jRe3A+C`6UnBI2Ph0F/jm8Gg354d-a2jW+XE9Zq,#JX?^r>LI"6X)LU:AYd
+9NSZm,("m>R^_&r*WQhESr`.SSp%e&-A_TWma%Ni$OH6R>c<\=W5hJ+pQ#NV*5e14S$R%B=C
+Y6#kXRi[A_.2Y$c4u"`[6G<0FTJN>H'$.s#jhc<pKQfr_2#m7Q'r+A@WDH#%,-]A'qPaSd-3P
+B\%P-sW-ASHS7_Cn(KjE"$DIsq1<^!BYN6#ZG%,DWU[eS'mI8(PZs@UgY;Bq+cgAbYWKHhZs
+qY5@h.]A=1G]A+=Q>[:kE"i2N%tq7JB@mA(lsn-nRr1,dneo@r4G?Z,$gF$03ZFgX"s<.8X"p0
+TK/i[_^gJN#o?ZDO'V)TNkAqJ+JQF5K=<&^3[Ui6YnN<]AXd'@$ZH!knJ%28g\4/I^3S-%T-"
+rr`aao=_4!8r.U">.Wi73\7EIaaa<Tak:$N@ukr$bK)co@A`6o+LAVMHS>QI#5X&E3-'fSX#
+]A6.PY-f>\Q.4A2/"MrbI5'G&aTlJ.Hc%ZSAV^f)h'Z9Dr,\]Ap,4WmKC:8[>Oq%tY0@OUK".u
+]AT6C##Me:g5qLiP'lXr:8%g]AmYPmI:Vus>G(f8G7LZ)[.[aj*B<WhmL.@32fsjmlalanaJ!&
+u;l3g&dRE1`&Ri0IqtE>IcpM]AH&BP)INokZ4E>2=Hn>T@sihU#23/VaC/IDsad0_-1A\,%.d
+57n.'%+s[.>Y&:D(-[g>nO@l:7<`ZS8Y6;o%mQ2#uuJ_C=K4t2.2]A7Z6j<5-FAT]A@$'g@#uo
+WS%C9imf@7rHq_kYWmJLPQ43I;Co"a!AcFnV^]A>q%-X_9);L>El^oYUFA8$cgM)"D6BWkm2$
+O<DWWcU+4LlD`b$@5!]A17oKdiY8n"$'/JYV-`t,Um;Mq$[D>:i^:J(0C'5M_h`44Q5buk5%F
+.&=56+]AJ.b3C^KA`h'cT+Kc`a^SuM<+arf5)`uX^kB$B/*('?.n/o[S!O^WiN:@KK>H=<`eq
+u,j*!Hf55W;AgLoRR1D2<\pWHq^H]Aa8*^0)Q)flhN12Ihuhs*R!5'[$`9BHm.7@&UKC3c/4j
+Wpt:Z4BP:haFPN\^Cr,bNB7M8QJJ2S=C]A<+-(#A?OstK-V<=;@k/Y8qq&Sbqt-("O,lVp]A^j
+KDW`?fFl.:)qhn!mLp-!cr^sriRl^'uV%XN_+8&ubTnWG"@UJo%.9JmT[=[^T&[r!:Pq!lm1
+N1:`;lTc+aJgudj;Vm[N.]ABYH*$706Y<?5pY[iE^/G8C7T"jg(++0;_P[s(#cp(jOpqj('Ae
+RF(DDhe=!]Am@dF=>U3)PSG>U^%AL(`4)$>6MI[S2h7Kaonp<#)qig7.Y9IWkl9SCEE92n*g&
+):BrdoX9@X1f3HoeI4E_9f,$(HS'cctLS!E$JsFB%Z5?=s#Q5!Z$BkRe-jaU_rV^@B#PM23Q
+%Uh87m)XXenmJU.>Cq8rZk+F*'$VLdE*q"Z$=s(X.J)Xej!?Hm)DQIDf.i!YRPaG_ftg'HHr
+ogO0[4HP9dPCCF+tICbaB)q&47<2f78*1,:&<j\eo^?f+7<aGT'"9sNEjK;t2=TFPdcH?eZ3
+BBIFKs.8,eol//cWsGKD0"q%3O3^!Ig=ZDqm_-6iAi!eP^1Sr_gGkMD/8KWu@)#sFJME"eHE
+&jV/^<0W,Crt3ipnTYDLCF(=@;83(#i7-2C(:uoS]AIK)+R7X4u@@pp?_Bbq"!Oil#<Cpp;r4
+Vp"[.ODsVkVO&q^rHe.PW'?<m;F`Q5M)s*`"oB0uOnqH),&bHStp`P/kP0lSP*2u*a]A9*LOg
+%D-L#99gS^3T7C%;XSNIFha8gjag=AQ1:33'S)KcFr@uXbMhcU^6D8fYm7og@'0Yg^#*%"Tq
+s"5[g"\bD?)%`gq>QQrN:N=VmVg3G)QS*#C<n`#!,)#QlGlYk1M.]AbP,0FX&>KBK+ta$o\eM
+<jL+5O;D>J'8ai^p;q%-:/#C'"EpS]AD7SXV3E;k\P!$$_g:n0Y:nR]A_@POllccZ->bgC4GM:
+GhF'OM9V=e8d:%+pN\j4K.jfho:CQ04GGabu5e#E85\'/q8RkeHd(rW=f'g_N+tB5@PJ!!#S
+Z:.26O@"J~
+]]></IM>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="17" r="27" cs="3" rs="2" s="5">
+<O t="Image">
+<IM>
+<![CDATA[!W*T7lA8>47h#eD$31&+%7s)Y;?-[s@fQK/<<rX+!!(Gnc#Nda'uEO15u`*_m99n$<7RDNmr
+cAS&C@'sA!EoG;Ibub">sq+8e=frA/0<V<+[*j1T%IfDl&IMdA.C2NXLc&LglGQ)U72lTX$$
+sKj-efm-hbpqfVX=c8tuGn*/U*8:5DhC6\!f?17I"pY9i9q9Ja'V`e6IH?XU6#c^EqOfBU*7
+B25E'rgIq7B25E'r`Z\<MZWc<KAV-?YuSqr\==@j/Il2D<\gtAnHP=Q^XDn-[krD5RQX,EE3
+9.b"?/2X#7_f@@i?hCI7gc.0EuIY,4*<MS#P,N2@,W.ei^h`$o#BKeo'KPV,Hu^o)ibN0/Ie
+KOFXtJ8r`V8&300J.StbmcT[l6S`Nha?k73UK2J6\a)_6@C3bU8/86!D(L;TR?^ZP0l)SqME
+XeLkVaOe0ZaV",s]AI@.=FH)7>K2[3E"f8KFoqs8E`;h7Jtt\"&`k<08:dl7mOBu37*a29uQZ
+QBkS1GUBEY@9i//!P@-4Akpa4-.!`UR#p^jr`D`:aklAk!-o-ehO*!D*,fsPJCsp+p?'#0/9
+Ao%\:/Gc_A,@QGKr.@'NA*dm9,Ur-)/H(55=NTaIh+!1A)NVM-)!#iVPXP>n2rnrlU$E;,L>
+D.;TeW1d"t7_2Oie]Ack$0$A2:<mVLtB]AZs;#^L@(P?:0U.T2`M4O1b<p@KFRR_&ZhITNKbnp
+("s4I/jCONBej*h9gqq?7bCq@TIE)@L8Y4o)B*iUI*;3%=5YJBMgUHG#n?ZqCB1g\62oWge-
+'X`'b8T4Hfuik."NTd,%YU$->k"X![\OnpqW%e,<Vf3cVf*r/b]A:Jnj02c91Db;32j+O!s"S
+EL'N"opq8f,hLO^-;o^+"0jFaTGj(.hDubK;Rc[Q\"E)*G+:uSq(r%,<Fq&[i%P5?>#f^@.J
+b=3r3T:Ur4+-,RPPhR(n#fgqjR^$5j/-*"OMD%1S0DMI(r43p4<r?]A5et8/F3eU&c!Gn;XjC
+d4DLinl=tdPLo(IZk<1-KWY>_VaQ0*Qb0DTu:E,g-o7=YL9D[\jt(.l60rXOGDlg*M%?!X"b
+5nH*V%U;XcV?$[jg2,,Ue?LC)>//UV_Y25ia,Cnj&_J^gS0EdmKe3DgCT4VI)%\in5gnP*QG
+#9<gsMddL)rGC[FK&+"iT5@hQj8[2'bm$%Oh_+Ib(L-d`5k"&.lA>-H8GpW50o]AbcOI*3",p
+KF0`p'e^i<Wn8^=o4L)U&kmMnN^n9D,c.r,Ul;1bGl&q(P6:@PL9VOOY0YRWU;+r3+Iffo7Z
+,`HGj0m^ET>,d53H)*(!PJ<cX09iuC(WSrPC0-r0U9"#`Ye=CMVdC83s\r01HI3!R$^5]A^:S
+*#Hb]An>2E!I>WM:i;=dQa<i=Yhmhr+ra\Kl\J<G:R4[pEE$H.!R[1Ml-t?+rq$!1A'?;2"pG
+2WGYq.F;k'cBJi%HZK+;$0P$i`S@qX*qfNd'q]AC>jKa9F2Fu&$0oX!gk&5rWkcO5^SXS-b0J
+VdLAI#r%ZL=d$*OlhV3is_Z^kM69$bS2W:uD!\"W(RH+M[fL+\1nSf*+H7OgT4c#/9#_-,PC
+qLX=-S]AaB!s"SOI85371Mg?lB*UjW49Rr9`t(E\*:%d;R*:HGU@5[k(!;R3r7cBN`@;JuH(l
+@H[B(Pb'OFlHGqeG-X3-k);<A53u0:]ANXW%/M@EYJ["MH^c>lK13'B+/bYmmZ\<%XPH\q\RP
+jo&uN_c0EQP+kf##p^*LBb;`:Kllm0[4_KcOHHh4pVRs,ineDQYd]AiY7/8$`uEP[eX&%N$mY
+TpP$aB)tqgI@15;[$4SgFc4'&!E8/-3B3C\Y*ftI8lb4RfYj^E.k/atj:.b70As2^48jc1+2
+,;GM)c+%Enenb@rieg%obOf"ktEX-hg=P_OJoQY]A0djn6LQ]AlaEqa5BuY7!:%/I2N0]AeUlJj
++IkJ82g=u)^:69L[6:XB.^HhYD%Y^CY6\kKV*WTGRQ0dQd9eQ.8TOhl?FJ^s>3.XPAF[4/Sq
+QNj"Y6USg^k`t4]A!/76phu_mrn7fRZu4^2naC,i#f[#g'sn%g$C#]A^:b/<6!?qSZ-,VjcF@@
+9O]A20O![b^lAX)41\D74"sl]AAs?D!C`aLUUQ;h4=9TOrt@8!#'JNTsmRDNc;]ACGMt*Gl]A+bT
+[O"h%4?@]A1aWOr7!XRN+(mScPRH@H]A]A0n&)ej!g6)1Cg,L\*U6]A/:Z6qZ[QpeFWOge/nV/WX
+\G-?PgPqJ\T=8`2Yp\V-5h.AV6`'SFUg'Z(7(+SbKts%oJ<2AIAn.4TmDY2Z/dLD*+!TKhP]A
+6*^=n'?R2([r*j$4_F\g?!Imo2+Qo;m*H<iVYs25qhjD[>V`E;[:a^rMJo1]A!m2*j:olC/sV
+\CkAUH+91@_^$Z]AsFNU3B+oK)')<WBQRb@-(r<_[91_s/ncId._("=_^)hgbMk]AfC8^l5FHV
+[B:tLe?9_Vj:gM&l&I@X,1>8IVM3`V[mGB]A%pED""RQSTd9MF-H&M[.m@W]A3q[?2E!&i$.+>
+&Xu3cBE_cPVVY#ekZIqDcR2f;#/Z,VE?Fe._mNhH;blQ)W[dDr<+mI8**8gC6c1$--d0W;NM
+A1uAiP''WH=B%?oK3N%P5u^NsJ#h&Sba)C+(,9S;)VP\"jS(8:o[pJSYRCKo4=G(_qpqG:(U
+0M'Vo]A>[OtC]Ai"("GN5.c2#l@Hp"n."8eBD7'EUKiMBI"D+h0'W5XVdNM[7F@`QZaY?A9J7b
+%F0u`FNL=B:qZPctN'sE>]AHn:<LQ^9"tZ*g52V65%)DU&k/X&::[a1]Ah^#?&dIcLpD?G473V
+oL0EE\cFTcl+9t_Lb2s$o;VDsQ-;Fj]A^$Ze]A]A,<;p'&($8H)$^@*8j?(o-mYWE;5=ZsnY"d6
+FR!/4ckXT/#,PLWb@,c913lG;mSB&_9[ER3<_5m*]A#n\8"n$-"R]A:q\?,K`[WYgr<57-h^R.
+quPH%'1t;Jnl/NW^eJP#"N#=h,MdXN4qOjD=gC2=1>bW?.K,EbKdS8^BV$=XcLs7]APHW]A'k_
+Eq>`p`"B-1:b)n/(9N>--f`+X$bSbVA^04'm_:%@Al@QI0885AFZ5e!qXXL4nRrg5XP7PL%K
+Q*PjMuJSYQ*;L$EuM%Q;E7W(RI,Qir2Lq%i$_[QW^?>MgFg;7''22TaPYQ_McO71iC_2a0!9
+^N[HIPj;Q4@U[5O$,7]A"=`.b/7^9<IrlO37-2faQ'3EeP5YEJfB3*>agt*A:!&DHBYLUQ;(r
+I-AkT+3HN=nALnH>mt4F;[T[tcKWI71oqaB?4\8kUC1*;C^<n7"IHb?Bb!>0.+2nQ2jNSKK(
+#T>E+^ja<<f5/dX"cr)R79`*/m%dg/hg;N/CtJg3S>hf+3coVD4L7!LGPSerRVQbZPA-\?6;
+DTo!Mgm'71)CE-c5'tnLd;s8Dor?6=oj5_:Eg5[U&AU44L+JeB7+Z]A;(*CcffRT*;/kuSRO`
+g(sDTt!jl)&7L6+`<#?Fm#>nL\DbOH%SVW[b'6@b?+>^B"ZipERQO92@%k_oE,ap2@`ffb(N
+b2YI<#_a^f.$%F,Pp.Yr_!!CM5dP`4k!#RG\Bn=3+`V\#nU&.`87:DMW>IJk+E?M9,#mV?Gr
+j7j`tL&a2l<#ufqp9,S3)?q7,lJH`;PQ`o@DSG7rI^M&@2,1Cnr78mt#q`2bIl:NkH*r']A3H
+<jB+q[QT'MAfNDI^RM2-sR*9tc=!4Qja7%KrRulpcR@^]AlAWRI&3s^2<aXj>Zt;pg@%,[G/-
+uN]AZ:&f%,$/"?q^DgR)<3fKI*(W>Iqc\gEGA0`F"o"iiSua)Fn:$Cm@\Uc-<.=BbkFA`q%qT
+D@!CcfL*+F8h+Yo,#GoH8'1,D:enP)`(p^nF)<Ql\^c.(hre]AQ9VkRR>71NJf,0e3+6d@-^X
+`@epGWJ/$?YI?>W;tQ-D-tC)\;lbg^ot9j(Bo<lfOGA:W34)dn[[-m<.V[hVDo+i"P/%Cc?7
+L@7:6pr/edSM9k3"j;GlO@W677gY]A#=&F]A7/0[V`-=^U`?g@_['Tl@VVP>-&Q8g*nLc!!i";
+-@]AVCn(OnBD7$-:VNshtkIkF&"rn3M-Dq>-W+cP\Dp^4a]A`Q#GKmrf2&P1Hcjk+;@3SKU)-N
+a/*hKTgiKZprBR;->!G&bfV#&k2o'`(nG'k)n+jFh-MdE:FW?]AHX9(`Y^)E#K0rel/'ZrghQ
+)[qlZk%`qh)OeRPrmR1r9WXP(ERl"fM0Urd*4uma7d>+ERr>*WGh"dH$'3"3P'L>++frU(c;
+\3`g!p)dKdK8k=8MHNcb>@#:-QFe+:5,)@u]A8!*Nc[L<+:#+.DBsZQ?c$lIj2RTFF*>e3%@8
+Ph$DR$uSZk`SBU86i5KmIHM&G?.NdNFE]AZc.gt=M*S\%'b/4]ALoP]AMW]AIeo\@r$8DER"+hLO
+Ze0e"/^JAk-BWBnH\6SVRW4fc$qpUg,LR!m4C`D:l6*;HroYZ5O=0j71]AiJrOs.Yk,A5B5D?
+NPmKg_q0eVF"&18(1)far&__*%321i#pTgap$Q\`M&?%:k0r3X1EeJ05N("Q5THruPdQ1%cd
+m=mB[kgs]AH#k$p3b`sY[_^(`++H3DaC2\BMQ!u*1\f4rfe^X/IsfOkJ.atoqTQ8m?<"`)pfQ
+GTHMdMra,cka_X`+GO$,DR4_;L[4p-i@ZoQ4VX#]A@"M'+%J=oj4P/@%:!K%H-*>I9Nk80:hu
+.`*2>(:=n0RkP+/D3UZ<hYEpAT<RsYbr@YEs5!nm#'_2fC/BPi8Kh<q0XSC.G&#fAd86%k#B
+0;0>s2]A7lBQ/):VQJ;VjHJc5@!sZdf,iif;l$Q3G??Ta6j4!IRlLVNk0.'';\m:>TPB:]A//T
+qSND8R,\\K;`U7$d`fD"nh9hYWSC4b+5!@kVMZOS0oub]AoK+9nh=*ok4Uh./Z<pZ7SkV'*Pl
+d7>,\bnZEIpq=6\\Fa5\2W?Ek?!+c).QCJOt,L'5tYstkK8WoS3$L?0ACI=5CFVSDWFBeI^J
+XOY;Q%Rp@(q]Ab-o8.rYR(`5Ff28YYQupo#-M<=$AHVr[mk-cqWp:g+gh:K*_no)GZeEW"4F6
+bBe.%+F%\Oo%^#7h>G`+jt6G5/NKGc>5RSX[QSj)fL[SpDKp<[``G@Vd(p)[lWEW+C5"!4]A"
+MNMDu7FBkDVL/bO:1.J)dXG(J^UF8PuWk^%(7M'1RGKbt!DqF6ft`B:dWcjhMFkW<_*p?82E
+<?U"-<9W%^)%o47rf[7.0e(S.loCD)_fD:>V#'pF7"A6Ue]A3]AgCrl:U74QlOtY?J?Xn(dg,_
+Bi93s18-2eot/s>J>++^+uK@'bi7$>Bd?i5AnR3\)1O?D=GSAs)>qg=2qj#6..%/r[GO:dO/
+N`"B:?-ZH;]AgFA!\TjT@_onEPM;EP[Qk]Am=VXW"Bs1gLVuY41V,eoA_tqT7#b.<`WHLhR?[s
+P7qdT\5=h6/f=QZ_IrGVNh::L;i=s3&.u-+BRH<,1Z\')M\drGOh:%9]A5G:Y?b:/]AJS5h,m?
+/q-VI+X`EtOD5s7&/q#1fk_s#0B+(CQOiRJm:\9DUnR0*>B_"&_X6hVs<>Po9Aic(.+V]AG59
+:03pJ[f)2JSV0Vt3-XV8-]Ab2dUl_+'ZWTQ0brVG"Sg=<aC4_Pf2XhSWAC?k'gXBtd4]ASfYj]A
+_<%4R6eesk@GR;ND6)))E\ODou_2bDr7qbfV'\Kr9q*/D/T(&7p:*nT5sQ1_[\c*H#LkVlW,
+Xmp^qh8cI(.ICk!XU#s,Qgj)kSK4J8RccV:nIN!h+PIW4A18,i5HH/L!UD0^V-?Z>f:Nh:\Z
+p1D:!S)6;B^n?6bTDf'9\nTn?gh[aWg1ktQl(ST2!VKgkq@2-7NA^f165^;=-lr++I=jZN`H
+cM`m:a6!qO<A]A]AmkIS@4sbCq\t$2CZk,VCYjAYft1HLbE,&c"K)D,Sh@XWki73RNJ>5:ai7U
+XS%c7/6%Ln6OgaN$>eq0DY^4p>1J`DW\YV7?G5n]A=hZKAM]A/H<7"&%7%")Ksrj>6N)IZ`N)>
+bs\A?'X0b+t0r)6\-2p,*h5KPH#%m&sZ\BWfUFt+CMu2KEoVoQ5%-!iYuAh6HehWFHR'PqC:
+-b[O\59qj/E(i#>0,?'b^6m.Ka%@*S!0LE1d;LuG,_!aVtVNAO1l;BcjbkXcpWW^I(2KMMqM
+4G#2YW6cDAgs$!flTE0#WXG[(Sgd);BM)6c_j(cm^g(Q`$E#n.Y2WE+),d;<+p`n2*cq$P&>
+ouaQfUJ1@gPfW@u<,m+=I;o$_e&F?h,j;\oO+jpm)>43\j,R^p(FQV3Js[U_BE79Ek.J.gf&
+KK7A]AkVs">1QJ@`9[mCsU.[C_]AgXp`iZVFt2.N?d8qOG[H&q^Zg.ZIa'M_[kX,\)_Lj2qoO$
+cTDR$t?[Yf*8$"#fA9pqk<sD>TA[R<?U0*dl<nk+tu*PTn/q@`8-!emGFhA2:WgI3G8[q6_B
+5ekTgD=<!Gp,?*ls5@)C&<=&:;1ds_O/$)B$3J5dMZ#cs$l%SaG_'lT_BAf/q<5fUEbOV#0h
+'t<]A]AS)C.oIeXS5,*OTF^QstFr8OsEGK"9:c+DE6UGsWP)`U\fckoRp"Bc`VL/Qtc/j>K.7j
+VSJ-jm[`HQ$AfhSe.lq:.+`U8&hr-(FX+)edBUTlZ8*;dEI?/CH;7_IPI+:3&[kI47aI(8-S
+KHP0mc;D&!:/'b+^]ARr8j8YmmkV<eppM*rJZOt[)$g*$>SC'B^s^q(?gmtGad'@KbsYad`CA
+8!R:j$lnahb?Y0M`o8u`rtreN,-os24oBs,u$EeNjgR]AfET`<im45FIhndJ$cU%!8_g*jNf+
+ViM'T/L7ujh[nG@/40H_*S(Ln?)nlgUf9I7l"iY7YT1#:9?XjTWI3g"m^!M^2YEDGb\,S.lU
+L:jtjdP&3ho,Y5OUl%)#l%"Z,?2B87i*:j>@[`&8fU!bh^JnIDjqU*K/5PD.-N&4dlUjFp*k
+-IeUQGG^eYNmb,nnbpHW2;-.QdJS1O8]A?Ab'[1pr`SRVM\=fW@CfrUP`"cW@CeGUoHscOfBU
+*4fV%QOfBU*7B25E'rgIq7B26ps7u3Bfsko&OEK[^z8OZBBY!QNJ~
+]]></IM>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="28" cs="2" s="5">
+<O>
+<![CDATA[单值]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="28" cs="2" s="5">
+<O>
+<![CDATA[平均值]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="28" cs="2" s="5">
+<O>
+<![CDATA[单值]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="28" cs="2" s="5">
+<O>
+<![CDATA[平均值]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="29" s="5">
+<O t="I">
+<![CDATA[1]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="29" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="29" cs="3" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="29" cs="3" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="29" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="29" cs="2" rs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="29" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="29" cs="2" rs="2" s="5">
+<Expand/>
+</C>
+<C c="17" r="29" cs="3" rs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="30" s="5">
+<O t="I">
+<![CDATA[2]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="30" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="30" cs="3" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="30" cs="3" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="30" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="30" cs="2" s="5">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="31" cs="20" s="24">
+<O>
+<![CDATA[附注:]]></O>
+<Expand/>
+</C>
+<C c="0" r="32" cs="20" s="25">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="33" cs="2" s="26">
+<O>
+<![CDATA[试验]]></O>
+<Expand/>
+</C>
+<C c="2" r="33" cs="3" s="15">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="7" r="33" cs="2" s="26">
+<O>
+<![CDATA[计算]]></O>
+<Expand/>
+</C>
+<C c="9" r="33" cs="3" s="15">
+<Expand/>
+</C>
+<C c="15" r="33" cs="2" s="26">
+<O>
+<![CDATA[复核]]></O>
+<Expand/>
+</C>
+<C c="17" r="33" cs="3" s="15">
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<Margin top="2880000" left="3600000" bottom="2880000" right="2880000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+</Report>
+<Report class="com.fr.report.worksheet.WorkSheet" name="粒化高炉矿渣粉试验报告">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[1152000,952500,952500,1152000,1152000,1152000,1152000,1152000,609600,1440000,1440000,1440000,1440000,1440000,1440000,1440000,1440000,1440000,1440000,1440000,1440000,1440000,1028700,723900,5410200,723900,762000,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[914400,1728000,1728000,1728000,1728000,1728000,1728000,952500,914400,1584000,2209800,1584000,1584000,1584000,1905000,1866900,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="15" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshi" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="15" r="0">
+<Expand/>
+</C>
+<C c="16" r="0">
+<Expand/>
+</C>
+<C c="17" r="0">
+<Expand/>
+</C>
+<C c="18" r="0">
+<Expand/>
+</C>
+<C c="0" r="1" cs="11" rs="2" s="28">
+<O>
+<![CDATA[用于水泥和混凝土中的高炉矿渣粉试验报告]]></O>
+<Expand/>
+</C>
+<C c="11" r="1" cs="4" s="12">
+<O>
+<![CDATA[ 表号：铁建试报07]]></O>
+<Expand/>
+</C>
+<C c="11" r="2" cs="4" s="13">
+<O>
+<![CDATA[ 批准文号：铁建设 [2009]A027号]]></O>
+<Expand/>
+</C>
+<C c="0" r="3" cs="2" s="14">
+<O>
+<![CDATA[委托单位]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="3" cs="6" s="15">
+<Expand/>
+</C>
+<C c="8" r="3" cs="2" s="14">
+<O>
+<![CDATA[报告编号]]></O>
+<Expand/>
+</C>
+<C c="10" r="3" cs="5" s="15">
+<Expand/>
+</C>
+<C c="0" r="4" cs="2" s="14">
+<O>
+<![CDATA[工程名称]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="4" cs="6" s="15">
+<Expand/>
+</C>
+<C c="8" r="4" cs="2" s="14">
+<O>
+<![CDATA[委托编号]]></O>
+<Expand/>
+</C>
+<C c="10" r="4" cs="5" s="15">
+<Expand/>
+</C>
+<C c="0" r="5" cs="2" s="14">
+<O>
+<![CDATA[使用部位]]></O>
+<Expand/>
+</C>
+<C c="2" r="5" cs="6" s="15">
+<Expand/>
+</C>
+<C c="8" r="5" cs="2" s="14">
+<O>
+<![CDATA[记录编号]]></O>
+<Expand/>
+</C>
+<C c="10" r="5" cs="5" s="15">
+<Expand/>
+</C>
+<C c="0" r="6" cs="2" s="14">
+<O>
+<![CDATA[样品产地]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="6" cs="6" s="15">
+<Expand/>
+</C>
+<C c="8" r="6" cs="2" s="14">
+<O>
+<![CDATA[规格种类]]></O>
+<Expand/>
+</C>
+<C c="10" r="6" cs="5" s="15">
+<Expand/>
+</C>
+<C c="0" r="7" cs="2" s="14">
+<O>
+<![CDATA[代表数量]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="7" cs="6" s="15">
+<Expand/>
+</C>
+<C c="8" r="7" cs="2" s="14">
+<O>
+<![CDATA[报告日期]]></O>
+<Expand/>
+</C>
+<C c="10" r="7" cs="5" s="15">
+<Expand/>
+</C>
+<C c="0" r="9" cs="5" s="29">
+<O>
+<![CDATA[试验项目]]></O>
+<Expand/>
+</C>
+<C c="5" r="9" cs="5" s="29">
+<O>
+<![CDATA[标准规定值]]></O>
+<Expand/>
+</C>
+<C c="10" r="9" cs="5" s="29">
+<O>
+<![CDATA[试验结果]]></O>
+<Expand/>
+</C>
+<C c="0" r="10" cs="5" s="23">
+<O>
+<![CDATA[含水率Ww（%）]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="10" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="10" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="11" cs="5" s="23">
+<O>
+<![CDATA[烧失量X（%）]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="11" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="11" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="12" cs="5" s="23">
+<O>
+<![CDATA[比表面积S(m²/kg)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="12" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="12" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="13" cs="5" s="23">
+<O>
+<![CDATA[需水量比W<sub>1</sub>/225（%）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="13" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="13" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="14" cs="5" s="23">
+<O>
+<![CDATA[流动度比（%）]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="14" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="14" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="15" cs="5" s="23">
+<O>
+<![CDATA[三氧化硫含量X<sub>SO3</sub>（%）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="15" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="15" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="16" cs="5" s="23">
+<O>
+<![CDATA[密度ρ（g/cm³）]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="16" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="16" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="17" cs="5" s="23">
+<O>
+<![CDATA[氯离子含量X<sub>Cl</sub>（%）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="17" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="17" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="18" cs="5" s="23">
+<O>
+<![CDATA[氯离子含量X<sub>Cl</sub>（%）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="18" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="18" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="19" cs="5" s="23">
+<O>
+<![CDATA[氧化镁X<sub>MgO</sub>（%）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="19" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="19" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="20" cs="5" s="23">
+<O>
+<![CDATA[碱含量X（%）]]></O>
+<Expand/>
+</C>
+<C c="5" r="20" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="20" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="21" cs="5" s="23">
+<O>
+<![CDATA[活性指数A<sub>28</sub>（%）]]></O>
+<CellGUIAttr showAsHTML="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="21" cs="5" s="29">
+<Expand/>
+</C>
+<C c="10" r="21" cs="5" s="29">
+<Expand/>
+</C>
+<C c="0" r="22" cs="8" s="30">
+<O>
+<![CDATA[检测评定依据：]]></O>
+<Expand/>
+</C>
+<C c="8" r="22" cs="7" s="30">
+<O>
+<![CDATA[试验结论：]]></O>
+<Expand/>
+</C>
+<C c="0" r="23" cs="8" rs="2" s="25">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="8" r="23" cs="7" rs="2" s="25">
+<Expand/>
+</C>
+<C c="0" r="25" rs="2" s="26">
+<O>
+<![CDATA[试验]]></O>
+<Expand/>
+</C>
+<C c="1" r="25" cs="3" rs="2" s="15">
+<Expand/>
+</C>
+<C c="4" r="25" rs="2" s="26">
+<O>
+<![CDATA[复核]]></O>
+<Expand/>
+</C>
+<C c="5" r="25" cs="2" rs="2" s="15">
+<Expand/>
+</C>
+<C c="8" r="25" rs="2" s="26">
+<O>
+<![CDATA[批准]]></O>
+<Expand/>
+</C>
+<C c="9" r="25" cs="2" rs="2" s="15">
+<Expand/>
+</C>
+<C c="11" r="25" cs="2" rs="2" s="26">
+<O>
+<![CDATA[单位(章)]]></O>
+<Expand/>
+</C>
+<C c="13" r="25" cs="2" rs="2" s="15">
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<Margin top="2880000" left="3600000" bottom="2880000" right="2880000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="false" delayPlaying="false" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<ParameterUI class="com.fr.main.parameter.UI.FormParameterUI">
+<Layout class="com.fr.form.ui.container.WAbsoluteLayout">
+<WidgetName name="para"/>
+<WidgetAttr/>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.report.web.ui.impl.form.FormSubmitButton">
+<WidgetName name="Search"/>
+<WidgetAttr disabled="true" invisible="true"/>
+<Text>
+<![CDATA[查询]]></Text>
+<Hotkeys>
+<![CDATA[enter]]></Hotkeys>
+</InnerWidget>
+<BoundsAttr x="283" y="25" width="80" height="21"/>
+</Widget>
+<LCAttr vgap="0" hgap="0"/>
+</Layout>
+</ParameterUI>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="1" size="144" foreground="-16776961" underline="1"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="宋体" style="1" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="宋体" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="宋体" style="1" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style vertical_alignment="1" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" textStyle="1" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="宋体" style="1" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="SimSun" style="1" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAE"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

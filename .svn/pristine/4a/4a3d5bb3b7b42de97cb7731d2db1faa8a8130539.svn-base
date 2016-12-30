@@ -1,0 +1,449 @@
+package com.shtoone.qms.service.impl.bhz;
+
+import net.sf.json.JSONObject;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.shtoone.qms.service.bhz.SYclAllServiceI;
+
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
+import org.jeecgframework.core.util.StringUtil;
+import org.jeecgframework.web.system.pojo.base.TSDepart;
+
+import com.shtoone.qms.entity.bhz.BhgsYclAllviewEntity;
+import com.shtoone.qms.entity.bhz.SYclAllzhviewEntity;
+import com.shtoone.qms.entity.bhz.SYclAllEntity;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+@Service("sYclAllService")
+@Transactional
+public class SYclAllServiceImpl extends CommonServiceImpl implements SYclAllServiceI {
+
+	
+ 	public <T> void delete(T entity) {
+ 		super.delete(entity);
+ 		//执行删除操作配置的sql增强
+		this.doDelSql((SYclAllEntity)entity);
+ 	}
+ 	
+ 	public <T> Serializable save(T entity) {
+ 		Serializable t = super.save(entity);
+ 		//执行新增操作配置的sql增强
+ 		this.doAddSql((SYclAllEntity)entity);
+ 		return t;
+ 	}
+ 	
+ 	public <T> void saveOrUpdate(T entity) {
+ 		super.saveOrUpdate(entity);
+ 		//执行更新操作配置的sql增强
+ 		this.doUpdateSql((SYclAllEntity)entity);
+ 	}
+ 	
+ 	/**
+	 * 默认按钮-sql增强-新增操作
+	 * @param id
+	 * @return
+	 */
+ 	public boolean doAddSql(SYclAllEntity t){
+	 	return true;
+ 	}
+ 	/**
+	 * 默认按钮-sql增强-更新操作
+	 * @param id
+	 * @return
+	 */
+ 	public boolean doUpdateSql(SYclAllEntity t){
+	 	return true;
+ 	}
+ 	/**
+	 * 默认按钮-sql增强-删除操作
+	 * @param id
+	 * @return
+	 */
+ 	public boolean doDelSql(SYclAllEntity t){
+	 	return true;
+ 	}
+ 	
+ 	/**
+	 * 替换sql中的变量
+	 * @param sql
+	 * @return
+	 */
+ 	public String replaceVal(String sql,SYclAllEntity t){
+ 		sql  = sql.replace("#{id}",String.valueOf(t.getId()));
+ 		sql  = sql.replace("#{picihao}",String.valueOf(t.getPicihao()));
+ 		sql  = sql.replace("#{mingcheng}",String.valueOf(t.getMingcheng()));
+ 		sql  = sql.replace("#{cunchudidian}",String.valueOf(t.getCunchudidian()));
+ 		sql  = sql.replace("#{leixing}",String.valueOf(t.getLeixing()));
+ 		sql  = sql.replace("#{rukushijian}",String.valueOf(t.getRukushijian()));
+ 		sql  = sql.replace("#{scchangjia}",String.valueOf(t.getScchangjia()));
+ 		sql  = sql.replace("#{chandi}",String.valueOf(t.getChandi()));
+ 		sql  = sql.replace("#{guige}",String.valueOf(t.getGuige()));
+ 		sql  = sql.replace("#{xinghao}",String.valueOf(t.getXinghao()));
+ 		sql  = sql.replace("#{jcshuliang}",String.valueOf(t.getJcshuliang()));
+ 		sql  = sql.replace("#{zgkucun}",String.valueOf(t.getZgkucun()));
+ 		sql  = sql.replace("#{pici}",String.valueOf(t.getPici()));
+ 		sql  = sql.replace("#{scdanwei}",String.valueOf(t.getScdanwei()));
+ 		sql  = sql.replace("#{qyshijian}",String.valueOf(t.getQyshijian()));
+ 		sql  = sql.replace("#{syshijian}",String.valueOf(t.getSyshijian()));
+ 		sql  = sql.replace("#{shiyanren}",String.valueOf(t.getShiyanren()));
+ 		sql  = sql.replace("#{syxingmu}",String.valueOf(t.getSyxingmu()));
+ 		sql  = sql.replace("#{ycl0}",String.valueOf(t.getYcl0()));
+ 		sql  = sql.replace("#{ycl1}",String.valueOf(t.getYcl1()));
+ 		sql  = sql.replace("#{ycl2}",String.valueOf(t.getYcl2()));
+ 		sql  = sql.replace("#{ycl3}",String.valueOf(t.getYcl3()));
+ 		sql  = sql.replace("#{ycl4}",String.valueOf(t.getYcl4()));
+ 		sql  = sql.replace("#{ycl5}",String.valueOf(t.getYcl5()));
+ 		sql  = sql.replace("#{ycl6}",String.valueOf(t.getYcl6()));
+ 		sql  = sql.replace("#{ycl7}",String.valueOf(t.getYcl7()));
+ 		sql  = sql.replace("#{yc8}",String.valueOf(t.getYcl8()));
+ 		sql  = sql.replace("#{ycl9}",String.valueOf(t.getYcl9()));
+ 		sql  = sql.replace("#{ycl10}",String.valueOf(t.getYcl10()));
+ 		sql  = sql.replace("#{ycl11}",String.valueOf(t.getYcl11()));
+ 		sql  = sql.replace("#{ycl12}",String.valueOf(t.getYcl12()));
+ 		sql  = sql.replace("#{bgbianhao}",String.valueOf(t.getBgbianhao()));
+ 		sql  = sql.replace("#{wybianma}",String.valueOf(t.getWybianma()));
+ 		sql  = sql.replace("#{biaoduanid}",String.valueOf(t.getBiaoduanid()));
+ 		sql  = sql.replace("#{shujulaiyuan}",String.valueOf(t.getShujulaiyuan()));
+ 		sql  = sql.replace("#{biaoji}",String.valueOf(t.getBiaoji()));
+ 		sql  = sql.replace("#{UUID}",UUID.randomUUID().toString());
+ 		return sql;
+ 	}
+ 	
+ 	
+ 	
+ 	
+	public List<SYclAllEntity> getDatagrid3(SYclAllzhviewEntity pageObj, DataGrid dataGrid, String biaoduanid,
+			String leixing,String guige,String xinghao,String chandi,String scchangjia) {
+          String sqlWhere = getSqlWhere(pageObj, biaoduanid,leixing,guige,xinghao,chandi,scchangjia);
+		
+		// 取出总数据条数（为了分页处理, 如果不用分页，取iCount值的这个处理可以不要）
+		String sqlCnt = "select count(*) from s_ycl_all t";
+		if (!sqlWhere.isEmpty()) {
+			sqlCnt += " where" + sqlWhere;
+		}
+		Long iCount = getCountForJdbcParam(sqlCnt, null);
+		
+		// 取出当前页的数据 
+		String sql = "select t.* from s_ycl_all t";
+		if (!sqlWhere.isEmpty()) {
+			sql += " where" + sqlWhere;
+		}
+		List<SYclAllEntity> syclalllist=new ArrayList<SYclAllEntity>();
+		List<Map<String, Object>> mapList = findForJdbc(sql, dataGrid.getPage(), dataGrid.getRows());
+		for(int i=0;i<mapList.size();i++)
+		{
+			SYclAllEntity syclall=new SYclAllEntity();
+			syclall.setBgbianhao(String.valueOf(mapList.get(i).get("bgbianhao")));
+			syclall.setBiaoduanid(String.valueOf(mapList.get(i).get("biaoduanid")));
+			syclall.setBiaoji(Integer.parseInt(String.valueOf(mapList.get(i).get("biaoji"))));
+			syclall.setChandi(String.valueOf(mapList.get(i).get("chandi")));
+			syclall.setCunchudidian(String.valueOf(mapList.get(i).get("cunchudidian")));
+			syclall.setGuige(String.valueOf(mapList.get(i).get("guige")));
+			syclall.setId(String.valueOf(mapList.get(i).get("id")));
+			syclall.setJcshuliang(new BigDecimal(String.valueOf(mapList.get(i).get("jcshuliang"))).setScale(8,BigDecimal.ROUND_HALF_UP));
+			syclall.setLeixing(String.valueOf(mapList.get(i).get("leixing")));
+			syclall.setMingcheng(String.valueOf(mapList.get(i).get("mingcheng")));
+			syclall.setPici(String.valueOf(mapList.get(i).get("pici")));
+			syclall.setPicihao(String.valueOf(mapList.get(i).get("picihao")));
+			syclall.setQyshijian(String.valueOf(mapList.get(i).get("qyshijian")));
+			syclall.setRukushijian(String.valueOf(mapList.get(i).get("rukushijian")));
+			syclall.setScchangjia(String.valueOf(mapList.get(i).get("scshijian")));
+			syclall.setScdanwei(String.valueOf(mapList.get(i).get("scdanwei")));
+			syclall.setShiyanren(String.valueOf(mapList.get(i).get("shiyanren")));
+			syclall.setShujulaiyuan(String.valueOf(mapList.get(i).get("shujulaiyuan")));
+			syclall.setSyshijian(String.valueOf(mapList.get(i).get("syshijian")));
+			syclall.setSyxingmu(String.valueOf(mapList.get(i).get("shiyanxiangmu")));
+			syclall.setWybianma(String.valueOf(mapList.get(i).get("wybianma")));
+			syclall.setXinghao(String.valueOf(mapList.get(i).get("xinghao")));
+			syclall.setYcl0(String.valueOf(mapList.get(i).get("ycl0")));
+			syclall.setYcl1(String.valueOf(mapList.get(i).get("ycl1")));
+			syclall.setYcl2(String.valueOf(mapList.get(i).get("ycl2")));
+			syclall.setYcl3(String.valueOf(mapList.get(i).get("ycl3")));
+			syclall.setYcl4(String.valueOf(mapList.get(i).get("ycl4")));
+			syclall.setYcl5(String.valueOf(mapList.get(i).get("ycl5")));
+			syclall.setYcl6(String.valueOf(mapList.get(i).get("ycl6")));
+			syclall.setYcl7(String.valueOf(mapList.get(i).get("ycl7")));
+			syclall.setYcl8(String.valueOf(mapList.get(i).get("ycl8")));
+			syclall.setYcl9(String.valueOf(mapList.get(i).get("ycl9")));
+			syclall.setYcl10(String.valueOf(mapList.get(i).get("ycl10")));
+			syclall.setYcl11(String.valueOf(mapList.get(i).get("ycl11")));
+			syclall.setYcl12(String.valueOf(mapList.get(i).get("ycl12")));
+			if(StringUtil.isNotEmpty(String.valueOf(mapList.get(i).get("zgkucun")))&&String.valueOf(mapList.get(i).get("zgkucun"))!="null"){
+				syclall.setZgkucun(new BigDecimal(String.valueOf(mapList.get(i).get("zgkucun"))).setScale(8,BigDecimal.ROUND_HALF_UP));
+			}else{
+				syclall.setZgkucun(new BigDecimal("0").setScale(8,BigDecimal.ROUND_HALF_UP));
+			}
+			syclalllist.add(syclall);
+		}
+		/*// 将结果集转换成页面上对应的数据集
+		Db2Page[] db2Pages = {
+				new Db2Page("id")
+				,new Db2Page("picihao")
+				,new Db2Page("mingcheng")
+				,new Db2Page("ycl0")
+		};
+		JSONObject jObject = getJsonDatagridEasyUI(mapList, iCount.intValue(), db2Pages);*/
+		return syclalllist;
+		// end of 方式3 ========================================= */
+	}
+	
+	// 拼查询条件（where语句）
+		String getSqlWhere(SYclAllzhviewEntity pageObj, String biaoduanid,
+				String leixing,String guige,String xinghao,String chandi,String scchangjia) {
+			// 拼出条件语句
+			String sqlWhere = "";
+			if (StringUtil.isNotEmpty(pageObj.getBiaoduanid())) {
+				if (!sqlWhere.isEmpty()) {
+					sqlWhere += " and";
+				}
+				sqlWhere += " t.biaoduanid='" +  biaoduanid+"'";
+			}
+			if (StringUtil.isNotEmpty(pageObj.getLeixing())) {
+				if (!sqlWhere.isEmpty()) {
+					sqlWhere += " and";
+				}
+				sqlWhere += " t.leixing='" +  leixing+"'";
+			}
+			if (StringUtil.isNotEmpty(pageObj.getGuige())) {
+				if (!sqlWhere.isEmpty()) {
+					sqlWhere += " and";
+				}
+				sqlWhere += " t.guige='" +  guige+"'";
+			}
+			if (StringUtil.isNotEmpty(pageObj.getXinghao())) {
+				if (!sqlWhere.isEmpty()) {
+					sqlWhere += " and";
+				}
+				sqlWhere += " t.xinghao='" +  xinghao+"'";
+			}
+			if (StringUtil.isNotEmpty(pageObj.getChandi())) {
+				if (!sqlWhere.isEmpty()) {
+					sqlWhere += " and";
+				}
+				sqlWhere += " t.chandi='" +  chandi+"'";
+			}
+			if (StringUtil.isNotEmpty(pageObj.getScchangjia())) {
+				if (!sqlWhere.isEmpty()) {
+					sqlWhere += " and";
+				}
+				sqlWhere += " t.scchangjia='" +  scchangjia+"'";
+			}
+			
+			return sqlWhere;
+		}
+		
+		
+		
+		public List<SYclAllEntity> getDatagrid4(BhgsYclAllviewEntity pageObj, DataGrid dataGrid, String biaoduanid,
+				String leixing,String guige,String xinghao,String chandi,String scchangjia) {
+	          String sqlWhere = getSqlWhere(pageObj, biaoduanid,leixing,guige,xinghao,chandi,scchangjia);
+			
+			// 取出总数据条数（为了分页处理, 如果不用分页，取iCount值的这个处理可以不要）
+			String sqlCnt = "select count(*) from s_ycl_all t";
+			if (!sqlWhere.isEmpty()) {
+				sqlCnt += " where" + sqlWhere;
+			}
+			Long iCount = getCountForJdbcParam(sqlCnt, null);
+			
+			// 取出当前页的数据 
+			String sql = "select t.* from s_ycl_all t";
+			if (!sqlWhere.isEmpty()) {
+				sql += " where" + sqlWhere;
+			}
+			List<SYclAllEntity> syclalllist=new ArrayList<SYclAllEntity>();
+			List<Map<String, Object>> mapList = findForJdbc(sql, dataGrid.getPage(), dataGrid.getRows());
+			for(int i=0;i<mapList.size();i++)
+			{
+				SYclAllEntity syclall=new SYclAllEntity();
+				syclall.setBgbianhao(String.valueOf(mapList.get(i).get("bgbianhao")));
+				syclall.setBiaoduanid(String.valueOf(mapList.get(i).get("biaoduanid")));
+				syclall.setBiaoji(Integer.parseInt(String.valueOf(mapList.get(i).get("biaoji"))));
+				syclall.setChandi(String.valueOf(mapList.get(i).get("chandi")));
+				syclall.setCunchudidian(String.valueOf(mapList.get(i).get("cunchudidian")));
+				syclall.setGuige(String.valueOf(mapList.get(i).get("guige")));
+				syclall.setId(String.valueOf(mapList.get(i).get("id")));
+				syclall.setJcshuliang(new BigDecimal(String.valueOf(mapList.get(i).get("jcshuliang"))).setScale(8,BigDecimal.ROUND_HALF_UP));
+				syclall.setLeixing(String.valueOf(mapList.get(i).get("leixing")));
+				syclall.setMingcheng(String.valueOf(mapList.get(i).get("mingcheng")));
+				syclall.setPici(String.valueOf(mapList.get(i).get("pici")));
+				syclall.setPicihao(String.valueOf(mapList.get(i).get("picihao")));
+				syclall.setQyshijian(String.valueOf(mapList.get(i).get("qyshijian")));
+				syclall.setRukushijian(String.valueOf(mapList.get(i).get("rukushijian")));
+				syclall.setScchangjia(String.valueOf(mapList.get(i).get("scshijian")));
+				syclall.setScdanwei(String.valueOf(mapList.get(i).get("scdanwei")));
+				syclall.setShiyanren(String.valueOf(mapList.get(i).get("shiyanren")));
+				syclall.setShujulaiyuan(String.valueOf(mapList.get(i).get("shujulaiyuan")));
+				syclall.setSyshijian(String.valueOf(mapList.get(i).get("syshijian")));
+				syclall.setSyxingmu(String.valueOf(mapList.get(i).get("shiyanxiangmu")));
+				syclall.setWybianma(String.valueOf(mapList.get(i).get("wybianma")));
+				syclall.setXinghao(String.valueOf(mapList.get(i).get("xinghao")));
+				syclall.setYcl0(String.valueOf(mapList.get(i).get("ycl0")));
+				syclall.setYcl1(String.valueOf(mapList.get(i).get("ycl1")));
+				syclall.setYcl2(String.valueOf(mapList.get(i).get("ycl2")));
+				syclall.setYcl3(String.valueOf(mapList.get(i).get("ycl3")));
+				syclall.setYcl4(String.valueOf(mapList.get(i).get("ycl4")));
+				syclall.setYcl5(String.valueOf(mapList.get(i).get("ycl5")));
+				syclall.setYcl6(String.valueOf(mapList.get(i).get("ycl6")));
+				syclall.setYcl7(String.valueOf(mapList.get(i).get("ycl7")));
+				syclall.setYcl8(String.valueOf(mapList.get(i).get("ycl8")));
+				syclall.setYcl9(String.valueOf(mapList.get(i).get("ycl9")));
+				syclall.setYcl10(String.valueOf(mapList.get(i).get("ycl10")));
+				syclall.setYcl11(String.valueOf(mapList.get(i).get("ycl11")));
+				syclall.setYcl12(String.valueOf(mapList.get(i).get("ycl12")));
+				System.out.println(String.valueOf(mapList.get(i).get("zgkucun")));
+				if(StringUtil.isNotEmpty(String.valueOf(mapList.get(i).get("zgkucun")))&&String.valueOf(mapList.get(i).get("zgkucun"))!="null"){
+					syclall.setZgkucun(new BigDecimal(String.valueOf(mapList.get(i).get("zgkucun"))).setScale(8,BigDecimal.ROUND_HALF_UP));
+				}else{
+					syclall.setZgkucun(new BigDecimal("0").setScale(8,BigDecimal.ROUND_HALF_UP));
+				}
+				syclalllist.add(syclall);
+			}
+			/*// 将结果集转换成页面上对应的数据集
+			Db2Page[] db2Pages = {
+					new Db2Page("id")
+					,new Db2Page("picihao")
+					,new Db2Page("mingcheng")
+					,new Db2Page("ycl0")
+			};
+			JSONObject jObject = getJsonDatagridEasyUI(mapList, iCount.intValue(), db2Pages);*/
+			return syclalllist;
+			// end of 方式3 ========================================= */
+		}
+		
+		// 拼查询条件（where语句）
+			String getSqlWhere(BhgsYclAllviewEntity pageObj, String biaoduanid,
+					String leixing,String guige,String xinghao,String chandi,String scchangjia) {
+				// 拼出条件语句
+				String sqlWhere = "";
+				if (StringUtil.isNotEmpty(pageObj.getBiaoduanid())) {
+					if (!sqlWhere.isEmpty()) {
+						sqlWhere += " and";
+					}
+					sqlWhere += " t.biaoduanid='" +  biaoduanid+"'";
+				}
+				if (StringUtil.isNotEmpty(pageObj.getLeixing())) {
+					if (!sqlWhere.isEmpty()) {
+						sqlWhere += " and";
+					}
+					sqlWhere += " t.leixing='" +  leixing+"'";
+				}
+				if (StringUtil.isNotEmpty(pageObj.getGuige())) {
+					if (!sqlWhere.isEmpty()) {
+						sqlWhere += " and";
+					}
+					sqlWhere += " t.guige='" +  guige+"'";
+				}
+				if (StringUtil.isNotEmpty(pageObj.getXinghao())) {
+					if (!sqlWhere.isEmpty()) {
+						sqlWhere += " and";
+					}
+					sqlWhere += " t.xinghao='" +  xinghao+"'";
+				}
+				if (StringUtil.isNotEmpty(pageObj.getChandi())) {
+					if (!sqlWhere.isEmpty()) {
+						sqlWhere += " and";
+					}
+					sqlWhere += " t.chandi='" +  chandi+"'";
+				}
+				if (StringUtil.isNotEmpty(pageObj.getScchangjia())) {
+					if (!sqlWhere.isEmpty()) {
+						sqlWhere += " and";
+					}
+					sqlWhere += " t.scchangjia='" +  scchangjia+"'";
+				}
+				
+				return sqlWhere;
+			}
+			
+			
+			
+	public JSONObject getDatagrid5(SYclAllEntity bhgview,DataGrid dataGrid ,String leixing,String guige,String  xinghao,Integer lft,Integer rgt) {
+		StringBuilder queryCtest = new StringBuilder(" 1=1");
+		if(StringUtil.isNotEmpty(leixing)){
+			queryCtest=queryCtest.append(" and leixing like '%"+leixing+"%'");
+		}
+		if(StringUtil.isNotEmpty(guige)){
+			queryCtest=queryCtest.append(" and guige  like '%"+guige+"%'");
+		}
+		if(StringUtil.isNotEmpty(xinghao)){
+			queryCtest=queryCtest.append(" and xinghao like '%"+xinghao+"%'");
+		}
+		if(StringUtil.isNotEmpty(lft) && StringUtil.isNotEmpty(rgt)){
+			queryCtest.append(" and lft > '"+lft+"'"+" and rgt < '"+rgt+"'" );
+		}		
+		queryCtest.append("  " );
+		StringBuffer sql = new StringBuffer();
+		sql.append("select t.id as id,picihao,mingcheng,cunchudidian,leixing,rukushijian,scchangjia,chandi,guige,xinghao,"
+				 + "round(convert(float,jcshuliang),2) as jcshuliang ,zgkucun,pici,scdanwei,qyshijian,syshijian,shiyanren,"
+				 + "syxingmu,ycl0,ycl1,ycl2,ycl3,ycl4,ycl5,ycl6,ycl7,ycl8,ycl9,ycl10,ycl11,ycl12,bgbianhao,wybianma,biaoduanid,"
+			     + "shujulaiyuan,biaoji from s_ycl_all  t"
+				 + " inner join t_s_depart s on t.biaoduanid=s.ID"
+				 + " where "+queryCtest.toString()+" order by  syshijian desc" );
+		// 取出总数据条数（为了分页处理, 如果不用分页，取iCount值的这个处理可以不要）
+		String sqlCnt = "select count(*) from s_ycl_all t  inner join t_s_depart s on t.biaoduanid=s.ID "+ "where"+ queryCtest.toString();
+		Long iCount = getCountForJdbcParam(sqlCnt, null);
+		List<Map<String, Object>> mapList = findForJdbc(sql.toString(),dataGrid.getPage(), dataGrid.getRows());
+		Db2Page[] db2Pages = {new Db2Page("id"),
+						      new Db2Page("picihao"),
+						      new Db2Page("mingcheng"),
+						      new Db2Page("cunchudidian"),
+						      new Db2Page("leixing"),
+						      new Db2Page("rukushijian"),
+						      new Db2Page("scchangjia"),
+						      new Db2Page("chandi"),
+						      new Db2Page("guige"),
+						      new Db2Page("xinghao"),
+						      new Db2Page("jcshuliang"),
+						      new Db2Page("zgkucun"),
+						      new Db2Page("pici"),
+						      new Db2Page("scdanwei"),
+						      new Db2Page("qyshijian"),
+						      new Db2Page("syshijian"),
+						      new Db2Page("shiyanren"),
+						      new Db2Page("syxingmu"),
+						      new Db2Page("ycl0"),
+						      new Db2Page("ycl1"),
+						      new Db2Page("ycl2"),
+						      new Db2Page("ycl3"),
+						      new Db2Page("ycl4"),
+						      new Db2Page("ycl5"),
+						      new Db2Page("ycl6"),
+						      new Db2Page("ycl7"),
+						      new Db2Page("ycl8"),
+						      new Db2Page("ycl9"),
+						      new Db2Page("ycl10"),
+						      new Db2Page("ycl11"),
+						      new Db2Page("ycl12"),
+						      new Db2Page("bgbianhao"), 
+						      new Db2Page("wybianma"),
+						      new Db2Page("biaoduanid"),
+						      new Db2Page("shujulaiyuan"),
+						      new Db2Page("biaoji")};				
+		JSONObject jObject = getJsonDatagridEasyUI(mapList,iCount.intValue(),db2Pages);
+		return jObject;
+	}
+
+	@Override
+	public List getDatagrid6(DataGrid dataGrid,Integer lft, Integer rgt) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select * from t_s_depart "+ " where type=4 and lft > '"+lft+"'"+" and rgt< '"+rgt+"'" );
+		List<Map<String, Object>> mapList = findForJdbc(sql.toString(),dataGrid.getPage(), dataGrid.getRows());
+		List<TSDepart> tslist=new ArrayList<TSDepart>();
+		for(int i=0;i<mapList.size();i++){
+			TSDepart tss=new TSDepart();
+			tss.setId(String.valueOf(mapList.get(i).get("id")));
+			tss.setDepartname(String.valueOf(mapList.get(i).get("departname")));
+			tslist.add(tss);
+		}
+		return tslist;
+	}
+}

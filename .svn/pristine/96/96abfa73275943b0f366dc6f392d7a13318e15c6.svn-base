@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20131111" releaseVersion="7.0.5">
+<TableDataMap>
+<TableData name="ds_Consign" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from V_Consign where datediff(day,QYRQ,getdate())>= CONVERT(int, SYSULiang) and rgt = lft + 1 and SYXM='100014' and MSTATUS=0]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebWriteContent>
+<ToolBars/>
+<SelectedColor/>
+<WebWrite isSheet="false"/>
+<UnloadCheck check="false"/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[4953000,5105400,5448300,3467100,3200400,3429000,2095500,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="9" s="0">
+<O>
+<![CDATA[试验提醒]]></O>
+<Expand/>
+</C>
+<C c="0" r="1" s="1">
+<O>
+<![CDATA[试验室]]></O>
+<Expand/>
+</C>
+<C c="1" r="1" s="2">
+<O>
+<![CDATA[委托编号]]></O>
+<Expand/>
+</C>
+<C c="2" r="1" s="1">
+<O>
+<![CDATA[施工部位]]></O>
+<Expand/>
+</C>
+<C c="3" r="1" s="1">
+<O>
+<![CDATA[取样地点]]></O>
+<Expand/>
+</C>
+<C c="4" r="1" s="1">
+<O>
+<![CDATA[代表数量]]></O>
+<Expand/>
+</C>
+<C c="5" r="1" s="1">
+<O>
+<![CDATA[取样日期]]></O>
+<Expand/>
+</C>
+<C c="6" r="1" s="1">
+<O>
+<![CDATA[龄期]]></O>
+<Expand/>
+</C>
+<C c="7" r="1" s="1">
+<O>
+<![CDATA[规格种类]]></O>
+<Expand/>
+</C>
+<C c="8" r="1" s="1">
+<O>
+<![CDATA[试样数量]]></O>
+<Expand/>
+</C>
+<C c="0" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="F_TRNAME"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="1" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="WTBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="2" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="SGBW"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="3" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="QYDD"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="4" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="DDSL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="5" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="QYRQ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="6" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="SYSULiang"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="7" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="GGZL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="8" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="SYSL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="false" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="80"/>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="2">
+<IM>
+<![CDATA[lO<9(kN.ld@UNU%p%320!n'b-/BYg<,j0G'R/e[g!1sg(hcUmbkA>4,]A#Jgf\q&HQh5@CJR^
+#%qcDHC$>CC+d&"1&_H-0lsXsFK1T_"mO*([&S\i>FDge*$X+HSAEjI.<+:*)B&0KHFSAts#
+%:\MsqC6!%F+WLpd(!M1$r_!8pcf"'QkH`A^Ta:]A~
+]]></IM>
+</Background>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAF"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

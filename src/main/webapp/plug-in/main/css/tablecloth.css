@@ -1,0 +1,56 @@
+/* 
+
+	TableCloth	
+	by Alen Grakalic, brought to you by cssglobe.com
+	
+*/
+
+/* general styles */
+
+table.cloth, td.cloth{
+	font:100% Arial, Helvetica, sans-serif; 
+}
+table.cloth{width:100%;border-collapse:collapse;margin:1em 0;}
+th.cloth, td.cloth{text-align:center;padding:.5em;border:1px solid #fff;}
+th.cloth{text-align:center;background:#206DD7 url(tr_back.gif) repeat-x;color:#fff;}
+td.cloth{background:#e5f1f4;}
+
+/* tablecloth styles */
+
+tr.even td.cloth{background:#e5f1f4;}
+tr.odd td.cloth{background:#f8fbfc;}
+
+/* tablecloth styles */
+tr td.cloth1{background:#e5f1f4;border:1px solid #fff;padding:.5em;text-align:center;}
+tr td.cloth2{background:#f8fbfc;border:1px solid #fff;padding:.5em;text-align:center;}
+
+th.over, tr.even th.over, tr.odd th.over{background:#4a98af;}
+th.down, tr.even th.down, tr.odd th.down{background:#bce774;}
+th.selected, tr.even th.selected, tr.odd th.selected{}
+
+td.over, tr.even td.over, tr.odd td.over{background:#ecfbd4;}
+td.down, tr.even td.down, tr.odd td.down{background:#bce774;color:#fff;}
+td.selected, tr.even td.selected, tr.odd td.selected{background:#bce774;color:#555;}
+
+/* use this if you want to apply different styleing to empty table cells*/
+/*td.empty, tr.odd td.empty, tr.even td.empty{background:#fff;}*/
+
+table {
+width:100%;
+border-collapse:collapse; /* �ؼ����ԣ��ϲ��������߿�(��ʵ���߿���2px������1px�����滹��1pxŶ) */
+border:solid #999; /* ���ñ߿����ԣ���ʽ(solid=ʵ��)����ɫ(#999=��) */
+border-width:1px 0 0 1px; /* ���ñ߿�״��ϸ���� �� �� �� = ��Ӧ��1px 0 0 1px */
+}
+table caption {font-size:14px;font-weight:bolder;}
+table th,table td {border:solid #999;border-width:0 1px 1px 0;padding:2px;}
+tfoot td {text-align:center;}
+
+
+
+/* �༭������ҳ��header*/
+td.editheader{
+	text-align: center;
+    vertical-align: middle;
+    background-color: #99CCFF;
+    font-weight: bold;
+}

@@ -1,0 +1,623 @@
+package com.shtoone.qms.controller.bhz;
+
+import java.io.File;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import jxl.Cell;
+import jxl.CellType;
+import jxl.Workbook;
+import jxl.format.Border;
+import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.web.system.pojo.base.TSDepart;
+import org.jeecgframework.web.system.service.SystemService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.jeecgframework.core.common.controller.BaseController;
+import org.jeecgframework.core.util.StringUtil;
+
+import com.shtoone.qms.entity.bhz.HntbhzziduancfgViewEntity;
+import com.shtoone.qms.entity.bhz.HunnintuView;
+import com.shtoone.qms.service.bhz.MaterialServiceI;
+
+
+@Controller
+@RequestMapping("/MaterialController")
+public class MaterialController extends BaseController{
+	
+	@Autowired
+	private MaterialServiceI materialService;	
+	@Autowired
+	private SystemService systemService;
+	private String bhzid;
+	private String startTime;
+	private String endTime;
+	private String gongchengmingcheng;
+	private String shebeibianhao;
+	private String jiaozuobuwei;
+	private String qiangdudengji;
+	private TSDepart dpt;//上级部门
+	
+	private Integer userlft = 0;
+	private Integer userrgt =0;
+
+	public TSDepart getDpt() {
+		return dpt;
+	}
+
+	public void setDpt(TSDepart dpt) {
+		this.dpt = dpt;
+	}
+
+	public Integer getUserlft() {
+		return userlft;
+	}
+
+	public void setUserlft(Integer userlft) {
+		this.userlft = userlft;
+	}
+
+	public Integer getUserrgt() {
+		return userrgt;
+	}
+
+	public void setUserrgt(Integer userrgt) {
+		this.userrgt = userrgt;
+	}
+
+	private HunnintuView hntviews;
+	
+	public String getShebeibianhao() {
+		return shebeibianhao;
+	}
+
+	public void setShebeibianhao(String shebeibianhao) {
+		this.shebeibianhao = shebeibianhao;
+	}
+
+	public String getBhzid() {
+		return bhzid;
+	}
+
+	public void setBhzid(String bhzid) {
+		this.bhzid = bhzid;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	/**
+	 * 材料成本核算 页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "material")
+	public ModelAndView material(HttpServletRequest request) {
+		return new ModelAndView("com/shtoone/qms/bhz/material");
+	}
+	
+	@RequestMapping(params = "datagrid")
+	public void datagrid(HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {		
+		startTime=request.getParameter("startTime");
+		endTime=request.getParameter("endTime");
+		gongchengmingcheng=request.getParameter("gongchengmingcheng");
+		jiaozuobuwei=(request.getParameter("gongchengmingcheng"));
+		qiangdudengji=(request.getParameter("gongchengmingcheng"));
+		shebeibianhao=request.getParameter("shebeibianhao");
+		
+		if (null == startTime && null == endTime) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar day = Calendar.getInstance();
+			setEndTime(sdf.format(day.getTime()));
+			day.add(Calendar.MONTH, -1);
+			setStartTime(sdf.format(day.getTime()));
+		}
+		HttpSession session = request.getSession();
+		Integer userlft = (Integer) session.getAttribute("userlft");
+		Integer userrgt =(Integer) session.getAttribute("userrgt");
+		
+		String pid = request.getParameter("pid");
+		if(pid!=null && pid.length()>0){
+			dpt=systemService.getEntity(TSDepart.class, pid);
+			userlft=dpt.getLft();
+			userrgt=dpt.getRgt();
+		}
+		JSONObject jObject = materialService.materiallist(gongchengmingcheng,jiaozuobuwei,qiangdudengji,startTime,endTime,userlft,userrgt,dataGrid,shebeibianhao);
+		HntbhzziduancfgViewEntity hbfield =materialService.hntfieldnamefindBybh(shebeibianhao);
+		
+		
+		
+		String optype = request.getParameter("type");
+		//查询操作
+		if(StringUtil.isNotEmpty(optype)&&optype.equals("findData")){
+			String strxml="";
+			if (null != jObject && jObject.size()>0 && hbfield!=null) {
+				strxml= materialService.gethntmaterialhsXml(jObject, hbfield);
+			} else {
+				strxml="";
+			}
+			jObject.put("strXML", strxml);
+			responseDatagrid(response, jObject);
+			//如果是导出操作
+		}else if(StringUtil.isNotEmpty(optype)&&optype.equals("exportData")){
+			
+			Iterator it = jObject.keys();
+			JSONArray array = null;
+			while (it.hasNext()) {
+				String key = (String) it.next();
+				if (key.equals("rows")) {
+					array = jObject.getJSONArray(key);
+				}
+			}
+			
+			exportXls(request,response,array,hbfield);
+			
+		}
+	}
+	
+	
+	/**
+	 * 导出excel
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	public void exportXls(HttpServletRequest request,HttpServletResponse response,JSONArray array,HntbhzziduancfgViewEntity hbfield) {
+		
+		if(null != array && array.size()>0&&null!=hbfield){
+			List<String> dataList=new ArrayList<String>();
+			StringBuilder databuilder = new StringBuilder();
+			
+			for (int i = 0; i < array.size(); i++) {
+				JSONObject key = array.getJSONObject(i);
+				
+				databuilder = new StringBuilder();
+				//字段
+				try{
+				databuilder.append(StringUtil.Null2Blank(hbfield.getSha1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShi1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShi2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getSha2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getGuliao5_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShuini1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShuini2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getKuangfen3_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getFeimeihui4_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getFenliao5_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShui1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShui2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getWaijiaji1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getWaijiaji2_shijizhi()));
+				databuilder.append("&^&");
+				
+				dataList.add(databuilder.toString());
+				databuilder = new StringBuilder();
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Sha1_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shi1_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shi2_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Sha2_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Guliao5_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shuini1_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shuini2_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Kuangfen3_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Feimeihui4_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Fenliao5_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shui1_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shui2_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Waijiaji1_shijizhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Waijiaji2_shijizhi")));
+				databuilder.append("&^&");
+				
+				dataList.add(databuilder.toString());
+				databuilder = new StringBuilder();
+				//字段
+				databuilder.append(StringUtil.Null2Blank(hbfield.getSha1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShi1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShi2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getSha2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getGuliao5_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShuini1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShuini2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getKuangfen3_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getFeimeihui4_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getFenliao5_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShui1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShui2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getWaijiaji1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getWaijiaji2_shijizhi()));
+				databuilder.append("&^&");
+				
+				dataList.add(databuilder.toString());
+				databuilder = new StringBuilder();
+				//理论用量
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Sha1_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shi1_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shi2_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Sha2_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Guliao5_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shuini1_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shuini2_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Kuangfen3_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Feimeihui4_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Fenliao5_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shui1_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shui2_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Waijiaji1_lilunzhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Waijiaji2_lilunzhi")));
+				databuilder.append("&^&");
+				
+				dataList.add(databuilder.toString());
+				databuilder = new StringBuilder();
+				//字段
+				databuilder.append(StringUtil.Null2Blank(hbfield.getSha1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShi1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShi2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getSha2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getGuliao5_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShuini1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShuini2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getKuangfen3_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getFeimeihui4_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getFenliao5_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShui1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getShui2_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getWaijiaji1_shijizhi()));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank(hbfield.getWaijiaji2_shijizhi()));
+				databuilder.append("&^&");
+				
+				dataList.add(databuilder.toString());
+				databuilder = new StringBuilder();
+				
+				//误差
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Sha1chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shi1chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shi2chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Sha2chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Guliao5chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shuini1chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shuini2chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Kuangfen3chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Feimeihui4chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Fenliao5chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shui1chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Shui2chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Waijiaji1chazhi")));
+				databuilder.append("&^&");
+				
+				databuilder.append(StringUtil.Null2Blank((String)key.get("Waijiaji2chazhi")));
+				databuilder.append("&^&");
+				
+				dataList.add(databuilder.toString());
+				}catch(Exception e){}
+			}
+			
+			String path=request.getSession().getServletContext().getRealPath("/");
+			String excelName="excel\\"+System.currentTimeMillis()+".xls";
+			File file=new File(path+"export");
+			if(!file.exists()){
+				file.mkdir();
+			}
+			
+			importswsmstjExcel(path+"excel/材料成本核算.xls", path+excelName,/*StringUtil.Null2Blank(deptname)*/"", startTime+"～"+endTime, dataList);
+			try {
+				response.reset();
+				response.setContentType("bin");
+				response.setHeader("Content-Disposition",
+						"attachment; filename=\"" + excelName + "\"");
+				java.io.FileInputStream in = new java.io.FileInputStream(path
+						+ excelName);
+				PrintWriter out = response.getWriter();
+				int i;
+				while ((i = in.read()) != -1) {
+					out.write(i);
+				}
+				in.close();
+		        out.flush();
+		        out.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static void importswsmstjExcel(String modelName,String excelName,String bhzmc,
+			String shijian,List<String> dataList){
+		try{
+			//Excel获得文件
+			Workbook wb=Workbook.getWorkbook(new File(modelName)); 
+			//打开一个文件的副本，并且指定数据写回到原文件
+			WritableWorkbook book=Workbook.createWorkbook(new File(excelName), wb);
+			WritableSheet sheet = book.getSheet(0);
+			if (null != bhzmc && bhzmc.equalsIgnoreCase("-请选择拌和站-")) {
+				bhzmc = "";
+			}
+			Label a= (Label)sheet.getWritableCell(0, 1);
+			a.setString(String.format("%s材料成本核算", bhzmc));
+			a = (Label)sheet.getWritableCell(0, 2);
+			a.setString(shijian);
+	
+			WritableFont font= new WritableFont(WritableFont.createFont("宋体"),10,WritableFont.NO_BOLD);
+			WritableCellFormat cellFormat2 = new WritableCellFormat(font); 
+			cellFormat2.setBorder(Border.ALL, jxl.format.BorderLineStyle.THIN);
+			 //把水平对齐方式指定为居中 
+			cellFormat2.setAlignment(jxl.format.Alignment.CENTRE); 
+			//把垂直对齐方式指定为居中 
+			cellFormat2.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
+			//设置自动换行
+			cellFormat2.setWrap(true);
+			jxl.write.NumberFormat format = new jxl.write.NumberFormat("#"); 
+			jxl.write.WritableCellFormat wcf = new jxl.write.WritableCellFormat(format);
+			
+			jxl.write.NumberFormat format1 = new jxl.write.NumberFormat("###,##0.00"); 
+			WritableCellFormat cellFormat1 = new WritableCellFormat(font,format1);
+			cellFormat1.setBorder(Border.ALL, jxl.format.BorderLineStyle.THIN);
+			 //把水平对齐方式指定为居中 
+			cellFormat1.setAlignment(jxl.format.Alignment.CENTRE); 
+			//把垂直对齐方式指定为居中 
+			cellFormat1.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
+			//设置自动换行
+			cellFormat1.setWrap(true);
+			
+			for(int j=0;j<dataList.size();j++){
+				String data=(String)dataList.get(j);//获得一条数据
+				String [] dataArray=data.split("\\&\\^\\&");//分解数据
+				for(int k=0;k<dataArray.length;k++){
+					Cell cell = null;
+					if((j+4)>=6&&(j+4)<8){
+						cell = sheet.getCell(k,j+5);
+					}else if((j+5)>=9){
+						cell = sheet.getCell(k,j+6);
+					}else{
+						cell = sheet.getCell(k,j+4);
+					}
+					
+						if (cell.getType()==CellType.NUMBER) {
+						    jxl.write.Number nb=(jxl.write.Number) cell;
+					        nb.setValue(Double.parseDouble(dataArray[k]));
+						} else {
+							if (cell.getType()==CellType.LABEL) {
+							       Label label=(Label) cell;
+							       label.setString(dataArray[k]);
+							} else {
+								Label label = null;
+								if((j+4)>=6&&(j+4)<8){
+									label = new Label(k,j+5,dataArray[k]);
+								}else if((j+5)>=9){
+									label = new Label(k,j+6,dataArray[k]);
+								}else{
+									label = new Label(k,j+4,dataArray[k]);
+								}
+								label.setCellFormat(cellFormat2); 
+								sheet.addCell(label);
+							}
+					}
+			
+				}
+			}
+			//写入数据并关闭文件 
+			book.write();
+			book.close();
+			wb.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	public String getGongchengmingcheng() {
+		return gongchengmingcheng;
+	}
+
+	public void setGongchengmingcheng(String gongchengmingcheng) {
+		this.gongchengmingcheng = gongchengmingcheng;
+	}
+
+	public void setHntviews(HunnintuView hntviews) {
+		this.hntviews = hntviews;
+	}
+
+	public String getJiaozuobuwei() {
+		return jiaozuobuwei;
+	}
+
+	public void setJiaozuobuwei(String jiaozuobuwei) {
+		this.jiaozuobuwei = jiaozuobuwei;
+	}
+
+	public String getQiangdudengji() {
+		return qiangdudengji;
+	}
+
+	public void setQiangdudengji(String qiangdudengji) {
+		this.qiangdudengji = qiangdudengji;
+	}
+	
+}

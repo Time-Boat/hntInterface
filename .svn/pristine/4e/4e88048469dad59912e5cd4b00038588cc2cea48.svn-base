@@ -1,0 +1,2895 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20130114" releaseVersion="7.0.4">
+<TableDataMap>
+<TableData name="ds1" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="guid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM `m_user_test_rec` where guid='${guid}']]></Query>
+</TableData>
+<TableData name="ds2" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM `t01311993_m`  where guid='${guid}']]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.worksheet.WorkSheet" name="第一组">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[3009900,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,14439900,3048000,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[838200,1676400,2743200,1872000,1872000,1872000,1872000,1872000,1872000,1872000,1872000,1872000,1872000,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="13" s="0">
+<O>
+<![CDATA[土的击实试验]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="0">
+<Expand/>
+</C>
+<C c="0" r="1" cs="2">
+<O>
+<![CDATA[施工单位：]]></O>
+<Expand/>
+</C>
+<C c="2" r="1" cs="5">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Header1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="7" r="1" cs="2" s="1">
+<O>
+<![CDATA[合同号：]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="1" cs="4">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Header2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="1">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(new=1,UUID(),ds1.select(guid))]]></Attributes>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="14" r="1">
+<Expand dir="0"/>
+</C>
+<C c="0" r="2" cs="2">
+<O>
+<![CDATA[监理单位：]]></O>
+<Expand/>
+</C>
+<C c="2" r="2" cs="5">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Header3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="7" r="2" cs="2" s="1">
+<O>
+<![CDATA[试验编号：]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="2" cs="4">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="TestNo"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="id"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.RowHeightHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand dir="0"/>
+</C>
+<C c="0" r="3" cs="2" s="2">
+<O>
+<![CDATA[试验单位]]></O>
+<Expand/>
+</C>
+<C c="2" r="3" cs="11" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Operator"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="3">
+<Expand/>
+</C>
+<C c="0" r="4" cs="2" s="2">
+<O>
+<![CDATA[工程名称]]></O>
+<Expand/>
+</C>
+<C c="2" r="4" cs="6" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Header4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="8" r="4" cs="2" s="2">
+<O>
+<![CDATA[试验日期]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="4" cs="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="TestDate"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="4">
+<Expand/>
+</C>
+<C c="0" r="5" cs="2" s="2">
+<O>
+<![CDATA[样品名称]]></O>
+<Expand/>
+</C>
+<C c="2" r="5" cs="6" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Header5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="8" r="5" cs="2" s="2">
+<O>
+<![CDATA[取样地点]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="5" cs="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Header8"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="5">
+<Expand/>
+</C>
+<C c="0" r="6" cs="2" s="2">
+<O>
+<![CDATA[用    途]]></O>
+<Expand/>
+</C>
+<C c="2" r="6" cs="6" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Header6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="8" r="6" cs="2" s="2">
+<O>
+<![CDATA[取样日期]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="6" cs="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Header9"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="6">
+<Expand/>
+</C>
+<C c="0" r="7" cs="2" s="2">
+<O>
+<![CDATA[仪器设备]]></O>
+<Expand/>
+</C>
+<C c="2" r="7" cs="6" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Header7"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="8" r="7" cs="2" s="2">
+<O>
+<![CDATA[检测依据]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="7" cs="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="Header10"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="7">
+<Expand/>
+</C>
+<C c="0" r="8" cs="3" s="2">
+<O>
+<![CDATA[试验方法]]></O>
+<Expand/>
+</C>
+<C c="3" r="8" cs="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="TestMethod"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="8" cs="3" s="2">
+<O>
+<![CDATA[超尺寸颗粒含量(%)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="8" cs="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="HammerQlty"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="8">
+<Expand/>
+</C>
+<C c="0" r="9" cs="3" s="2">
+<O>
+<![CDATA[超尺寸颗粒吸水量(%)]]></O>
+<Expand/>
+</C>
+<C c="3" r="9" cs="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="ExSizeGranuleBulkSpGr"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="9" cs="3" s="2">
+<O>
+<![CDATA[超尺寸颗粒毛体积比重]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="9" cs="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterCubage"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="9">
+<Expand/>
+</C>
+<C c="0" r="10" cs="2" s="2">
+<O>
+<![CDATA[落距(cm)]]></O>
+<Expand/>
+</C>
+<C c="2" r="10" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="HitNOPerLayer"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="3" r="10" cs="2" s="2">
+<O>
+<![CDATA[每层击数]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="10" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="FallDistance"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="10" cs="2" s="2">
+<O>
+<![CDATA[击锤质量(kg)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="10" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="SoilSampleSort"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="10" cs="2" s="2">
+<O>
+<![CDATA[筒体积(cm³)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="10" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerExSizeGranule"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="13" r="10">
+<Expand/>
+</C>
+<C c="0" r="11" rs="6" s="2">
+<O>
+<![CDATA[干密度]]></O>
+<Expand/>
+</C>
+<C c="1" r="11" cs="2" s="2">
+<O>
+<![CDATA[试验次数]]></O>
+<Expand/>
+</C>
+<C c="3" r="11" cs="2" s="2">
+<O t="I">
+<![CDATA[1]]></O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="5" r="11" cs="2" s="2">
+<O t="I">
+<![CDATA[2]]></O>
+<Expand/>
+</C>
+<C c="7" r="11" cs="2" s="2">
+<O t="I">
+<![CDATA[3]]></O>
+<Expand/>
+</C>
+<C c="9" r="11" cs="2" s="2">
+<O t="I">
+<![CDATA[4]]></O>
+<Expand/>
+</C>
+<C c="11" r="11" cs="2" s="2">
+<O t="I">
+<![CDATA[5]]></O>
+<Expand/>
+</C>
+<C c="13" r="11">
+<Expand/>
+</C>
+<C c="1" r="12" cs="2" s="2">
+<O>
+<![CDATA[筒+湿土质量(g)]]></O>
+<Expand/>
+</C>
+<C c="3" r="12" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterAndWetSoilQlty1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="12" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterAndWetSoilQlty2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="12" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterAndWetSoilQlty3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="12" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterAndWetSoilQlty4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="12" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterAndWetSoilQlty5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="12">
+<Expand/>
+</C>
+<C c="1" r="13" cs="2" s="2">
+<O>
+<![CDATA[筒质量(g)]]></O>
+<Expand/>
+</C>
+<C c="3" r="13" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterQlty1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="13" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterQlty2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="13" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterQlty3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="13" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterQlty4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="13" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="CanisterQlty5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="13">
+<Expand/>
+</C>
+<C c="1" r="14" cs="2" s="2">
+<O>
+<![CDATA[湿土质量(g)]]></O>
+<Expand/>
+</C>
+<C c="3" r="14" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WetSoilQlty1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="14" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WetSoilQlty2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="14" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WetSoilQlty3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="14" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WetSoilQlty4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="14" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WetSoilQlty5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="14">
+<Expand/>
+</C>
+<C c="1" r="15" cs="2" s="2">
+<O>
+<![CDATA[湿密度(g/cm³)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="15" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WetSoilDensity1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="15" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WetSoilDensity2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="15" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WetSoilDensity3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="15" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WetSoilDensity4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="15" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WetSoilDensity5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="15">
+<Expand/>
+</C>
+<C c="1" r="16" cs="2" s="2">
+<O>
+<![CDATA[干密度(g/cm³)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="16" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilDensity1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="16" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilDensity2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="16" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilDensity3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="16" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilDensity4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="16" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilDensity5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="16">
+<Expand/>
+</C>
+<C c="0" r="17" rs="8" s="2">
+<O>
+<![CDATA[含水率]]></O>
+<Expand/>
+</C>
+<C c="1" r="17" cs="2" s="2">
+<O>
+<![CDATA[盒号]]></O>
+<Expand/>
+</C>
+<C c="3" r="17" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxNO11"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="17" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxNO21"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="17" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxNO12"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="17" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxNO22"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="17" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxNO13"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="17" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxNO23"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="17" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxNO14"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="17" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxNO24"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="17" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxNO15"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="17" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxNO25"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="17">
+<Expand/>
+</C>
+<C c="1" r="18" cs="2" s="2">
+<O>
+<![CDATA[盒质量(g)]]></O>
+<Expand/>
+</C>
+<C c="3" r="18" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxQlty11"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="18" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxQlty21"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="18" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxQlty12"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="18" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxQlty22"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="18" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxQlty13"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="18" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxQlty23"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="18" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxQlty14"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="18" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxQlty24"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="18" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxQlty15"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="18" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxQlty25"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="18">
+<Expand/>
+</C>
+<C c="1" r="19" cs="2" s="2">
+<O>
+<![CDATA[盒+湿土质量(g)]]></O>
+<Expand/>
+</C>
+<C c="3" r="19" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndWetSoilQlty11"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="19" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndWetSoilQlty21"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="19" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndWetSoilQlty12"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="19" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndWetSoilQlty22"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="19" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndWetSoilQlty13"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="19" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndWetSoilQlty23"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="19" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndWetSoilQlty14"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="19" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndWetSoilQlty24"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="19" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndWetSoilQlty15"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="19" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndWetSoilQlty25"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="19">
+<Expand/>
+</C>
+<C c="1" r="20" cs="2" s="2">
+<O>
+<![CDATA[盒+干土质量(g)]]></O>
+<Expand/>
+</C>
+<C c="3" r="20" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndDrySoilQlty11"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="20" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndDrySoilQlty21"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="20" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndDrySoilQlty12"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="20" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndDrySoilQlty22"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="20" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndDrySoilQlty13"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="20" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndDrySoilQlty23"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="20" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndDrySoilQlty14"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="20" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndDrySoilQlty24"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="20" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndDrySoilQlty15"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="20" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BoxAndDrySoilQlty25"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="20">
+<Expand/>
+</C>
+<C c="1" r="21" cs="2" s="2">
+<O>
+<![CDATA[水分质量(g)]]></O>
+<Expand/>
+</C>
+<C c="3" r="21" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WaterQlty11"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="21" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WaterQlty21"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="21" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WaterQlty12"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="21" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WaterQlty22"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="21" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WaterQlty13"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="21" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WaterQlty23"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="21" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WaterQlty14"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="21" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WaterQlty24"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="21" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WaterQlty15"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="21" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="WaterQlty25"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="21">
+<Expand/>
+</C>
+<C c="1" r="22" cs="2" s="2">
+<O>
+<![CDATA[干土质量(g)]]></O>
+<Expand/>
+</C>
+<C c="3" r="22" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilQlty11"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="22" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilQlty21"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="22" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilQlty12"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="22" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilQlty22"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="22" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilQlty13"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="22" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilQlty23"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="22" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilQlty14"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="22" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilQlty24"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="22" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilQlty15"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="22" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="DrySoilQlty25"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="22">
+<Expand/>
+</C>
+<C c="1" r="23" cs="2" s="2">
+<O>
+<![CDATA[含水率(%)]]></O>
+<Expand/>
+</C>
+<C c="3" r="23" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerWater11"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="23" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerWater21"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="23" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerWater12"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="23" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerWater12"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="23" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerWater13"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="23" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerWater23"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="23" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerWater14"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="23" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerWater24"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="23" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerWater15"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="23" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="PerWater25"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="23">
+<Expand/>
+</C>
+<C c="1" r="24" cs="2" s="2">
+<O>
+<![CDATA[平均含水率(%)]]></O>
+<Expand/>
+</C>
+<C c="3" r="24" cs="2" s="3">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF($op=="write",ROUND5(AVERAGE(D24,E24),2),ds2.select(PerWaterAvg1))]]></Attributes>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if($$$==0,'',$$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="5" r="24" cs="2" s="4">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF($op=="write",ROUND5(AVERAGE(F24,G24),2),ds2.select(PerWaterAvg2))]]></Attributes>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if($$$==0,"",$$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="7" r="24" cs="2" s="3">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF($op=="write",ROUND5(AVERAGE(H24,I24),2),ds2.select(PerWaterAvg3))]]></Attributes>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if($$$==0,"",$$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="24" cs="2" s="3">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF($op=="write",ROUND5(AVERAGE(J24,K24),2),ds2.select(PerWaterAvg4))]]></Attributes>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if($$$==0,"",$$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="24" cs="2" s="3">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF($op=="write",ROUND5(AVERAGE(L24,M24),2),ds2.select(PerWaterAvg5))]]></Attributes>
+</O>
+<CellGUIAttr adjustmode="2" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if($$$==0,"",$$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="24">
+<Expand/>
+</C>
+<C c="0" r="25" cs="3" s="2">
+<O>
+<![CDATA[最佳含水率(%)]]></O>
+<Expand upParentDefault="false"/>
+</C>
+<C c="3" r="25" cs="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BestPerWater"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="7" r="25" cs="4" s="2">
+<O>
+<![CDATA[最大干密度(g/cm³)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="11" r="25" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="MaxDrySoilDensity"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="13" r="25">
+<Expand/>
+</C>
+<C c="0" r="26" cs="3" s="2">
+<O>
+<![CDATA[平均最佳含水率(%)]]></O>
+<Expand upParentDefault="false"/>
+</C>
+<C c="3" r="26" cs="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="BestPerWaterModify"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="7" r="26" cs="4" s="2">
+<O>
+<![CDATA[平均最大干密度(g/cm³)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="11" r="26" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="MaxDrySoilDensityModify"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="13" r="26">
+<Expand/>
+</C>
+<C c="0" r="27" cs="13" s="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=JFreeToChart01311993(D25,F25,H25,J25,L25,D17,F17,H17,J17,L17)]]></Attributes>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="13" r="27">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="28" cs="2" s="2">
+<O>
+<![CDATA[备注]]></O>
+<Expand upParentDefault="false"/>
+</C>
+<C c="2" r="28" cs="11" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="Conclusion"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="13" r="28">
+<Expand/>
+</C>
+<C c="0" r="29" cs="2">
+<O>
+<![CDATA[试验：]]></O>
+<Expand upParentDefault="false"/>
+</C>
+<C c="2" r="29">
+<Expand upParentDefault="false"/>
+</C>
+<C c="3" r="29">
+<Expand upParentDefault="false"/>
+</C>
+<C c="4" r="29">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="5" r="29">
+<O>
+<![CDATA[复核：]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="6" r="29">
+<Expand upParentDefault="false"/>
+</C>
+<C c="7" r="29">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="8" r="29">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="9" r="29">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="10" r="29">
+<O>
+<![CDATA[主管：]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="11" r="29">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="12" r="29">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand upParentDefault="false"/>
+</C>
+<C c="13" r="29">
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting/>
+</ReportSettings>
+</ReportAttrSet>
+<ReportWriteAttr>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL1">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="m_user_test_rec"/>
+<ColumnConfig name="TestNo" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="UserTestID" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="ContNo" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="TestDate" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Operator" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="ProjectLevel" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="ProjectNo" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header1" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header2" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header3" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header4" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header5" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header6" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header7" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header8" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header9" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header10" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Conclusion" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="IsUpToGrade" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="SubmitState" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="UserMode" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header11" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header12" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header13" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header14" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header15" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header16" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header17" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header18" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header19" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Header20" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="UserGroupId" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="UserId" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Uploaded" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="PrintUploaded" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="UserGroupTypeID" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="IsConvertEmf" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="guid" isKey="true" skipUnmodified="false">
+<ColumnRow column="13" row="1"/>
+</ColumnConfig>
+</DMLConfig>
+</Submiter>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL2">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="t01311993_m"/>
+<ColumnConfig name="guid" isKey="false" skipUnmodified="true">
+<ColumnRow column="13" row="1"/>
+</ColumnConfig>
+<ColumnConfig name="TestNo" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="TestMethod" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="HammerQlty" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="LayerNO" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="HitNOPerLayer" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="FallDistance" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="SoilSampleSort" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="PerExSizeGranule" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="ExSizeGranuleBulkSpGr" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterCubage" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="MaxDrySoilDensity" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BestPerWater" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="PerExSizePerWater" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="MaxDrySoilDensityModify" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BestPerWaterModify" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="Conclusion" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="TuLiBiZhong" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="TestTime1" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BeforehandPerWater1" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterAndWetSoilQlty1" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterNO1" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterQlty1" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WetSoilQlty1" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WetSoilDensity1" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxNO11" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxNO21" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxQlty11" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxQlty21" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndWetSoilQlty11" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndWetSoilQlty21" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndDrySoilQlty11" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndDrySoilQlty21" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WaterQlty11" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WaterQlty21" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="DrySoilQlty11" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="DrySoilQlty21" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="PerWaterAvg1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="DrySoilDensity1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="PerWater11" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="PerWater21" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="Judge1" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BaoHeHanShuiLv1" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="TestTime2" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BeforehandPerWater2" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterAndWetSoilQlty2" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterNO2" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterQlty2" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WetSoilQlty2" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WetSoilDensity2" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxNO12" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxNO22" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxQlty12" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxQlty22" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndWetSoilQlty12" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndWetSoilQlty22" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndDrySoilQlty12" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndDrySoilQlty22" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WaterQlty12" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WaterQlty22" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="DrySoilQlty12" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="DrySoilQlty22" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="PerWaterAvg2" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="DrySoilDensity2" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="PerWater12" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="PerWater22" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="Judge2" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BaoHeHanShuiLv2" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="TestTime3" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BeforehandPerWater3" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterAndWetSoilQlty3" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterNO3" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterQlty3" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WetSoilQlty3" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WetSoilDensity3" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxNO13" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxNO23" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxQlty13" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxQlty23" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndWetSoilQlty13" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndWetSoilQlty23" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndDrySoilQlty13" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndDrySoilQlty23" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WaterQlty13" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WaterQlty23" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="DrySoilQlty13" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="DrySoilQlty23" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="PerWaterAvg3" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="DrySoilDensity3" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="PerWater13" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="PerWater23" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="Judge3" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BaoHeHanShuiLv3" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="TestTime4" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BeforehandPerWater4" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterAndWetSoilQlty4" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterNO4" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterQlty4" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WetSoilQlty4" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WetSoilDensity4" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxNO14" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxNO24" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxQlty14" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxQlty24" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndWetSoilQlty14" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndWetSoilQlty24" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndDrySoilQlty14" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndDrySoilQlty24" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WaterQlty14" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WaterQlty24" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="DrySoilQlty14" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="DrySoilQlty24" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="PerWaterAvg4" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="DrySoilDensity4" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="PerWater14" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="PerWater24" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="Judge4" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BaoHeHanShuiLv4" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="TestTime5" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BeforehandPerWater5" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterAndWetSoilQlty5" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterNO5" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="CanisterQlty5" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WetSoilQlty5" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WetSoilDensity5" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxNO15" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxNO25" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxQlty15" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxQlty25" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndWetSoilQlty15" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndWetSoilQlty25" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndDrySoilQlty15" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BoxAndDrySoilQlty25" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WaterQlty15" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="WaterQlty25" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="DrySoilQlty15" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="DrySoilQlty25" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="PerWaterAvg5" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="DrySoilDensity5" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="PerWater15" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="PerWater25" isKey="false" skipUnmodified="true">
+<ColumnRow column="12" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="Judge5" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="BaoHeHanShuiLv5" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[]]></O>
+</ColumnConfig>
+<ColumnConfig name="id" isKey="true" skipUnmodified="false">
+<ColumnRow column="13" row="2"/>
+</ColumnConfig>
+</DMLConfig>
+</Submiter>
+</ReportWriteAttr>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="宋体" style="1" size="160"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.00]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.00]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAE"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

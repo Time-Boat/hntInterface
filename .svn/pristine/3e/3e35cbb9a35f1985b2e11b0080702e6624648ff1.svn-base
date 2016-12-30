@@ -1,0 +1,901 @@
+package com.shtoone.qms.service.impl.bhz;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.common.model.json.DataGridReturn;
+import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
+import org.jeecgframework.core.util.StringUtil;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.shtoone.qms.entity.bhz.HntbhzziduancfgViewEntity;
+import com.shtoone.qms.entity.bhz.HunnintuView;
+import com.shtoone.qms.service.bhz.HntwuchaAnalyseServiceI;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+@Service("hntwuchaAnalyseServiceI")
+@Transactional
+public class HntwuchaAnalyseServiceImpl extends CommonServiceImpl implements HntwuchaAnalyseServiceI{
+	
+	public JSONObject HntwuchaAnalyseDataGrid(HunnintuView hntView, DataGrid dataGrid,String startTime,
+			String endTime,String gongchengmingcheng,String jiaozuobuwei,Integer lft,Integer rgt){
+		// 取出总数据条数（为了分页处理, 如果不用分页，取iCount值的这个处理可以不要）
+		String sqlCnt = "select count(*) from Hntview where 1=1";
+		
+		//
+		StringBuffer sql = new StringBuffer("select * from HunnintuView where 1=1");
+		StringBuffer sqlbuff = new StringBuffer("");
+		if (StringUtil.isNotEmpty(startTime) && StringUtil.isNotEmpty(endTime)) {
+			sql.append(" and (convert(varchar(100),chuliaoshijian,23) between '"+startTime+"' and '"+endTime+"') ");
+			sqlbuff.append(" and (convert(varchar(100),chuliaoshijian,23) between '"+startTime+"' and '"+endTime+"') ");
+		}
+		if (lft>0 && rgt>0) {
+			sql.append(" and lft>='"+lft+"' and rgt<='"+rgt+"' ");
+			sqlbuff.append(" and lft>='"+lft+"' and rgt<='"+rgt+"' ");
+		}
+		if(StringUtil.isNotEmpty(gongchengmingcheng)){
+			sql.append(" and gongchengmingcheng like '%"+gongchengmingcheng+"%' ");
+			sqlbuff.append(" and gongchengmingcheng like '%"+gongchengmingcheng+"%' ");
+		}
+		if(StringUtil.isNotEmpty(jiaozuobuwei)){
+			sql.append(" and jiaozuobuwei like '%"+jiaozuobuwei+"%' ");
+			sqlbuff.append(" and jiaozuobuwei like '%"+jiaozuobuwei+"%' ");
+		}
+		Long iCount = getCountForJdbcParam(sqlCnt+sqlbuff, null);
+		System.out.println(sqlCnt+sql);
+		List<Map<String, Object>> mapList = findForJdbc(sql.toString(), dataGrid.getPage(), dataGrid.getRows());
+		// 将结果集转换成页面上对应的数据集
+		Db2Page[] db2Pages = {
+							//实际用量
+							 new Db2Page("chuliaoshijian","chuliaoshijian")
+							,new Db2Page("shuini1_shijizhi","shuini1_shijizhi")
+							,new Db2Page("shuini1_lilunzhi","shuini1_lilunzhi")
+							,new Db2Page("shuini2_shijizhi","shuini2_shijizhi")
+							,new Db2Page("shuini2_lilunzhi","shuini2_lilunzhi")
+							,new Db2Page("shui1_shijizhi","shui1_shijizhi")
+							,new Db2Page("shui1_lilunzhi","shui1_lilunzhi")
+							,new Db2Page("shui2_shijizhi","shui2_shijizhi")
+							,new Db2Page("shui2_lilunzhi","shui2_lilunzhi")
+							,new Db2Page("sha1_shijizhi","sha1_shijizhi")
+							,new Db2Page("sha1_lilunzhi","sha1_lilunzhi")
+							,new Db2Page("sha2_shijizhi","sha2_shijizhi")
+							,new Db2Page("sha2_lilunzhi","sha2_lilunzhi")
+							,new Db2Page("shi1_shijizhi","shi1_shijizhi")
+							,new Db2Page("shi1_lilunzhi","shi1_lilunzhi")
+							,new Db2Page("shi2_shijizhi","shi2_shijizhi")
+							,new Db2Page("shi2_lilunzhi","shi2_lilunzhi")
+							,new Db2Page("guliao5_shijizhi","guliao5_shijizhi")
+							,new Db2Page("guliao5_lilunzhi","guliao5_lilunzhi")
+							,new Db2Page("kuangfen3_shijizhi","kuangfen3_shijizhi")
+							,new Db2Page("kuangfen3_lilunzhi","kuangfen3_lilunzhi")
+							,new Db2Page("feimeihui4_shijizhi","feimeihui4_shijizhi")
+							,new Db2Page("feimeihui4_lilunzhi","feimeihui4_lilunzhi")
+							,new Db2Page("fenliao5_shijizhi","fenliao5_shijizhi")
+							,new Db2Page("fenliao5_lilunzhi","fenliao5_lilunzhi")
+							,new Db2Page("fenliao6_shijizhi","fenliao6_shijizhi")
+							,new Db2Page("fenliao6_lilunzhi","fenliao6_lilunzhi")
+							,new Db2Page("waijiaji1_shijizhi","waijiaji1_shijizhi")
+							,new Db2Page("waijiaji1_lilunzhi","waijiaji1_lilunzhi")
+							,new Db2Page("waijiaji2_shijizhi","waijiaji2_shijizhi")
+							,new Db2Page("waijiaji2_lilunzhi","waijiaji2_lilunzhi")
+							,new Db2Page("waijiaji3_shijizhi","waijiaji3_shijizhi")
+							,new Db2Page("waijiaji3_lilunzhi","waijiaji3_lilunzhi")
+							,new Db2Page("waijiaji4_shijizhi","waijiaji4_shijizhi")
+							,new Db2Page("waijiaji4_lilunzhi","waijiaji4_lilunzhi")
+							//误差
+							,new Db2Page("shw1","shw1")
+							,new Db2Page("shw2","shw2")
+							,new Db2Page("flw1","flw1")
+							,new Db2Page("flw2","flw2")
+							,new Db2Page("glw1","glw1")
+							,new Db2Page("glw2","glw2")
+							,new Db2Page("glw3","glw3")
+							,new Db2Page("glw4","glw4")
+							,new Db2Page("glw5","glw5")
+							,new Db2Page("flw3","flw3")
+							,new Db2Page("flw4","flw4")
+							,new Db2Page("flw5","flw5")
+							,new Db2Page("flw6","flw6")
+							,new Db2Page("wjw1","wjw1")
+							,new Db2Page("wjw2","wjw2")
+							,new Db2Page("wjw3","wjw3")
+							,new Db2Page("wjw4","wjw4")
+					};
+		JSONObject jObject = getJsonDatagridEasyUI(mapList, iCount.intValue(), db2Pages);
+		return jObject;
+	}
+	
+	//绘制材料用量走势图
+	public String HntUserImage(JSONObject jObject,HntbhzziduancfgViewEntity hntbhzField,HntbhzziduancfgViewEntity hntbhzisShow){
+		//解析json数据
+		Iterator it = jObject.keys();
+		JSONArray array=null;
+		while(it.hasNext()){
+			String key=(String)it.next();
+			if(key.equals("rows")){
+				array = jObject.getJSONArray(key);
+			}
+		}
+		//绘制图表
+		StringBuilder strXML = new StringBuilder("");  
+        strXML.append("<?xml version='1.0' encoding='utf-8'?><chart caption='材料用量走势图' subcaption='( ");
+        if(array.size()>0){
+         strXML.append(array.getJSONObject(0).get("chuliaoshijian"));
+        }else{
+         strXML.append("");
+        }
+        strXML.append("至");
+        if(array.size()>0){
+        	strXML.append(array.getJSONObject(array.size()-1).get("chuliaoshijian"));
+        }else{
+        	strXML.append("");
+        }
+        strXML.append(")' lineThickness='2' showValues='0' anchorRadius='2' "); 
+        strXML.append(" divLineAlpha='20' divLineColor='CC3300' divLineIsDashed='1' slantLabels='1' "); 
+        strXML.append(" showAlternateHGridColor='1' alternateHGridColor='CC3300' shadowAlpha='40'"); 
+        strXML.append(" labelStep='3' ");
+        strXML.append(" numvdivlines='15' chartRightMargin='35' chartLeftMargin='35' formatNumberScale='0' ");
+        strXML.append(" bgColor='FFFFFF,CC3300' bgAngle='270' bgAlpha='10,10' alternateHGridAlpha='5' numberSuffix='kg'> ");
+        strXML.append("<categories>");
+        for(int i=0;i<array.size();i++){
+			JSONObject key2=array.getJSONObject(i);
+			strXML.append("<category label='");
+			strXML.append(key2.get("chuliaoshijian"));
+			strXML.append("'/>");
+		}
+        strXML.append("</categories>");
+		if (null != hntbhzField && null != hntbhzisShow) {
+			if (StringUtil.Null2Blank(hntbhzisShow.getShui1_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShui1_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shui1_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShui1_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShui1_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shui1_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShui2_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShui2_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shui2_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShui2_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShui2_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shui2_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShuini1_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShuini1_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shuini1_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShuini1_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShuini1_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shuini1_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShuini2_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShuini2_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shuini2_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShuini2_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShuini2_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shuini2_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getSha1_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getSha1_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("sha1_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getSha1_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getSha1_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("sha1_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShi1_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShi1_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shi1_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShi1_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShi1_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shi1_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShi2_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShi2_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shi2_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShi2_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShi2_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shi2_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getSha2_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getSha2_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("sha2_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getSha2_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getSha2_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("sha2_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getGuliao5_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getGuliao5_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("guliao5_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getGuliao5_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getGuliao5_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("guliao5_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getKuangfen3_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getKuangfen3_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("kuangfen3_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getKuangfen3_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getKuangfen3_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("kuangfen3_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getFeimeihui4_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getFeimeihui4_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("feimeihui4_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getFeimeihui4_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getFeimeihui4_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("feimeihui4_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getFenliao5_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getFenliao5_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("fenliao5_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getFenliao5_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getFenliao5_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("fenliao5_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getFenliao6_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getFenliao6_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("fenliao6_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getFenliao6_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getFenliao6_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("fenliao6_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji1_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji1_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("waijiaji1_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji1_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji1_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("waijiaji1_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji2_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji2_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("waijiaji2_shijizhi()"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji2_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji2_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("waijiaji2_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji3_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji3_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("waijiaji3_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji3_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji3_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("waijiaji3_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji4_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji4_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("waijiaji4_shijizhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji4_lilunzhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji4_lilunzhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("waijiaji4_lilunzhi"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+		} 
+
+		strXML.append(" <styles>");
+        strXML.append(" <definition>"); 
+        strXML.append(" <style type='font' name='captionFont' size='12'/>"); 
+        strXML.append(" </definition>"); 
+        strXML.append(" <application>"); 
+        strXML.append(" <apply toObject='Caption' styles='captionFont' />"); 
+        strXML.append(" <apply toObject='SubCaption' styles='SubcaptionFont' />"); 
+        strXML.append(" </application>"); 
+        strXML.append(" </styles>"); 
+        strXML.append(" </chart>");
+		return strXML.toString();
+	}
+	
+	
+	//绘制材料误差走势图
+	public String HntWuchaImage(JSONObject jObject,HntbhzziduancfgViewEntity hntbhzField,HntbhzziduancfgViewEntity hntbhzisShow){
+		//解析json数据
+		Iterator it = jObject.keys();
+		JSONArray array=null;
+		while(it.hasNext()){
+			String key=(String)it.next();
+			if(key.equals("rows")){
+				array = jObject.getJSONArray(key);
+			}
+		}
+		StringBuilder strXML = new StringBuilder("");
+		strXML.append("<?xml version='1.0' encoding='utf-8'?><chart caption='误差走势图' subcaption='(");
+		if(array.size()>0){
+			strXML.append(array.getJSONObject(0).get("chuliaoshijian"));
+		}else{
+			strXML.append("");
+		}
+        strXML.append("至");
+        if(array.size()>0){
+        	strXML.append(array.getJSONObject(array.size()-1).get("chuliaoshijian"));
+        }else{
+        	strXML.append("");
+        }
+		strXML.append(")' lineThickness='2' showValues='0' anchorRadius='2' ");
+		strXML.append("divLineAlpha='20' divLineColor='CC3300' divLineIsDashed='1' slantLabels='1' ");
+		strXML.append("showAlternateHGridColor='1' alternateHGridColor='CC3300' shadowAlpha='40' ");
+		strXML.append("labelStep='3");
+		strXML.append("' numvdivlines='15' chartRightMargin='35' chartLeftMargin='35' formatNumberScale='0' ");
+		strXML.append("bgColor='FFFFFF,CC3300' bgAngle='270' bgAlpha='10,10' alternateHGridAlpha='5' numberSuffix='%'> ");
+		strXML.append("<categories>");
+		for(int i=0;i<array.size();i++){
+			JSONObject key2=array.getJSONObject(i);
+			strXML.append("<category label='");
+			strXML.append(key2.get("chuliaoshijian"));
+			strXML.append("'/>");
+		}
+		strXML.append("</categories>");
+		if (null != hntbhzField && null != hntbhzisShow) {
+			if (StringUtil.Null2Blank(hntbhzisShow.getShui1_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShui1_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shw1"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}		
+			
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShui2_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShui2_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("shw2"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+						
+			if (StringUtil.Null2Blank(hntbhzisShow.getShuini1_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShuini1_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("flw1"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+		
+			if (StringUtil.Null2Blank(hntbhzisShow.getShuini2_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShuini2_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("flw2"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}			
+			
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getSha1_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getSha1_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("glw1"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}			
+			
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShi1_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShi1_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("glw2"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}		
+			
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getShi2_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getShi2_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("glw3"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+		
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getSha2_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getSha2_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("glw4"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}			
+			
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getGuliao5_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getGuliao5_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("glw5"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getKuangfen3_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getKuangfen3_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("flw3"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getFeimeihui4_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getFeimeihui4_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("flw4"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}			
+						
+			if (StringUtil.Null2Blank(hntbhzisShow.getFenliao5_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getFenliao5_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("flw5"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+						
+			if (StringUtil.Null2Blank(hntbhzisShow.getFenliao6_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getFenliao6_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("flw6"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}			
+			
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji1_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji1_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("wjw1"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji2_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji2_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("wjw2"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+			
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji3_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji3_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("wjw3"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}
+			
+						
+			if (StringUtil.Null2Blank(hntbhzisShow.getWaijiaji4_shijizhi()).equalsIgnoreCase("1")) {
+				strXML.append("<dataset seriesName='");
+				strXML.append(hntbhzField.getWaijiaji4_shijizhi());
+				strXML.append("'>");
+				for(int i=0;i<array.size();i++){
+					JSONObject key2=array.getJSONObject(i);
+					strXML.append("<set value='");
+					strXML.append(key2.get("wjw4"));
+					strXML.append("'/>");
+				}
+				strXML.append("</dataset>");	
+			}				
+		} 
+
+		strXML.append(" <styles>");
+        strXML.append(" <definition>"); 
+        strXML.append(" <style type='font' name='captionFont' size='12'/>"); 
+        strXML.append(" </definition>"); 
+        strXML.append(" <application>"); 
+        strXML.append(" <apply toObject='Caption' styles='captionFont' />"); 
+        strXML.append(" <apply toObject='SubCaption' styles='SubcaptionFont' />"); 
+        strXML.append(" </application>"); 
+        strXML.append(" </styles>"); 
+        strXML.append(" </chart>"); 
+		return strXML.toString();
+	}
+	
+	public DataGridReturn zhuheDataGrid(final JSONObject jObject,final boolean isOffset){
+		return new DataGridReturn(null,null);
+	}
+}

@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20131111" releaseVersion="7.0.5">
+<TableDataMap>
+<TableData name="ds_sysInput" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="id"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[ShiyanshiInfo]A where ${if(len(id)==0,"1=2","shiyanshi_guid='"+id+"'")}]]></Query>
+</TableData>
+<TableData name="ds_depart" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="userrgt"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userlft"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[t_s_depart]A where rgt = lft + 1  and isnull(type,'')='3'  and (lft between ${userlft} and ${userrgt})
+]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebWriteContent>
+<Listener event="writesuccess">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[window.opener= null;  
+window.open("","_self");   
+window.close(); ]]></Content>
+</JavaScript>
+</Listener>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.button.write.Submit">
+<WidgetAttr/>
+<Text>
+<![CDATA[保存]]></Text>
+<IconName>
+<![CDATA[submit]]></IconName>
+<Verify failVerifySubmit="false"/>
+</Widget>
+<Widget class="com.fr.report.web.button.write.Verify">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Verify-Data_Verify')}]]></Text>
+<IconName>
+<![CDATA[verify]]></IconName>
+</Widget>
+<Widget class="com.fr.form.ui.CustomToolBarButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[返回]]></Text>
+<IconName>
+<![CDATA[frozzen]]></IconName>
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'shiyanshiList.cpt&op=write')]]></Content>
+</JavaScript>
+</Widget>
+<Widget class="com.fr.report.web.button.PDFPrint">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Utils-Print[Client]A')}]]></Text>
+<IconName>
+<![CDATA[pdfprint]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.Print">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Print')}]]></Text>
+<IconName>
+<![CDATA[print]]></IconName>
+<PrintButtons/>
+</Widget>
+<Widget class="com.fr.report.web.button.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Export')}]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="true" excelO="true" excelS="true" word="true" image="true" html="true"/>
+</Widget>
+<Widget class="com.fr.report.web.button.write.ShowCellValue">
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="false"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue/>
+</Widget>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<SelectedColor/>
+<WebWrite isSheet="false"/>
+<UnloadCheck/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[152400,1981200,723900,1440000,1440000,1447800,1440000,1440000,1440000,1440000,1440000,6438900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[1676400,1676400,3543300,1828800,3162300,1562100,3619500,1562100,1676400,1371600,2933700,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0">
+<Expand/>
+</C>
+<C c="1" r="1" cs="10" s="0">
+<O>
+<![CDATA[试验室基础信息]]></O>
+<Expand/>
+</C>
+<C c="11" r="1">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=sql("qms", "select departname from t_s_depart where ID='" + C4 + "'", 1)]]></Attributes>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="1" r="3" s="1">
+<O>
+<![CDATA[试验室名称]]></O>
+<Expand/>
+</C>
+<C c="2" r="3" s="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(nr = 1 && len(id) = 0, $userdepartid, ds_sysInput.select(shiyanshi_guid))]]></Attributes>
+</O>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetAttr/>
+<EMSG>
+<![CDATA[请选择试验室]]></EMSG>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<DirectEdit>
+<![CDATA[false]]></DirectEdit>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="ID" viName="departname"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[ds_depart]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.DatabaseDictionary">
+<FormulaDictAttr kiName="ID" viName="departname"/>
+<DBDictAttr tableName="t_s_depart" schemaName="dbo" ki="-1" vi="-1" kiName="ID" viName="departname"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+</Dictionary>
+</Present>
+<Expand dir="0"/>
+</C>
+<C c="3" r="3" s="3">
+<O>
+<![CDATA[试验室编码]]></O>
+<Expand/>
+</C>
+<C c="4" r="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_TRCODE"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="5" r="3" s="3">
+<O>
+<![CDATA[检测区段]]></O>
+<Expand/>
+</C>
+<C c="6" r="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_JCQD"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="7" r="3" s="3">
+<O>
+<![CDATA[经度]]></O>
+<Expand/>
+</C>
+<C c="8" r="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="longitude"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="9" r="3" s="3">
+<O>
+<![CDATA[纬度]]></O>
+<Expand/>
+</C>
+<C c="10" r="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="latitude"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="4" s="3">
+<O>
+<![CDATA[邮编]]></O>
+<Expand/>
+</C>
+<C c="2" r="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_POSTCODE"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="3" r="4" s="3">
+<O>
+<![CDATA[传真]]></O>
+<Expand/>
+</C>
+<C c="4" r="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_FAX"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="5" r="4" s="3">
+<O>
+<![CDATA[联系电话]]></O>
+<Expand/>
+</C>
+<C c="6" r="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_TEL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="7" r="4" s="3">
+<O>
+<![CDATA[面积]]></O>
+<Expand/>
+</C>
+<C c="8" r="4" cs="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="mianji"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="11" r="4">
+<Expand/>
+</C>
+<C c="12" r="4">
+<Expand/>
+</C>
+<C c="13" r="4">
+<Expand/>
+</C>
+<C c="14" r="4">
+<Expand/>
+</C>
+<C c="15" r="4">
+<Expand/>
+</C>
+<C c="1" r="5" s="3">
+<O>
+<![CDATA[通讯地址]]></O>
+<Expand/>
+</C>
+<C c="2" r="5" cs="5" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_ADDRESS"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="7" r="5" s="3">
+<O>
+<![CDATA[试验主任]]></O>
+<Expand/>
+</C>
+<C c="8" r="5" cs="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="zhuren"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="6" cs="2" s="3">
+<O>
+<![CDATA[母体试验室名称]]></O>
+<Expand/>
+</C>
+<C c="3" r="6" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_MOTHROOM"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="5" r="6" cs="2" s="3">
+<O>
+<![CDATA[委外机构名称]]></O>
+<Expand/>
+</C>
+<C c="7" r="6" cs="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_WWORG"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="7" cs="2" s="3">
+<O>
+<![CDATA[母体试验室认证编号]]></O>
+<Expand/>
+</C>
+<C c="3" r="7" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_MOTHAUTH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="5" r="7" cs="2" s="3">
+<O>
+<![CDATA[委外机构地址]]></O>
+<Expand/>
+</C>
+<C c="7" r="7" cs="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_WWADDRESS"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="8" cs="2" s="3">
+<O>
+<![CDATA[母体试验室认证有效期]]></O>
+<Expand/>
+</C>
+<C c="3" r="8" cs="2" s="4">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_MOTHVALIDDATE"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="5" r="8" cs="2" s="3">
+<O>
+<![CDATA[委外机构资质认证编号]]></O>
+<Expand/>
+</C>
+<C c="7" r="8" cs="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_WWAUTH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="9" cs="2" s="3">
+<O>
+<![CDATA[试验室类型]]></O>
+<Expand/>
+</C>
+<C c="3" r="9" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="leixin"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="1" value="监理试验室"/>
+<Dict key="2" value="施工单位试验室"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="1" value="监理试验室"/>
+<Dict key="2" value="施工单位试验室"/>
+</CustomDictAttr>
+</Dictionary>
+</Present>
+<Expand dir="0"/>
+</C>
+<C c="5" r="9" cs="2" s="3">
+<O>
+<![CDATA[委外机构认证有效期]]></O>
+<Expand/>
+</C>
+<C c="7" r="9" cs="4" s="4">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_VALIDDATE"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="10" cs="2" s="3">
+<O>
+<![CDATA[试验资料表头（项目名称）]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="10" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="5" r="10" cs="2" s="3">
+<O>
+<![CDATA[委外机构检测项目]]></O>
+<Expand/>
+</C>
+<C c="7" r="10" cs="4" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_WWRANGE"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="11" s="5">
+<O>
+<![CDATA[描述信息]]></O>
+<Expand/>
+</C>
+<C c="2" r="11" cs="9" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_sysInput" columnName="F_DESC"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextArea">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<Margin top="986400" left="2743200" bottom="986400" right="2743200"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL1">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="ShiyanshiInfo"/>
+<ColumnConfig name="shiyanshi_guid" isKey="true" skipUnmodified="true">
+<ColumnRow column="2" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="usergrouporderid" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="longitude" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="latitude" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_TRCODE" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_JCQD" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_ADDRESS" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="F_POSTCODE" isKey="false" skipUnmodified="true">
+<ColumnRow column="14" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="F_FAX" isKey="false" skipUnmodified="true">
+<ColumnRow column="14" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="F_TEL" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="F_MOTHROOM" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="F_MOTHAUTH" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="F_MOTHVALIDDATE" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="F_WWORG" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="F_WWADDRESS" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="F_WWAUTH" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="F_VALIDDATE" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="F_WWRANGE" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="F_DESC" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="F_XMBT" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="F_TRNAME" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="1"/>
+</ColumnConfig>
+<ColumnConfig name="leixin" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="mianji" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="zhuren" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="5"/>
+</ColumnConfig>
+</DMLConfig>
+</Submiter>
+</ReportWriteAttr>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<Parameter>
+<Attributes name="userlft"/>
+<O>
+<![CDATA[0]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userrgt"/>
+<O>
+<![CDATA[0]]></O>
+</Parameter>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="144"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="6" color="-16744320"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" isVerticalText="1" textDirection="1" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAF"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FunctionManager xmlVersion="20131111" releaseVersion="7.0.5">
+<FunctionDefList>
+<FunctionDef name="JFreeToChart01311993">
+<Class className="com.fr.function.JFreeToChart01311993"/>
+<Description>
+<![CDATA[]]></Description>
+</FunctionDef>
+<FunctionDef name="Calc01311993">
+<Class className="com.fr.function.Calc01311993"/>
+<Description>
+<![CDATA[]]></Description>
+</FunctionDef>
+<FunctionDef name="CreateGuid">
+<Class className="com.fr.function.CreateGuid"/>
+<Description>
+<![CDATA[]]></Description>
+</FunctionDef>
+<FunctionDef name="JudgeArrayMiddleValue">
+<Class className="com.fr.function.JudgeArrayMiddleValue"/>
+<Description>
+<![CDATA[]]></Description>
+</FunctionDef>
+<FunctionDef name="CalculateSNKYAvg">
+<Class className="com.fr.function.CalculateSNKYAvg"/>
+<Description>
+<![CDATA[]]></Description>
+</FunctionDef>
+<FunctionDef name="CalculateSNKZAvg">
+<Class className="com.fr.function.CalculateSNKZAvg"/>
+<Description>
+<![CDATA[]]></Description>
+</FunctionDef>
+<FunctionDef name="CalculateTimeDiff">
+<Class className="com.fr.function.CalculateTimeDiff"/>
+<Description>
+<![CDATA[]]></Description>
+</FunctionDef>
+</FunctionDefList>
+</FunctionManager>

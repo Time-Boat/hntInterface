@@ -1,0 +1,4494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20131111" releaseVersion="7.0.5">
+<TableDataMap>
+<TableData name="ds_shiyanshi" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="shiyanshi_guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="loginsysid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[ShiyanshiInfo]A where 1=2 ${if(len(loginsysid)!=0&&len(shiyanshi_guid)==0," and shiyanshi_guid = '"+loginsysid+"'",'')} ${if(len(shiyanshi_guid)==0,""," and shiyanshi_guid = '"+shiyanshi_guid+"'")}]]></Query>
+</TableData>
+<TableData name="ds_testrec" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="rec_guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[T_USER_TEST_REC]A where 1=2 ${if(len(rec_guid)==0,""," or rec_guid = '"+rec_guid+"'")}]]></Query>
+</TableData>
+<TableData name="ds_T_T100048" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="oldguid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="rec_guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[T_T100048]A where 1=2 ${if(len(rec_guid)==0,""," or rec_guid = '"+rec_guid+"'")}
+${if(len(rec_guid)==0 && len(oldguid)>0," or rec_guid = '"+oldguid+"'","")}]]></Query>
+</TableData>
+<TableData name="ds_wangnj_1" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Wangnj]A where 1=2 ${if(len(split(syjids,","))>0, " or (SJXH='1' and SYJID = '"+INDEXOFARRAY(split(syjids,","),1)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_wangnj_2" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Wangnj]A where 1=2 ${if(len(split(syjids,","))>0, " or (SJXH='2' and SYJID = '"+INDEXOFARRAY(split(syjids,","),1)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_wangnj_3" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Wangnj]A where 1=2 ${if(len(split(syjids,","))>0, " or (SJXH='3' and SYJID = '"+INDEXOFARRAY(split(syjids,","),1)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_shiyanshi1" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[ShiyanshiInfo]A]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebPageContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.button.page.First">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('ReportServerP-First')}]]></Text>
+<IconName>
+<![CDATA[first]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.page.Previous">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('ReportServerP-Previous')}]]></Text>
+<IconName>
+<![CDATA[previous]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.page.PageNavi">
+<WidgetAttr/>
+</Widget>
+<Widget class="com.fr.report.web.button.page.Next">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('ReportServerP-Next')}]]></Text>
+<IconName>
+<![CDATA[next]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.page.Last">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('ReportServerP-Last')}]]></Text>
+<IconName>
+<![CDATA[last]]></IconName>
+</Widget>
+<Widget class="com.fr.form.ui.CustomToolBarButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[返回]]></Text>
+<IconName>
+<![CDATA[frozzen]]></IconName>
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'TT_ConsignList.cpt&op=write&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm)]]></Content>
+</JavaScript>
+</Widget>
+<Widget class="com.fr.report.web.button.PDFPrint">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Utils-Print[Client]A')}]]></Text>
+<IconName>
+<![CDATA[pdfprint]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.Print">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Print')}]]></Text>
+<IconName>
+<![CDATA[print]]></IconName>
+<PrintButtons/>
+</Widget>
+<Widget class="com.fr.report.web.button.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Export')}]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="true" excelO="true" excelS="true" word="true" image="true" html="true"/>
+</Widget>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<WebPage isPage="false" isShowAsImage="false" isAutoScale="false" isTDHeavy="false"/>
+</WebPageContent>
+<WebWriteContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.button.write.Submit">
+<WidgetAttr/>
+<Text>
+<![CDATA[保存]]></Text>
+<IconName>
+<![CDATA[submit]]></IconName>
+<Verify failVerifySubmit="false"/>
+</Widget>
+<Widget class="com.fr.report.web.button.write.Verify">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Verify-Data_Verify')}]]></Text>
+<IconName>
+<![CDATA[verify]]></IconName>
+</Widget>
+<Widget class="com.fr.form.ui.CustomToolBarButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[返回]]></Text>
+<IconName>
+<![CDATA[frozzen]]></IconName>
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'TT_ConsignList.cpt&op=write&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm)]]></Content>
+</JavaScript>
+</Widget>
+<Widget class="com.fr.report.web.button.PDFPrint">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Utils-Print[Client]A')}]]></Text>
+<IconName>
+<![CDATA[pdfprint]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.Print">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Print')}]]></Text>
+<IconName>
+<![CDATA[print]]></IconName>
+<PrintButtons/>
+</Widget>
+<Widget class="com.fr.report.web.button.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Export')}]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="true" excelO="true" excelS="true" word="true" image="true" html="true"/>
+</Widget>
+<Widget class="com.fr.report.web.button.write.ShowCellValue">
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="false"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue/>
+</Widget>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<SelectedColor/>
+<WebWrite isSheet="false"/>
+<UnloadCheck/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="钢筋焊接接头试验记录">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[0,792000,792000,1080000,1080000,1080000,1080000,1080000,216000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,1224000,2514600,1080000,1080000,1080000,792000,792000,792000,792000,792000,792000,792000,792000,792000,792000,792000,792000,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2095500,2247900,5295900,2286000,2438400,2362200,2057400,2552700,2324100,4800600,3009900,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="9" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshi" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="1" cs="2" rs="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshi" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="2" r="1" cs="3" rs="2" s="2">
+<O>
+<![CDATA[钢筋焊接接头试验记录]]></O>
+<Expand/>
+</C>
+<C c="5" r="1" cs="4" s="3">
+<O>
+<![CDATA[表号：铁建试录098]]></O>
+<Expand/>
+</C>
+<C c="9" r="1">
+<O>
+<![CDATA[试验rec_guid]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="10" r="1">
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="5" r="2" cs="4" s="4">
+<O>
+<![CDATA[批准文号：铁建设函[2009]A27号]]></O>
+<Expand/>
+</C>
+<C c="9" r="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF((nr = 1 && len(rec_guid) = 0) || iscopy = 1, CreateGuid($fr_username, sessionID, TODAY(), "100048"), ds_testrec.select(rec_guid))]]></Attributes>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="10" r="2" s="5">
+<O>
+<![CDATA[报告类型]]></O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="3" s="6">
+<O>
+<![CDATA[样品编号]]></O>
+<Expand/>
+</C>
+<C c="1" r="3" cs="3" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_testrec.SELECT(F_YPBH),ds_wangnj_1.SELECT(SJBH))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="3" s="6">
+<O>
+<![CDATA[记录编号]]></O>
+<Expand/>
+</C>
+<C c="5" r="3" cs="4" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_JLBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="9" r="3">
+<O>
+<![CDATA[铁道部上传试验室编码]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="10" r="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_BGZT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetName name="F_BGLX"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="0" value="自检"/>
+<Dict key="1" value="见证"/>
+<Dict key="2" value="监理评检"/>
+<Dict key="3" value="其他"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="0" value="自检"/>
+<Dict key="1" value="见证"/>
+<Dict key="2" value="监理评检"/>
+<Dict key="3" value="其他"/>
+</CustomDictAttr>
+</Dictionary>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="4" s="6">
+<O>
+<![CDATA[产地厂名]]></O>
+<Expand/>
+</C>
+<C c="1" r="4" cs="3" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_testrec.SELECT(F_YPCD),ds_wangnj_1.SELECT(CDCM))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="4" s="6">
+<O>
+<![CDATA[委托编号]]></O>
+<Expand/>
+</C>
+<C c="5" r="4" cs="4" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_testrec.SELECT(F_WTBH),ds_wangnj_1.SELECT(WTBH))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="4">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshi" columnName="F_TRCODE"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="10" r="4" s="5">
+<O>
+<![CDATA[是否合格]]></O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="5" s="6">
+<O>
+<![CDATA[代表数量]]></O>
+<Expand/>
+</C>
+<C c="1" r="5" cs="3" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_testrec.SELECT(F_DBSL),ds_wangnj_1.SELECT(DDSL))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsImage="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="5" s="6">
+<O>
+<![CDATA[委托日期]]></O>
+<Expand/>
+</C>
+<C c="5" r="5" cs="4" s="10">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_WTRQ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="9" r="5">
+<O>
+<![CDATA[试验室guid]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="10" r="5" s="9">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_SFHG"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetName name="F_SFHG"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="1" value="合格"/>
+<Dict key="0" value="不合格"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="1" value="合格"/>
+<Dict key="0" value="不合格"/>
+</CustomDictAttr>
+</Dictionary>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="6" s="1">
+<O>
+<![CDATA[产品批号]]></O>
+<Expand/>
+</C>
+<C c="1" r="6" cs="3" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_SCPH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="6" s="1">
+<O>
+<![CDATA[级别代号]]></O>
+<Expand/>
+</C>
+<C c="5" r="6" cs="4" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_testrec.SELECT(F_SDXDJ),ds_wangnj_1.SELECT(PZBM))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($loginsysid)!=0&&len($shiyanshi_guid)==0,$loginsysid,$shiyanshi_guid)]]></Attributes>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="10" r="6" s="5">
+<O>
+<![CDATA[被抽检试验室]]></O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="7" s="1">
+<O>
+<![CDATA[母材强度]]></O>
+<Expand/>
+</C>
+<C c="1" r="7" cs="3" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="MCintensity"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="7" s="1">
+<O>
+<![CDATA[试验日期]]></O>
+<Expand/>
+</C>
+<C c="5" r="7" cs="4" s="11">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_testrec.SELECT(F_SYRQ),ds_wangnj_1.SELECT(SYRQ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="7">
+<O>
+<![CDATA[试件编号唯一号]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="10" r="7" s="9">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="cjshiyanshi_guid"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetName name="F_CJSYS"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="shiyanshi_guid" viName="F_TRNAME"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[ds_shiyanshi1]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.DatabaseDictionary">
+<FormulaDictAttr ki="2" vi="4"/>
+<DBDictAttr tableName="ShiyanshiInfo" schemaName="dbo" ki="2" vi="4" kiName="" viName=""/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+</Dictionary>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="9" cs="2" rs="4" s="12">
+<O>
+<![CDATA[仪器设备及环境条件]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="9" s="13">
+<O>
+<![CDATA[仪器设备名称]]></O>
+<Expand/>
+</C>
+<C c="3" r="9" s="13">
+<O>
+<![CDATA[型号]]></O>
+<Expand/>
+</C>
+<C c="4" r="9" s="13">
+<O>
+<![CDATA[管理编号]]></O>
+<Expand/>
+</C>
+<C c="5" r="9" s="13">
+<O>
+<![CDATA[示值范围]]></O>
+<Expand/>
+</C>
+<C c="6" r="9" s="13">
+<O>
+<![CDATA[分辨力]]></O>
+<Expand/>
+</C>
+<C c="7" r="9" s="13">
+<O>
+<![CDATA[温度（℃）]]></O>
+<Expand/>
+</C>
+<C c="8" r="9" s="13">
+<O>
+<![CDATA[相对湿度（%）]]></O>
+<Expand/>
+</C>
+<C c="9" r="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(ds_wangnj_1.SELECT(SYJID))>0,ds_wangnj_1.SELECT(SYJID),'1')]]></Attributes>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="2" r="10" s="14">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="YiQiSheBei1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="3" r="10" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="XingHao1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="10" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="GuanLiBianHao1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="10" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="ShiZhiFanWei1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="10" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="FenBianLi1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="7" r="10" rs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="WenDu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="10" rs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="XiangDuiShiDu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="9" r="10">
+<O t="DSColumn">
+<Attributes dsName="ds_wangnj_1" columnName="WTID"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="2" r="11" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="YiQiSheBei2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="3" r="11" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="XingHao2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="11" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="GuanLiBianHao2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="11" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="ShiZhiFanWei2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="11" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="FenBianLi2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="2" r="12" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="YiQiSheBei3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="3" r="12" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="XingHao3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="12" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="GuanLiBianHao3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="12" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="ShiZhiFanWei3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="12" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="FenBianLi3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="13" cs="2" s="13">
+<O>
+<![CDATA[样品状态描述]]></O>
+<Expand/>
+</C>
+<C c="2" r="13" cs="2" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="YangPinZhuangTaiMiaoShu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="13" cs="2" s="13">
+<O>
+<![CDATA[采用标准]]></O>
+<Expand/>
+</C>
+<C c="6" r="13" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="CaiYongBiaoZhun"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="14" cs="3" rs="2" s="13">
+<O>
+<![CDATA[项    目]]></O>
+<Expand/>
+</C>
+<C c="3" r="14" cs="6" s="13">
+<O>
+<![CDATA[试件编号]]></O>
+<Expand/>
+</C>
+<C c="3" r="15" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="SampleNo1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="15" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="SampleNo2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="15" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="SampleNo3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="15" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="SampleNo4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="7" r="15" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="SampleNo5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="15" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="SampleNo6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="16" cs="3" s="13">
+<O>
+<![CDATA[取样部位]]></O>
+<Expand/>
+</C>
+<C c="3" r="16" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="QuYangBuWei1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="16" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="QuYangBuWei2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="17" cs="3" s="13">
+<O>
+<![CDATA[焊接种类]]></O>
+<Expand/>
+</C>
+<C c="3" r="17" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="HanJieZhongLei1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="17" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="HanJieZhongLei2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="18" cs="3" s="15">
+<O>
+<![CDATA[焊缝长度Lh(mm)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="18" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="HanFengChangDu1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="18" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="HanFengChangDu2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="18" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="HanFengChangDu3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="18" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="HanFengChangDu4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="7" r="18" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="HanFengChangDu5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="18" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="HanFengChangDu6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="19" cs="3" s="13">
+<O>
+<![CDATA[焊工姓名及上岗证编号]]></O>
+<Expand/>
+</C>
+<C c="3" r="19" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="HanGongname1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="19" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="HanGongname2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="20" rs="6" s="16">
+<O>
+<![CDATA[拉     伸     试           验]]></O>
+<Expand/>
+</C>
+<C c="1" r="20" cs="2" s="13">
+<O>
+<![CDATA[公称直径α（mm）]]></O>
+<Expand/>
+</C>
+<C c="3" r="20" cs="3" s="13">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(ZhiJing1),ds_wangnj_1.SELECT(GCZJ))]]></Attributes>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<Listener event="stopedit">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var zhijing1 = contentPane.getWidgetByName("zhijing1").getValue();
+if(zhijing1==6)
+contentPane.setCellValue('D22',null,'28.27');
+else if(zhijing1==6.5)
+contentPane.setCellValue('D22',null,'33.18');
+else if(zhijing1==8)
+contentPane.setCellValue('D22',null,'50.27');
+else if(zhijing1==10)
+contentPane.setCellValue('D22',null,'78.54');
+else if(zhijing1==12)
+contentPane.setCellValue('D22',null,'113.1');
+else if(zhijing1==14)
+contentPane.setCellValue('D22',null,'153.9');
+else if(zhijing1==16)
+contentPane.setCellValue('D22',null,'201.1');
+else if(zhijing1==18)
+contentPane.setCellValue('D22',null,'254.5');
+else if(zhijing1==20)
+contentPane.setCellValue('D22',null,'314.2');
+else if(zhijing1==22)
+contentPane.setCellValue('D22',null,'380.1');
+else if(zhijing1==25)
+contentPane.setCellValue('D22',null,'490.9');
+else if(zhijing1==28)
+contentPane.setCellValue('D22',null,'615.8');
+else if(zhijing1==32)
+contentPane.setCellValue('D22',null,'804.2');
+else if(zhijing1==36)
+contentPane.setCellValue('D22',null,'1018');
+else if(zhijing1==40)
+contentPane.setCellValue('D22',null,'1257');
+else if(zhijing1==50)
+contentPane.setCellValue('D22',null,'1964');]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="zhijing1"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="6" value="6"/>
+<Dict key="6.5" value="6.5"/>
+<Dict key="8" value="8"/>
+<Dict key="10" value="10"/>
+<Dict key="12" value="12"/>
+<Dict key="14" value="14"/>
+<Dict key="16" value="16"/>
+<Dict key="18" value="18"/>
+<Dict key="20" value="20"/>
+<Dict key="22" value="22"/>
+<Dict key="25" value="25"/>
+<Dict key="28" value="28"/>
+<Dict key="32" value="32"/>
+<Dict key="36" value="36"/>
+<Dict key="40" value="40"/>
+<Dict key="50" value="50"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="20" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="ZhiJing2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<Listener event="stopedit">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var zhijing2 = contentPane.getWidgetByName("zhijing2").getValue();
+if(zhijing2==6)
+contentPane.setCellValue('G22',null,'28.27');
+else if(zhijing2==6.5)
+contentPane.setCellValue('G22',null,'33.18');
+else if(zhijing2==8)
+contentPane.setCellValue('G22',null,'50.27');
+else if(zhijing2==10)
+contentPane.setCellValue('G22',null,'78.54');
+else if(zhijing2==12)
+contentPane.setCellValue('G22',null,'113.1');
+else if(zhijing2==14)
+contentPane.setCellValue('G22',null,'153.9');
+else if(zhijing2==16)
+contentPane.setCellValue('G22',null,'201.1');
+else if(zhijing2==18)
+contentPane.setCellValue('G22',null,'254.5');
+else if(zhijing2==20)
+contentPane.setCellValue('G22',null,'314.2');
+else if(zhijing2==22)
+contentPane.setCellValue('G22',null,'380.1');
+else if(zhijing2==25)
+contentPane.setCellValue('G22',null,'490.9');
+else if(zhijing2==28)
+contentPane.setCellValue('G22',null,'615.8');
+else if(zhijing2==32)
+contentPane.setCellValue('G22',null,'804.2');
+else if(zhijing2==36)
+contentPane.setCellValue('G22',null,'1018');
+else if(zhijing2==40)
+contentPane.setCellValue('G22',null,'1257');
+else if(zhijing2==50)
+contentPane.setCellValue('G22',null,'1964');]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="zhijing2"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="6" value="6"/>
+<Dict key="6.5" value="6.5"/>
+<Dict key="8" value="8"/>
+<Dict key="10" value="10"/>
+<Dict key="12" value="12"/>
+<Dict key="14" value="14"/>
+<Dict key="16" value="16"/>
+<Dict key="18" value="18"/>
+<Dict key="20" value="20"/>
+<Dict key="22" value="22"/>
+<Dict key="25" value="25"/>
+<Dict key="28" value="28"/>
+<Dict key="32" value="32"/>
+<Dict key="36" value="36"/>
+<Dict key="40" value="40"/>
+<Dict key="50" value="50"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="1" r="21" cs="2" s="13">
+<O>
+<![CDATA[公称截面面积So(mm²)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="21" cs="3" s="17">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(MianJi1),ds_wangnj_1.SELECT(SJMJ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="21" cs="3" s="17">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="MianJi2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="1" r="22" cs="2" s="18">
+<O>
+<![CDATA[拉断最大力Fm(kN)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="22" s="19">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(LaDuanZuiDaLi1),ds_wangnj_1.SELECT(LZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="22" s="19">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(LaDuanZuiDaLi2),ds_wangnj_2.SELECT(LZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="22" s="19">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(LaDuanZuiDaLi3),ds_wangnj_3.SELECT(LZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="22" s="19">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="LaDuanZuiDaLi4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="22" s="19">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="LaDuanZuiDaLi5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="8" r="22" s="19">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="LaDuanZuiDaLi6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="1" r="23" cs="2" s="1">
+<O>
+<![CDATA[抗拉强度Rm(MPa)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="23" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(D22)>0,ROUND(D23*1000/D22/5,0)*5,"")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if(len($$$)==0||$$$==0,'',$$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="23" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(D22)>0,ROUND(E23*1000/D22/5,0)*5,"")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if(len($$$)==0||$$$==0,'',$$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="23" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(D22)>0,ROUND(F23*1000/D22/5,0)*5,"")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if(len($$$)==0||$$$==0,'',$$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="23" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G22)>0,ROUND(G23*1000/G22/5,0)*5,ds_T_T100048.SELECT(KangLaQiangDu4))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if(len($$$)==0||$$$==0,'',$$$)]]></Content>
+</Present>
+<Expand/>
+</C>
+<C c="7" r="23" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G22)>0,ROUND(H23*1000/G22/5,0)*5,ds_T_T100048.SELECT(KangLaQiangDu5))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if(len($$$)==0||$$$==0,'',$$$)]]></Content>
+</Present>
+<Expand/>
+</C>
+<C c="8" r="23" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G22)>0,ROUND(I23*1000/G22/5,0)*5,ds_T_T100048.SELECT(KangLaQiangDu5))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[=if(len($$$)==0||$$$==0,'',$$$)]]></Content>
+</Present>
+<Expand/>
+</C>
+<C c="1" r="24" cs="2" s="13">
+<O>
+<![CDATA[拉断处位置描述（距焊缝mm）]]></O>
+<Expand/>
+</C>
+<C c="3" r="24" s="14">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(DuanKouMiaoSu1),ds_wangnj_1.SELECT(DKWZ))]]></Attributes>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="24" s="14">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(DuanKouMiaoSu2),ds_wangnj_2.SELECT(DKWZ))]]></Attributes>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="24" s="14">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(DuanKouMiaoSu3),ds_wangnj_3.SELECT(DKWZ))]]></Attributes>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="24" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="DuanKouMiaoSu4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="7" r="24" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="DuanKouMiaoSu5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="24" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="DuanKouMiaoSu6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="1" r="25" cs="2" s="13">
+<O>
+<![CDATA[断口特征描述]]></O>
+<Expand/>
+</C>
+<C c="3" r="25" s="14">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(LaDuanChuMiaoSu1),ds_wangnj_1.SELECT(LDCMS))]]></Attributes>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="25" s="14">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(LaDuanChuMiaoSu2),ds_wangnj_2.SELECT(LDCMS))]]></Attributes>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="25" s="14">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0,ds_T_T100048.SELECT(LaDuanChuMiaoSu3),ds_wangnj_3.SELECT(LDCMS))]]></Attributes>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="25" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="LaDuanChuMiaoSu4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="7" r="25" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="LaDuanChuMiaoSu5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="25" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="LaDuanChuMiaoSu6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="26" rs="4" s="16">
+<O>
+<![CDATA[弯曲试验]]></O>
+<Expand/>
+</C>
+<C c="1" r="26" cs="2" s="13">
+<O>
+<![CDATA[弯曲角度α（°）]]></O>
+<Expand/>
+</C>
+<C c="3" r="26" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="WanquJiaoDu1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr allowNegative="false" minValue="0.0">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="26" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="WanquJiaoDu2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr allowNegative="false" minValue="0.0">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand/>
+</C>
+<C c="1" r="27" cs="2" s="13">
+<O>
+<![CDATA[弯心直径d（mm）]]></O>
+<Expand/>
+</C>
+<C c="3" r="27" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="WanquZhiJing1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="27" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="WanquZhiJing2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="1" r="28" cs="2" s="13">
+<O>
+<![CDATA[弯曲外表面描述]]></O>
+<Expand/>
+</C>
+<C c="3" r="28" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="BiaoMianMiaoSu1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="28" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="BiaoMianMiaoSu2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="5" r="28" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="BiaoMianMiaoSu3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="28" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="BiaoMianMiaoSu4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="7" r="28" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="BiaoMianMiaoSu5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="28" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="BiaoMianMiaoSu6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="1" r="29" cs="2" s="13">
+<O>
+<![CDATA[弯曲结果]]></O>
+<Expand/>
+</C>
+<C c="3" r="29" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="WanQuresult1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="29" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="WanQuresult2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="30" s="22">
+<O>
+<![CDATA[附注：]]></O>
+<Expand/>
+</C>
+<C c="1" r="30" cs="8" s="23">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="fuzhu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextArea">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="31" s="24">
+<O>
+<![CDATA[试验]]></O>
+<Expand/>
+</C>
+<C c="1" r="31" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_SYR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="2" r="31">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="31" s="24">
+<O>
+<![CDATA[计算]]></O>
+<Expand/>
+</C>
+<C c="4" r="31" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_JSR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="7" r="31" s="24">
+<O>
+<![CDATA[复核]]></O>
+<Expand/>
+</C>
+<C c="8" r="31" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_FHR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<Margin top="2880000" left="3600000" bottom="2880000" right="2880000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL1">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_T100048"/>
+<ColumnConfig name="rec_guid" isKey="true" skipUnmodified="false">
+<ColumnRow column="9" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="MCintensity" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="YiQiSheBei1" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="YiQiSheBei2" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="YiQiSheBei3" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="XingHao1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="XingHao2" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="XingHao3" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="GuanLiBianHao1" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="GuanLiBianHao2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="GuanLiBianHao3" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="ShiZhiFanWei1" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="ShiZhiFanWei2" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="ShiZhiFanWei3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="FenBianLi1" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="FenBianLi2" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="FenBianLi3" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="WenDu" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="XiangDuiShiDu" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="YangPinZhuangTaiMiaoShu" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="CaiYongBiaoZhun" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="SampleNo1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="SampleNo2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="SampleNo3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="SampleNo4" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="SampleNo5" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="SampleNo6" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="QuYangBuWei1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="QuYangBuWei2" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="HanJieZhongLei1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="HanJieZhongLei2" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="HanFengChangDu1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="HanFengChangDu2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="HanFengChangDu3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="HanFengChangDu4" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="HanFengChangDu5" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="HanFengChangDu6" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="HanGongname1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="HanGongname2" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="ZhiJing1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="ZhiJing2" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="MianJi1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="MianJi2" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanZuiDaLi1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanZuiDaLi2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanZuiDaLi3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanZuiDaLi4" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanZuiDaLi5" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanZuiDaLi6" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="KangLaQiangDu1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="KangLaQiangDu2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="KangLaQiangDu3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="KangLaQiangDu4" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="KangLaQiangDu5" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="KangLaQiangDu6" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanChuMiaoSu1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanChuMiaoSu2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanChuMiaoSu3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanChuMiaoSu4" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanChuMiaoSu5" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="LaDuanChuMiaoSu6" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="DuanKouMiaoSu1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="DuanKouMiaoSu2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="DuanKouMiaoSu3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="DuanKouMiaoSu4" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="DuanKouMiaoSu5" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="DuanKouMiaoSu6" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="WanquJiaoDu1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="26"/>
+</ColumnConfig>
+<ColumnConfig name="WanquJiaoDu2" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="26"/>
+</ColumnConfig>
+<ColumnConfig name="WanquZhiJing1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="27"/>
+</ColumnConfig>
+<ColumnConfig name="WanquZhiJing2" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="27"/>
+</ColumnConfig>
+<ColumnConfig name="BiaoMianMiaoSu1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="BiaoMianMiaoSu2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="BiaoMianMiaoSu3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="BiaoMianMiaoSu4" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="BiaoMianMiaoSu5" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="BiaoMianMiaoSu6" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="WanQuresult1" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="29"/>
+</ColumnConfig>
+<ColumnConfig name="WanQuresult2" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="29"/>
+</ColumnConfig>
+<ColumnConfig name="fuzhu" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="30"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL2">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_USER_TEST_REC"/>
+<ColumnConfig name="rec_guid" isKey="true" skipUnmodified="false">
+<ColumnRow column="9" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="F_WTBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="F_YPBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_JLBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_SCPH" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="F_SDXDJ" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="F_DBSL" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="F_YPCD" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="F_SYR" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="31"/>
+</ColumnConfig>
+<ColumnConfig name="F_FHR" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="31"/>
+</ColumnConfig>
+<ColumnConfig name="F_JSR" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="31"/>
+</ColumnConfig>
+<ColumnConfig name="F_WTRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="F_SYRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="usertestid" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[100048]]></O>
+</ColumnConfig>
+<ColumnConfig name="shiyanshi_guid" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="cjshiyanshi_guid" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="F_SFHG" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="F_BGZT" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_TRCODE" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="fr_username" isKey="false" skipUnmodified="false">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$fr_username]]></Attributes>
+</O>
+</ColumnConfig>
+<ColumnConfig name="F_CZZ" isKey="false" skipUnmodified="false">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$fullname]]></Attributes>
+</O>
+</ColumnConfig>
+<ColumnConfig name="userdepartid" isKey="false" skipUnmodified="false">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$userdepartid]]></Attributes>
+</O>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL3">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.UpdateConfig">
+<Table schema="dbo" name="T_Consign"/>
+<ColumnConfig name="WTID" isKey="true" skipUnmodified="false">
+<ColumnRow column="9" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="rec_guid" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="MSTATUS" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[2]]></O>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+</ReportWriteAttr>
+</Report>
+<Report class="com.fr.report.worksheet.WorkSheet" name="钢筋焊接接头试验报告">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[792000,792000,1440000,1440000,1440000,1440000,342900,1440000,1512000,1512000,1512000,1512000,1512000,1512000,1512000,1512000,1512000,1512000,1512000,1512000,1512000,1512000,1371600,1008000,2476500,1104900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2160000,2592000,2971800,2552700,2160000,2514600,2095500,0,2160000,2400300,1828800,228600,2057400,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="2" rs="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshi" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="2" r="0" cs="5" rs="2" s="2">
+<O>
+<![CDATA[钢筋焊接接头试验报告]]></O>
+<Expand/>
+</C>
+<C c="8" r="0" cs="4">
+<O>
+<![CDATA[表号：铁建试报48]]></O>
+<Expand/>
+</C>
+<C c="12" r="0">
+<O>
+<![CDATA[rec_guid]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="8" r="1" cs="4">
+<O>
+<![CDATA[批准文号：铁建设函[2009]A27号]]></O>
+<Expand/>
+</C>
+<C c="12" r="1">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!J3]]></Attributes>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="0" r="2" s="1">
+<O>
+<![CDATA[委托单位]]></O>
+<Expand/>
+</C>
+<C c="1" r="2" cs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN($rec_guid) != 0, ds_testrec.SELECT(F_WTDW), ds_wangnj_1.SELECT(WTDW))]]></Attributes>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="2" s="1">
+<O>
+<![CDATA[产地厂名]]></O>
+<Expand/>
+</C>
+<C c="5" r="2" cs="2" s="25">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!B5]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="2" s="1">
+<O>
+<![CDATA[报告编号]]></O>
+<Expand/>
+</C>
+<C c="9" r="2" cs="3" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_BGBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="3" s="1">
+<O>
+<![CDATA[工程名称]]></O>
+<Expand/>
+</C>
+<C c="1" r="3" cs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN($rec_guid) != 0, ds_testrec.SELECT(F_GCMC), ds_wangnj_1.SELECT(GCMC))]]></Attributes>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="3" s="1">
+<O>
+<![CDATA[表面形状]]></O>
+<Expand/>
+</C>
+<C c="5" r="3" cs="2" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="biaomianxingzhuang"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="3" s="1">
+<O>
+<![CDATA[委托编号]]></O>
+<Expand/>
+</C>
+<C c="9" r="3" cs="3" s="25">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!F5]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="4" s="1">
+<O>
+<![CDATA[施工部位]]></O>
+<Expand/>
+</C>
+<C c="1" r="4" cs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN($rec_guid) != 0, ds_testrec.SELECT(F_SGBW), ds_wangnj_1.SELECT(SGBW))]]></Attributes>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="4" s="1">
+<O>
+<![CDATA[钢筋牌号]]></O>
+<Expand/>
+</C>
+<C c="5" r="4" cs="2" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="gangjingpaihao"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="4" s="1">
+<O>
+<![CDATA[记录编号]]></O>
+<Expand/>
+</C>
+<C c="9" r="4" cs="3" s="25">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!F4]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="5" s="1">
+<O>
+<![CDATA[母材强度]]></O>
+<Expand/>
+</C>
+<C c="1" r="5" cs="3" s="25">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!B8]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="5" s="1">
+<O>
+<![CDATA[代表数量]]></O>
+<Expand/>
+</C>
+<C c="5" r="5" cs="2" s="25">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!B6]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="5" s="1">
+<O>
+<![CDATA[报告日期]]></O>
+<Expand/>
+</C>
+<C c="9" r="5" cs="3" s="10">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_BGRQ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="7" cs="3" rs="2" s="13">
+<O>
+<![CDATA[项目]]></O>
+<Expand/>
+</C>
+<C c="3" r="7" rs="2" s="26">
+<O>
+<![CDATA[标准规定值]]></O>
+<Expand/>
+</C>
+<C c="4" r="7" cs="8" s="13">
+<O>
+<![CDATA[试件编号]]></O>
+<Expand/>
+</C>
+<C c="4" r="8" s="27">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D16) > 0, '钢筋焊接接头试验记录'!D16, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="8" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!E16) > 0, '钢筋焊接接头试验记录'!E16, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="8" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!F16) > 0, '钢筋焊接接头试验记录'!F16, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="8" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!G16]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="8" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G16) > 0, '钢筋焊接接头试验记录'!G16, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="8" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!H16) > 0, '钢筋焊接接头试验记录'!H16, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="8" cs="2" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!I16) > 0, '钢筋焊接接头试验记录'!I16, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="9" cs="3" s="13">
+<O>
+<![CDATA[取样部位]]></O>
+<Expand/>
+</C>
+<C c="3" r="9" s="14">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_QuyangBuWei"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="9" cs="3" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D17) > 0, '钢筋焊接接头试验记录'!D17, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="9" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!G17]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="9" cs="4" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G17) > 0, '钢筋焊接接头试验记录'!G17, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="10" cs="3" s="13">
+<O>
+<![CDATA[焊接种类]]></O>
+<Expand/>
+</C>
+<C c="3" r="10" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_HanJieZhongLei"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="10" cs="3" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D18) > 0, '钢筋焊接接头试验记录'!D18, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="10" s="28">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="10" cs="4" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G18) > 0, '钢筋焊接接头试验记录'!G18, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="11" cs="3" s="13">
+<O>
+<![CDATA[焊缝长度Lh(mm)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="11" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_HanFengChangDu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="11" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D19) > 0, '钢筋焊接接头试验记录'!D19, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="11" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!E19) > 0, '钢筋焊接接头试验记录'!E19, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="11" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!F19) > 0, '钢筋焊接接头试验记录'!F19, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="11" s="28">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="11" s="28">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G19) > 0, '钢筋焊接接头试验记录'!G19, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="11" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!H19) > 0, '钢筋焊接接头试验记录'!H19, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="11" cs="2" s="29">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!I19) > 0, '钢筋焊接接头试验记录'!I19, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="12" cs="3" s="13">
+<O>
+<![CDATA[焊工姓名及上岗证编号]]></O>
+<Expand/>
+</C>
+<C c="3" r="12" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_HanGongname"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="12" cs="3" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D20) > 0, '钢筋焊接接头试验记录'!D20, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="12" s="21">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="12" cs="4" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G20) > 0, '钢筋焊接接头试验记录'!G20, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="13" rs="6" s="16">
+<O>
+<![CDATA[拉     伸     试           验]]></O>
+<Expand/>
+</C>
+<C c="1" r="13" cs="2" s="30">
+<O>
+<![CDATA[公称直径α（mm）]]></O>
+<Expand/>
+</C>
+<C c="3" r="13" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_ZhiJing"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="13" cs="3" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D21) > 0, '钢筋焊接接头试验记录'!D21, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="13" s="31">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="13" cs="4" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G21) > 0, '钢筋焊接接头试验记录'!G21, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="14" cs="2" s="13">
+<O>
+<![CDATA[公称截面面积So(mm²)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="14" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_MianJi"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="14" cs="3" s="17">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D22) > 0, '钢筋焊接接头试验记录'!D22, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="14" s="32">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="14" cs="4" s="17">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G22) > 0, '钢筋焊接接头试验记录'!G22, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="15" cs="2" s="8">
+<O>
+<![CDATA[拉断最大力Fm(kN)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="15" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_LaDuanZuiDaLi"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="15" s="33">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D23) > 0, FORMAT('钢筋焊接接头试验记录'!D23, "#0.00"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="15" s="33">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!E23) > 0, FORMAT('钢筋焊接接头试验记录'!E23, "#0.00"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="15" s="33">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!F23) > 0, FORMAT('钢筋焊接接头试验记录'!F23, "#0.00"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="15" s="34">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="15" s="33">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G23) > 0, FORMAT('钢筋焊接接头试验记录'!G23, "#0.00"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="15" s="33">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!H23) > 0, FORMAT('钢筋焊接接头试验记录'!H23, "#0.00"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="15" cs="2" s="33">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!I23) > 0, FORMAT('钢筋焊接接头试验记录'!I23, "#0.00"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="16" cs="2" s="1">
+<O>
+<![CDATA[抗拉强度Rm(MPa)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="16" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_KangLaQiangDu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="16" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D24) > 0, '钢筋焊接接头试验记录'!D24, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="16" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!E24) > 0, '钢筋焊接接头试验记录'!E24, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="16" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!F24) > 0, '钢筋焊接接头试验记录'!F24, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="16" s="20">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="16" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G24) > 0, '钢筋焊接接头试验记录'!G24, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="16" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!H24) > 0, '钢筋焊接接头试验记录'!H24, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="16" cs="2" s="20">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!I24) > 0, '钢筋焊接接头试验记录'!I24, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="17" cs="2" s="13">
+<O>
+<![CDATA[拉断处位置描述]]></O>
+<Expand/>
+</C>
+<C c="3" r="17" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_DuanKouMiaoSu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="17" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D25) > 0, '钢筋焊接接头试验记录'!D25, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="17" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!E25) > 0, '钢筋焊接接头试验记录'!E25, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="17" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!F25) > 0, '钢筋焊接接头试验记录'!F25, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="17" s="21">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="17" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G25) > 0, '钢筋焊接接头试验记录'!G25, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="17" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!H25) > 0, '钢筋焊接接头试验记录'!H25, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="17" cs="2" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!I25) > 0, '钢筋焊接接头试验记录'!I25, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="18" cs="2" s="13">
+<O>
+<![CDATA[断口特征描述]]></O>
+<Expand/>
+</C>
+<C c="3" r="18" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_LaDuanChuMiaoSu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="18" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D26) > 0, '钢筋焊接接头试验记录'!D26, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="18" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!E26) > 0, '钢筋焊接接头试验记录'!E26, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="18" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!F26) > 0, '钢筋焊接接头试验记录'!F26, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="18" s="21">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="18" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G26) > 0, '钢筋焊接接头试验记录'!G26, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="18" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!H26) > 0, '钢筋焊接接头试验记录'!H26, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="18" cs="2" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!I26) > 0, '钢筋焊接接头试验记录'!I26, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="19" rs="4" s="16">
+<O>
+<![CDATA[弯曲试验]]></O>
+<Expand/>
+</C>
+<C c="1" r="19" cs="2" s="13">
+<O>
+<![CDATA[弯曲角度α（°）]]></O>
+<Expand/>
+</C>
+<C c="3" r="19" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_WanquJiaoDu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="19" cs="3" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D27) > 0, '钢筋焊接接头试验记录'!D27, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="19" s="35">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="19" cs="4" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G27) > 0, '钢筋焊接接头试验记录'!G27, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="20" cs="2" s="13">
+<O>
+<![CDATA[弯心直径d（mm）]]></O>
+<Expand/>
+</C>
+<C c="3" r="20" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_WanquZhiJing"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="20" cs="3" s="27">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D28) > 0, '钢筋焊接接头试验记录'!D28, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="20" s="27">
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="20" cs="4" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G28) > 0, '钢筋焊接接头试验记录'!G28, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="21" cs="2" s="13">
+<O>
+<![CDATA[弯曲外表面描述]]></O>
+<Expand/>
+</C>
+<C c="3" r="21" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_BiaoMianMiaoSu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="21" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D29) > 0, '钢筋焊接接头试验记录'!D29, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="21" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!E29) > 0, '钢筋焊接接头试验记录'!E29, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="21" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!F29) > 0, '钢筋焊接接头试验记录'!F29, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="21" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!G29]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="21" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G29) > 0, '钢筋焊接接头试验记录'!G29, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="21" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!H29) > 0, '钢筋焊接接头试验记录'!H29, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="21" cs="2" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!I29) > 0, '钢筋焊接接头试验记录'!I29, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="22" cs="2" s="13">
+<O>
+<![CDATA[弯曲结果]]></O>
+<Expand/>
+</C>
+<C c="3" r="22" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_T_T100048" columnName="Biaozun_WanQuresult"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="22" cs="3" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!D30) > 0, '钢筋焊接接头试验记录'!D30, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="22" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!G30]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="22" cs="4" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('钢筋焊接接头试验记录'!G30) > 0, '钢筋焊接接头试验记录'!G30, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="23" cs="2" s="36">
+<O>
+<![CDATA[检测评定依据：]]></O>
+<Expand/>
+</C>
+<C c="2" r="23" cs="3" s="37">
+<Expand/>
+</C>
+<C c="5" r="23" s="36">
+<O>
+<![CDATA[试验结论：]]></O>
+<Expand/>
+</C>
+<C c="6" r="23" cs="6" s="38">
+<Expand/>
+</C>
+<C c="0" r="24" cs="5" s="39">
+<O>
+<![CDATA[《焊接接头拉伸试验方法》 GB/T2651-2008《钢筋焊接及验收规程》JGJ18-2012《钢筋混凝土用钢第2部分：热轧带肋钢筋》GB1499.2-2007]]></O>
+<Expand/>
+</C>
+<C c="5" r="24" cs="7" s="40">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($op) > 0, CONCATENATE(if(ds_wangnj_1.SELECT(PDJG) == '不合格' || ds_wangnj_2.SELECT(PDJG) == '不合格' || ds_wangnj_3.SELECT(PDJG) == '不合格', '该批钢筋焊接接头的力学性能不符合《钢筋焊接及验收规程》（JGJ18-2012）中标准要求。', ''),if(((ds_wangnj_1.SELECT(PDJG) == '合格' || len(ds_wangnj_1.SELECT(PDJG)) == 0) && (ds_wangnj_2.SELECT(PDJG) == '合格' || len(ds_wangnj_2.SELECT(PDJG)) == 0) && (ds_wangnj_3.SELECT(PDJG) == '合格' || len(ds_wangnj_3.SELECT(PDJG)) == 0)),'该批钢筋焊接接头的力学性能（和工艺性能）均符合《钢筋焊接及验收规程》（JGJ18-2012）中标准要求。','')),ds_T_T100048.SELECT(testresult))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="25" s="24">
+<O>
+<![CDATA[试验]]></O>
+<Expand/>
+</C>
+<C c="1" r="25" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!B32]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="3" r="25" s="24">
+<O>
+<![CDATA[复核]]></O>
+<Expand/>
+</C>
+<C c="4" r="25" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='钢筋焊接接头试验记录'!I32]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="6" r="25" s="24">
+<O>
+<![CDATA[批准]]></O>
+<Expand/>
+</C>
+<C c="8" r="25" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_PZR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="9" r="25" s="24">
+<O>
+<![CDATA[单位（章）]]></O>
+<Expand/>
+</C>
+<C c="10" r="25" cs="2" s="8">
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<Margin top="2880000" left="3600000" bottom="2880000" right="2880000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL1">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_T100048"/>
+<ColumnConfig name="rec_guid" isKey="true" skipUnmodified="false">
+<ColumnRow column="12" row="1"/>
+</ColumnConfig>
+<ColumnConfig name="biaomianxingzhuang" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="gangjingpaihao" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_QuyangBuWei" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_HanJieZhongLei" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_HanFengChangDu" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_HanGongname" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_ZhiJing" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_MianJi" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_LaDuanZuiDaLi" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_KangLaQiangDu" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_LaDuanChuMiaoSu" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_DuanKouMiaoSu" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_WanquJiaoDu" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_WanquZhiJing" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_BiaoMianMiaoSu" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="Biaozun_WanQuresult" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="pingdingyiju" isKey="false" skipUnmodified="true">
+<ColumnRow column="0" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="testresult" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="24"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL2">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_USER_TEST_REC"/>
+<ColumnConfig name="rec_guid" isKey="true" skipUnmodified="false">
+<ColumnRow column="12" row="1"/>
+</ColumnConfig>
+<ColumnConfig name="F_BGBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="F_BGRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="F_WTDW" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="F_GCMC" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_SGBW" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="F_PZR" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="25"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+</ReportWriteAttr>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="false" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="144"/>
+<Background name="ColorBackground" color="-1"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" vertical_alignment="1" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-3342388"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" isVerticalText="1" textDirection="1" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.0]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.00]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.0]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.00]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.00]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.0000]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Bottom style="1" color="-16777216"/>
+<Left style="1" color="-16777216"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Bottom style="1" color="-16777216"/>
+<Left style="1" color="-16777216"/>
+<Right style="1" color="-16777216"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAF"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

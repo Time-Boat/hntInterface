@@ -1,0 +1,482 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ 
+<!DOCTYPE html>
+<html>
+<head>
+<meta name=”renderer”content=”webkit|ie-comp|ie-stand”>
+<title></title>
+<style type="text/css">
+.linear{   
+		background-repeat: repeat-y; 
+        FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#6699cc,endColorStr=#6699cc); /*IE 6 7 8*/   
+        background: -ms-linear-gradient(top, #6699cc,  #6699cc);        /* IE 10 */  
+        background:-moz-linear-gradient(top,#6699cc,#6699cc);/*火狐*/   
+        background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#6699cc), to(#6699cc));/*谷歌*/   
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#6699cc), to(#6699cc));      /* Safari 4-5, Chrome 1-9*/  
+        background: -webkit-linear-gradient(top, #6699cc, #6699cc);   /*Safari5.1 Chrome 10+*/  
+        background: -o-linear-gradient(top, #6699cc, #6699cc);  /*Opera 11.10+*/  
+    }   
+</style>
+<style type="text/css">
+*{padding:0;list-style-type:none;}
+a,img{border:0;text-decoration:none;}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+/* allbrand */
+.allbrand .brand{width:105px;height:102px;overflow:hidden;margin:0 auto 0 auto;}
+.allbrand .brand a{display:inline;position:relative;float:top;width:105px;height:102px;line-height:30px;text-align:center;color:#000;font-size:12px;margin:0 0 0 0;}
+.allbrand .brand a img{position:absolute;left:0px;width:105px;height:102px;border:0px solid #e9e8e8;float:top;}
+.allbrand .brand a b{display:none;position:absolute;top:0px;left:0px;width:105px;height:0;background:#4AD486;border:0px solid #e9e8e8;cursor:pointer;overflow:hidden;}
+
+
+
+.allbrand .brand1{width:106px;height:102px;overflow:hidden;margin:0 auto 0 auto;}
+.allbrand .brand1 a{display:inline;position:relative;float:top;width:106px;height:102px;line-height:20px;text-align:center;color:#000;font-size:12px;margin:0 0 0 0; }
+.allbrand .brand1 a img{position:absolute;left:0px;width:106px;height:102px;border:0px solid #e9e8e8;float:top;}
+.allbrand .brand1 a b{display:none;position:absolute;top:0px;left:0px;width:106px;height:0;background:#EBE9E8;border:0px solid #e9e8e8;cursor:pointer;overflow:hidden;}
+
+.allbrand .brand2{width:103px;height:100px;overflow:hidden;margin:0 auto 0 auto;}
+.allbrand .brand2 a{display:inline;position:relative;float:top;width:103px;height:100px;line-height:20px;text-align:center;color:#000;font-size:12px;margin:0 0 0 0;}
+.allbrand .brand2 a img{position:absolute;left:0px;width:103px;height:100px;border:0px solid #e9e8e8;float:top;}
+.allbrand .brand2 a b{display:none;position:relative;top:0px;left:0px;width:103px;height:0;background:#3ABEC0;border:0px solid #e9e8e8;cursor:pointer;overflow:hidden;}
+</style>
+<script type="text/javascript" src="plug-in/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="plug-in/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="plug-in/login/js/jquery-jrumble.js"></script>
+<script type="text/javascript" src="plug-in/login/js/jquery.tipsy.js"></script>
+<script type="text/javascript" src="plug-in/login/js/iphone.check.js"></script>
+<script type="text/javascript" src="plug-in/login/js/login.js"></script>
+<script type="text/javascript" src="plug-in/lhgDialog/lhgdialog.min.js"></script>
+<SCRIPT language=javascript>
+  function ok(){	
+	   
+   var obj = document.getElementById("userName");  
+    if (obj.value == "") {
+      alert("帐号不能为空，请输入！");
+      obj.focus();
+      return false;
+    }else{
+    	setCookie();  
+	    var actionurl=$('form').attr('action');//提交路径  
+	    var checkurl=$('form').attr('check');//验证路径  
+	     var formData = new Object();  
+	    var data=$(":input").each(function() {  
+	        formData[this.name] =$("#"+this.name ).val();  
+	    });  
+	    $.ajax({  
+	       async : false,  
+	       cache : false,  
+	       type : 'POST',  
+	       url : checkurl,// 请求的action路径  
+	       data : formData,  
+	       error : function() {// 请求失败处理函数  
+	       },  
+	       success : function(data) {  
+	           var d = $.parseJSON(data);  
+	           if (d.success) {  
+	              loginsuccess();  
+	              setTimeout("window.location.href='"+actionurl+"'", 1000);  
+	           } else {  
+	               if(d.msg == "a"){  
+	                  $.dialog.confirm("数据库无数据,是否初始化数据?", function(){  
+	                     window.location = "init.jsp";  
+	                  }, function(){  
+	                     //  
+	                  });  
+	              } else  
+	                  showError(d.msg);  
+	           }  
+	       }  
+	    });  
+      return true;
+    }  
+  } 
+  
+
+</SCRIPT>
+
+</head>
+<body class="linear" style="margin-top:0px;padding-top: 0px;border:0px;background-color: #6699cc">
+<!-- <div id="login"> -->
+    <form name="formLogin" id="formLogin" action="loginController.do?login" check="loginController.do?checkuser" method="post" onsubmit="return ok()" >
+	<input name="userKey" type="hidden" id="userKey"	value="D1B5CC2FE46C4CC983C073BCA897935608D926CD32992B5900" />
+  <div class="allbrand">
+   <table id="__01" width="801px" height="601px" border="0" cellpadding="0" cellspacing="0" align="center" style="margin-top:0px;padding-top: 0px;border:1px ;border-color: #6699cc">
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="16" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:800px;height:215px;
+		background-image:url(plug-in/login/images/images/zj4hj_01.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:215px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="4" rowspan="2" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:240px;height:2px;
+		background-image:url(plug-in/login/images/images/zj4hj_02.gif);"></td>
+		<td colspan="2" rowspan="2" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:14px;height:2px;
+		background-image:url(plug-in/login/images/images/zj4hj_03.gif);"></td>
+		<td colspan="10" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:546px;height:1px;
+		background-image:url(plug-in/login/images/images/zj4hj_04.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="9" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:409px;height:1px;
+		background-image:url(plug-in/login/images/images/zj4hj_05.gif);"></td>
+		<td rowspan="15" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:137px;height:210px;
+		background-image:url(plug-in/login/images/images/zj4hj_06.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="2" rowspan="9" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:135px;height:105px;
+		background-image:url(plug-in/login/images/images/zj4hj_07.gif);"></td>
+		<td colspan="2" rowspan="7" id="" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:105px;height:102px;
+		background-image:url(plug-in/login/images/images/zj4hj_08.gif);"><div class="brand"  ><a><img src="plug-in/login/images/images/zj4hj_08.gif" width="105px" height="102px"  ></a></div></td>
+		<!-- <div class="brand"><a><img src="plug-in/login/images/images/zj4hj_08.gif" width="105px" height="102px" alt=""></a></div> -->
+		<td rowspan="13" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:13px;height:208px;
+		background-image:url(plug-in/login/images/images/zj4hj_09.gif);"></td>
+		<td colspan="3" id="QQ" rowspan="6" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:106px;height:101px;
+		background-image:url(plug-in/login/images/images/zj4hj_10.gif);"><div class="brand1"  ><a id="QQ"><img src="plug-in/login/images/images/zj4hj_10.gif" width="106px" height="101px" ></a></div></td>
+	<!-- 	<div class="brand1"><a id="QQ"><img src="plug-in/login/images/images/zj4hj_10.gif" width="106px" height="101px" alt=""></a></div> -->
+		<td rowspan="12" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:12px;height:207px;
+		background-image:url(plug-in/login/images/images/zj4hj_11.gif);"></td>
+		<td colspan="6" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:292px;height:1px;
+		background-image:url(plug-in/login/images/images/zj4hj_12.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="6" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:292px;height:1px;
+		background-image:url(plug-in/login/images/images/zj4hj_13.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="6"style="margin-top:0px;padding-top: 0px;border:0px red solid;width:292px;height:48px;
+		background-image:url(plug-in/login/images/images/zj4hj_14.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:48px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="3" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:8px;height:1px;
+		background-image:url(plug-in/login/images/images/zj4hj_15.gif);"></td>
+		<td colspan="3" rowspan="3" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:284px;height:51px;
+		background-image:url(plug-in/login/images/images/zj4hj_16.gif);">
+		<input  name="userName" type="text" id="userName" title="用户名"   value=""  size=65 
+      style="background:transparent; BORDER-RIGHT: 0px; BORDER-TOP: 0px; outline:none;font-size:22px;BORDER-LEFT: 0px;  WIDTH:163px; BORDER-BOTTOM: 0px;height:46px;margin-left:55px;"
+       nullmsg="请输入用户名!" size="13px"/></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/zj4hj_17.gif);"></td>
+		<td colspan="2" rowspan="6" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:7px;height:99px;
+		background-image:url(plug-in/login/images/images/zj4hj_18.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td rowspan="9" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:157px;
+		background-image:url(plug-in/login/images/images/zj4hj_19.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:49px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td rowspan="2" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:3px;
+		background-image:url(plug-in/login/images/images/zj4hj_20.gif);"></td>
+		<td colspan="2" rowspan="2" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:105px;height:3px;
+		background-image:url(plug-in/login/images/images/zj4hj_21.gif);"></td>
+		<td colspan="3" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:284px;height:1px;
+		background-image:url(plug-in/login/images/images/zj4hj_22.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="2" rowspan="2" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:105px;height:3px;
+		background-image:url(plug-in/login/images/images/zj4hj_23.gif);"></td>
+		<td colspan="2" rowspan="3" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:283px;height:48px;
+		background-image:url(plug-in/login/images/images/zj4hj_24.gif);" ><input  name="password" type="password" id="password" title="密码"  value="" size=65
+      style="background:transparent; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px;font-size:22px; outline:none;WIDTH: 165px; BORDER-BOTTOM: 0px;height:46px;margin-left:55px;font-size:24"
+       nullmsg="请输入密码!" /></td>
+		<td rowspan="3" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:48px;
+		background-image:url(plug-in/login/images/images/zj4hj_25.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:2px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="2" rowspan="6"   style="margin-top:0px;padding-top: 0px;border:0px red solid;width:105px;height:105px;
+		background-image:url(plug-in/login/images/images/22.gif);"><div class="brand2"><a id="TQ"><img src="plug-in/login/images/images/22.gif" width="105px" height="105px" alt="" style="background-color: #3ABEC0"><a></div></td>
+		<td rowspan="6" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:105px;
+		background-image:url(plug-in/login/images/images/zj4hj_27.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td rowspan="3" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:133px;height:102px;
+		background-image:url(plug-in/login/images/images/zj4hj_28.gif);"></td>
+		<td colspan="2" rowspan="3" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:106px;height:102px;
+		background-image:url(plug-in/login/images/images/zj4hj_29.gif);"></td>
+		<td rowspan="5" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:104px;
+		background-image:url(plug-in/login/images/images/zj4hj_30.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:45px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:5px;height:56px;
+		background-image:url(plug-in/login/images/images/zj4hj_31.gif);"></td>
+		<td colspan="2" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:222px;height:56px;
+		background-image:url(plug-in/login/images/images/zj4hj_32.gif);"></td>
+		<td colspan="2" rowspan="3" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:64px;height:58px;
+		background-image:url(plug-in/login/images/images/zj4hj_33.gif);"><INPUT id="but_login" 
+		style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px;width: 64px;height: 50px;" 
+		type="image" src="plug-in/login/images/images/zj4hj_33.gif"   name="but_login"   ></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:56px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="3" rowspan="3" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:227px;height:3px;
+		background-image:url(plug-in/login/images/images/zj4hj_34.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="3" rowspan="2" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:239px;height:2px;
+		background-image:url(plug-in/login/images/images/zj4hj_35.gif);"></td>
+		<td rowspan="2" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:12px;height:2px;
+		background-image:url(plug-in/login/images/images/zj4hj_36.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:13px;height:1px;
+		background-image:url(plug-in/login/images/images/zj4hj_37.gif);"></td>
+		<td colspan="2" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:64px;height:1px;
+		background-image:url(plug-in/login/images/images/zj4hj_38.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td colspan="16" style="margin-top:0px;padding-top: 0px;border:0px red solid;width:800px;height:174px;
+		background-image:url(plug-in/login/images/images/zj4hj_39.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:174px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+	</tr>
+	<tr style="margin-top:0px;padding-top: 0px;border:0px ;">
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:133px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:2px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:104px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:13px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:104px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:12px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:5px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:2px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:220px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:63px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:1px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td style="margin-top:0px;padding-top: 0px;border:0px red solid;width:137px;height:1px;
+		background-image:url(plug-in/login/images/images/&#x5206;&#x9694;&#x7b26;.gif);"></td>
+		<td></td>
+	</tr>
+	</table>
+	</div>
+<!-- <script type="text/javascript" src="plug-in/jquery/jquery-1.8.3.min.js"></script> -->
+<script type="text/javascript">
+//获得当前时间 参数label 填写时间的标签id
+function getNowTime(label){
+	//取得当前时间   
+    var now= new Date();   
+    var year=now.getFullYear();   
+    var month=now.getMonth()+1;   
+    var day=now.getDate();   
+    var hour=now.getHours();   
+    var minute=now.getMinutes();   
+    var second=now.getSeconds(); 
+	var weekday=now.getDay();
+	if(month<10){
+		month="0"+month;
+	}
+	if(day<10){
+		day="0"+day;
+	}
+	if(hour<10){
+		hour="0"+hour;
+	}
+	if(minute<10){
+		minute="0"+minute;
+	}
+	if(second<10){
+		second="0"+second;
+	}
+	switch(weekday){
+		case 0:weekday="星期天";break;
+		case 1:weekday="星期一";break;
+		case 2:weekday="星期二";break;
+		case 3:weekday="星期三";break;
+		case 4:weekday="星期四";break;
+		case 5:weekday="星期五";break;
+		case 6:weekday="星期六";break;
+		default:weekday="星期八";
+	}
+    // var nowdate="今天是"+year+"年"+month+"月"+day+"日 "+hour+":"+minute+":"+second+" "+weekday;
+	var nowdate="<div style='height:5px;'></div>"+year+"年"+month+"月"+day+"日<div>"+hour+":"+minute+":"+second+"</div><div>"+weekday+"</div>"; 
+    document.getElementById(label).innerHTML = nowdate;
+	var timeId=setTimeout("getNowTime('riqi')",1000);//刷新时间  
+	return nowdate;
+}
+
+function getQQ(label){
+	var QQ="<div style='height:7px;'></div>客服电话:<div style='height:1px;'></div>027-87614140<div style='height:1px;'></div>客服QQ:<div style='height:1px;'></div>402015856"; 
+    document.getElementById(label).innerHTML = QQ;
+	var timeId=setTimeout("getQQ('QQtest')",1000);//刷新时间  
+	return QQ;
+}
+
+function getWeather(label){
+	var Weather="<iframe allowtransparency='true' frameborder='0' width='140' height='109' scrolling='no' style='margin-left:-3px;margin-top:4px;' src='http://tianqi.2345.com/plugin/widget/index.htm?s=2&z=1&t=0&v=1&d=1&k=&f=2&q=0&e=0&a=0&c=59488&w=140&h=109'></iframe>"; 
+    document.getElementById(label).innerHTML = Weather;
+	var timeId=setTimeout("getWeather('Weather')",1000);//刷新时间  
+	return Weather;
+}
+
+</script>
+
+<script type="text/javascript">
+//品牌翻转
+var allBrandAnimate = function(t,d){
+	if(t.find('.brand b').length != 0){
+		return false;
+	}
+	t.find('.brand a').each(function(){
+		//$(this).append('<b>' + $(this).find('img').attr('alt') + '</b>')
+		
+		$(this).append("<b id='riqi'></b>");
+		getNowTime("riqi");
+	});
+	t.find('.brand a').hover(function(){
+		$(this).find('img').stop().animate({'height':0,'top':'50px'},d,function(){
+			$(this).hide().next().show();
+			$(this).next().animate({
+				'height':'102px',
+				'top':'0'
+			},d);
+		});
+	},function(){
+		$(this).find('b').animate({'height':0,'top':'50px'},d,function(){
+			$(this).hide().prev().show();
+			$(this).prev().animate({
+				'height':'102px',
+				'top':'0'
+			},d);
+		});
+	});
+}
+allBrandAnimate($('.allbrand'),120);
+
+
+//品牌翻转
+var allBrandAnimate1 = function(t,d,c){
+	if(t.find(c+' b').length != 0){
+		return false;
+	}
+	t.find(c+' a').each(function(){
+		//$(this).append('<b>' + $(this).find('img').attr('alt') + '</b>')
+		if($(this).attr("id")=="QQ"){
+			$(this).append("<b id='QQtest'></b>");
+			getQQ("QQtest");
+		}
+
+		if($(this).attr("id")=="TQ"){
+			//$(this).append('<b>abc</b>');
+			$(this).append("<b id='Weather'></b>");
+			getWeather("Weather");
+			//style="margin-left:-13px;margin-top:-2px;"
+			//<iframe allowtransparency="true" frameborder="0" width="140" height="100" scrolling="no" //src="http://tianqi.2345.com/plugin/widget/index.htm?s=2&z=1&t=0&v=1&d=1&k=&f=2&q=1&e=0&a=1&c=54511&w=140&h=100"></iframe>
+		}
+		
+		
+		
+	});
+	t.find(c+' a').hover(function(){
+		$(this).find('img').stop().animate({'height':0,'top':'50px'},d,function(){
+			$(this).hide().next().show();
+			$(this).next().animate({
+				'height':'100px',
+				'top':'0'
+			},d);
+		});
+	},function(){
+		$(this).find('b').animate({'height':0,'top':'50px'},d,function(){
+			$(this).hide().prev().show();
+			$(this).prev().animate({
+				'height':'100px',
+				'top':'0'
+			},d);
+		});
+	});
+}
+allBrandAnimate1($('.allbrand'),120,".brand1");
+
+//品牌翻转
+var allBrandAnimate2 = function(t,d,c){
+	if(t.find(c+' b').length != 0){
+		return false;
+	}
+	t.find(c+' a').each(function(){
+		//$(this).append('<b>' + $(this).find('img').attr('alt') + '</b>')
+		if($(this).attr("id")=="QQ"){
+			$(this).append("<b id='QQtest'></b>");
+			getQQ("QQtest");
+		}
+
+		if($(this).attr("id")=="TQ"){
+			//$(this).append('<b>abc</b>');
+			$(this).append("<b id='Weather'></b>");
+			getWeather("Weather");
+			//style="margin-left:-13px;margin-top:-2px;"
+			//<iframe allowtransparency="true" frameborder="0" width="140" height="100" scrolling="no" //src="http://tianqi.2345.com/plugin/widget/index.htm?s=2&z=1&t=0&v=1&d=1&k=&f=2&q=1&e=0&a=1&c=54511&w=140&h=100"></iframe>
+		}
+		
+		
+		
+	});
+	t.find(c+' a').hover(function(){
+		$(this).find('img').stop().animate({'height':0,'top':'50px'},d,function(){
+			$(this).hide().next().show();
+			$(this).next().animate({
+				'height':'100px',
+				'top':'0'
+			},d);
+		});
+	},function(){
+		$(this).find('b').animate({'height':0,'top':'50px'},d,function(){
+			$(this).hide().prev().show();
+			$(this).prev().animate({
+				'height':'100px',
+				'top':'0'
+			},d);
+		});
+	});
+}
+allBrandAnimate2($('.allbrand'),120,".brand2");
+</script>
+
+</body>
+</html>

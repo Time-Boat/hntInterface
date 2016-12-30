@@ -1,0 +1,282 @@
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="/context/mytags.jsp"%>
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>S_YCL_ALLZHView</title>
+  <t:base type="jquery,easyui,tools,DatePicker"></t:base>
+  <script type="text/javascript" src="plug-in/ckeditor_new/ckeditor.js"></script>
+  <script type="text/javascript" src="plug-in/ckfinder/ckfinder.js"></script>
+  <script type="text/javascript">
+  //编写自定义JS代码
+  </script>
+ </head>
+ <body>
+  <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="sYclAllzhviewController.do?doUpdate" tiptype="1">
+					<%-- <input id="id" name="id" type="hidden" value="${sYclAllzhviewPage.id }"> --%>
+		<table   cellpadding="0" cellspacing="1" class="formtable">
+			<tr><td class="Validform_label"  align="left">
+			<label >	名称</label>
+			</td>
+			<!-- <td class="Validform_label" >
+				<label   align="left">规格</label>
+			</td>
+			<td class="Validform_label">
+				<label   align="left">型号</label>
+			</td>
+			<td class="Validform_label">
+				<label   align="left">类型</label>
+			</td> -->
+			<!-- <td class="Validform_label">
+				<label   align="left">产地</label>
+			</td>
+			<td class="Validform_label">
+				<label   align="left">生产厂家</label>
+			</td>-->
+			<td class="Validform_label">
+				<label   align="left">进场数量</label>
+			</td> 
+			<td class="Validform_label">
+				<label   align="left">产品批号</label>
+			</td>
+			<td class="Validform_label">
+				<label   align="left">拟使用工程部位</label>
+			</td>
+			<td class="Validform_label">
+				<label   align="left">取样时间</label>
+			</td>
+			<td class="Validform_label">
+				<label   align="left">样品编号</label>
+			</td>
+			<td class="Validform_label">
+				<label    align="left">报告时间</label>
+			</td>
+			<td class="Validform_label">
+				<label   align="left">报告编号</label>
+			</td>
+			<c:if test="${type=='水泥'}">
+				<td class="Validform_label">
+					<label   align="left">密度(g/cm³)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">比表面积(cm²)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">标准稠度用水量</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">初凝时间(min)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">终凝时间(min)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">安定性</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">3d抗折强度(MPa)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">3d抗压强度(MPa)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">28d抗折强度(MPa)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">28d抗压强度(MPa)</label>
+				</td>
+			</c:if>
+			<c:if test="${type=='粉煤灰'}">
+				<td class="Validform_label">
+					<label   align="left">45um方孔筛筛余(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label    align="left">比表面积(cm²)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">需水量比(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">烧失量(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">含水量(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">三氧化硫含量(%)</label>
+				</td>
+				
+			</c:if>
+			<c:if test="${type=='矿粉'}">
+				<td class="Validform_label">
+					<label   align="left">密度(g/cm³)</label>
+				</td>
+				<td class="Validform_label">
+					<label  align="left">比表面积(cm²)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">7d活性指数(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">28d活性指数(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label    align="left">含水量(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">三氧化硫含量(%)</label>
+				</td>
+			</c:if>
+			<c:if test="${type=='粗骨料'}">
+				<td class="Validform_label">
+					<label   align="left">级配</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">含泥量(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label    align="left">泥块含量(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">针片状含量(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">压碎值(%)</label>
+				</td>
+				
+			</c:if>
+			<c:if test="${type=='细骨料'}">
+				<td class="Validform_label">
+					<label   align="left">级配</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">细度模数</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">含泥量(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">泥块含量(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label    align="left">堆积密度(g/cm³)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">氯离子含量(%)</label>
+				</td>
+			</c:if>
+			<c:if test="${type=='水'}">
+				<td class="Validform_label">
+					<label   align="left">pH</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">不溶物(mg/L)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">可溶物(mg/L)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">氯化物（Cl-计）(mg/L)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">硫酸盐（SO42-计）(mg/L)</label>
+				</td>
+			</c:if>
+			
+			<c:if test="${type=='外加剂'}">
+				<td class="Validform_label">
+					<label   align="left">减水率(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">含气量(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">泌水率比(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">初凝时间差(min)</label>
+				</td>
+				<td class="Validform_label">
+					<label    align="left">终凝时间差(min)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">28d抗压强度比(%)</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">28d收缩率比(%)</label>
+				</td>
+			</c:if>
+			
+			<c:if test="${type=='其他'}">
+				<td class="Validform_label">
+					<label   align="left">检测结果1</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">检测结果2</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">检测结果3</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">检测结果4</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">检测结果5</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">检测结果6</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">检测结果7</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">检测结果8</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">检测结果9</label>
+				</td>
+				<td class="Validform_label">
+					<label   align="left">检测结果10</label>
+				</td>
+			</c:if>
+			
+			
+			</tr>
+		
+			<c:forEach items="${syclalllist}" var="depart">
+				<tr><td class="value">${depart.mingcheng}</td>
+				<%-- <td class="value">${depart.guige}</td>
+				<td class="value">${depart.xinghao}</td>
+				<td class="value">${depart.leixing}</td>
+				<td class="value">${depart.chandi}</td>
+				<td class="value">${depart.scchangjia}</td> --%>
+				<td class="value">${depart.jcshuliang}</td>
+				<td class="value">${depart.picihao}</td>
+				<td class="value">${depart.syxingmu}</td>
+				<td class="value">${depart.qyshijian}</td>
+				<td class="value">${depart.ycl11}</td>
+				<td class="value">${depart.ycl12}</td>
+				<td class="value">${depart.bgbianhao}</td>
+				<td class="value">${depart.ycl1}</td>
+				<td class="value">${depart.ycl2}</td>
+				<td class="value">${depart.ycl3}</td>
+				<td class="value">${depart.ycl4}</td>
+				<td>${depart.ycl5}</td>
+				<c:if test="${type=='水泥'||type=='粉煤灰'||type=='矿粉'||type=='细骨料'||type=='外加剂'||type=='其他'}">
+					<td class="value">${depart.ycl6}</td>
+				</c:if>
+				<c:if test="${type=='水泥'||type=='外加剂'||type=='其他'}">
+					<td class="value">${depart.ycl7}</td>
+				</c:if>
+				
+				<c:if test="${type=='水泥'||type=='其他'}">
+					<td class="value">${depart.ycl8}</td>
+					<td class="value">${depart.ycl9}</td>
+					<td class="value">${depart.ycl10}</td>
+				</c:if>
+				</tr>
+			</c:forEach>
+			</table>
+		</t:formvalid>
+ </body>
+  <script src = "webpage/com/shtoone/qms/bhz/sYclAllzhview.js"></script>		

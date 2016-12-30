@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DatasourceManager xmlVersion="20131111" releaseVersion="7.0.5">
+<ConnectionMap>
+<Connection name="qms" class="com.fr.data.impl.JDBCDatabaseConnection">
+<DatabaseAttr/>
+<JDBCDatabaseAttr url="jdbc:sqlserver://localhost:53783;instance=SQL2012;databaseName=qms" driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" user="sa" password="___00600026007e0060000b00bb004e" encryptPassword="true">
+<DBCPAttr/>
+</JDBCDatabaseAttr>
+</Connection>
+</ConnectionMap>
+<TableDataMap>
+<TableData name="员工信息表" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[FRDemo]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM 员工信息表]]></Query>
+</TableData>
+<TableData name="用户信息表" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[FRDemo]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM [userinfo]A]]></Query>
+</TableData>
+<TableData name="staff" class="com.fr.data.impl.EmbeddedTableData">
+<Parameters/>
+<DSName>
+<![CDATA[]]></DSName>
+<ColumnNames>
+<![CDATA[name,,.,,password,,.,,fullname,,.,,department,,.,,position,,.,,salary,,.,,email]]></ColumnNames>
+<ColumnTypes>
+<![CDATA[java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String]]></ColumnTypes>
+<RowData>
+<![CDATA[F3Mg#j>8\K2DI)LF9JoB_@uOh3M1FO4I`\Vfp)0UH5\f9ltCXXCHm]A<WI]AU$VcR>J[R451?>
+<>P6%2[fTjDbg/f.%iAfcc1kEB%@JT6]A1RE;FIpOP;k#/4n[nT*oD:32L??mQYe3+o$&'ii,
+0!V%Z4U,"DbqQ+-"M[dp,G:hi3".9>?Kjg?EAe*TE&0#B4P?kelG0PK@[H6)E#uE!hq.=6V*
+=lWF7?hgVh:(l#Ij.R?;e?NV1b_GG"0Mhp4l*jEq24U<4$'ma;Y0J;MSU8qT>WjZlK>dg4R6
+/P<t,-~
+]]></RowData>
+</TableData>
+</TableDataMap>
+<ADHOCMap>
+<TableData name="员工信息表" class="com.fr.data.impl.ADHOCNamedTableData">
+<DBTableDataName>
+<![CDATA[员工信息表]]></DBTableDataName>
+</TableData>
+<TableData name="员工信息表_SQL视图" class="com.fr.data.impl.ADHOCSQLTableData">
+<DBConnectionName>
+<![CDATA[FRDemo]]></DBConnectionName>
+<Query>
+<![CDATA[select * from 员工信息表]]></Query>
+</TableData>
+</ADHOCMap>
+</DatasourceManager>

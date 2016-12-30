@@ -1,0 +1,1947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20131111" releaseVersion="7.0.5">
+<TableDataMap>
+<TableData name="dsT_Consign" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="WTDW"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="WTBH"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="SGBW"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="page"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userrgt"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="StartTime"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="loginsysid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userlft"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="singlepage"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select *,dbo.GetSyjid(b.WTID) as syjids from (SELECT V_Consign.*,ROW_NUMBER() OVER (ORDER BY V_Consign.id DESC) AS rowno FROM V_Consign  inner join T_Hntwt on V_Consign.WTID=T_Hntwt.wtid where SYXM = '100014' and MSTATUS<>-1 and (lft between ${userlft} and ${userrgt}) ${if(len(loginsysid)!=0&&len(shiyanshi)==0," and shiyanshi_guid = '"+loginsysid+"'",'')} ${if(len(StartTime)==0,""," and Shiyanriqi = '"+StartTime+"'")} ${if(len(shiyanshi)==0,""," and shiyanshi_guid = '"+shiyanshi+"'")} ${if(len(WTBH)==0,""," and WTBH like '%"+WTBH+"%'")} ${if(len(WTDW)==0,""," and WTDW like '%"+WTDW+"%'")} ${if(len(MSTATUS)==0,""," and MSTATUS = '"+MSTATUS+"'")} ${if(len(SGBW)==0,""," and SGBW like '%"+SGBW+"%'")} ${if(len(shiyanxm)==0,""," and SYXM = '"+shiyanxm+"'")}) as b where (b.rowno between ${singlepage}*(${page}-1)+1 and ${singlepage}*${page}) order by id desc]]></Query>
+</TableData>
+<TableData name="ds_testname" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT TestName,TestID FROM dbo.[T_Menu_Config]A where TestID = '100014']]></Query>
+</TableData>
+<TableData name="ds_totalpage" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="WTDW"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="WTBH"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="SGBW"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userrgt"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="loginsysid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userlft"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT count(V_Consign.id) as 总数 FROM [V_Consign]A   inner join T_Hntwt on V_Consign.WTID=T_Hntwt.wtid where  SYXM = '100014' and MSTATUS<>-1 and (lft between ${userlft} and ${userrgt}) ${if(len(loginsysid)!=0&&len(shiyanshi)==0," and shiyanshi_guid = '"+loginsysid+"'",'')} ${if(len(shiyanshi)==0,""," and shiyanshi_guid = '"+shiyanshi+"'")} ${if(len(WTBH)==0,""," and WTBH like '%"+WTBH+"%'")} ${if(len(WTDW)==0,""," and WTDW like '%"+WTDW+"%'")} ${if(len(MSTATUS)==0,""," and MSTATUS = '"+MSTATUS+"'")} ${if(len(SGBW)==0,""," and SGBW like '%"+SGBW+"%'")} ${if(len(shiyanxm)==0,""," and SYXM = '"+shiyanxm+"'")}]]></Query>
+</TableData>
+<TableData name="ds_depart" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="userrgt"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userlft"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[t_s_depart]A where rgt = lft + 1 and (lft between ${userlft} and ${userrgt})]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebPageContent>
+<ToolBars/>
+<WebPage isPage="false" isShowAsImage="false" isAutoScale="false" isTDHeavy="false"/>
+</WebPageContent>
+<WebWriteContent>
+<ToolBars/>
+<SelectedColor/>
+<WebWrite isSheet="false"/>
+<UnloadCheck check="false"/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR F="1" T="2"/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[0,1295400,1440000,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[3810000,4495800,2971800,2628900,2438400,2590800,1600200,5105400,3733800,2552700,2743200,2743200,2743200,2743200,2743200,2514600,1981200,1371600,1485900,1295400,1447800,1371600,1333500,1485900,1447800,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$page - 1]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="1" r="0">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$page + 1]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="2" r="0">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if($singlepage > 0, roundup(E1 / D1, 0), 0)]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="3" r="0">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$singlepage]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="4" r="0">
+<O t="DSColumn">
+<Attributes dsName="ds_totalpage" columnName="总数"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="1" s="0">
+<O>
+<![CDATA[委托编号]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="1" s="0">
+<O>
+<![CDATA[试验室]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="1" s="0">
+<O>
+<![CDATA[试验日期]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="1" s="1">
+<O>
+<![CDATA[收样时间]]></O>
+<Expand/>
+</C>
+<C c="4" r="1" s="0">
+<O>
+<![CDATA[样品名称]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="1" s="0">
+<O>
+<![CDATA[规格种类]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="1" s="0">
+<O>
+<![CDATA[代表数量]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="1" s="0">
+<O>
+<![CDATA[施工部位]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="1" s="0">
+<O>
+<![CDATA[试验项目]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="1">
+<O>
+<![CDATA[唯一编号]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="10" r="1">
+<O>
+<![CDATA[试验室guid]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="11" r="1">
+<O>
+<![CDATA[委托单状态]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="12" r="1">
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="13" r="1">
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="14" r="1">
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="15" r="1">
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="16" r="1" s="1">
+<O>
+<![CDATA[委托单状态]]></O>
+<Expand/>
+</C>
+<C c="17" r="1" s="2">
+<O>
+<![CDATA[查看委托]]></O>
+<Expand/>
+</C>
+<C c="18" r="1" s="2">
+<O>
+<![CDATA[编辑委托]]></O>
+<Expand/>
+</C>
+<C c="19" r="1" s="2">
+<O>
+<![CDATA[另存委托]]></O>
+<Expand/>
+</C>
+<C c="20" r="1" s="2">
+<O>
+<![CDATA[编辑报告]]></O>
+<Expand/>
+</C>
+<C c="21" r="1" s="2">
+<O>
+<![CDATA[查看报告]]></O>
+<Expand/>
+</C>
+<C c="22" r="1" s="2">
+<O>
+<![CDATA[提交报告]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="23" r="1" s="2">
+<O>
+<![CDATA[申请修改]]></O>
+<Expand/>
+</C>
+<C c="24" r="1" s="2">
+<O>
+<![CDATA[批复申请]]></O>
+<Expand/>
+</C>
+<C c="0" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="WTBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="0" showAsDefault="true"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="1" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="departname"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="0" showAsDefault="true"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="2" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="Shiyanriqi"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="1" showAsDefault="true"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="3" r="2" s="4">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="SYRQ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand dir="0"/>
+</C>
+<C c="4" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="YPMC"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="0" showAsDefault="true"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="5" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="GGZL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="0" showAsDefault="true"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="6" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="DDSL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="0" showAsImage="true"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="7" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="SGBW"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="0" showAsDefault="true"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="SYXMMC"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="0" showAsDefault="true"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="9" r="2">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="WTID"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[(row() - 1) % 20 = 0]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.PageHighlightAction">
+<P i="1"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0" extendable="3" leftParentDefault="false" upParentDefault="false"/>
+</C>
+<C c="10" r="2">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="shiyanshi_guid"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Parameters/>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand dir="0"/>
+</C>
+<C c="11" r="2">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="MSTATUS"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="12" r="2">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="SYXM"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="13" r="2">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="rec_guid"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="14" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="hisWTBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr adjustmode="0" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="15" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="dsT_Consign" columnName="syjids"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="16" r="2" s="5">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SWITCH(L3, 0, "未做试验", 1, "完成试验", 2, "编辑过报告", 3, "完成报告", 4, "申请修改", 5, "同意修改")]]></Attributes>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand dir="0"/>
+</C>
+<C c="17" r="2" s="4">
+<O>
+<![CDATA[]]></O>
+<CellGUIAttr adjustmode="0" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=J3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi_guid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=K3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet=NT_HNTConsignInput.cpt&WTID='+WTID+'&shiyanshi_guid='+shiyanshi_guid+'&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm);]]></Content>
+</JavaScript>
+</Listener>
+<WidgetAttr/>
+<Text>
+<![CDATA[]]></Text>
+<IconName>
+<![CDATA[preview]]></IconName>
+</Widget>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="18" r="2" s="4">
+<CellGUIAttr adjustmode="0" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=J3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi_guid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=K3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet=NT_HNTConsignInput.cpt&op=write&WTID='+WTID+'&shiyanshi_guid='+shiyanshi_guid+'&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm);]]></Content>
+</JavaScript>
+</Listener>
+<Listener event="afterinit">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=L3]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[if(MSTATUS==0 || MSTATUS==5){
+  this.visible();
+} else {
+	this.invisible();
+}
+]]></Content>
+</JavaScript>
+</Listener>
+<WidgetAttr/>
+<Text>
+<![CDATA[]]></Text>
+<IconName>
+<![CDATA[edit]]></IconName>
+</Widget>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="19" r="2" s="4">
+<CellGUIAttr adjustmode="0" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=J3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_HNTConsignInput.cpt&op=write&WTID='+WTID+'&iscopy=1'+'&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm);]]></Content>
+</JavaScript>
+</Listener>
+<WidgetAttr/>
+<Text>
+<![CDATA[]]></Text>
+<IconName>
+<![CDATA[submitforcily]]></IconName>
+</Widget>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="20" r="2" s="3">
+<Widget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="usertestid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=M3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=J3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi_guid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=K3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="rec_guid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(N3 != null, N3, "")]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="syjids"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=P3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="row"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=row() - 1]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="col"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=col() + 5]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[var nr=0;
+var oldguid = "";
+if(rec_guid==""){
+	nr = 1;
+	oldguid = contentPane.getCellValue(col,row);
+}
+if(usertestid=="100014"){
+setTimeout(function(){
+location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_HNTT'+usertestid+'.cpt&op=write&WTID='+WTID+'&shiyanshi_guid='+shiyanshi_guid+'&rec_guid='+rec_guid+'&syjids='+syjids+'&nr='+nr+'&usertestid='+usertestid+
+'&oldguid='+oldguid+'&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm);},20);
+} else {
+setTimeout(function(){
+location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_T'+usertestid+'.cpt&op=write&WTID='+WTID+'&shiyanshi_guid='+shiyanshi_guid+'&rec_guid='+rec_guid+'&syjids='+syjids+'&nr='+nr+'&usertestid='+usertestid+
+'&oldguid='+oldguid+'&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm);},20);
+}
+]]></Content>
+</JavaScript>
+</Listener>
+<Listener event="afterinit">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=L3]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[if(MSTATUS==1 || MSTATUS==2 || MSTATUS==5){
+  this.visible();
+} else {
+	this.invisible();
+}]]></Content>
+</JavaScript>
+</Listener>
+<WidgetAttr/>
+<Text>
+<![CDATA[]]></Text>
+<IconName>
+<![CDATA[edit]]></IconName>
+</Widget>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="21" r="2" s="3">
+<Widget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="usertestid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=M3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=J3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi_guid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=K3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="rec_guid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(N3 != null, N3, "")]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[if(usertestid=="100014"){
+location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_HNTT'+usertestid+'.cpt&WTID='+WTID+'&shiyanshi_guid='+shiyanshi_guid+'&rec_guid='+rec_guid+'&usertestid='+usertestid+'&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm);
+} else {
+location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_T'+usertestid+'.cpt&WTID='+WTID+'&shiyanshi_guid='+shiyanshi_guid+'&rec_guid='+rec_guid+'&usertestid='+usertestid+'&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm);
+}]]></Content>
+</JavaScript>
+</Listener>
+<Listener event="afterinit">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=L3]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[if(MSTATUS==3 || MSTATUS==4){
+  this.visible();
+} else {
+	this.invisible();
+}]]></Content>
+</JavaScript>
+</Listener>
+<WidgetAttr/>
+<Text>
+<![CDATA[]]></Text>
+<IconName>
+<![CDATA[edit]]></IconName>
+</Widget>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[row() % 2 = 1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.BackgroundHighlightAction">
+<Background name="ColorBackground" color="-3342388"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="22" r="2" s="6">
+<O>
+<![CDATA[提交]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[(L3 = 2 || L3 = 5) && FIND("施工", $fr_authority) > 0]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="72" foreground="-16776961" underline="1"/>
+</HighlightAction>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.HyperlinkHighlightAction">
+<NameJavaScriptGroup>
+<NameJavaScript name="网络报表1">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=J3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="recguid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=N3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="returnurl"/>
+<O>
+<![CDATA[NT_HNTConsignList]]></O>
+</Parameter>
+</Parameters>
+<TargetFrame>
+<![CDATA[_dialog]]></TargetFrame>
+<Features width="550" height="400"/>
+<ReportletName showPI="true">
+<![CDATA[/TYTijiaoBaogao.cpt&op=write]]></ReportletName>
+</JavaScript>
+</JavaScript>
+</NameJavaScript>
+</NameJavaScriptGroup>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="23" r="2" s="6">
+<O>
+<![CDATA[申请]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[L3 = 3]]></Formula>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[FIND("施工", $fr_authority) > 0]]></Formula>
+</Condition>
+</JoinCondition>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="72" foreground="-16776961" underline="1"/>
+</HighlightAction>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.HyperlinkHighlightAction">
+<NameJavaScriptGroup>
+<NameJavaScript name="网络报表1">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=J3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="recguid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=N3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="returnurl"/>
+<O>
+<![CDATA[NT_HNTConsignList]]></O>
+</Parameter>
+</Parameters>
+<TargetFrame>
+<![CDATA[_dialog]]></TargetFrame>
+<Features width="550" height="400"/>
+<ReportletName showPI="true">
+<![CDATA[/TYOneXiugaijilu.cpt&op=write]]></ReportletName>
+</JavaScript>
+</JavaScript>
+</NameJavaScript>
+</NameJavaScriptGroup>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="24" r="2" s="6">
+<O>
+<![CDATA[批复]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[L3 = 4]]></Formula>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[FIND("监理", $fr_authority) > 0]]></Formula>
+</Condition>
+</JoinCondition>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="72" foreground="-16776961" underline="1"/>
+</HighlightAction>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.HyperlinkHighlightAction">
+<NameJavaScriptGroup>
+<NameJavaScript name="网络报表1">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=J3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="recguid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=N3]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="returnurl"/>
+<O>
+<![CDATA[NT_HNTConsignList]]></O>
+</Parameter>
+</Parameters>
+<TargetFrame>
+<![CDATA[_dialog]]></TargetFrame>
+<Features width="550" height="400"/>
+<ReportletName showPI="true">
+<![CDATA[/TYPifuXiugaijilu.cpt&op=write]]></ReportletName>
+</JavaScript>
+</JavaScript>
+</NameJavaScript>
+</NameJavaScriptGroup>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<FrozenColumnRow columnrow="A3"/>
+<PaperSetting orientation="1">
+<Margin top="144000" left="2160000" bottom="144000" right="2160000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="false" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<ParameterUI class="com.fr.form.main.parameter.FormParameterUI">
+<Layout class="com.fr.form.ui.container.WAbsoluteLayout">
+<WidgetName name="para"/>
+<WidgetAttr/>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="shiyanxm"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr ki="1" vi="0"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[ds_testname]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="186" y="34" width="120" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelSYXM"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[试验项目:]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="106" y="34" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelMSTATUS"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[委托状态:]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="106" y="61" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.EditorHolder">
+<WidgetName name="SGBW"/>
+<WidgetAttr/>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="394" y="34" width="120" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelSGBW"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[施工部位:]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="314" y="34" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.parameter.FormSubmitButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[setTimeout(function(){
+var val=$('tr[tridx=0]A','div.content-container').children().eq(2).text();
+$('input[name="TOTALPAGE"]A').val(val);
+},1000);]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="Search"/>
+<WidgetAttr/>
+<Text>
+<![CDATA[查询]]></Text>
+<Hotkeys>
+<![CDATA[enter]]></Hotkeys>
+</InnerWidget>
+<BoundsAttr x="851" y="61" width="50" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.EditorHolder">
+<WidgetName name="WTDW"/>
+<WidgetAttr/>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="601" y="7" width="123" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelWTDW"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[委托单位:]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="521" y="7" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.EditorHolder">
+<WidgetName name="WTBH"/>
+<WidgetAttr/>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="394" y="7" width="120" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelWTBH"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[委托编号:]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="314" y="7" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="shiyanshi"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="ID" viName="departname"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[ds_depart]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="186" y="7" width="120" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="Labelshiyanshi_guid"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[试验室:]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="106" y="7" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="shiyanshi_guid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$loginsysid]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[window.location.href="${contextPath}/ReportServer?reportlet=NT_HNTConsignInput.cpt&op=write&nr=1&shiyanshi_guid="+shiyanshi_guid;]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="button0"/>
+<WidgetAttr/>
+<Text>
+<![CDATA[新建]]></Text>
+</InnerWidget>
+<BoundsAttr x="18" y="7" width="80" height="75"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelWTDW_c_c_c_c_c_c_c_c_c_c"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[当前/总数:]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="733" y="7" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.EditorHolder">
+<WidgetName name="page"/>
+<WidgetAttr/>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="813" y="7" width="30" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelWTDW_c_c_c_c_c_c_c_c_c_c_c"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[/]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="843" y="7" width="8" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.TextEditor">
+<WidgetName name="totalpage"/>
+<WidgetAttr disabled="true"/>
+<TextAttr/>
+<widgetValue>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=roundup(E1/D1,0)]]></Attributes>
+</O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="851" y="7" width="50" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelWTDW_c_c_c_c_c_c_c_c_c"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[每页:]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="733" y="34" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.TextEditor">
+<WidgetName name="singlepage"/>
+<WidgetAttr/>
+<TextAttr/>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="813" y="34" width="30" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var page= $("tr[tridx=0]A","div.content-container").children().eq(0).text();  
+//var singlepage= $("tr[tridx=0]A","div.content-container").children().eq(3).text(); 
+if(page>0) 
+//this.setEnable(false);
+
+{
+$('input[name="PAGE"]A').val(page);
+var aa = contentPane.parameterEl.getWidgetByName("Search");
+aa.fireEvent("click");
+}]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="button1"/>
+<WidgetAttr/>
+<Text>
+<![CDATA[上一页]]></Text>
+</InnerWidget>
+<BoundsAttr x="733" y="61" width="50" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var page= $("tr[tridx=0]A","div.content-container").children().eq(1).text();  
+var total=$("tr[tridx=0]A","div.content-container").children().eq(2).text();  
+//var singlepage= $("tr[tridx=0]A","div.content-container").children().eq(3).text(); 
+if(parseInt(page) <= parseInt(total))
+{
+$('input[name="PAGE"]A').val(page);
+var aa = contentPane.parameterEl.getWidgetByName("Search");
+aa.fireEvent("click");
+}]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="button2"/>
+<WidgetAttr/>
+<Text>
+<![CDATA[下一页]]></Text>
+</InnerWidget>
+<BoundsAttr x="793" y="61" width="50" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.RadioGroup">
+<Listener event="statechange">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var aa = contentPane.parameterEl.getWidgetByName("Search");
+aa.fireEvent("click");]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="MSTATUS"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="0" value="未做试验"/>
+<Dict key="1" value="完成试验"/>
+<Dict key="2" value="编辑过报告"/>
+<Dict key="3" value="完成报告"/>
+<Dict key="4" value="申请修改"/>
+<Dict key="5" value="同意修改"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="186" y="61" width="538" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelWTDW_c"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[试验日期:]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="521" y="34" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.DateEditor">
+<WidgetName name="StartTime"/>
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="601" y="34" width="128" height="21"/>
+</Widget>
+<LCAttr vgap="0" hgap="0"/>
+</Layout>
+<DesignAttr width="1000" height="90"/>
+</ParameterUI>
+<Parameter>
+<Attributes name="page"/>
+<O>
+<![CDATA[1]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="singlepage"/>
+<O>
+<![CDATA[20]]></O>
+</Parameter>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="80"/>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="2">
+<IM>
+<![CDATA[lO<9(kN.ld@UNU%p%320!n'b-/BYg<,j0G'R/e[g!1sg(hcUmbkA>4,]A#Jgf\q&HQh5@CJR^
+#%qcDHC$>CC+d&"1&_H-0lsXsFK1T_"mO*([&S\i>FDge*$X+HSAEjI.<+:*)B&0KHFSAts#
+%:\MsqC6!%F+WLpd(!M1$r_!8pcf"'QkH`A^Ta:]A~
+]]></IM>
+</Background>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="72"/>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="2">
+<IM>
+<![CDATA[lO<9(kN.ld@UNU%p%320!n'b-/BYg<,j0G'R/e[g!1sg(hcUmbkA>4,]A#Jgf\q&HQh5@CJR^
+#%qcDHC$>CC+d&"1&_H-0lsXsFK1T_"mO*([&S\i>FDge*$X+HSAEjI.<+:*)B&0KHFSAts#
+%:\MsqC6!%F+WLpd(!M1$r_!8pcf"'QkH`A^Ta:]A~
+]]></IM>
+</Background>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="1" size="72"/>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="2">
+<IM>
+<![CDATA[lO<9(kN.ld@UNU%p%320!n'b-/BYg<,j0G'R/e[g!1sg(hcUmbkA>4,]A#Jgf\q&HQh5@CJR^
+#%qcDHC$>CC+d&"1&_H-0lsXsFK1T_"mO*([&S\i>FDge*$X+HSAEjI.<+:*)B&0KHFSAts#
+%:\MsqC6!%F+WLpd(!M1$r_!8pcf"'QkH`A^Ta:]A~
+]]></IM>
+</Background>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72" foreground="-1"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAF"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

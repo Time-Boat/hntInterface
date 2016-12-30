@@ -1,0 +1,4427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20131111" releaseVersion="7.0.5">
+<TableDataMap>
+<TableData name="ds_shiyanshiInfo" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="shiyanshi_guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="loginsysid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[ShiyanshiInfo]A where 1=2 ${if(len(loginsysid)!=0&&len(shiyanshi_guid)==0," or shiyanshi_guid = '"+loginsysid+"'",'')} ${if(len(shiyanshi_guid)==0,""," or shiyanshi_guid = '"+shiyanshi_guid+"'")}]]></Query>
+</TableData>
+<TableData name="ds_testrec" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="rec_guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[T_USER_TEST_REC]A where 1=2 ${if(len(rec_guid)==0,""," or rec_guid = '"+rec_guid+"'")}]]></Query>
+</TableData>
+<TableData name="ds_T_T100014" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="oldguid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="rec_guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[T_T100014]A where 1=2 ${if(len(rec_guid)==0,""," or rec_guid = '"+rec_guid+"'")}
+${if(len(rec_guid)==0 && len(oldguid)>0," or rec_guid = '"+oldguid+"'","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji11" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>0, " or (SJXH='1' and SYJID = '"+INDEXOFARRAY(split(syjids,","),1)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji12" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>0, " or (SJXH='2' and SYJID = '"+INDEXOFARRAY(split(syjids,","),1)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji13" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>0, " or (SJXH='3' and SYJID = '"+INDEXOFARRAY(split(syjids,","),1)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji21" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>1, " or (SJXH='1' and SYJID = '"+INDEXOFARRAY(split(syjids,","),2)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji22" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>1, " or (SJXH='2' and SYJID = '"+INDEXOFARRAY(split(syjids,","),2)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji23" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>1, " or (SJXH='3' and SYJID = '"+INDEXOFARRAY(split(syjids,","),2)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji31" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>2, " or (SJXH='1' and SYJID = '"+INDEXOFARRAY(split(syjids,","),3)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji32" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>2, " or (SJXH='2' and SYJID = '"+INDEXOFARRAY(split(syjids,","),3)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji41" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>3, " or (SJXH='1' and SYJID = '"+INDEXOFARRAY(split(syjids,","),4)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji33" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>2, " or (SJXH='3' and SYJID = '"+INDEXOFARRAY(split(syjids,","),3)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji42" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>3, " or (SJXH='2' and SYJID = '"+INDEXOFARRAY(split(syjids,","),4)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji43" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>3, " or (SJXH='3' and SYJID = '"+INDEXOFARRAY(split(syjids,","),4)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji51" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>4, " or (SJXH='1' and SYJID = '"+INDEXOFARRAY(split(syjids,","),5)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji52" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>4, " or (SJXH='2' and SYJID = '"+INDEXOFARRAY(split(syjids,","),5)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_yaliji53" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="syjids"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[V_Yaliji]A where 1=2 ${if(len(split(syjids,","))>4, " or (SJXH='3' and SYJID = '"+INDEXOFARRAY(split(syjids,","),5)+"')","")}]]></Query>
+</TableData>
+<TableData name="ds_Shiyanshi1" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[ShiyanshiInfo]A]]></Query>
+</TableData>
+<TableData name="ds_Hntwt" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from T_Hntwt where 1=2 ${if(len(WTID)==0,""," or wtid = '"+WTID+"'")}]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebPageContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.button.page.First">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('ReportServerP-First')}]]></Text>
+<IconName>
+<![CDATA[first]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.page.Previous">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('ReportServerP-Previous')}]]></Text>
+<IconName>
+<![CDATA[previous]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.page.PageNavi">
+<WidgetAttr/>
+</Widget>
+<Widget class="com.fr.report.web.button.page.Next">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('ReportServerP-Next')}]]></Text>
+<IconName>
+<![CDATA[next]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.page.Last">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('ReportServerP-Last')}]]></Text>
+<IconName>
+<![CDATA[last]]></IconName>
+</Widget>
+<Widget class="com.fr.form.ui.CustomToolBarButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[返回]]></Text>
+<IconName>
+<![CDATA[frozzen]]></IconName>
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_HNTConsignList.cpt&op=write&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm)]]></Content>
+</JavaScript>
+</Widget>
+<Widget class="com.fr.report.web.button.PDFPrint">
+<WidgetAttr/>
+<Text>
+<![CDATA[打印]]></Text>
+<IconName>
+<![CDATA[pdfprint]]></IconName>
+</Widget>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<WebPage isPage="false" isShowAsImage="false" isAutoScale="false" isTDHeavy="false"/>
+</WebPageContent>
+<WebWriteContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.button.write.Submit">
+<WidgetAttr/>
+<Text>
+<![CDATA[保存]]></Text>
+<IconName>
+<![CDATA[submit]]></IconName>
+<Verify failVerifySubmit="false"/>
+</Widget>
+<Widget class="com.fr.report.web.button.write.Verify">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Verify-Data_Verify')}]]></Text>
+<IconName>
+<![CDATA[verify]]></IconName>
+</Widget>
+<Widget class="com.fr.form.ui.CustomToolBarButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[返回]]></Text>
+<IconName>
+<![CDATA[frozzen]]></IconName>
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_HNTConsignList.cpt&op=write&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm)]]></Content>
+</JavaScript>
+</Widget>
+<Widget class="com.fr.report.web.button.PDFPrint">
+<WidgetAttr/>
+<Text>
+<![CDATA[打印]]></Text>
+<IconName>
+<![CDATA[pdfprint]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.write.ShowCellValue">
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="false"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue/>
+</Widget>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<SelectedColor/>
+<WebWrite isSheet="false"/>
+<UnloadCheck/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="混凝土试件抗压强度试验记录">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[762000,792000,647700,1562100,1195200,1195200,1195200,1195200,1195200,1195200,1195200,1195200,1195200,1195200,1195200,1195200,1195200,1195200,1195200,1036800,609600,2160000,2160000,2160000,2160000,2160000,2160000,2160000,2160000,2160000,2160000,2160000,2160000,2160000,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2858400,2895600,2590800,2743200,1371600,3390900,2324100,2552700,2667000,1752600,2933700,2628900,2260800,1915200,2116800,3771900,3276600,3276600,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="15" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshiInfo" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="15" r="0">
+<O>
+<![CDATA[试验rec_guid]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="16" r="0">
+<O>
+<![CDATA[试件编号唯一号]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="0" r="1" cs="3" rs="2" s="1">
+<Expand/>
+</C>
+<C c="3" r="1" cs="8" rs="2" s="2">
+<O>
+<![CDATA[混凝土试件抗压强度试验记录]]></O>
+<Expand/>
+</C>
+<C c="11" r="1">
+<O>
+<![CDATA[表号：]]></O>
+<Expand/>
+</C>
+<C c="12" r="1" cs="3">
+<O>
+<![CDATA[铁建试录040]]></O>
+<Expand/>
+</C>
+<C c="15" r="1">
+<O>
+<![CDATA[试验rec_guid]]></O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="16" r="1">
+<O>
+<![CDATA[试件编号唯一号]]></O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="17" r="1">
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="11" r="2">
+<O>
+<![CDATA[批准文号：]]></O>
+<Expand/>
+</C>
+<C c="12" r="2" cs="3">
+<O>
+<![CDATA[铁建设函[2009]A27号]]></O>
+<Expand/>
+</C>
+<C c="15" r="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF((nr = 1 && len(rec_guid) = 0) || iscopy = 1, CreateGuid($fr_username, sessionID, TODAY(), "100014"), ds_testrec.select(rec_guid))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="16" r="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(ds_yaliji11.SELECT(SYJID)) > 0, ds_yaliji11.SELECT(SYJID), "1")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="3" s="3">
+<O>
+<![CDATA[记录编号]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="3" s="4">
+<O>
+<![CDATA[试件编号]]></O>
+<Expand/>
+</C>
+<C c="2" r="3" s="4">
+<O>
+<![CDATA[制件日期]]></O>
+<Expand/>
+</C>
+<C c="3" r="3" s="4">
+<O>
+<![CDATA[试验日期]]></O>
+<Expand/>
+</C>
+<C c="4" r="3" s="3">
+<O>
+<![CDATA[龄期（d）]]></O>
+<Expand/>
+</C>
+<C c="5" r="3" s="4">
+<O>
+<![CDATA[试件尺寸（mm）]]></O>
+<Expand/>
+</C>
+<C c="6" r="3" s="4">
+<O>
+<![CDATA[承压面积A（mm²）]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="3" s="4">
+<O>
+<![CDATA[破坏荷载P（kN）]]></O>
+<Expand/>
+</C>
+<C c="8" r="3" s="4">
+<O>
+<![CDATA[抗压强度ƒcu,i（MPa）]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="3" s="4">
+<O>
+<![CDATA[折算系数K]]></O>
+<Expand/>
+</C>
+<C c="10" r="3" s="4">
+<O>
+<![CDATA[抗压强度组值ƒcu（MPa）]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="3" s="4">
+<O>
+<![CDATA[压力机名称]]></O>
+<Expand/>
+</C>
+<C c="12" r="3" s="4">
+<O>
+<![CDATA[示值范围]]></O>
+<Expand/>
+</C>
+<C c="13" r="3" s="4">
+<O>
+<![CDATA[分辨力]]></O>
+<Expand/>
+</C>
+<C c="14" r="3" s="4">
+<O>
+<![CDATA[试验人]]></O>
+<Expand/>
+</C>
+<C c="15" r="3" s="5">
+<O>
+<![CDATA[试验室铁道部编码]]></O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="16" r="3">
+<O>
+<![CDATA[试件编号唯一号]]></O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="4" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_testrec.SELECT(F_JLBH), ds_Hntwt.SELECT(F_JLBH))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand extendable="1"/>
+</C>
+<C c="1" r="4" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shijianid1), ds_yaliji11.SELECT(SJBH))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="2" r="4" rs="3" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(E5) > 0, DATEDELTA(D5, -TOINTEGER(E5)), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="4" rs="3" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_testrec.SELECT(F_SYRQ), ds_yaliji11.SELECT(SYRQ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="4" rs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(lingqi1), ds_yaliji11.SELECT(LQ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="5" r="4" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shijianchicun1), ds_yaliji11.SELECT(SJCC))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="6" r="4" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(chengyamianji1), ds_yaliji11.SELECT(SJMJ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="4" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu1), ds_yaliji11.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="4" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G5) > 0, ROUND(H5 * 1000 / G5, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="4" rs="3" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(zhesuanxishu1), ds_yaliji11.SELECT(ZSXS))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="4" rs="3" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len(I5) > 0 && len(I6) > 0 && len(I7) > 0, ROUND(JudgeArrayMiddleValue(I5, I6, I7, 0.15) * J5, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ <= 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="4" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(yalijiname1), ds_Hntwt.SELECT(yalijiname1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="12" r="4" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shilirank1), ds_Hntwt.SELECT(shilirank1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="13" r="4" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(fenbianli1), ds_Hntwt.SELECT(fenbianli1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="14" r="4" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_testrec.SELECT(F_SYR), ds_yaliji11.SELECT(CZRY))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="4">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshiInfo" columnName="F_TRCODE"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="16" r="4">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(ds_yaliji21.SELECT(SYJID)) > 0, ds_yaliji21.SELECT(SYJID), "1")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="17" r="4" s="11">
+<O>
+<![CDATA[报告类型]]></O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="5" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu2), ds_yaliji12.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="5" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G5) > 0, ROUND(H6 * 1000 / G5, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="5">
+<O>
+<![CDATA[试验室guid]]></O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="16" r="5">
+<O>
+<![CDATA[试件编号唯一号]]></O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="17" r="5" s="12">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_BGZT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetName name="F_BGLX"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="0" value="自检"/>
+<Dict key="1" value="见证"/>
+<Dict key="2" value="监理评检"/>
+<Dict key="3" value="其他"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="0" value="自检"/>
+<Dict key="1" value="见证"/>
+<Dict key="2" value="监理评检"/>
+<Dict key="3" value="其他"/>
+</CustomDictAttr>
+</Dictionary>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="6" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu3), ds_yaliji13.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="6" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G5) > 0, ROUND(H7 * 1000 / G5, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($loginsysid) != 0 && len($shiyanshi_guid) = 0, $loginsysid, $shiyanshi_guid)]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="16" r="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(ds_yaliji31.SELECT(SYJID)) > 0, ds_yaliji31.SELECT(SYJID), "1")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="17" r="6" s="11">
+<O>
+<![CDATA[是否合格]]></O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="7" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B8) > 0, A5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="7" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shijianid2), ds_yaliji21.SELECT(SJBH))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="2" r="7" rs="3" s="13">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(E8) > 0, DATEDELTA(D8, -TOINTEGER(E8)), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="7" rs="3" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B8) > 0, D5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="7" rs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(lingqi2), ds_yaliji21.SELECT(LQ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="5" r="7" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shijianchicun2), ds_yaliji21.SELECT(SJCC))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="6" r="7" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(chengyamianji2), ds_yaliji21.SELECT(SJMJ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="7" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu4), ds_yaliji21.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="7" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G8) > 0, ROUND(H8 * 1000 / G8, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="7" rs="3" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(zhesuanxishu2), ds_yaliji21.SELECT(ZSXS))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="7" rs="3" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len(I8) > 0 && len(I9) > 0 && len(I10) > 0, ROUND(JudgeArrayMiddleValue(I8, I9, I10, 0.15) * J8, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ <= 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="7" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B8) > 0, L5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="7" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B8) > 0, M5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="13" r="7" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B8) > 0, N5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="14" r="7" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B8) > 0, O5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="15" r="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$WTID]]></Attributes>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="16" r="7">
+<O>
+<![CDATA[试件编号唯一号]]></O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="17" r="7" s="12">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_SFHG"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetName name="F_SFHG"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="1" value="合格"/>
+<Dict key="0" value="不合格"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="1" value="合格"/>
+<Dict key="0" value="不合格"/>
+</CustomDictAttr>
+</Dictionary>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="8" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu5), ds_yaliji22.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="8" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G8) > 0, ROUND(H9 * 1000 / G8, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="16" r="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(ds_yaliji41.SELECT(SYJID)) > 0, ds_yaliji41.SELECT(SYJID), "1")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="17" r="8" s="11">
+<O>
+<![CDATA[被抽检试验室]]></O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="9" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu6), ds_yaliji23.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="9" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G8) > 0, ROUND(H10 * 1000 / G8, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="16" r="9">
+<O>
+<![CDATA[试件编号唯一号]]></O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="17" r="9" s="12">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="cjshiyanshi_guid"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetName name="F_CJSYS"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="shiyanshi_guid" viName="F_TRNAME"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[ds_Shiyanshi1]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="e37d485a-04d9-4409-89c3-32453401b9f6" value="沪昆客专3标中铁十二局中心实验室"/>
+<Dict key="297ee90c4447f8a4014447fbba1e0015" value="上海同望测试试验室"/>
+<Dict key="B2237D0E374FE33A863E8CE0802BC1E4" value="沪昆客专2标中铁二十局中心试验室"/>
+<Dict key="7ECAE7FB62CC9D840EFA71B5B2C2E969" value="沪昆客专1标中铁五局中心试验室"/>
+<Dict key="4351BE6D3EF6330BAA0B15002D62D7E9" value="沪昆客专1标中铁五局工地试验室"/>
+<Dict key="17ACEDEC4A1212295B4516B5715E3960" value="沪昆客专4标中铁三局中心试验室"/>
+<Dict key="592893025FB0E1F5644592BBA4F21510" value="沪昆客专3标中铁十六局中心试验室"/>
+<Dict key="297ee90c4490ce7b01449196cfd8000b" value="沪昆客专4标中铁三局1号工地试验室"/>
+<Dict key="A60E7DD6B0DD9D4F4E62D5D6F2C6082D" value="沪昆客专4标中铁三局2号工地试验室"/>
+<Dict key="9653DBD616A2833C0D22936276023C96" value="沪昆客专监理1标"/>
+<Dict key="3F68D51602BE210D3488BA6FEFD4B050" value="沪昆客专监理2标"/>
+<Dict key="297ee90c4490ce7b01449196cfd8000b" value=""/>
+</CustomDictAttr>
+</Dictionary>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="10" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B11) > 0, A5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="10" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shijianid3), ds_yaliji31.SELECT(SJBH))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="2" r="10" rs="3" s="13">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(E11) > 0, DATEDELTA(D11, -TOINTEGER(E11)), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="10" rs="3" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B11) > 0, D5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="10" rs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(lingqi3), ds_yaliji31.SELECT(LQ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="5" r="10" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shijianchicun3), ds_yaliji31.SELECT(SJCC))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="6" r="10" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(chengyamianji3), ds_yaliji31.SELECT(SJMJ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="10" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu7), ds_yaliji31.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="10" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G11) > 0, ROUND(H11 * 1000 / G11, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="10" rs="3" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(zhesuanxishu3), ds_yaliji31.SELECT(ZSXS))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="10" rs="3" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len(I11) > 0 && len(I12) > 0 && len(I13) > 0, ROUND(JudgeArrayMiddleValue(I11, I12, I13, 0.15) * J11, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ <= 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="10" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B11) > 0, L5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="10" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B11) > 0, M5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="13" r="10" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B11) > 0, N5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="14" r="10" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B11) > 0, O5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="16" r="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(ds_yaliji51.SELECT(SYJID)) > 0, ds_yaliji51.SELECT(SYJID), "1")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" printContent="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="11" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu8), ds_yaliji32.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="11" s="14">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G11) > 0, ROUND(H12 * 1000 / G11, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="12" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu9), ds_yaliji33.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="12" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G11) > 0, ROUND(H13 * 1000 / G11, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="13" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B14) > 0, A5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="13" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shijianid4), ds_yaliji41.SELECT(SJBH))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="2" r="13" rs="3" s="13">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(E14) > 0, DATEDELTA(D14, -TOINTEGER(E14)), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="13" rs="3" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B14) > 0, D5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="13" rs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(lingqi4), ds_yaliji41.SELECT(LQ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="5" r="13" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shijianchicun4), ds_yaliji41.SELECT(SJCC))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="6" r="13" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(chengyamianji4), ds_yaliji41.SELECT(SJMJ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="13" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu10), ds_yaliji41.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="13" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G14) > 0, ROUND(H14 * 1000 / G14, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="13" rs="3" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(zhesuanxishu4), ds_yaliji41.SELECT(ZSXS))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="13" rs="3" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len(I14) > 0 && len(I15) > 0 && len(I16) > 0, ROUND(JudgeArrayMiddleValue(I14, I15, I16, 0.15) * J14, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ <= 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="13" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B14) > 0, L5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="13" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B14) > 0, M5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="13" r="13" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B14) > 0, N5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="14" r="13" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B14) > 0, O5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="14" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu11), ds_yaliji42.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="14" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G14) > 0, ROUND(H15 * 1000 / G14, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="15" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu12), ds_yaliji43.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="15" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G14) > 0, ROUND(H16 * 1000 / G14, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="16" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B17) > 0, A5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="16" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shijianid5), ds_yaliji51.SELECT(SJBH))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="2" r="16" rs="3" s="13">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(E17) > 0, DATEDELTA(D17, -TOINTEGER(E17)), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="16" rs="3" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B17) > 0, D5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="16" rs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(lingqi5), ds_yaliji51.SELECT(LQ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="5" r="16" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shijianchicun5), ds_yaliji51.SELECT(SJCC))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="6" r="16" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(chengyamianji5), ds_yaliji51.SELECT(SJMJ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="16" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu13), ds_yaliji51.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="16" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G17) > 0, ROUND(H17 * 1000 / G17, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="16" rs="3" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(zhesuanxishu5), ds_yaliji51.SELECT(ZSXS))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="10" r="16" rs="3" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len(I17) > 0 && len(I18) > 0 && len(I19) > 0, ROUND(JudgeArrayMiddleValue(I17, I18, I19, 0.15) * J17, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ <= 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="11" r="16" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B17) > 0, L5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="16" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B17) > 0, M5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="13" r="16" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B17) > 0, N5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="14" r="16" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len(B17) > 0, O5, "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="17" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu14), ds_yaliji52.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="17" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G17) > 0, ROUND(H18 * 1000 / G17, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="18" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pohuaiheshu15), ds_yaliji53.SELECT(KYLZ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="18" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G17) > 0, ROUND(H19 * 1000 / G17, 1), "")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Present class="com.fr.base.present.FormulaPresent">
+<Content>
+<![CDATA[if(len($$$) = 0 || $$$ = 0, "", $$$)]]></Content>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="19" rs="2" s="15">
+<O>
+<![CDATA[附注：]]></O>
+<Expand/>
+</C>
+<C c="1" r="19" cs="14" rs="2" s="16">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(fuzhu), ds_Hntwt.SELECT(fuzhu))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting orientation="1">
+<Margin top="3600000" left="2880000" bottom="2880000" right="2880000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL1">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_USER_TEST_REC"/>
+<ColumnConfig name="rec_guid" isKey="true" skipUnmodified="false">
+<ColumnRow column="15" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="F_JLBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="0" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="F_SYR" isKey="false" skipUnmodified="true">
+<ColumnRow column="14" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="F_SYRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="usertestid" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[100014]]></O>
+</ColumnConfig>
+<ColumnConfig name="F_BGZT" isKey="false" skipUnmodified="true">
+<ColumnRow column="17" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="F_SFHG" isKey="false" skipUnmodified="true">
+<ColumnRow column="17" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="cjshiyanshi_guid" isKey="false" skipUnmodified="true">
+<ColumnRow column="17" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="fr_username" isKey="false" skipUnmodified="false">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$fr_username]]></Attributes>
+</O>
+</ColumnConfig>
+<ColumnConfig name="F_CZZ" isKey="false" skipUnmodified="false">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$fullname]]></Attributes>
+</O>
+</ColumnConfig>
+<ColumnConfig name="F_TRCODE" isKey="false" skipUnmodified="true">
+<ColumnRow column="15" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="shiyanshi_guid" isKey="false" skipUnmodified="true">
+<ColumnRow column="15" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="userdepartid" isKey="false" skipUnmodified="false">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$userdepartid]]></Attributes>
+</O>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL2">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_T100014"/>
+<ColumnConfig name="rec_guid" isKey="true" skipUnmodified="false">
+<ColumnRow column="15" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="shijianid1" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="shijianid2" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="shijianid3" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="shijianid4" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="shijianid5" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="zhijiandate1" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="zhijiandate2" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="zhijiandate3" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="zhijiandate4" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="zhijiandate5" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="lingqi1" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="lingqi2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="lingqi3" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="lingqi4" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="lingqi5" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="shijianchicun1" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="shijianchicun2" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="shijianchicun3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="shijianchicun4" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="shijianchicun5" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="chengyamianji1" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="chengyamianji2" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="chengyamianji3" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="chengyamianji4" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="chengyamianji5" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu1" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu2" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu3" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu4" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu5" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu6" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu7" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu8" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu9" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu10" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu11" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu12" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu13" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu14" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="pohuaiheshu15" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu1" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu2" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu3" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu4" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu5" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu6" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu7" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu8" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu9" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu10" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu11" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu12" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu13" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu14" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="kayaqiangdu15" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="zhesuanxishu1" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="zhesuanxishu2" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="zhesuanxishu3" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="zhesuanxishu4" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="zhesuanxishu5" isKey="false" skipUnmodified="true">
+<ColumnRow column="9" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="kangyaqiangduzushu1" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="kangyaqiangduzushu2" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="kangyaqiangduzushu3" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="kangyaqiangduzushu4" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="kangyaqiangduzushu5" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="yalijiname1" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="yalijiname2" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="yalijiname3" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="yalijiname4" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="yalijiname5" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="shilirank1" isKey="false" skipUnmodified="true">
+<ColumnRow column="12" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="shilirank2" isKey="false" skipUnmodified="true">
+<ColumnRow column="12" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="shilirank3" isKey="false" skipUnmodified="true">
+<ColumnRow column="12" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="shilirank4" isKey="false" skipUnmodified="true">
+<ColumnRow column="12" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="shilirank5" isKey="false" skipUnmodified="true">
+<ColumnRow column="12" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="fenbianli1" isKey="false" skipUnmodified="true">
+<ColumnRow column="13" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="fenbianli2" isKey="false" skipUnmodified="true">
+<ColumnRow column="13" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="fenbianli3" isKey="false" skipUnmodified="true">
+<ColumnRow column="13" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="fenbianli4" isKey="false" skipUnmodified="true">
+<ColumnRow column="13" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="fenbianli5" isKey="false" skipUnmodified="true">
+<ColumnRow column="13" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="fuzhu" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="19"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL3">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.UpdateConfig">
+<Table schema="dbo" name="T_Consign"/>
+<ColumnConfig name="WTID" isKey="true" skipUnmodified="false">
+<ColumnRow column="15" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="MSTATUS" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[3]]></O>
+</ColumnConfig>
+<ColumnConfig name="rec_guid" isKey="false" skipUnmodified="false">
+<ColumnRow column="15" row="2"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+</ReportWriteAttr>
+</Report>
+<Report class="com.fr.report.worksheet.WorkSheet" name="混凝土试件抗压强度试验报告">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[762000,1371600,1152000,1152000,1152000,1152000,266700,720000,723900,1152000,723900,1152000,723900,720000,720000,720000,647700,1143000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,720000,647700,723900,720000,720000,720000,720000,720000,720000,720000,720000,720000,609600,381000,419100,838200,38100,914400,1143000,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2743200,1257300,1790700,1790700,1600200,2247900,1257300,2286000,2590800,2667000,609600,2895600,0,1790700,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="13" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshiInfo" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="13" r="0">
+<O>
+<![CDATA[rec_guid]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="0" r="1">
+<Expand/>
+</C>
+<C c="1" r="1">
+<Expand/>
+</C>
+<C c="2" r="1" cs="6" s="17">
+<O>
+<![CDATA[混凝土试件抗压强度试验报告]]></O>
+<Expand/>
+</C>
+<C c="8" r="1" cs="5">
+<O>
+<![CDATA[表号：铁建试报14                     批准文号：铁建设函[2009]A27号]]></O>
+<Expand/>
+</C>
+<C c="13" r="1">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='混凝土试件抗压强度试验记录'!P3]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="0" r="2" s="1">
+<O>
+<![CDATA[委托单位]]></O>
+<Expand/>
+</C>
+<C c="1" r="2" cs="6" s="18">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_testrec.SELECT(F_WTDW), ds_yaliji11.SELECT(WTDW))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="2" s="1">
+<O>
+<![CDATA[报告编号]]></O>
+<Expand/>
+</C>
+<C c="8" r="2" cs="5" s="18">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_testrec.SELECT(F_BGBH), ds_Hntwt.SELECT(F_BGBH))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="3" s="1">
+<O>
+<![CDATA[工程名称]]></O>
+<Expand/>
+</C>
+<C c="1" r="3" cs="6" s="18">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_testrec.SELECT(F_GCMC), ds_yaliji11.SELECT(GCMC))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ObjectCondition">
+<Compare op="0">
+<O>
+<![CDATA[len($$$)>42]]></O>
+</Compare>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="7" r="3" s="1">
+<O>
+<![CDATA[委托编号]]></O>
+<Expand/>
+</C>
+<C c="8" r="3" cs="4" s="18">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_testrec.SELECT(F_WTBH), ds_yaliji11.SELECT(WTBH))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="12" r="3" s="1">
+<Expand/>
+</C>
+<C c="0" r="4" s="1">
+<O>
+<![CDATA[施工部位]]></O>
+<Expand/>
+</C>
+<C c="1" r="4" cs="6" s="18">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_testrec.SELECT(F_SGBW), ds_yaliji11.SELECT(SGBW))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>42]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="7" r="4" s="1">
+<O>
+<![CDATA[记录编号]]></O>
+<Expand/>
+</C>
+<C c="8" r="4" cs="4" s="18">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='混凝土试件抗压强度试验记录'!A5]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="4" s="1">
+<Expand/>
+</C>
+<C c="0" r="5" s="1">
+<O>
+<![CDATA[代表数量]]></O>
+<Expand/>
+</C>
+<C c="1" r="5" cs="6" s="18">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_testrec.SELECT(F_DBSL), ds_yaliji11.SELECT(DDSL))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="5" s="1">
+<O>
+<![CDATA[报告日期]]></O>
+<Expand/>
+</C>
+<C c="8" r="5" cs="5" s="19">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_testrec.SELECT(F_BGRQ), ds_Hntwt.SELECT(F_BGRQ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="7" cs="13" s="20">
+<O>
+<![CDATA[（1）技术条件]]></O>
+<Expand/>
+</C>
+<C c="0" r="8" cs="2" s="4">
+<O>
+<![CDATA[设计强度等级]]></O>
+<Expand/>
+</C>
+<C c="2" r="8" cs="4" s="4">
+<O>
+<![CDATA[配合比报告编号]]></O>
+<Expand/>
+</C>
+<C c="6" r="8" cs="4" s="4">
+<O>
+<![CDATA[理论配合比]]></O>
+<Expand/>
+</C>
+<C c="10" r="8" cs="3" s="4">
+<O>
+<![CDATA[水胶比]]></O>
+<Expand/>
+</C>
+<C c="0" r="9" cs="2" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shejiqiangdurank), ds_Hntwt.SELECT(shejiqiangdurank))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="2" r="9" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(peihebireportbianhao), ds_Hntwt.SELECT(peihebireportbianhao))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="6" r="9" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(lilunpeihebi), ds_Hntwt.SELECT(lilunpeihebi))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="10" r="9" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shuijiaobi1), ds_Hntwt.SELECT(shuijiaobi1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="10" cs="2" s="4">
+<O>
+<![CDATA[制件日期]]></O>
+<Expand/>
+</C>
+<C c="2" r="10" cs="4" s="4">
+<O>
+<![CDATA[试件尺寸（mm）]]></O>
+<Expand/>
+</C>
+<C c="6" r="10" cs="4" s="4">
+<O>
+<![CDATA[施工配合比]]></O>
+<Expand/>
+</C>
+<C c="10" r="10" cs="3" s="4">
+<O>
+<![CDATA[水胶比]]></O>
+<Expand/>
+</C>
+<C c="0" r="11" cs="2" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='混凝土试件抗压强度试验记录'!C5]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="11" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='混凝土试件抗压强度试验记录'!F5]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="11" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongpeihebi), ds_Hntwt.SELECT(shigongpeihebi))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="10" r="11" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shuijiaobi2), ds_Hntwt.SELECT(shuijiaobi2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="12" cs="3" s="4">
+<O>
+<![CDATA[制件时坍落度（mm）]]></O>
+<Expand/>
+</C>
+<C c="3" r="12" cs="4" s="4">
+<O>
+<![CDATA[制件时扩展度（mm）]]></O>
+<Expand/>
+</C>
+<C c="7" r="12" cs="3" s="4">
+<O>
+<![CDATA[制件时维勃稠度（s）]]></O>
+<Expand/>
+</C>
+<C c="10" r="12" cs="3" s="4">
+<O>
+<![CDATA[制件捣实方法]]></O>
+<Expand/>
+</C>
+<C c="0" r="13" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(zhijianshitanluodu), ds_Hntwt.SELECT(zhijianshitanluodu))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="3" r="13" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(zhijianshikuozhandu), ds_Hntwt.SELECT(zhijianshikuozhandu))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="13" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(zhijianshiweibochoudu), ds_Hntwt.SELECT(zhijianshiweibochoudu))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="10" r="13" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(zhijiandaoshifangfa), ds_Hntwt.SELECT(zhijiandaoshifangfa))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="14" cs="3" s="4">
+<O>
+<![CDATA[养护方法]]></O>
+<Expand/>
+</C>
+<C c="3" r="14" cs="4" s="4">
+<O>
+<![CDATA[养护温度(℃)]]></O>
+<Expand/>
+</C>
+<C c="7" r="14" cs="3" s="4">
+<O>
+<![CDATA[工地拌和方法]]></O>
+<Expand/>
+</C>
+<C c="10" r="14" cs="3" s="4">
+<O>
+<![CDATA[工地捣实方法]]></O>
+<Expand/>
+</C>
+<C c="0" r="15" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(yanhufangfa), ds_Hntwt.SELECT(yanhufangfa))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="3" r="15" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(yanhuwendu), ds_Hntwt.SELECT(yanhuwendu))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="15" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(gongdibanhefangfa), ds_Hntwt.SELECT(gongdibanhefangfa))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="10" r="15" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(gongdidaoshifangfa), ds_Hntwt.SELECT(gongdidaoshifangfa))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="16" cs="13" s="20">
+<O>
+<![CDATA[（2）混凝土使用材料情况]]></O>
+<Expand/>
+</C>
+<C c="0" r="17" s="4">
+<O>
+<![CDATA[材料名称]]></O>
+<Expand/>
+</C>
+<C c="1" r="17" cs="3" s="4">
+<O>
+<![CDATA[材料产地]]></O>
+<Expand/>
+</C>
+<C c="4" r="17" cs="3" s="4">
+<O>
+<![CDATA[品种规格]]></O>
+<Expand/>
+</C>
+<C c="7" r="17" cs="4" s="4">
+<O>
+<![CDATA[报告编号]]></O>
+<Expand/>
+</C>
+<C c="11" r="17" s="4">
+<O>
+<![CDATA[施工拌和用料量(kg/m³）]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="18" s="4">
+<O>
+<![CDATA[水泥]]></O>
+<Expand/>
+</C>
+<C c="1" r="18" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_shuini), ds_Hntwt.SELECT(cailiaochandi_shuini))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="18" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_shuini), ds_Hntwt.SELECT(pinzhongguige_shuini))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="18" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_shuini), ds_Hntwt.SELECT(baogaobianhao_shuini))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="18" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_shuini), ds_Hntwt.SELECT(shigongbanheyongliang_shuini))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="19" s="4">
+<O>
+<![CDATA[掺和料1]]></O>
+<Expand/>
+</C>
+<C c="1" r="19" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_banheliao1), ds_Hntwt.SELECT(cailiaochandi_banheliao1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="19" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_banheliao1), ds_Hntwt.SELECT(pinzhongguige_banheliao1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="19" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_banheliao1), ds_Hntwt.SELECT(baogaobianhao_banheliao1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="19" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_banheliao1), ds_Hntwt.SELECT(shigongbanheyongliang_banheliao1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="20" s="4">
+<O>
+<![CDATA[掺和料2]]></O>
+<Expand/>
+</C>
+<C c="1" r="20" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_banheliao2), ds_Hntwt.SELECT(cailiaochandi_banheliao2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="20" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_banheliao2), ds_Hntwt.SELECT(pinzhongguige_banheliao2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="20" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_banheliao2), ds_Hntwt.SELECT(baogaobianhao_banheliao2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="20" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_banheliao2), ds_Hntwt.SELECT(shigongbanheyongliang_banheliao2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="21" s="4">
+<O>
+<![CDATA[细骨料]]></O>
+<Expand/>
+</C>
+<C c="1" r="21" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_xiguliao), ds_Hntwt.SELECT(cailiaochandi_xiguliao))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="21" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_xiguliao), ds_Hntwt.SELECT(pinzhongguige_xiguliao))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="21" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_xiguliao), ds_Hntwt.SELECT(baogaobianhao_xiguliao))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="21" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_xiguliao), ds_Hntwt.SELECT(shigongbanheyongliang_xiguliao))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="22" s="4">
+<O>
+<![CDATA[粗骨料]]></O>
+<Expand/>
+</C>
+<C c="1" r="22" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_cuguliao1), ds_Hntwt.SELECT(cailiaochandi_cuguliao1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="22" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_cuguliao1), ds_Hntwt.SELECT(pinzhongguige_cuguliao1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="22" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_cuguliao1), ds_Hntwt.SELECT(baogaobianhao_cuguliao1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>30]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="11" r="22" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_cuguliao1), ds_Hntwt.SELECT(shigongbanheyongliang_cuguliao1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="23" s="4">
+<O>
+<![CDATA[粗骨料]]></O>
+<Expand/>
+</C>
+<C c="1" r="23" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_cuguliao2), ds_Hntwt.SELECT(cailiaochandi_cuguliao2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="23" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_cuguliao2), ds_Hntwt.SELECT(pinzhongguige_cuguliao2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="23" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_cuguliao2), ds_Hntwt.SELECT(baogaobianhao_cuguliao2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="23" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_cuguliao2), ds_Hntwt.SELECT(shigongbanheyongliang_cuguliao2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="24" s="4">
+<O>
+<![CDATA[粗骨料]]></O>
+<Expand/>
+</C>
+<C c="1" r="24" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_cuguliao3), ds_Hntwt.SELECT(cailiaochandi_cuguliao3))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="24" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_cuguliao3), ds_Hntwt.SELECT(pinzhongguige_cuguliao3))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="24" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_cuguliao3), ds_Hntwt.SELECT(baogaobianhao_cuguliao3))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="24" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_cuguliao3), ds_Hntwt.SELECT(shigongbanheyongliang_cuguliao3))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="25" s="4">
+<O>
+<![CDATA[外加剂1]]></O>
+<Expand/>
+</C>
+<C c="1" r="25" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_waijiaji1), ds_Hntwt.SELECT(cailiaochandi_waijiaji1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="25" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_waijiaji1), ds_Hntwt.SELECT(pinzhongguige_waijiaji1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="7" r="25" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_waijiaji1), ds_Hntwt.SELECT(baogaobianhao_waijiaji1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="25" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_waijiaji1), ds_Hntwt.SELECT(shigongbanheyongliang_waijiaji1))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="26" s="4">
+<O>
+<![CDATA[外加剂2]]></O>
+<Expand/>
+</C>
+<C c="1" r="26" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_waijiaji2), ds_Hntwt.SELECT(cailiaochandi_waijiaji2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="26" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_waijiaji2), ds_Hntwt.SELECT(pinzhongguige_waijiaji2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="7" r="26" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_waijiaji2), ds_Hntwt.SELECT(baogaobianhao_waijiaji2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="26" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_waijiaji2), ds_Hntwt.SELECT(shigongbanheyongliang_waijiaji2))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="27" s="4">
+<O>
+<![CDATA[外加剂3]]></O>
+<Expand/>
+</C>
+<C c="1" r="27" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_waijiaji3), ds_Hntwt.SELECT(cailiaochandi_waijiaji3))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="27" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_waijiaji3), ds_Hntwt.SELECT(pinzhongguige_waijiaji3))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="7" r="27" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_waijiaji3), ds_Hntwt.SELECT(baogaobianhao_waijiaji3))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="27" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_waijiaji3), ds_Hntwt.SELECT(shigongbanheyongliang_waijiaji3))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="28" s="4">
+<O>
+<![CDATA[拌和水]]></O>
+<Expand/>
+</C>
+<C c="1" r="28" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(cailiaochandi_shui), ds_Hntwt.SELECT(cailiaochandi_shui))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[len($$$)>10]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.FRFontHighlightAction">
+<FRFont name="宋体" style="0" size="48"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="4" r="28" cs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(pinzhongguige_shui), ds_Hntwt.SELECT(pinzhongguige_shui))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="7" r="28" cs="4" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(baogaobianhao_shui), ds_Hntwt.SELECT(baogaobianhao_shui))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="28" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($rec_guid) != 0, ds_T_T100014.SELECT(shigongbanheyongliang_shui), ds_Hntwt.SELECT(shigongbanheyongliang_shui))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="29" cs="12" s="20">
+<O>
+<![CDATA[（3）抗压强度试验结果]]></O>
+<Expand/>
+</C>
+<C c="0" r="30" cs="2" rs="2" s="4">
+<O>
+<![CDATA[试件编号]]></O>
+<Expand/>
+</C>
+<C c="2" r="30" rs="2" s="3">
+<O>
+<![CDATA[试件序号]]></O>
+<Expand/>
+</C>
+<C c="3" r="30" cs="2" rs="2" s="4">
+<O>
+<![CDATA[试验日期]]></O>
+<Expand/>
+</C>
+<C c="5" r="30" rs="2" s="4">
+<O>
+<![CDATA[龄期(d)]]></O>
+<Expand/>
+</C>
+<C c="6" r="30" cs="2" rs="2" s="4">
+<O>
+<![CDATA[承压面积A(mm²)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="30" cs="4" s="3">
+<O>
+<![CDATA[抗压强度ƒcu,i（MPa）]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="31" s="4">
+<O>
+<![CDATA[单块值]]></O>
+<Expand/>
+</C>
+<C c="9" r="31" cs="2" s="4">
+<O>
+<![CDATA[折算系数]]></O>
+<Expand/>
+</C>
+<C c="11" r="31" s="4">
+<O>
+<![CDATA[组值]]></O>
+<Expand/>
+</C>
+<C c="0" r="32" cs="2" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!B5) > 0, '混凝土试件抗压强度试验记录'!B5, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="32" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len('混凝土试件抗压强度试验记录'!A5) > 0, 1, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="3" r="32" cs="2" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!D5) > 0, '混凝土试件抗压强度试验记录'!D5, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="32" rs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!E5) > 0, '混凝土试件抗压强度试验记录'!E5, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="32" cs="2" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!G5) > 0, '混凝土试件抗压强度试验记录'!G5, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="32" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!I5) > 0, FORMAT('混凝土试件抗压强度试验记录'!I5, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="32" cs="2" rs="3" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!J5) > 0, '混凝土试件抗压强度试验记录'!J5, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="32" rs="3" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!K5) > 0, FORMAT('混凝土试件抗压强度试验记录'!K5, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="33" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len('混凝土试件抗压强度试验记录'!A5) > 0, 2, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="33" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!I6) > 0, FORMAT('混凝土试件抗压强度试验记录'!I6, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="34" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len('混凝土试件抗压强度试验记录'!A5) > 0, 3, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="34" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!I7) > 0, FORMAT('混凝土试件抗压强度试验记录'!I7, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="35" cs="2" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!B8) > 0, '混凝土试件抗压强度试验记录'!B8, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="35" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len('混凝土试件抗压强度试验记录'!A8) > 0, 1, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="3" r="35" cs="2" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!D8) > 0, '混凝土试件抗压强度试验记录'!D8, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="35" rs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!E8) > 0, '混凝土试件抗压强度试验记录'!E8, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="35" cs="2" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!G8) > 0, '混凝土试件抗压强度试验记录'!G8, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="35" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!I8) > 0, FORMAT('混凝土试件抗压强度试验记录'!I8, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="35" cs="2" rs="3" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!J8) > 0, '混凝土试件抗压强度试验记录'!J8, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="35" rs="3" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!K8) > 0, FORMAT('混凝土试件抗压强度试验记录'!K8, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="36" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len('混凝土试件抗压强度试验记录'!A8) > 0, 2, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="36" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!I9) > 0, FORMAT('混凝土试件抗压强度试验记录'!I9, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="37" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len('混凝土试件抗压强度试验记录'!A8) > 0, 3, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="37" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!I10) > 0, FORMAT('混凝土试件抗压强度试验记录'!I10, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="38" cs="2" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!B11) > 0, '混凝土试件抗压强度试验记录'!B11, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="38" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len('混凝土试件抗压强度试验记录'!A11) > 0, 1, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="3" r="38" cs="2" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!D11) > 0, '混凝土试件抗压强度试验记录'!D11, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="38" rs="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!E11) > 0, '混凝土试件抗压强度试验记录'!E11, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="6" r="38" cs="2" rs="3" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!G11) > 0, '混凝土试件抗压强度试验记录'!G11, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="38" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!I11) > 0, FORMAT('混凝土试件抗压强度试验记录'!I11, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="9" r="38" cs="2" rs="3" s="9">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!J11) > 0, '混凝土试件抗压强度试验记录'!J11, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="11" r="38" rs="3" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!K11) > 0, FORMAT('混凝土试件抗压强度试验记录'!K11, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="39" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len('混凝土试件抗压强度试验记录'!A11) > 0, 2, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="39" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!I12) > 0, FORMAT('混凝土试件抗压强度试验记录'!I12, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="40" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(len('混凝土试件抗压强度试验记录'!A11) > 0, 3, "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="40" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(LEN('混凝土试件抗压强度试验记录'!I13) > 0, FORMAT('混凝土试件抗压强度试验记录'!I13, "#0.0"), "/")]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="41" cs="2" s="21">
+<O>
+<![CDATA[检测评定依据：]]></O>
+<Expand/>
+</C>
+<C c="2" r="41" cs="4" s="22">
+<Expand/>
+</C>
+<C c="6" r="41" cs="2" s="23">
+<O>
+<![CDATA[试验结论：]]></O>
+<Expand/>
+</C>
+<C c="8" r="41" cs="4" s="22">
+<Expand/>
+</C>
+<C c="0" r="42" cs="6" rs="4" s="24">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(FIND("喷", ds_T_T100014.SELECT(gongdidaoshifangfa)) > 0, 'GB/T50081-2002《普通混凝土力学性能试验方法标准》TB10424-2010《铁路混凝土工程施工质量验收标准》TB10753-2010《高速铁路隧道工程施工质量验收标准》', 'GB/T50081-2002《普通混凝土力学性能试验方法标准》TB10424-2010《铁路混凝土工程施工质量验收标准》')]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="6" r="42" cs="6" rs="4" s="24">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if(len($op) > 0, CONCATENATE(if(ds_yaliji11.SELECT(PDJG) == '不合格' || ds_yaliji21.SELECT(PDJG) == '不合格' || ds_yaliji31.SELECT(PDJG) == '不合格' || ds_yaliji11.SELECT(PDJG) == '无效' || ds_yaliji21.SELECT(PDJG) == '无效' || ds_yaliji31.SELECT(PDJG) == '无效', '该组混凝土试件抗压强度不符合规范及设计要求。 ', ''),if((ds_yaliji11.SELECT(PDJG) == '合格') && (ds_yaliji21.SELECT(PDJG) == '合格' || len(ds_yaliji21.SELECT(PDJG)) == 0)  && (ds_yaliji31.SELECT(PDJG) == '合格' || len(ds_yaliji31.SELECT(PDJG)) == 0) ,'该组混凝土试件抗压强度符合规范及设计要求。','')),ds_T_T100014.SELECT(shiyantest))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="0" r="46" s="25">
+<O>
+<![CDATA[试验]]></O>
+<Expand/>
+</C>
+<C c="1" r="46" cs="2" s="26">
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="3" r="46" cs="2" s="25">
+<O>
+<![CDATA[复核]]></O>
+<Expand/>
+</C>
+<C c="5" r="46" cs="2" s="26">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_FHR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="7" r="46" s="25">
+<O>
+<![CDATA[批准]]></O>
+<Expand/>
+</C>
+<C c="8" r="46" s="26">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="F_PZR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="9" r="46" s="25">
+<O>
+<![CDATA[单位(章)]]></O>
+<Expand/>
+</C>
+<C c="11" r="46" s="26">
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<Margin top="2880000" left="3600000" bottom="2880000" right="2880000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL1">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_USER_TEST_REC"/>
+<ColumnConfig name="rec_guid" isKey="true" skipUnmodified="false">
+<ColumnRow column="13" row="1"/>
+</ColumnConfig>
+<ColumnConfig name="F_WTBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_BGBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="F_BGRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="F_JLBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="F_WTDW" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="F_GCMC" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_SGBW" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="F_DBSL" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="F_FHR" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="46"/>
+</ColumnConfig>
+<ColumnConfig name="F_PZR" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="46"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL2">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_T100014"/>
+<ColumnConfig name="rec_guid" isKey="true" skipUnmodified="false">
+<ColumnRow column="13" row="1"/>
+</ColumnConfig>
+<ColumnConfig name="shejiqiangdurank" isKey="false" skipUnmodified="true">
+<ColumnRow column="0" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="peihebireportbianhao" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="lilunpeihebi" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="shuijiaobi1" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="shigongpeihebi" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="shuijiaobi2" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="zhijianshitanluodu" isKey="false" skipUnmodified="true">
+<ColumnRow column="0" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="zhijianshikuozhandu" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="zhijianshiweibochoudu" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="zhijiandaoshifangfa" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="yanhufangfa" isKey="false" skipUnmodified="true">
+<ColumnRow column="0" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="yanhuwendu" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="gongdibanhefangfa" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="gongdidaoshifangfa" isKey="false" skipUnmodified="true">
+<ColumnRow column="10" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_shuini" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_banheliao1" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_banheliao2" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_xiguliao" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_waijiaji1" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_waijiaji2" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="26"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_shui" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_shuini" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_banheliao1" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_banheliao2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_xiguliao" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_waijiaji1" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_waijiaji2" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="26"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_shui" isKey="false" skipUnmodified="true">
+<ColumnRow column="4" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_shuini" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_banheliao1" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_banheliao2" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_xiguliao" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_waijiaji1" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_waijiaji2" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="26"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_shui" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_shuini" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_banheliao1" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_banheliao2" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_xiguliao" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_waijiaji1" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_waijiaji2" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="26"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_shui" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="jiancepingdingyiju" isKey="false" skipUnmodified="true">
+<ColumnRow column="0" row="42"/>
+</ColumnConfig>
+<ColumnConfig name="shiyantest" isKey="false" skipUnmodified="true">
+<ColumnRow column="6" row="42"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_cuguliao1" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_cuguliao2" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_cuguliao3" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="cailiaochandi_waijiaji3" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="27"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_cuguliao1" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_cuguliao2" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_cuguliao3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="pinzhongguige_waijiaji3" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="27"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_cuguliao1" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_cuguliao2" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_cuguliao3" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="baogaobianhao_waijiaji3" isKey="false" skipUnmodified="true">
+<ColumnRow column="7" row="27"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_cuguliao1" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_cuguliao2" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_cuguliao3" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="shigongbanheyongliang_waijiaji3" isKey="false" skipUnmodified="true">
+<ColumnRow column="11" row="27"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+</ReportWriteAttr>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="112"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="宋体" style="1" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style textStyle="1" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1" color="-16777216"/>
+<Bottom style="1" color="-16777216"/>
+<Left style="1" color="-16777216"/>
+<Right style="1" color="-16777216"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.00]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.0]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-3342388"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.0]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-103"/>
+<Border>
+<Bottom style="1" color="-16777216"/>
+<Left style="1" color="-16777216"/>
+<Right style="1" color="-16777216"/>
+</Border>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAF"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

@@ -1,0 +1,1271 @@
+package com.shtoone.qms.controller.bhz;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONObject;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.jeecgframework.core.common.controller.BaseController;
+import org.jeecgframework.core.common.exception.BusinessException;
+import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
+import org.jeecgframework.core.common.model.json.AjaxJson;
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.constant.Globals;
+import org.jeecgframework.core.util.StringUtil;
+import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.web.system.pojo.base.TSDepart;
+import org.jeecgframework.web.system.service.SystemService;
+import org.jeecgframework.core.util.MyBeanUtils;
+
+import com.alibaba.fastjson.serializer.BigDecimalCodec;
+import com.shtoone.qms.entity.bhz.SYclGuigexinghaomEntity;
+import com.shtoone.qms.entity.bhz.SYclGuigexinghaosEntity;
+import com.shtoone.qms.entity.bhz.SYclAllEntity;
+import com.shtoone.qms.service.bhz.SYclAllServiceI;
+
+/**   
+ * @Title: Controller
+ * @Description: s_ycl_all
+ * @author onlineGenerator
+ * @date 2015-06-15 18:16:55
+ * @version V1.0   
+ *
+ */
+@Controller
+@RequestMapping("/sYclAllController")
+public class SYclAllController extends BaseController {
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger.getLogger(SYclAllController.class);
+
+	@Autowired
+	private SYclAllServiceI sYclAllService;
+	@Autowired
+	private SystemService systemService;
+	private String message;
+	
+	private TSDepart dpt;//上级部门
+	private Integer userlft = 0;
+	private Integer userrgt =0;
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+
+	/**
+	 * s_ycl_all列表 页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "sYclAll")
+	public ModelAndView sYclAll(HttpServletRequest request) {
+		List<SYclGuigexinghaomEntity> List = new ArrayList<SYclGuigexinghaomEntity>();
+		List<SYclGuigexinghaosEntity> sList = new ArrayList<SYclGuigexinghaosEntity>();
+		List.addAll((List)systemService.getList(SYclGuigexinghaomEntity.class));
+		request.setAttribute("List", List);
+		sList.addAll((List)systemService.getList(SYclGuigexinghaosEntity.class));
+		request.setAttribute("sList", sList);
+		return new ModelAndView("com/shtoone/qms/bhz/sYclAllList");
+	}
+
+	/**
+	 * easyui AJAX请求数据
+	 * 
+	 * @param request
+	 * @param response
+	 * @param dataGrid
+	 * @param user
+	 */
+
+	@RequestMapping(params = "datagrid")
+	public void datagrid(SYclAllEntity sYclAll,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) throws ParseException {
+		String leixing=request.getParameter("leixing");
+		String guige=request.getParameter("guige");
+		String xinghao=request.getParameter("xinghao");
+		String pid =request.getParameter("biaoduanid");
+		if(pid!=null && pid.length()>0){
+			dpt=systemService.getEntity(TSDepart.class, pid);
+			//dpt.setId(pid);
+			//List<TSDepart> list=systemService.findByQueryString("from t_s_depart where ID = '"+pid+"'");
+			setUserlft(dpt.getLft());
+			setUserrgt(dpt.getRgt());
+		}else{
+			HttpSession session = request.getSession();
+			setUserlft(Integer.parseInt( session.getAttribute("userlft").toString()));
+			setUserrgt(Integer.parseInt(session.getAttribute("userrgt").toString()));
+		}
+		JSONObject jObject = sYclAllService.getDatagrid5(sYclAll, dataGrid,leixing,guige,xinghao,userlft,userrgt);
+		responseDatagrid(response, jObject);
+	}
+
+	/**
+	 * 删除s_ycl_all
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "doDel")
+	@ResponseBody
+	public AjaxJson doDel(SYclAllEntity sYclAll, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		sYclAll = systemService.getEntity(SYclAllEntity.class, sYclAll.getId());
+		message = "s_ycl_all删除成功";
+		try{
+			sYclAllService.delete(sYclAll);
+			systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+		}catch(Exception e){
+			e.printStackTrace();
+			message = "s_ycl_all删除失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+	}
+	
+	/**
+	 * 批量删除s_ycl_all
+	 * 
+	 * @return
+	 */
+	 @RequestMapping(params = "doBatchDel")
+	@ResponseBody
+	public AjaxJson doBatchDel(String ids,HttpServletRequest request){
+		AjaxJson j = new AjaxJson();
+		message = "s_ycl_all删除成功";
+		try{
+			for(String id:ids.split(",")){
+				SYclAllEntity sYclAll = systemService.getEntity(SYclAllEntity.class, 
+				id
+				);
+				sYclAllService.delete(sYclAll);
+				systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			message = "s_ycl_all删除失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+	}
+
+
+	/**
+	 * 添加s_ycl_all
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(params = "doAdd")
+	@ResponseBody
+	public AjaxJson doAdd(SYclAllEntity sYclAll, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		message = "s_ycl_all添加成功";
+		try{
+			if(request.getParameter("leixing").equals("水泥")){
+				sYclAll.setMingcheng(request.getParameter("shuinimingcheng"));
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setScchangjia(request.getParameter("shuiniscchangjia"));
+				sYclAll.setChandi(request.getParameter("shuinichandi"));
+				sYclAll.setGuige(request.getParameter("shuiniguige"));
+				sYclAll.setXinghao(request.getParameter("shuinixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("shuinijcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("shuinipicihao"));
+				sYclAll.setSyxingmu(request.getParameter("shuinisyxingmu"));
+				sYclAll.setQyshijian(request.getParameter("shuiniqyshijian"));
+				sYclAll.setYcl11(request.getParameter("shuiniycl11"));
+				sYclAll.setYcl12(request.getParameter("shuiniycl12"));
+				sYclAll.setBgbianhao(request.getParameter("shuinibgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("shuinishiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("shuinicunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("shuinisyshijian"));
+				sYclAll.setRukushijian(request.getParameter("shuinirukushijian"));
+				sYclAll.setPici(request.getParameter("shuinipici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("shuiniycl0"));
+				sYclAll.setYcl1(request.getParameter("shuiniycl1"));
+				sYclAll.setYcl2(request.getParameter("shuiniycl2"));
+				sYclAll.setYcl3(request.getParameter("shuiniycl3"));
+				sYclAll.setYcl4(request.getParameter("shuiniycl4"));
+				sYclAll.setYcl5(request.getParameter("shuiniycl5"));
+				sYclAll.setYcl6(request.getParameter("shuiniycl6"));
+				sYclAll.setYcl7(request.getParameter("shuiniycl7"));
+				sYclAll.setYcl8(request.getParameter("shuiniycl8"));
+				sYclAll.setYcl9(request.getParameter("shuiniycl9"));
+				sYclAll.setYcl10(request.getParameter("shuiniycl10"));
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("粉煤灰")){
+				sYclAll.setBiaoduanid(request.getParameter("fmhtspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("fenmeihuimingcheng"));
+				sYclAll.setScchangjia(request.getParameter("fenmeihuiscchangjia"));
+				sYclAll.setChandi(request.getParameter("fenmeihuichandi"));
+				sYclAll.setGuige(request.getParameter("fenmeihuiguige"));
+				sYclAll.setXinghao(request.getParameter("fenmeihuixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("fenmeihuijcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("fenmeihuipicihao"));
+				sYclAll.setSyxingmu(request.getParameter("fenmeihuisyxingmu"));
+				sYclAll.setQyshijian(request.getParameter("fenmeihuiqyshijian"));
+				sYclAll.setYcl11(request.getParameter("fenmeihuiycl11"));
+				sYclAll.setYcl12(request.getParameter("fenmeihuiycl12"));
+				sYclAll.setBgbianhao(request.getParameter("fenmeihuibgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("fenmeihuishiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("fenmeihuicunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("fenmeihuisyshijian"));
+				sYclAll.setRukushijian(request.getParameter("fenmeihuirukushijian"));
+				sYclAll.setPici(request.getParameter("fenmeihuipici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("fenmeihuiycl0"));
+				sYclAll.setYcl1(request.getParameter("fenmeihuiycl1"));
+				sYclAll.setYcl2(request.getParameter("fenmeihuiycl2"));
+				sYclAll.setYcl3(request.getParameter("fenmeihuiycl3"));
+				sYclAll.setYcl4(request.getParameter("fenmeihuiycl4"));
+				sYclAll.setYcl5(request.getParameter("fenmeihuiycl5"));
+				sYclAll.setYcl6(request.getParameter("fenmeihuiycl6"));
+//				sYclAll.setYcl7(request.getParameter("kuangfenycl7"));
+//				sYclAll.setYcl8(request.getParameter("fenmeihui.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("fenmeihui.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("fenmeihui.ycl10"));
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("矿粉")){
+				sYclAll.setBiaoduanid(request.getParameter("kftspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("kuangfen.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("kuangfenscchangjia"));
+				sYclAll.setChandi(request.getParameter("kuangfenchandi"));
+				sYclAll.setGuige(request.getParameter("kuangfenguige"));
+				sYclAll.setXinghao(request.getParameter("kuangfenxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("kuangfenjcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("kuangfenpicihao"));
+				sYclAll.setSyxingmu(request.getParameter("kuangfensyxingmu"));
+				sYclAll.setQyshijian(request.getParameter("kuangfenqyshijian"));
+				sYclAll.setYcl11(request.getParameter("kuangfenycl11"));
+				sYclAll.setYcl12(request.getParameter("kuangfenycl12"));
+				sYclAll.setBgbianhao(request.getParameter("kuangfenbgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("kuangfenshiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("kuangfencunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("kuangfensyshijian"));
+				sYclAll.setRukushijian(request.getParameter("kuangfenrukushijian"));
+				sYclAll.setPici(request.getParameter("kuangfenpici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("kuangfenycl0"));
+				sYclAll.setYcl1(request.getParameter("kuangfenycl1"));
+				sYclAll.setYcl2(request.getParameter("kuangfenycl2"));
+				sYclAll.setYcl3(request.getParameter("kuangfenycl3"));
+				sYclAll.setYcl4(request.getParameter("kuangfenycl4"));
+				sYclAll.setYcl5(request.getParameter("kuangfenycl5"));
+				sYclAll.setYcl6(request.getParameter("kuangfenycl6"));
+//				sYclAll.setYcl7(request.getParameter("kuangfen.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("kuangfen.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("kuangfen.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("kuangfen.ycl10"));
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("粗集料")){
+				sYclAll.setBiaoduanid(request.getParameter("cjltspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("cunjiliaomingcheng"));
+				sYclAll.setScchangjia(request.getParameter("cunjiliaoscchangjia"));
+				sYclAll.setChandi(request.getParameter("cunjiliaochandi"));
+				sYclAll.setGuige(request.getParameter("cunjiliaoguige"));
+				sYclAll.setXinghao(request.getParameter("cunjiliaoxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("cunjiliaojcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("cunjiliaopicihao"));
+				sYclAll.setSyxingmu(request.getParameter("cunjiliaosyxingmu"));
+				sYclAll.setQyshijian(request.getParameter("cunjiliaoqyshijian"));
+				sYclAll.setYcl11(request.getParameter("cunjiliaoycl11"));
+				sYclAll.setYcl12(request.getParameter("cunjiliaoycl12"));
+				sYclAll.setBgbianhao(request.getParameter("cunjiliaobgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("cunjiliaoshiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("cunjiliaocunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("cunjiliaosyshijian"));
+				sYclAll.setRukushijian(request.getParameter("cunjiliaorukushijian"));
+				sYclAll.setPici(request.getParameter("cunjiliaopici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("cunjiliaoycl0"));
+				sYclAll.setYcl1(request.getParameter("cunjiliaoycl1"));
+				sYclAll.setYcl2(request.getParameter("cunjiliaoycl2"));
+				sYclAll.setYcl3(request.getParameter("cunjiliaoycl3"));
+				sYclAll.setYcl4(request.getParameter("cunjiliaoycl4"));
+				sYclAll.setYcl5(request.getParameter("cunjiliaoycl5"));
+//				sYclAll.setYcl6(request.getParameter("cunjiliaoycl6"));
+//				sYclAll.setYcl7(request.getParameter("cunjiliao.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("cunjiliao.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("cunjiliao.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("cunjiliao.ycl10"));
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("细集料")){
+				sYclAll.setBiaoduanid(request.getParameter("xjltspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("xijiliaomingcheng"));
+				sYclAll.setScchangjia(request.getParameter("xijiliaoscchangjia"));
+				sYclAll.setChandi(request.getParameter("xijiliaochandi"));
+				sYclAll.setGuige(request.getParameter("xijiliaoguige"));
+				sYclAll.setXinghao(request.getParameter("xijiliaoxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("xijiliaojcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("xijiliaopicihao"));
+				sYclAll.setSyxingmu(request.getParameter("xijiliaosyxingmu"));
+				sYclAll.setQyshijian(request.getParameter("xijiliaoqyshijian"));
+				sYclAll.setYcl11(request.getParameter("xijiliaoycl11"));
+				sYclAll.setYcl12(request.getParameter("xijiliaoycl12"));
+				sYclAll.setBgbianhao(request.getParameter("xijiliaobgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("xijiliaoshiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("xijiliaocunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("xijiliaosyshijian"));
+				sYclAll.setRukushijian(request.getParameter("xijiliaorukushijian"));
+				sYclAll.setPici(request.getParameter("xijiliaopici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("xijiliaoycl0"));
+				sYclAll.setYcl1(request.getParameter("xijiliaoycl1"));
+				sYclAll.setYcl2(request.getParameter("xijiliaoycl2"));
+				sYclAll.setYcl3(request.getParameter("xijiliaoycl3"));
+				sYclAll.setYcl4(request.getParameter("xijiliaoycl4"));
+				sYclAll.setYcl5(request.getParameter("xijiliaoycl5"));
+				sYclAll.setYcl6(request.getParameter("xijiliaoycl6"));
+//				sYclAll.setYcl7(request.getParameter("xijiliao.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("xijiliao.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("xijiliao.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("xijiliao.ycl10"));
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("水")){
+				sYclAll.setBiaoduanid(request.getParameter("stspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("shuimingcheng"));
+				sYclAll.setScchangjia(request.getParameter("shuiscchangjia"));
+				sYclAll.setChandi(request.getParameter("shuichandi"));
+				sYclAll.setGuige(request.getParameter("shuiguige"));
+				sYclAll.setXinghao(request.getParameter("shuixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("shuijcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("shuipicihao"));
+				sYclAll.setSyxingmu(request.getParameter("shuisyxingmu"));
+				sYclAll.setQyshijian(request.getParameter("shuiqyshijian"));
+				sYclAll.setYcl11(request.getParameter("shuiycl11"));
+				sYclAll.setYcl12(request.getParameter("shuiycl12"));
+				sYclAll.setBgbianhao(request.getParameter("shuibgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("shuishiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("shuicunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("shuisyshijian"));
+				sYclAll.setRukushijian(request.getParameter("shuirukushijian"));
+				sYclAll.setPici(request.getParameter("shuipici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("shuiycl0"));
+				sYclAll.setYcl1(request.getParameter("shuiycl1"));
+				sYclAll.setYcl2(request.getParameter("shuiycl2"));
+				sYclAll.setYcl3(request.getParameter("shuiycl3"));
+				sYclAll.setYcl4(request.getParameter("shuiycl4"));
+				sYclAll.setYcl5(request.getParameter("shuiycl5"));
+//				sYclAll.setYcl6(request.getParameter("shui.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("shui.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("shui.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("shui.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("shui.ycl10"));
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("外加剂")){
+				sYclAll.setBiaoduanid(request.getParameter("wjjtspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("waijiajimingcheng"));
+				sYclAll.setScchangjia(request.getParameter("waijiajiscchangjia"));
+				sYclAll.setChandi(request.getParameter("waijiajichandi"));
+				sYclAll.setGuige(request.getParameter("waijiajiguige"));
+				sYclAll.setXinghao(request.getParameter("waijiajixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("waijiajijcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("waijiajipicihao"));
+				sYclAll.setSyxingmu(request.getParameter("waijiajisyxingmu"));
+				sYclAll.setQyshijian(request.getParameter("waijiajiqyshijian"));
+				sYclAll.setYcl11(request.getParameter("waijiajiycl11"));
+				sYclAll.setYcl12(request.getParameter("waijiajiycl12"));
+				sYclAll.setBgbianhao(request.getParameter("waijiajibgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("waijiajishiyanren"));
+				
+				
+				sYclAll.setCunchudidian(request.getParameter("waijiajicunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("waijiajisyshijian"));
+				sYclAll.setRukushijian(request.getParameter("waijiajirukushijian"));
+				sYclAll.setPici(request.getParameter("waijiajipici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("waijiajiycl0"));
+				sYclAll.setYcl1(request.getParameter("waijiajiycl1"));
+				sYclAll.setYcl2(request.getParameter("waijiajiycl2"));
+				sYclAll.setYcl3(request.getParameter("waijiajiycl3"));
+				sYclAll.setYcl4(request.getParameter("waijiajiycl4"));
+				sYclAll.setYcl5(request.getParameter("waijiajiycl5"));
+				sYclAll.setYcl6(request.getParameter("waijiajiycl6"));
+				sYclAll.setYcl7(request.getParameter("waijiajiycl7"));
+//				sYclAll.setYcl8(request.getParameter("waijiaji.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("waijiaji.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("waijiaji.ycl10"));
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("其他")){
+				sYclAll.setBiaoduanid(request.getParameter("qttspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("qita.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("qita.scchangjia"));
+				sYclAll.setChandi(request.getParameter("qita.chandi"));
+				sYclAll.setGuige(request.getParameter("qita.guige"));
+				sYclAll.setXinghao(request.getParameter("qitaxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("qita.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("qita.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("qita.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("qita.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("qita.ycl11"));
+				sYclAll.setYcl12(request.getParameter("qita.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("qita.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("qita.shiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("qita.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("qita.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("qita.rukushijian"));
+				sYclAll.setPici(request.getParameter("qita.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("qita.ycl0"));
+				sYclAll.setYcl1(request.getParameter("qita.ycl1"));
+				sYclAll.setYcl2(request.getParameter("qita.ycl2"));
+				sYclAll.setYcl3(request.getParameter("qita.ycl3"));
+				sYclAll.setYcl4(request.getParameter("qita.ycl4"));
+				sYclAll.setYcl5(request.getParameter("qita.ycl5"));
+				sYclAll.setYcl6(request.getParameter("qita.ycl6"));
+				sYclAll.setYcl7(request.getParameter("qita.ycl7"));
+				sYclAll.setYcl8(request.getParameter("qita.ycl8"));
+				sYclAll.setYcl9(request.getParameter("qita.ycl9"));
+				sYclAll.setYcl10(request.getParameter("qita.ycl10"));
+				sYclAllService.save(sYclAll);
+			}
+			
+			
+			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
+		}catch(Exception e){
+			e.printStackTrace();
+			message = "s_ycl_all添加失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+	}
+	
+	
+	
+	@RequestMapping(params = "shigongpeibiList")
+	public ModelAndView shigongpeibiList(HttpServletRequest request) {
+		// 给部门查询条件中的下拉框准备数据
+		//添加跳转时，需要带入所属单位
+		List<TSDepart> departList = systemService.getList(TSDepart.class);
+		request.setAttribute("departList", departList);
+		//这里要从登陆用户的Session中获取departId
+		String departId=(String)request.getSession().getAttribute("userdepartid");
+		if (StringUtil.isNotEmpty(departId)) {
+			TSDepart tspDepart = new TSDepart();
+			TSDepart tsDepart = new TSDepart();
+			TSDepart depart = systemService.getEntity(TSDepart.class, departId);
+			tspDepart.setId(depart.getId());
+			tspDepart.setDepartname(depart.getDepartname());
+			tsDepart.setTSPDepart(tspDepart);
+			request.setAttribute("depart", tsDepart);
+		}
+		return new ModelAndView("system/inground/shigong/shigongpeibiList");
+	}
+	
+	/**
+	 * 更新s_ycl_all
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(params = "doUpdate")
+	@ResponseBody
+	public AjaxJson doUpdate(SYclAllEntity sYclAll, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		message = "s_ycl_all更新成功";
+//		SYclAllEntity t = sYclAllService.get(SYclAllEntity.class, sYclAll.getId());
+		try {
+			sYclAll.setId(request.getParameter("id"));
+			if(request.getParameter("leixing").equals("水泥")){
+				sYclAll.setMingcheng(request.getParameter("shuini.mingcheng"));
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setScchangjia(request.getParameter("shuini.scchangjia"));
+				sYclAll.setChandi(request.getParameter("shuini.chandi"));
+				sYclAll.setGuige(request.getParameter("shuini.guige"));
+				sYclAll.setXinghao(request.getParameter("shuinixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("shuini.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("shuini.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("shuini.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("shuini.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("shuini.ycl11"));
+				sYclAll.setYcl12(request.getParameter("shuini.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("shuini.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("shuini.shiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("shuini.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("shuini.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("shuini.rukushijian"));
+				sYclAll.setPici(request.getParameter("shuini.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("shuini.ycl0"));
+				sYclAll.setYcl1(request.getParameter("shuini.ycl1"));
+				sYclAll.setYcl2(request.getParameter("shuini.ycl2"));
+				sYclAll.setYcl3(request.getParameter("shuini.ycl3"));
+				sYclAll.setYcl4(request.getParameter("shuini.ycl4"));
+				sYclAll.setYcl5(request.getParameter("shuini.ycl5"));
+				sYclAll.setYcl6(request.getParameter("shuini.ycl6"));
+				sYclAll.setYcl7(request.getParameter("shuini.ycl7"));
+				sYclAll.setYcl8(request.getParameter("shuini.ycl8"));
+				sYclAll.setYcl9(request.getParameter("shuini.ycl9"));
+				sYclAll.setYcl10(request.getParameter("shuini.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.saveOrUpdate(sYclAll);
+			}else if(request.getParameter("leixing").equals("粉煤灰")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("fenmeihui.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("fenmeihui.scchangjia"));
+				sYclAll.setChandi(request.getParameter("fenmeihui.chandi"));
+				sYclAll.setGuige(request.getParameter("fenmeihui.guige"));
+				sYclAll.setXinghao(request.getParameter("fenmeihuixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("fenmeihui.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("fenmeihui.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("fenmeihui.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("fenmeihui.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("fenmeihui.ycl11"));
+				sYclAll.setYcl12(request.getParameter("fenmeihui.ycl12"));
+				
+				sYclAll.setCunchudidian(request.getParameter("fenmeihui.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("fenmeihui.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("fenmeihui.rukushijian"));
+				sYclAll.setPici(request.getParameter("fenmeihui.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setBgbianhao(request.getParameter("fenmeihui.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("fenmeihui.shiyanren"));
+				sYclAll.setYcl0(request.getParameter("fenmeihui.ycl0"));
+				sYclAll.setYcl1(request.getParameter("fenmeihui.ycl1"));
+				sYclAll.setYcl2(request.getParameter("fenmeihui.ycl2"));
+				sYclAll.setYcl3(request.getParameter("fenmeihui.ycl3"));
+				sYclAll.setYcl4(request.getParameter("fenmeihui.ycl4"));
+				sYclAll.setYcl5(request.getParameter("fenmeihui.ycl5"));
+				sYclAll.setYcl6(request.getParameter("fenmeihui.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("fenmeihui.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("fenmeihui.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("fenmeihui.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("fenmeihui.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.saveOrUpdate(sYclAll);
+			}else if(request.getParameter("leixing").equals("矿粉")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("kuangfen.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("kuangfen.scchangjia"));
+				sYclAll.setChandi(request.getParameter("kuangfen.chandi"));
+				sYclAll.setGuige(request.getParameter("kuangfen.guige"));
+				sYclAll.setXinghao(request.getParameter("kuangfenxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("kuangfen.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("kuangfen.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("kuangfen.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("kuangfen.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("kuangfen.ycl11"));
+				sYclAll.setYcl12(request.getParameter("kuangfen.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("kuangfen.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("kuangfen.shiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("kuangfen.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("kuangfen.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("kuangfen.rukushijian"));
+				sYclAll.setPici(request.getParameter("kuangfen.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("kuangfen.ycl0"));
+				sYclAll.setYcl1(request.getParameter("kuangfen.ycl1"));
+				sYclAll.setYcl2(request.getParameter("kuangfen.ycl2"));
+				sYclAll.setYcl3(request.getParameter("kuangfen.ycl3"));
+				sYclAll.setYcl4(request.getParameter("kuangfen.ycl4"));
+				sYclAll.setYcl5(request.getParameter("kuangfen.ycl5"));
+				sYclAll.setYcl6(request.getParameter("kuangfen.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("kuangfen.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("kuangfen.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("kuangfen.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("kuangfen.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.saveOrUpdate(sYclAll);
+			}else if(request.getParameter("leixing").equals("粗集料")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("cunjiliao.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("cunjiliao.scchangjia"));
+				sYclAll.setChandi(request.getParameter("cunjiliao.chandi"));
+				sYclAll.setGuige(request.getParameter("cunjiliao.guige"));
+				sYclAll.setXinghao(request.getParameter("cunjiliaoxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("cunjiliao.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("cunjiliao.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("cunjiliao.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("cunjiliao.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("cunjiliao.ycl11"));
+				sYclAll.setYcl12(request.getParameter("cunjiliao.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("cunjiliao.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("cunjiliao.shiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("cunjiliao.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("cunjiliao.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("cunjiliao.rukushijian"));
+				sYclAll.setPici(request.getParameter("cunjiliao.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("cunjiliao.ycl0"));
+				sYclAll.setYcl1(request.getParameter("cunjiliao.ycl1"));
+				sYclAll.setYcl2(request.getParameter("cunjiliao.ycl2"));
+				sYclAll.setYcl3(request.getParameter("cunjiliao.ycl3"));
+				sYclAll.setYcl4(request.getParameter("cunjiliao.ycl4"));
+				sYclAll.setYcl5(request.getParameter("cunjiliao.ycl5"));
+//				sYclAll.setYcl6(request.getParameter("cunjiliao.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("cunjiliao.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("cunjiliao.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("cunjiliao.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("cunjiliao.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.saveOrUpdate(sYclAll);
+			}else if(request.getParameter("leixing").equals("细集料")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("xijiliao.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("xijiliao.scchangjia"));
+				sYclAll.setChandi(request.getParameter("xijiliao.chandi"));
+				sYclAll.setGuige(request.getParameter("xijiliao.guige"));
+				sYclAll.setXinghao(request.getParameter("xijiliaoxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("xijiliao.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("xijiliao.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("xijiliao.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("xijiliao.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("xijiliao.ycl11"));
+				sYclAll.setYcl12(request.getParameter("xijiliao.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("xijiliao.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("xijiliao.shiyanren"));
+				
+				
+				sYclAll.setCunchudidian(request.getParameter("xijiliao.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("xijiliao.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("xijiliao.rukushijian"));
+				sYclAll.setPici(request.getParameter("xijiliao.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("xijiliao.ycl0"));
+				sYclAll.setYcl1(request.getParameter("xijiliao.ycl1"));
+				sYclAll.setYcl2(request.getParameter("xijiliao.ycl2"));
+				sYclAll.setYcl3(request.getParameter("xijiliao.ycl3"));
+				sYclAll.setYcl4(request.getParameter("xijiliao.ycl4"));
+				sYclAll.setYcl5(request.getParameter("xijiliao.ycl5"));
+				sYclAll.setYcl6(request.getParameter("xijiliao.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("xijiliao.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("xijiliao.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("xijiliao.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("xijiliao.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.saveOrUpdate(sYclAll);
+			}else if(request.getParameter("leixing").equals("水")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("shui.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("shui.scchangjia"));
+				sYclAll.setChandi(request.getParameter("shui.chandi"));
+				sYclAll.setGuige(request.getParameter("shui.guige"));
+				sYclAll.setXinghao(request.getParameter("shuixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("shui.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("shui.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("shui.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("shui.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("shui.ycl11"));
+				sYclAll.setYcl12(request.getParameter("shui.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("shui.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("shui.shiyanren"));
+				sYclAll.setYcl0(request.getParameter("shui.ycl0"));
+				sYclAll.setYcl1(request.getParameter("shui.ycl1"));
+				sYclAll.setYcl2(request.getParameter("shui.ycl2"));
+				sYclAll.setYcl3(request.getParameter("shui.ycl3"));
+				sYclAll.setYcl4(request.getParameter("shui.ycl4"));
+				sYclAll.setYcl5(request.getParameter("shui.ycl5"));
+				
+				sYclAll.setCunchudidian(request.getParameter("shui.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("shui.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("shui.rukushijian"));
+				sYclAll.setPici(request.getParameter("shui.pici"));
+				
+				sYclAll.setBiaoji(0);
+//				sYclAll.setYcl6(request.getParameter("shui.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("shui.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("shui.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("shui.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("shui.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.saveOrUpdate(sYclAll);
+			}else if(request.getParameter("leixing").equals("外加剂")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("waijiaji.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("waijiaji.scchangjia"));
+				sYclAll.setChandi(request.getParameter("waijiaji.chandi"));
+				sYclAll.setGuige(request.getParameter("waijiaji.guige"));
+				sYclAll.setXinghao(request.getParameter("waijiajixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("waijiaji.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("waijiaji.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("waijiaji.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("waijiaji.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("waijiaji.ycl11"));
+				sYclAll.setYcl12(request.getParameter("waijiaji.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("waijiaji.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("waijiaji.shiyanren"));
+				sYclAll.setYcl0(request.getParameter("waijiaji.ycl0"));
+				sYclAll.setYcl1(request.getParameter("waijiaji.ycl1"));
+				sYclAll.setYcl2(request.getParameter("waijiaji.ycl2"));
+				sYclAll.setYcl3(request.getParameter("waijiaji.ycl3"));
+				sYclAll.setYcl4(request.getParameter("waijiaji.ycl4"));
+				sYclAll.setYcl5(request.getParameter("waijiaji.ycl5"));
+				sYclAll.setYcl6(request.getParameter("waijiaji.ycl6"));
+				sYclAll.setYcl7(request.getParameter("waijiaji.ycl7"));
+				
+				sYclAll.setCunchudidian(request.getParameter("waijiaji.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("waijiaji.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("waijiaji.rukushijian"));
+				sYclAll.setPici(request.getParameter("waijiaji.pici"));
+				
+				sYclAll.setBiaoji(0);
+//				sYclAll.setYcl8(request.getParameter("waijiaji.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("waijiaji.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("waijiaji.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.saveOrUpdate(sYclAll);
+			}else if(request.getParameter("leixing").equals("其他")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("qita.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("qita.scchangjia"));
+				sYclAll.setChandi(request.getParameter("qita.chandi"));
+				sYclAll.setGuige(request.getParameter("qita.guige"));
+				sYclAll.setXinghao(request.getParameter("qitaxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("qita.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("qita.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("qita.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("qita.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("qita.ycl11"));
+				sYclAll.setYcl12(request.getParameter("qita.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("qita.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("qita.shiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("qita.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("qita.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("qita.rukushijian"));
+				sYclAll.setPici(request.getParameter("qita.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("qita.ycl0"));
+				sYclAll.setYcl1(request.getParameter("qita.ycl1"));
+				sYclAll.setYcl2(request.getParameter("qita.ycl2"));
+				sYclAll.setYcl3(request.getParameter("qita.ycl3"));
+				sYclAll.setYcl4(request.getParameter("qita.ycl4"));
+				sYclAll.setYcl5(request.getParameter("qita.ycl5"));
+				sYclAll.setYcl6(request.getParameter("qita.ycl6"));
+				sYclAll.setYcl7(request.getParameter("qita.ycl7"));
+				sYclAll.setYcl8(request.getParameter("qita.ycl8"));
+				sYclAll.setYcl9(request.getParameter("qita.ycl9"));
+				sYclAll.setYcl10(request.getParameter("qita.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.saveOrUpdate(sYclAll);
+			}
+//			sYclAllService.saveOrUpdate(t);
+			systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = "s_ycl_all更新失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+	}
+	
+	
+	
+	/**
+	 * 更新s_ycl_all
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(params = "doCopy")
+	@ResponseBody
+	public AjaxJson doCopy(SYclAllEntity sYclAll, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		message = "s_ycl_all更新成功";
+//		SYclAllEntity t = sYclAllService.get(SYclAllEntity.class, sYclAll.getId());
+		try {
+//			sYclAll.setId(request.getParameter("id"));
+			if(request.getParameter("leixing").equals("水泥")){
+				sYclAll.setMingcheng(request.getParameter("shuini.mingcheng"));
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setScchangjia(request.getParameter("shuini.scchangjia"));
+				sYclAll.setChandi(request.getParameter("shuini.chandi"));
+				sYclAll.setGuige(request.getParameter("shuini.guige"));
+				sYclAll.setXinghao(request.getParameter("shuinixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("shuini.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("shuini.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("shuini.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("shuini.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("shuini.ycl11"));
+				sYclAll.setYcl12(request.getParameter("shuini.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("shuini.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("shuini.shiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("shuini.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("shuini.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("shuini.rukushijian"));
+				sYclAll.setPici(request.getParameter("shuini.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("shuini.ycl0"));
+				sYclAll.setYcl1(request.getParameter("shuini.ycl1"));
+				sYclAll.setYcl2(request.getParameter("shuini.ycl2"));
+				sYclAll.setYcl3(request.getParameter("shuini.ycl3"));
+				sYclAll.setYcl4(request.getParameter("shuini.ycl4"));
+				sYclAll.setYcl5(request.getParameter("shuini.ycl5"));
+				sYclAll.setYcl6(request.getParameter("shuini.ycl6"));
+				sYclAll.setYcl7(request.getParameter("shuini.ycl7"));
+				sYclAll.setYcl8(request.getParameter("shuini.ycl8"));
+				sYclAll.setYcl9(request.getParameter("shuini.ycl9"));
+				sYclAll.setYcl10(request.getParameter("shuini.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("粉煤灰")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("fenmeihui.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("fenmeihui.scchangjia"));
+				sYclAll.setChandi(request.getParameter("fenmeihui.chandi"));
+				sYclAll.setGuige(request.getParameter("fenmeihui.guige"));
+				sYclAll.setXinghao(request.getParameter("fenmeihuixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("fenmeihui.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("fenmeihui.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("fenmeihui.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("fenmeihui.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("fenmeihui.ycl11"));
+				sYclAll.setYcl12(request.getParameter("fenmeihui.ycl12"));
+				
+				sYclAll.setCunchudidian(request.getParameter("fenmeihui.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("fenmeihui.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("fenmeihui.rukushijian"));
+				sYclAll.setPici(request.getParameter("fenmeihui.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setBgbianhao(request.getParameter("fenmeihui.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("fenmeihui.shiyanren"));
+				sYclAll.setYcl0(request.getParameter("fenmeihui.ycl0"));
+				sYclAll.setYcl1(request.getParameter("fenmeihui.ycl1"));
+				sYclAll.setYcl2(request.getParameter("fenmeihui.ycl2"));
+				sYclAll.setYcl3(request.getParameter("fenmeihui.ycl3"));
+				sYclAll.setYcl4(request.getParameter("fenmeihui.ycl4"));
+				sYclAll.setYcl5(request.getParameter("fenmeihui.ycl5"));
+				sYclAll.setYcl6(request.getParameter("fenmeihui.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("fenmeihui.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("fenmeihui.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("fenmeihui.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("fenmeihui.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("矿粉")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("kuangfen.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("kuangfen.scchangjia"));
+				sYclAll.setChandi(request.getParameter("kuangfen.chandi"));
+				sYclAll.setGuige(request.getParameter("kuangfen.guige"));
+				sYclAll.setXinghao(request.getParameter("kuangfenxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("kuangfen.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("kuangfen.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("kuangfen.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("kuangfen.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("kuangfen.ycl11"));
+				sYclAll.setYcl12(request.getParameter("kuangfen.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("kuangfen.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("kuangfen.shiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("kuangfen.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("kuangfen.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("kuangfen.rukushijian"));
+				sYclAll.setPici(request.getParameter("kuangfen.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("kuangfen.ycl0"));
+				sYclAll.setYcl1(request.getParameter("kuangfen.ycl1"));
+				sYclAll.setYcl2(request.getParameter("kuangfen.ycl2"));
+				sYclAll.setYcl3(request.getParameter("kuangfen.ycl3"));
+				sYclAll.setYcl4(request.getParameter("kuangfen.ycl4"));
+				sYclAll.setYcl5(request.getParameter("kuangfen.ycl5"));
+				sYclAll.setYcl6(request.getParameter("kuangfen.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("kuangfen.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("kuangfen.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("kuangfen.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("kuangfen.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("粗集料")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("cunjiliao.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("cunjiliao.scchangjia"));
+				sYclAll.setChandi(request.getParameter("cunjiliao.chandi"));
+				sYclAll.setGuige(request.getParameter("cunjiliao.guige"));
+				sYclAll.setXinghao(request.getParameter("cunjiliaoxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("cunjiliao.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("cunjiliao.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("cunjiliao.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("cunjiliao.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("cunjiliao.ycl11"));
+				sYclAll.setYcl12(request.getParameter("cunjiliao.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("cunjiliao.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("cunjiliao.shiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("cunjiliao.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("cunjiliao.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("cunjiliao.rukushijian"));
+				sYclAll.setPici(request.getParameter("cunjiliao.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("cunjiliao.ycl0"));
+				sYclAll.setYcl1(request.getParameter("cunjiliao.ycl1"));
+				sYclAll.setYcl2(request.getParameter("cunjiliao.ycl2"));
+				sYclAll.setYcl3(request.getParameter("cunjiliao.ycl3"));
+				sYclAll.setYcl4(request.getParameter("cunjiliao.ycl4"));
+				sYclAll.setYcl5(request.getParameter("cunjiliao.ycl5"));
+//				sYclAll.setYcl6(request.getParameter("cunjiliao.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("cunjiliao.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("cunjiliao.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("cunjiliao.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("cunjiliao.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("细集料")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("xijiliao.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("xijiliao.scchangjia"));
+				sYclAll.setChandi(request.getParameter("xijiliao.chandi"));
+				sYclAll.setGuige(request.getParameter("xijiliao.guige"));
+				sYclAll.setXinghao(request.getParameter("xijiliaoxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("xijiliao.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("xijiliao.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("xijiliao.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("xijiliao.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("xijiliao.ycl11"));
+				sYclAll.setYcl12(request.getParameter("xijiliao.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("xijiliao.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("xijiliao.shiyanren"));
+				
+				
+				sYclAll.setCunchudidian(request.getParameter("xijiliao.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("xijiliao.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("xijiliao.rukushijian"));
+				sYclAll.setPici(request.getParameter("xijiliao.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("xijiliao.ycl0"));
+				sYclAll.setYcl1(request.getParameter("xijiliao.ycl1"));
+				sYclAll.setYcl2(request.getParameter("xijiliao.ycl2"));
+				sYclAll.setYcl3(request.getParameter("xijiliao.ycl3"));
+				sYclAll.setYcl4(request.getParameter("xijiliao.ycl4"));
+				sYclAll.setYcl5(request.getParameter("xijiliao.ycl5"));
+				sYclAll.setYcl6(request.getParameter("xijiliao.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("xijiliao.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("xijiliao.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("xijiliao.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("xijiliao.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("水")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("shui.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("shui.scchangjia"));
+				sYclAll.setChandi(request.getParameter("shui.chandi"));
+				sYclAll.setGuige(request.getParameter("shui.guige"));
+				sYclAll.setXinghao(request.getParameter("shuixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("shui.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("shui.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("shui.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("shui.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("shui.ycl11"));
+				sYclAll.setYcl12(request.getParameter("shui.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("shui.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("shui.shiyanren"));
+				sYclAll.setYcl0(request.getParameter("shui.ycl0"));
+				sYclAll.setYcl1(request.getParameter("shui.ycl1"));
+				sYclAll.setYcl2(request.getParameter("shui.ycl2"));
+				sYclAll.setYcl3(request.getParameter("shui.ycl3"));
+				sYclAll.setYcl4(request.getParameter("shui.ycl4"));
+				sYclAll.setYcl5(request.getParameter("shui.ycl5"));
+				
+				sYclAll.setCunchudidian(request.getParameter("shui.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("shui.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("shui.rukushijian"));
+				sYclAll.setPici(request.getParameter("shui.pici"));
+				
+				sYclAll.setBiaoji(0);
+//				sYclAll.setYcl6(request.getParameter("shui.ycl6"));
+//				sYclAll.setYcl7(request.getParameter("shui.ycl7"));
+//				sYclAll.setYcl8(request.getParameter("shui.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("shui.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("shui.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("外加剂")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("waijiaji.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("waijiaji.scchangjia"));
+				sYclAll.setChandi(request.getParameter("waijiaji.chandi"));
+				sYclAll.setGuige(request.getParameter("waijiaji.guige"));
+				sYclAll.setXinghao(request.getParameter("waijiajixinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("waijiaji.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("waijiaji.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("waijiaji.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("waijiaji.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("waijiaji.ycl11"));
+				sYclAll.setYcl12(request.getParameter("waijiaji.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("waijiaji.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("waijiaji.shiyanren"));
+				sYclAll.setYcl0(request.getParameter("waijiaji.ycl0"));
+				sYclAll.setYcl1(request.getParameter("waijiaji.ycl1"));
+				sYclAll.setYcl2(request.getParameter("waijiaji.ycl2"));
+				sYclAll.setYcl3(request.getParameter("waijiaji.ycl3"));
+				sYclAll.setYcl4(request.getParameter("waijiaji.ycl4"));
+				sYclAll.setYcl5(request.getParameter("waijiaji.ycl5"));
+				sYclAll.setYcl6(request.getParameter("waijiaji.ycl6"));
+				sYclAll.setYcl7(request.getParameter("waijiaji.ycl7"));
+				
+				sYclAll.setCunchudidian(request.getParameter("waijiaji.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("waijiaji.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("waijiaji.rukushijian"));
+				sYclAll.setPici(request.getParameter("waijiaji.pici"));
+				
+				sYclAll.setBiaoji(0);
+//				sYclAll.setYcl8(request.getParameter("waijiaji.ycl8"));
+//				sYclAll.setYcl9(request.getParameter("waijiaji.ycl9"));
+//				sYclAll.setYcl9(request.getParameter("waijiaji.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.save(sYclAll);
+			}else if(request.getParameter("leixing").equals("其他")){
+				sYclAll.setBiaoduanid(request.getParameter("tspdepartId"));
+				sYclAll.setMingcheng(request.getParameter("qita.mingcheng"));
+				sYclAll.setScchangjia(request.getParameter("qita.scchangjia"));
+				sYclAll.setChandi(request.getParameter("qita.chandi"));
+				sYclAll.setGuige(request.getParameter("qita.guige"));
+				sYclAll.setXinghao(request.getParameter("qitaxinghao"));
+				sYclAll.setJcshuliang( new BigDecimal(request.getParameter("qita.jcshuliang")).setScale(8,BigDecimal.ROUND_HALF_UP));
+				sYclAll.setPicihao(request.getParameter("qita.picihao"));
+				sYclAll.setSyxingmu(request.getParameter("qita.syxingmu"));
+				sYclAll.setQyshijian(request.getParameter("qita.qyshijian"));
+				sYclAll.setYcl11(request.getParameter("qita.ycl11"));
+				sYclAll.setYcl12(request.getParameter("qita.ycl12"));
+				sYclAll.setBgbianhao(request.getParameter("qita.bgbianhao"));
+				sYclAll.setShiyanren(request.getParameter("qita.shiyanren"));
+				
+				sYclAll.setCunchudidian(request.getParameter("qita.cunchudidian"));
+				sYclAll.setSyshijian(request.getParameter("qita.syshijian"));
+				sYclAll.setRukushijian(request.getParameter("qita.rukushijian"));
+				sYclAll.setPici(request.getParameter("qita.pici"));
+				
+				sYclAll.setBiaoji(0);
+				sYclAll.setYcl0(request.getParameter("qita.ycl0"));
+				sYclAll.setYcl1(request.getParameter("qita.ycl1"));
+				sYclAll.setYcl2(request.getParameter("qita.ycl2"));
+				sYclAll.setYcl3(request.getParameter("qita.ycl3"));
+				sYclAll.setYcl4(request.getParameter("qita.ycl4"));
+				sYclAll.setYcl5(request.getParameter("qita.ycl5"));
+				sYclAll.setYcl6(request.getParameter("qita.ycl6"));
+				sYclAll.setYcl7(request.getParameter("qita.ycl7"));
+				sYclAll.setYcl8(request.getParameter("qita.ycl8"));
+				sYclAll.setYcl9(request.getParameter("qita.ycl9"));
+				sYclAll.setYcl10(request.getParameter("qita.ycl10"));
+//				MyBeanUtils.copyBeanNotNull2Bean(sYclAll, t);
+				sYclAllService.save(sYclAll);
+			}
+//			sYclAllService.saveOrUpdate(t);
+			systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = "s_ycl_all更新失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+	}
+	
+
+	/**
+	 * s_ycl_all新增页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "goAdd")
+	public ModelAndView goAdd(SYclAllEntity sYclAll, HttpServletRequest req) {
+		List<SYclGuigexinghaomEntity> List = new ArrayList<SYclGuigexinghaomEntity>();
+		List<SYclGuigexinghaosEntity> sList = new ArrayList<SYclGuigexinghaosEntity>();
+		if (StringUtil.isNotEmpty(sYclAll.getId())) {
+			sYclAll = sYclAllService.getEntity(SYclAllEntity.class, sYclAll.getId());
+			req.setAttribute("sYclAllPage", sYclAll);
+		}
+		List.addAll((List)systemService.getList(SYclGuigexinghaomEntity.class));
+		req.setAttribute("List", List);
+		sList.addAll((List)systemService.getList(SYclGuigexinghaosEntity.class));
+		req.setAttribute("sList", sList);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar day = Calendar.getInstance();
+		String time=sdf.format(day.getTime());
+		req.setAttribute("time", time);
+		String departId=(String)req.getSession().getAttribute("userdepartid");
+		//获取对应的下拉项目部
+		//第一步获取当前的最上级departid
+		List<TSDepart> departlist=new ArrayList<TSDepart>();
+		TSDepart depart=new TSDepart();
+		
+		if(departId!=null && departId.length()>0){
+			dpt=systemService.getEntity(TSDepart.class, departId);
+			//dpt.setId(pid);
+			//List<TSDepart> list=systemService.findByQueryString("from t_s_depart where ID = '"+pid+"'");
+			setUserlft(dpt.getLft());
+			setUserrgt(dpt.getRgt());
+		}else{
+			HttpSession session = req.getSession();
+			setUserlft(Integer.parseInt( session.getAttribute("userlft").toString()));
+			setUserrgt(Integer.parseInt(session.getAttribute("userrgt").toString()));
+		}
+		DataGrid dataGrid = new DataGrid();
+		departlist = sYclAllService.getDatagrid6(depart, dataGrid,userlft,userrgt);
+		req.setAttribute("departlist", departlist);
+
+		return new ModelAndView("com/shtoone/qms/bhz/sYclAll-add");
+	}
+	
+	
+	/**
+	 * s_ycl_all编辑页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "copyandadd")
+	public ModelAndView copyandadd(SYclAllEntity sYclAll, HttpServletRequest req) {
+		List<SYclGuigexinghaomEntity> List = new ArrayList<SYclGuigexinghaomEntity>();
+		List<SYclGuigexinghaosEntity> sList = new ArrayList<SYclGuigexinghaosEntity>();
+		if (StringUtil.isNotEmpty(sYclAll.getId())) {
+			sYclAll = sYclAllService.getEntity(SYclAllEntity.class, sYclAll.getId());
+			req.setAttribute("sYclAllPage", sYclAll);
+		}
+		
+		List.addAll((List)systemService.getList(SYclGuigexinghaomEntity.class));
+		req.setAttribute("List", List);
+		sList.addAll((List)systemService.getList(SYclGuigexinghaosEntity.class));
+		req.setAttribute("sList", sList);
+		/*String departId=(String)req.getSession().getAttribute("userdepartid");*/
+		/*if (StringUtil.isNotEmpty(departId)) {
+			TSDepart tspDepart = new TSDepart();
+			TSDepart tsDepart = new TSDepart();
+			TSDepart depart = systemService.getEntity(TSDepart.class, sYclAll.getBiaoduanid());
+			tspDepart.setId(depart.getId());
+			tspDepart.setDepartname(depart.getDepartname());
+			tsDepart.setTSPDepart(tspDepart);
+			req.setAttribute("depart", tsDepart);*/
+		/*}*/
+			
+			String departId=(String)req.getSession().getAttribute("userdepartid");
+			//获取对应的下拉项目部
+			//第一步获取当前的最上级departid
+			List<TSDepart> departlist=new ArrayList<TSDepart>();
+			TSDepart depart=new TSDepart();
+			
+			if(departId!=null && departId.length()>0){
+				dpt=systemService.getEntity(TSDepart.class, departId);
+				setUserlft(dpt.getLft());
+				setUserrgt(dpt.getRgt());
+			}else{
+				HttpSession session = req.getSession();
+				setUserlft(Integer.parseInt( session.getAttribute("userlft").toString()));
+				setUserrgt(Integer.parseInt(session.getAttribute("userrgt").toString()));
+			}
+			DataGrid dataGrid = new DataGrid();
+			departlist = sYclAllService.getDatagrid6(depart, dataGrid,userlft,userrgt);
+			req.setAttribute("departlist", departlist);
+		return new ModelAndView("com/shtoone/qms/bhz/sYclAll-copy");
+	}
+	
+	
+	/**
+	 * s_ycl_all编辑页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "goUpdate")
+	public ModelAndView goUpdate(SYclAllEntity sYclAll, HttpServletRequest req) {
+		List<SYclGuigexinghaomEntity> List = new ArrayList<SYclGuigexinghaomEntity>();
+		List<SYclGuigexinghaosEntity> sList = new ArrayList<SYclGuigexinghaosEntity>();
+		if (StringUtil.isNotEmpty(sYclAll.getId())) {
+			sYclAll = sYclAllService.getEntity(SYclAllEntity.class, sYclAll.getId());
+			req.setAttribute("sYclAllPage", sYclAll);
+		}
+		
+		List.addAll((List)systemService.getList(SYclGuigexinghaomEntity.class));
+		req.setAttribute("List", List);
+		sList.addAll((List)systemService.getList(SYclGuigexinghaosEntity.class));
+		req.setAttribute("sList", sList);
+		
+		
+		String departId=(String)req.getSession().getAttribute("userdepartid");
+		//获取对应的下拉项目部
+		//第一步获取当前的最上级departid
+		List<TSDepart> departlist=new ArrayList<TSDepart>();
+		TSDepart depart=new TSDepart();
+		
+		if(departId!=null && departId.length()>0){
+			dpt=systemService.getEntity(TSDepart.class, departId);
+			setUserlft(dpt.getLft());
+			setUserrgt(dpt.getRgt());
+		}else{
+			HttpSession session = req.getSession();
+			setUserlft(Integer.parseInt( session.getAttribute("userlft").toString()));
+			setUserrgt(Integer.parseInt(session.getAttribute("userrgt").toString()));
+		}
+		DataGrid dataGrid = new DataGrid();
+		departlist = sYclAllService.getDatagrid6(depart, dataGrid,userlft,userrgt);
+		req.setAttribute("departlist", departlist);
+		/*String departId=(String)req.getSession().getAttribute("userdepartid");*/
+		/*if (StringUtil.isNotEmpty(departId)) {*/
+			/*TSDepart tspDepart = new TSDepart();
+			TSDepart tsDepart = new TSDepart();
+			TSDepart depart = systemService.getEntity(TSDepart.class, sYclAll.getBiaoduanid());
+			tspDepart.setId(depart.getId());
+			tspDepart.setDepartname(depart.getDepartname());
+			tsDepart.setTSPDepart(tspDepart);
+			req.setAttribute("depart", tsDepart);*/
+		/*}*/
+		return new ModelAndView("com/shtoone/qms/bhz/sYclAll-update");
+	}
+
+	public Integer getUserlft() {
+		return userlft;
+	}
+
+	public void setUserlft(Integer userlft) {
+		this.userlft = userlft;
+	}
+
+	public Integer getUserrgt() {
+		return userrgt;
+	}
+
+	public void setUserrgt(Integer userrgt) {
+		this.userrgt = userrgt;
+	}
+}

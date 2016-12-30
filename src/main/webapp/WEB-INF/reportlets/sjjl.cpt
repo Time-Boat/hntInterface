@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20131111" releaseVersion="7.0.5">
+<ReportWebAttr>
+<ServerPrinter/>
+<WebPageContent>
+<ToolBars/>
+<WebPage isPage="false" isShowAsImage="false" isAutoScale="false" isTDHeavy="false"/>
+</WebPageContent>
+<WebWriteContent>
+<ToolBars/>
+<SelectedColor/>
+<WebWrite isSheet="false"/>
+<UnloadCheck/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[1143000,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[17487900,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" s="0">
+<O>
+<![CDATA[使用说明：]]></O>
+<Expand/>
+</C>
+<C c="0" r="1" s="0">
+<O>
+<![CDATA[1.编辑报告会自动调出最新的一条历史数据，方便填写]]></O>
+<Expand/>
+</C>
+<C c="0" r="2" s="0">
+<O>
+<![CDATA[2.可以输入指定的历史委托编号，回车后再点编辑报告]]></O>
+<Expand/>
+</C>
+<C c="0" r="3" s="0">
+<Expand/>
+</C>
+<C c="0" r="4" s="0">
+<O>
+<![CDATA[系统近期更新记录：]]></O>
+<Expand/>
+</C>
+<C c="0" r="5" s="0">
+<O>
+<![CDATA[2014.08.19 更新：另根据指挥部统一要求，升级具体内容如下：]]></O>
+<Expand/>
+</C>
+<C c="0" r="6" s="0">
+<O>
+<![CDATA[           1.修改钢筋焊接接头试验报告检测评定依据]]></O>
+<Expand/>
+</C>
+<C c="0" r="7" s="0">
+<O>
+<![CDATA[           2.钢筋原材报告中内径偏差(mm) 取消平均值改为逐支检查]]></O>
+<Expand/>
+</C>
+<C c="0" r="8" s="0">
+<O>
+<![CDATA[           3.修正钢筋原材、焊接、连接试验记录及报告中部份黑体字体]]></O>
+<Expand/>
+</C>
+<C c="0" r="9" s="0">
+<O>
+<![CDATA[           4.修改混凝土和喷射混凝土抗压强试验报告检测评定依据]]></O>
+<Expand/>
+</C>
+<C c="0" r="10" s="0">
+<O>
+<![CDATA[2014.06.12 更新：优化平台速度]]></O>
+<Expand/>
+</C>
+<C c="0" r="11" s="0">
+<O>
+<![CDATA[2014.05.26 更新：客户端软件更新，优化在网络状况不好情况下的数据上传]]></O>
+<Expand/>
+</C>
+<C c="0" r="12" s="0">
+<O>
+<![CDATA[2014.05.26 更新：委托单更新，另存时记录历史委托单，编辑报告时优先使用]]></O>
+<Expand/>
+</C>
+<C c="0" r="13" s="0">
+<O>
+<![CDATA[2014.05.13 更新：直接在委托中出报告，按照工管中心会议要求升级最新版]]></O>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting orientation="1">
+<Margin top="986400" left="2743200" bottom="986400" right="2743200"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAF"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

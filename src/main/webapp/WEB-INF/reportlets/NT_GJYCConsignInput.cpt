@@ -1,0 +1,2991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20131111" releaseVersion="7.0.5">
+<TableDataMap>
+<TableData name="ds_Consign" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from T_Consign where 1=2 ${if(len(WTID)==0,""," or WTID = '"+WTID+"'")}]]></Query>
+</TableData>
+<TableData name="ds_shiyanshi" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="shiyanshi_guid"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[ShiyanshiInfo]A where 1= 2 ${if(len(shiyanshi_guid)==0,""," or shiyanshi_guid = '"+shiyanshi_guid+"'")}]]></Query>
+</TableData>
+<TableData name="ds_Testname" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT TestName,F_DEVTYPE,TestId FROM dbo.[T_Menu_Config]A where F_DEVTYPE='1' or F_DEVTYPE='2']]></Query>
+</TableData>
+<TableData name="ds_depart" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="userrgt"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userlft"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[t_s_depart]A where rgt = lft + 1  and (lft between ${userlft} and ${userrgt})]]></Query>
+</TableData>
+<TableData name="ds_gjycwt" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from T_Gjycwt where 1=2 ${if(len(WTID)==0,""," or wtid = '"+WTID+"'")}]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebPageContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.form.ui.CustomToolBarButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[返回]]></Text>
+<IconName>
+<![CDATA[frozzen]]></IconName>
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_GJYCConsignList.cpt&op=write&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm);]]></Content>
+</JavaScript>
+</Widget>
+<Widget class="com.fr.form.ui.CustomToolBarButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[另存]]></Text>
+<IconName>
+<![CDATA[submitforcily]]></IconName>
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=I8]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_GJYCConsignInput.cpt&op=write&WTID='+WTID+'&iscopy=1&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm);]]></Content>
+</JavaScript>
+</Widget>
+<Widget class="com.fr.report.web.button.PDFPrint">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Utils-Print[Client]A')}]]></Text>
+<IconName>
+<![CDATA[pdfprint]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.Print">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Print')}]]></Text>
+<IconName>
+<![CDATA[print]]></IconName>
+<PrintButtons appletPrint="false"/>
+</Widget>
+<Widget class="com.fr.report.web.button.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Export')}]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="true" excelO="true" excelS="true" word="true" image="true" html="true"/>
+</Widget>
+<Widget class="com.fr.report.web.button.page.Previous">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('ReportServerP-Previous')}]]></Text>
+<IconName>
+<![CDATA[previous]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.page.Next">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('ReportServerP-Next')}]]></Text>
+<IconName>
+<![CDATA[next]]></IconName>
+</Widget>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<WebPage isPage="false" isShowAsImage="false" isAutoScale="false" isTDHeavy="false"/>
+</WebPageContent>
+<WebWriteContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.button.write.Submit">
+<WidgetAttr/>
+<Text>
+<![CDATA[保存]]></Text>
+<IconName>
+<![CDATA[submit]]></IconName>
+<Verify failVerifySubmit="false"/>
+</Widget>
+<Widget class="com.fr.form.ui.CustomToolBarButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[另存]]></Text>
+<IconName>
+<![CDATA[submitforcily]]></IconName>
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=I8]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_GJYCConsignInput.cpt&op=write&WTID='+WTID+'&iscopy=1&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm);]]></Content>
+</JavaScript>
+</Widget>
+<Widget class="com.fr.form.ui.CustomToolBarButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[删除]]></Text>
+<IconName>
+<![CDATA[delete]]></IconName>
+<JavaScript class="com.fr.js.Commit2DBJavaScript">
+<Parameters/>
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.UpdateConfig">
+<Table schema="dbo" name="T_Consign"/>
+<ColumnConfig name="WTID" isKey="true" skipUnmodified="false">
+<ColumnRow column="8" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="MSTATUS" isKey="false" skipUnmodified="false">
+<O>
+<![CDATA[-1]]></O>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[WTID]]></CNAME>
+<Compare op="1">
+<O>
+<![CDATA[]]></O>
+</Compare>
+</Condition>
+</DMLConfig>
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[FR.Msg.alert('上海同望信息提醒','成功删除一条数据！',function(){location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_GJYCConsignList.cpt&op=write&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm)});]]></Content>
+</JavaScript>
+</JavaScript>
+</Widget>
+<Widget class="com.fr.form.ui.CustomToolBarButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[返回]]></Text>
+<IconName>
+<![CDATA[frozzen]]></IconName>
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="MSTATUS"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$MSTATUS]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanxm"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanxm]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'NT_GJYCConsignList.cpt&op=write&MSTATUS='+MSTATUS+'&shiyanshi='+shiyanshi+'&shiyanxm='+shiyanxm)]]></Content>
+</JavaScript>
+</Widget>
+<Widget class="com.fr.report.web.button.write.Verify">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Verify-Data_Verify')}]]></Text>
+<IconName>
+<![CDATA[verify]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.PDFPrint">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Utils-Print[Client]A')}]]></Text>
+<IconName>
+<![CDATA[pdfprint]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.button.Print">
+<WidgetAttr/>
+<Text>
+<![CDATA[${i18n('Print')}]]></Text>
+<IconName>
+<![CDATA[print]]></IconName>
+<PrintButtons appletPrint="false"/>
+</Widget>
+<Widget class="com.fr.report.web.button.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[导出]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="true" excelO="true" excelS="true" word="true" image="true" html="true"/>
+</Widget>
+<Widget class="com.fr.report.web.button.write.ShowCellValue">
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="false"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue/>
+</Widget>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<SelectedColor/>
+<WebWrite isSheet="false"/>
+<UnloadCheck/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="试验任务委托单">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[0,864000,864000,1447800,228600,1440000,1440000,1440000,1440000,1440000,1440000,1440000,1440000,2781300,1440000,1440000,2209800,1728000,2171700,2667000,1440000,1440000,1440000,1296000,1296000,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2362200,3657600,2894400,3276600,3124200,2743200,2743200,2895600,2628900,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0">
+<Expand/>
+</C>
+<C c="0" r="1" cs="2" rs="2" s="0">
+<Expand dir="0"/>
+</C>
+<C c="2" r="1" cs="3" rs="2" s="1">
+<O>
+<![CDATA[试验任务委托单]]></O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="1" cs="3">
+<O>
+<![CDATA[表号：铁建试报14]]></O>
+<Expand/>
+</C>
+<C c="8" r="1">
+<O t="I">
+<![CDATA[1]]></O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.ColWidthHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+<C c="5" r="2" cs="3">
+<O>
+<![CDATA[批准文号：铁建设函[2009]A27号]]></O>
+<Expand/>
+</C>
+<C c="8" r="2">
+<O>
+<![CDATA[试验类型]]></O>
+<Expand/>
+</C>
+<C c="0" r="3">
+<O>
+<![CDATA[委托单位]]></O>
+<Expand/>
+</C>
+<C c="1" r="3" cs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="WTDW"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="4" r="3" s="3">
+<O>
+<![CDATA[委托编号  ]]></O>
+<Expand/>
+</C>
+<C c="5" r="3" cs="3" s="4">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="WTBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="3">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="TESTTYPE"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="4">
+<Expand/>
+</C>
+<C c="0" r="5" cs="2" s="5">
+<O>
+<![CDATA[所属试验室]]></O>
+<CellPageAttr/>
+<Expand/>
+</C>
+<C c="2" r="5" cs="6" s="6">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(nr = 1 || iscopy = 1, $userdepartid, ds_Consign.select(shiyanshi_guid))]]></Attributes>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetAttr/>
+<EMSG>
+<![CDATA[试验室不能为空！]]></EMSG>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<DirectEdit>
+<![CDATA[false]]></DirectEdit>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="ID" viName="departname"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[ds_depart]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.DatabaseDictionary">
+<FormulaDictAttr kiName="ID" viName="departname"/>
+<DBDictAttr tableName="t_s_depart" schemaName="dbo" ki="-1" vi="-1" kiName="ID" viName="departname"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+</Dictionary>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="5">
+<Expand/>
+</C>
+<C c="0" r="6" cs="2" s="6">
+<O>
+<![CDATA[样品名称]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="6" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="YPMC"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="6">
+<O>
+<![CDATA[WTID]]></O>
+<Expand/>
+</C>
+<C c="0" r="7" cs="2" s="6">
+<O>
+<![CDATA[送样编号]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="7" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="SYBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF((nr = 1 && len(rec_guid) = 0) || iscopy = 1, CreateGuid($fr_username, sessionID, TODAY(), "200000"), ds_Consign.select(WTID))]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="0" r="8" cs="2" s="6">
+<O>
+<![CDATA[产地厂名]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="8" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="CDCM"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="8">
+<O>
+<![CDATA[试验usertestid]]></O>
+<Expand/>
+</C>
+<C c="0" r="9" cs="2" s="6">
+<O>
+<![CDATA[试样数量]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="9" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="SYSL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<EMSG>
+<![CDATA[试样数量不能为空]]></EMSG>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<NumberAttr allowDecimals="false" allowNegative="false">
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="9">
+<O t="I">
+<![CDATA[100047]]></O>
+<Expand/>
+</C>
+<C c="0" r="10" cs="2" s="7">
+<O>
+<![CDATA[规格种类]]></O>
+<Expand/>
+</C>
+<C c="2" r="10" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="GGZL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="10">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="SYSULiang"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="11" cs="2" s="6">
+<O>
+<![CDATA[代表数量]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="11" cs="6" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="DDSL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="8" r="11" s="4">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(iscopy = 1 && len(ds_Consign.select(rec_guid)) > 0, ds_Consign.select(WTBH), ds_Consign.select(hisWTBH))]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="0" r="12" cs="2" s="6">
+<O>
+<![CDATA[取样地点]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="12" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="QYDD"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="12">
+<Expand/>
+</C>
+<C c="0" r="13" cs="2" s="6">
+<O>
+<![CDATA[样品描述]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="13" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="YPMS"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="13">
+<Expand/>
+</C>
+<C c="0" r="14" cs="2" s="6">
+<O>
+<![CDATA[取样日期]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="14" cs="6" s="9">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="QYRQ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="14">
+<Expand/>
+</C>
+<C c="0" r="15" cs="2" s="6">
+<O>
+<![CDATA[工程名称]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="15" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="GCMC"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="15">
+<Expand/>
+</C>
+<C c="0" r="16" cs="2" s="6">
+<O>
+<![CDATA[施工部位]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="16" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="SGBW"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="16">
+<Expand/>
+</C>
+<C c="0" r="17" cs="2" s="6">
+<O>
+<![CDATA[检验标准]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="17" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="JYBZ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="17">
+<Expand/>
+</C>
+<C c="0" r="18" cs="2" s="6">
+<O>
+<![CDATA[试验项目]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="18" s="10">
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="3" r="18" cs="4" s="10">
+<O>
+<![CDATA[钢筋试验]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="18" s="11">
+<Expand/>
+</C>
+<C c="8" r="18">
+<Expand/>
+</C>
+<C c="0" r="19" cs="2" s="6">
+<O>
+<![CDATA[试样验收意见]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="19" cs="6" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="YSYJ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="19">
+<Expand/>
+</C>
+<C c="0" r="20" cs="2" s="6">
+<O>
+<![CDATA[收样日期]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="20" cs="6" s="9">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="SYRQ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="20">
+<Expand/>
+</C>
+<C c="0" r="21" cs="2" s="6">
+<O>
+<![CDATA[取样人]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="21" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="QYR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="21" s="6">
+<O>
+<![CDATA[取样见证人]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="21" cs="3" s="12">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="QYJZR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="21">
+<Expand/>
+</C>
+<C c="0" r="22" cs="2" s="6">
+<O>
+<![CDATA[委托人]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="22" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="WTR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="22" s="6">
+<O>
+<![CDATA[委托单位负责人]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="22" cs="3" s="12">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="WTFZR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="22">
+<Expand/>
+</C>
+<C c="0" r="23" cs="2" s="6">
+<O>
+<![CDATA[住址及邮编]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="23" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="ZZYB"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="23" s="6">
+<O>
+<![CDATA[联系电话]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="23" cs="3" s="12">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="LLDH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="23">
+<Expand/>
+</C>
+<C c="0" r="24" cs="2" s="6">
+<O>
+<![CDATA[收样人]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="24" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="SYR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="24" s="6">
+<O>
+<![CDATA[预计报告发出日期]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="5" r="24" cs="3" s="13">
+<O t="DSColumn">
+<Attributes dsName="ds_Consign" columnName="YJBGRQ"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="8" r="24">
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<Margin top="2880000" left="3600000" bottom="2880000" right="2880000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL1">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_Consign"/>
+<ColumnConfig name="WTID" isKey="true" skipUnmodified="false">
+<ColumnRow column="8" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="shiyanshi_guid" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="WTBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="WTDW" isKey="false" skipUnmodified="true">
+<ColumnRow column="1" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="YPMC" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="6"/>
+</ColumnConfig>
+<ColumnConfig name="SYBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="7"/>
+</ColumnConfig>
+<ColumnConfig name="CDCM" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="SYSL" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="GGZL" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="DDSL" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="11"/>
+</ColumnConfig>
+<ColumnConfig name="QYDD" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="YPMS" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="QYRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="GCMC" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="SGBW" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="JYBZ" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="SYXM" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="YSYJ" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="SYRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="20"/>
+</ColumnConfig>
+<ColumnConfig name="QYR" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="QYJZR" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="WTR" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="WTFZR" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="ZZYB" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="LLDH" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="SYR" isKey="false" skipUnmodified="true">
+<ColumnRow column="2" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="YJBGRQ" isKey="false" skipUnmodified="true">
+<ColumnRow column="5" row="24"/>
+</ColumnConfig>
+<ColumnConfig name="TESTTYPE" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="SFSYJ" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="1"/>
+</ColumnConfig>
+<ColumnConfig name="SYXMMC" isKey="false" skipUnmodified="true">
+<ColumnRow column="3" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="SYSULiang" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="hisWTBH" isKey="false" skipUnmodified="true">
+<ColumnRow column="8" row="11"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+</ReportWriteAttr>
+</Report>
+<Report class="com.fr.report.worksheet.WorkSheet" name="钢筋原材委托送样单">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[0,1371600,533400,723900,723900,723900,723900,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,1152000,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[1638300,1066800,1219200,2552700,1343520,1343520,1343520,1343520,1343520,1343520,1343520,1714500,1343520,1343520,1343520,1343520,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="13" s="14">
+<O t="DSColumn">
+<Attributes dsName="ds_shiyanshiInfo" columnName="F_XMBT"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="0" r="1">
+<Expand/>
+</C>
+<C c="1" r="1">
+<Expand/>
+</C>
+<C c="2" r="1" cs="12" s="15">
+<O>
+<![CDATA[钢筋原材委托送样单]]></O>
+<Expand/>
+</C>
+<C c="0" r="3" cs="2" s="16">
+<O>
+<![CDATA[记录编号]]></O>
+<Expand/>
+</C>
+<C c="2" r="3" cs="6" s="17">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="F_JLBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="3" cs="2" s="16">
+<O>
+<![CDATA[报告编号]]></O>
+<Expand/>
+</C>
+<C c="10" r="3" cs="6" s="17">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="F_BGBH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="4" cs="2" s="16">
+<O>
+<![CDATA[产品批号]]></O>
+<Expand/>
+</C>
+<C c="2" r="4" cs="6" s="18">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="F_SCPH"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="4" cs="2" s="16">
+<O>
+<![CDATA[表面形状]]></O>
+<Expand/>
+</C>
+<C c="10" r="4" cs="6" s="17">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="BiaoMianXingShi"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="5" cs="2" s="19">
+<O>
+<![CDATA[炉(批)号]]></O>
+<Expand/>
+</C>
+<C c="2" r="5" cs="6" s="20">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="lupihao"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="5" cs="2" s="16">
+<O>
+<![CDATA[报告日期]]></O>
+<Expand/>
+</C>
+<C c="10" r="5" cs="6" s="21">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF((nr = 1 && len(rec_guid) = 0) || iscopy = 1, FORMAT(Now(), "yyyy-MM-dd"), ds_gjycwt.SELECT(F_BGRQ))]]></Attributes>
+</O>
+<CellGUIAttr printBackground="false"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.DateEditor">
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="12" r="6">
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="13" r="6">
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="7" cs="2" rs="3" s="5">
+<O>
+<![CDATA[仪器设备及环境条件]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="2" r="7" cs="2" s="6">
+<O>
+<![CDATA[仪器设备名称]]></O>
+<Expand/>
+</C>
+<C c="4" r="7" cs="2" s="6">
+<O>
+<![CDATA[型号]]></O>
+<Expand/>
+</C>
+<C c="6" r="7" cs="2" s="6">
+<O>
+<![CDATA[  管理 编号]]></O>
+<Expand/>
+</C>
+<C c="8" r="7" cs="2" s="5">
+<O>
+<![CDATA[  示值 范围]]></O>
+<Expand/>
+</C>
+<C c="10" r="7" cs="2" s="6">
+<O>
+<![CDATA[分辨力]]></O>
+<Expand/>
+</C>
+<C c="12" r="7" cs="2" s="6">
+<O>
+<![CDATA[温度(℃)]]></O>
+<Expand/>
+</C>
+<C c="14" r="7" cs="2" s="6">
+<O>
+<![CDATA[相对湿度（%）]]></O>
+<Expand/>
+</C>
+<C c="2" r="8" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="YiQiSheBei1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="4" r="8" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="XingHao1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="6" r="8" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="GuanLiBianHao1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="8" cs="2" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="ShiZhiFanWei1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="10" r="8" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="FenBianLi1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="12" r="8" cs="2" rs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="WenDu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="14" r="8" cs="2" rs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="XiangDuiShiDu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="2" r="9" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="YiQiSheBei2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="4" r="9" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="XingHao2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<CellInsertPolicy/>
+<Expand dir="0"/>
+</C>
+<C c="6" r="9" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="GuanLiBianHao2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="9" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="ShiZhiFanWei2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="10" r="9" cs="2" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="FenBianLi2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="10" cs="2" s="6">
+<O>
+<![CDATA[样品状态描述]]></O>
+<Expand/>
+</C>
+<C c="2" r="10" cs="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="YangPinZhuangTaiMiaoShu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="6" r="10" cs="2" s="6">
+<O>
+<![CDATA[采用标准]]></O>
+<Expand/>
+</C>
+<C c="8" r="10" cs="8" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="CaiYongBiaoZhun"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand/>
+</C>
+<C c="0" r="11" cs="4" s="5">
+<O>
+<![CDATA[项目]]></O>
+<Expand/>
+</C>
+<C c="4" r="11" cs="4" s="5">
+<O>
+<![CDATA[标准规定]]></O>
+<Expand/>
+</C>
+<C c="8" r="11" cs="4" s="5">
+<O>
+<![CDATA[项目]]></O>
+<Expand/>
+</C>
+<C c="12" r="11" cs="4" s="5">
+<O>
+<![CDATA[标准规定]]></O>
+<Expand/>
+</C>
+<C c="0" r="12" cs="4" s="5">
+<O>
+<![CDATA[内径d(mm)]]></O>
+<Expand/>
+</C>
+<C c="4" r="12" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue13"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="12" cs="4" s="6">
+<O>
+<![CDATA[屈标比ReL/R]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="12" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="qubiaobibiaozhun"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="13" cs="4" s="5">
+<O>
+<![CDATA[重量偏差(%)]]></O>
+<Expand/>
+</C>
+<C c="4" r="13" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue14"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="13" cs="4" s="6">
+<O>
+<![CDATA[伸长率δ(%)]]></O>
+<Expand/>
+</C>
+<C c="12" r="13" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="14" cs="4" s="5">
+<O>
+<![CDATA[公称直径a（mm）]]></O>
+<Expand/>
+</C>
+<C c="4" r="14" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="14" cs="4" s="5">
+<O>
+<![CDATA[最大力下的总伸长率Agt(%)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="12" r="14" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue7"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="15" cs="4" s="6">
+<O>
+<![CDATA[公称截面面积So(mm²)]]></O>
+<CellGUIAttr showAsImage="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="15" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="15" cs="4" s="6">
+<O>
+<![CDATA[拉断处位置描述]]></O>
+<Expand/>
+</C>
+<C c="12" r="15" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue8"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="16" cs="4" s="5">
+<O>
+<![CDATA[原始标距Lo(mm)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="16" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="16" cs="4" s="6">
+<O>
+<![CDATA[弯曲角度α(°)]]></O>
+<Expand/>
+</C>
+<C c="12" r="16" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue9"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="17" cs="4" s="5">
+<O>
+<![CDATA[屈服强度Re(MPa)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="17" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="17" cs="4" s="6">
+<O>
+<![CDATA[弯曲直径D(mm)]]></O>
+<Expand/>
+</C>
+<C c="12" r="17" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue10"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="18" cs="4" s="5">
+<O>
+<![CDATA[抗拉强度Rm(MPa)]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="18" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="18" cs="4" s="6">
+<O>
+<![CDATA[弯曲外表面描述]]></O>
+<Expand/>
+</C>
+<C c="12" r="18" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue11"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="19" cs="4" s="6">
+<O>
+<![CDATA[强屈比Rm/ReL]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="19" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="qiangqbbiaozhun"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="19" cs="4" s="6">
+<O>
+<![CDATA[弯曲结果]]></O>
+<Expand/>
+</C>
+<C c="12" r="19" cs="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="StandardValue12"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="20" rs="10" s="5">
+<O>
+<![CDATA[尺寸及重量测量]]></O>
+<Expand/>
+</C>
+<C c="1" r="20" cs="3" s="5">
+<O>
+<![CDATA[试件编号]]></O>
+<Expand/>
+</C>
+<C c="4" r="20" cs="2" s="5">
+<O t="I">
+<![CDATA[1]]></O>
+<Expand/>
+</C>
+<C c="6" r="20" cs="2" s="5">
+<O t="I">
+<![CDATA[2]]></O>
+<Expand/>
+</C>
+<C c="8" r="20" cs="2" s="5">
+<O t="I">
+<![CDATA[3]]></O>
+<Expand/>
+</C>
+<C c="10" r="20" cs="2" s="5">
+<O t="I">
+<![CDATA[4]]></O>
+<Expand/>
+</C>
+<C c="12" r="20" cs="2" s="5">
+<O t="I">
+<![CDATA[5]]></O>
+<Expand/>
+</C>
+<C c="14" r="20" cs="2" s="5">
+<O t="I">
+<![CDATA[6]]></O>
+<Expand/>
+</C>
+<C c="1" r="21" cs="3" s="5">
+<O>
+<![CDATA[内径d(mm)]]></O>
+<Expand/>
+</C>
+<C c="4" r="21" cs="2" s="22">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="neijin1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="6" r="21" cs="2" s="22">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="neijin2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="21" cs="2" s="22">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="neijin3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="10" r="21" cs="2" s="22">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="neijin4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="12" r="21" cs="2" s="22">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="neijin5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="14" r="21" cs="2" s="22">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="neijin6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="22" cs="3" s="5">
+<O>
+<![CDATA[内径平均值(mm)]]></O>
+<Expand/>
+</C>
+<C c="4" r="22" cs="12" s="22">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="neijinavg"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="23" cs="3" s="5">
+<O>
+<![CDATA[内径标准尺寸(mm)]]></O>
+<Expand/>
+</C>
+<C c="4" r="23" cs="12" s="22">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="neijinbz"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="24" cs="3" s="5">
+<O>
+<![CDATA[内径偏差(mm)]]></O>
+<Expand/>
+</C>
+<C c="4" r="24" cs="2" s="22">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(E22) > 0, E22 - E24, "")]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="6" r="24" cs="2" s="22">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(G22) > 0, G22 - G24, "")]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="8" r="24" cs="2" s="22">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(I22) > 0, I22 - I24, "")]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="10" r="24" cs="2" s="22">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(K22) > 0, K22 - K24, "")]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="12" r="24" cs="2" s="22">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(M22) > 0, M22 - M24, "")]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="14" r="24" cs="2" s="22">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=IF(Len(O22) > 0, O22 - O24, "")]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="1" r="25" cs="3" s="5">
+<O>
+<![CDATA[长度L(mm)]]></O>
+<Expand/>
+</C>
+<C c="4" r="25" cs="2" s="23">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="changdu1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="6" r="25" cs="2" s="23">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="changdu2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="8" r="25" cs="2" s="23">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="changdu3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="10" r="25" cs="2" s="23">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="changdu4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="12" r="25" cs="2" s="23">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="changdu5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="14" r="25" cs="2" s="23">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="changdu6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="26" cs="3" s="5">
+<O>
+<![CDATA[总长度(mm)]]></O>
+<Expand/>
+</C>
+<C c="4" r="26" cs="12" s="23">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="zongchangdu"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="27" cs="3" s="5">
+<O>
+<![CDATA[总重量(kg)]]></O>
+<Expand/>
+</C>
+<C c="4" r="27" cs="12" s="24">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="zongzl"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="28" cs="3" s="5">
+<O>
+<![CDATA[理论重量(kg/m)]]></O>
+<Expand/>
+</C>
+<C c="4" r="28" cs="12" s="24">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="lilunzl"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="1" r="29" cs="3" s="5">
+<O>
+<![CDATA[重量偏差(%)]]></O>
+<Expand/>
+</C>
+<C c="4" r="29" cs="12" s="22">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="zhongliangpc"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.NumberEditor">
+<WidgetAttr/>
+<NumberAttr>
+<widgetValue/>
+</NumberAttr>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="30" cs="2" rs="2" s="25">
+<O>
+<![CDATA[ 附注：]]></O>
+<Expand/>
+</C>
+<C c="2" r="30" cs="14" rs="2" s="26">
+<O t="DSColumn">
+<Attributes dsName="ds_gjycwt" columnName="Remark"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr/>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+<Expand dir="0"/>
+</C>
+<C c="0" r="32">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[='试验任务委托单'!I8]]></Attributes>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.RowHeightHighlightAction"/>
+</Highlight>
+</HighlightList>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<Submiter class="com.fr.report.write.BuiltInSQLSubmiter" name="内置SQL1">
+<Attributes dsName="qms"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="dbo" name="T_Gjycwt"/>
+<ColumnConfig name="wtid" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="32"/>
+</ColumnConfig>
+<ColumnConfig name="F_JLBH" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_BGBH" isKey="false" skipUnmodified="false">
+<ColumnRow column="10" row="3"/>
+</ColumnConfig>
+<ColumnConfig name="F_SCPH" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="BiaoMianXingShi" isKey="false" skipUnmodified="false">
+<ColumnRow column="10" row="4"/>
+</ColumnConfig>
+<ColumnConfig name="lupihao" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="F_BGRQ" isKey="false" skipUnmodified="false">
+<ColumnRow column="10" row="5"/>
+</ColumnConfig>
+<ColumnConfig name="YiQiSheBei1" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="YiQiSheBei2" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="XingHao1" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="XingHao2" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="GuanLiBianHao1" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="GuanLiBianHao2" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="ShiZhiFanWei1" isKey="false" skipUnmodified="false">
+<ColumnRow column="8" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="ShiZhiFanWei2" isKey="false" skipUnmodified="false">
+<ColumnRow column="8" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="FenBianLi1" isKey="false" skipUnmodified="false">
+<ColumnRow column="10" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="FenBianLi2" isKey="false" skipUnmodified="false">
+<ColumnRow column="10" row="9"/>
+</ColumnConfig>
+<ColumnConfig name="WenDu" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="XiangDuiShiDu" isKey="false" skipUnmodified="false">
+<ColumnRow column="14" row="8"/>
+</ColumnConfig>
+<ColumnConfig name="YangPinZhuangTaiMiaoShu" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="CaiYongBiaoZhun" isKey="false" skipUnmodified="false">
+<ColumnRow column="8" row="10"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue1" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue2" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue3" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue4" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue5" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue6" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="13"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue7" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="14"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue8" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="15"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue9" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="16"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue10" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="17"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue11" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="18"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue12" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="qiangqbbiaozhun" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="19"/>
+</ColumnConfig>
+<ColumnConfig name="qubiaobibiaozhun" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="neijin6" isKey="false" skipUnmodified="false">
+<ColumnRow column="14" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="neijin5" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="neijin4" isKey="false" skipUnmodified="false">
+<ColumnRow column="10" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="neijin3" isKey="false" skipUnmodified="false">
+<ColumnRow column="8" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="neijin2" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="neijin1" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="21"/>
+</ColumnConfig>
+<ColumnConfig name="neijinavg" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="22"/>
+</ColumnConfig>
+<ColumnConfig name="neijinbz" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="23"/>
+</ColumnConfig>
+<ColumnConfig name="changdu6" isKey="false" skipUnmodified="false">
+<ColumnRow column="14" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="changdu5" isKey="false" skipUnmodified="false">
+<ColumnRow column="12" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="changdu4" isKey="false" skipUnmodified="false">
+<ColumnRow column="10" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="changdu3" isKey="false" skipUnmodified="false">
+<ColumnRow column="8" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="changdu2" isKey="false" skipUnmodified="false">
+<ColumnRow column="6" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="changdu1" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="25"/>
+</ColumnConfig>
+<ColumnConfig name="zongzl" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="27"/>
+</ColumnConfig>
+<ColumnConfig name="zongchangdu" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="26"/>
+</ColumnConfig>
+<ColumnConfig name="lilunzl" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="28"/>
+</ColumnConfig>
+<ColumnConfig name="zhongliangpc" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="29"/>
+</ColumnConfig>
+<ColumnConfig name="Remark" isKey="false" skipUnmodified="false">
+<ColumnRow column="2" row="30"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue13" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="12"/>
+</ColumnConfig>
+<ColumnConfig name="StandardValue14" isKey="false" skipUnmodified="false">
+<ColumnRow column="4" row="13"/>
+</ColumnConfig>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</Submiter>
+</ReportWriteAttr>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="false" delayPlaying="false" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<ParameterUI class="com.fr.form.main.parameter.FormParameterUI">
+<Layout class="com.fr.form.ui.container.WAbsoluteLayout">
+<WidgetName name="para"/>
+<WidgetAttr/>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.parameter.FormSubmitButton">
+<WidgetName name="Search"/>
+<WidgetAttr disabled="true" invisible="true"/>
+<Text>
+<![CDATA[查询]]></Text>
+<Hotkeys>
+<![CDATA[enter]]></Hotkeys>
+</InnerWidget>
+<BoundsAttr x="283" y="25" width="80" height="21"/>
+</Widget>
+<LCAttr vgap="0" hgap="0"/>
+</Layout>
+</ParameterUI>
+<Parameter>
+<Attributes name="userlft"/>
+<O>
+<![CDATA[0]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userrgt"/>
+<O>
+<![CDATA[0]]></O>
+</Parameter>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="宋体" style="1" size="144"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="宋体" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Top style="1" color="-16777216"/>
+<Bottom style="1" color="-16777216"/>
+<Left style="1" color="-16777216"/>
+<Right style="1" color="-16777216"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="112"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Bottom style="1" color="-16777216"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" vertical_alignment="3" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" vertical_alignment="3" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" vertical_alignment="3" imageLayout="1" paddingLeft="0" paddingRight="0">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Bottom style="1" color="-16777216"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.0]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.000]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAF"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

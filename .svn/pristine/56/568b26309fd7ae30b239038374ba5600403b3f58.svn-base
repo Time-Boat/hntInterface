@@ -1,0 +1,16 @@
+package com.shtoone.qms.service.bhz;
+
+import net.sf.json.JSONObject;
+
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.common.service.CommonService;
+
+import com.shtoone.qms.entity.bhz.HandsetEntity;
+import com.shtoone.qms.entity.bhz.HandsetsEntity;
+
+public interface HandsetServiceI extends CommonService{
+	public JSONObject getDatagrid3(HandsetEntity pageObj, DataGrid dataGrid,
+			String departid, String userlft, String userrgt);
+	
+	public JSONObject getDatagrid4(HandsetsEntity pageObj, DataGrid dataGrid,String id);
+}

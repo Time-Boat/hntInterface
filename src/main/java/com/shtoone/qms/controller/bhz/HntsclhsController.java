@@ -1,0 +1,371 @@
+package com.shtoone.qms.controller.bhz;
+
+import java.io.File;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import jxl.Cell;
+import jxl.CellType;
+import jxl.Workbook;
+import jxl.format.Border;
+import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.jeecgframework.core.common.controller.BaseController;
+import org.jeecgframework.core.common.model.json.AjaxJson;
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.constant.Globals;
+import org.jeecgframework.core.util.StringUtil;
+import org.jeecgframework.web.system.pojo.base.TSDepart;
+import org.jeecgframework.web.system.service.SystemService;
+import org.jeecgframework.core.util.MyBeanUtils;
+
+import com.shtoone.qms.entity.HntsclhsEntity;
+import com.shtoone.qms.entity.bhz.HntviewEntity;
+import com.shtoone.qms.service.bhz.HntsclhsServiceI;
+
+
+@Controller
+@RequestMapping("/hntsclhsController")
+public class HntsclhsController extends BaseController {
+	
+	@Autowired
+	private HntsclhsServiceI hntsclhsService;	
+	
+	@Autowired
+	private SystemService systemService;
+	
+	private String ctBegin;
+	private String ctEnd;
+	private TSDepart dpt;//上级部门
+	private String shebeibianhao;
+	private Integer userlft = 0;
+	private Integer userrgt =0;
+	private String message;
+	
+	public TSDepart getDpt() {
+		return dpt;
+	}
+
+	public void setDpt(TSDepart dpt) {
+		this.dpt = dpt;
+	}
+
+	public Integer getUserlft() {
+		return userlft;
+	}
+
+	public void setUserlft(Integer userlft) {
+		this.userlft = userlft;
+	}
+
+	public Integer getUserrgt() {
+		return userrgt;
+	}
+
+	public void setUserrgt(Integer userrgt) {
+		this.userrgt = userrgt;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	public String getCtEnd() {
+		return ctEnd;
+	}
+
+	public void setCtEnd(String ctEnd) {
+		this.ctEnd = ctEnd;
+	}
+	
+	public String getCtBegin() {
+		return ctBegin;
+	}
+
+	public void setCtBegin(String ctBegin) {
+		this.ctBegin = ctBegin;
+	}
+
+	public String getShebeibianhao() {
+		return shebeibianhao;
+	}
+
+	public void setShebeibianhao(String shebeibianhao) {
+		this.shebeibianhao = shebeibianhao;
+	}
+
+	/**
+	 * 生产量核算分析列表 页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "hntsclhs")
+	public ModelAndView hntsclhs(HttpServletRequest request) {
+		return new ModelAndView("com/shtoone/qms/bhz/hntsclhsList");
+	}
+
+
+	@RequestMapping(params = "datagrid")
+	public void datagrid(HntviewEntity hntsclhs,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+		ctBegin = request.getParameter("startTime");   
+		ctEnd = request.getParameter("endTime");
+		String pid=request.getParameter("departid");
+		shebeibianhao=request.getParameter("shebeibianhao");
+		HttpSession session = request.getSession();
+		Integer userlft = (Integer) session.getAttribute("userlft");
+		Integer userrgt =(Integer) session.getAttribute("userrgt");
+		if(StringUtil.isNotEmpty(pid)){
+			dpt=systemService.getEntity(TSDepart.class, pid);
+			userlft=dpt.getLft();
+			userrgt=dpt.getRgt();
+		}
+		
+		if (null == ctBegin && null == ctEnd) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar day = Calendar.getInstance();
+			setCtEnd(sdf.format(day.getTime()));
+			day.add(Calendar.MONTH, -1);
+			setCtBegin(sdf.format(day.getTime()));
+		}
+
+		JSONObject jObject = hntsclhsService.getDatagrid3(hntsclhs, dataGrid,ctBegin,ctEnd,userlft,userrgt,shebeibianhao);
+		
+		String optype = request.getParameter("type");
+		//查询操作
+		if(!StringUtil.isNotEmpty(optype)&&!"exportData".equals(optype)){
+			responseDatagrid(response, jObject);
+			
+			//如果是导出操作
+		}else {
+			Iterator it = jObject.keys();
+			JSONArray array = null;
+			while (it.hasNext()) {
+				String key = (String) it.next();
+				if (key.equals("rows")) {
+					array = jObject.getJSONArray(key);
+				}
+			}
+			exportXls(request,response,array);
+			
+		}
+	}
+
+	/**
+	 * 删除产能分析
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "del")
+	@ResponseBody
+	public AjaxJson del(HntsclhsEntity hntsclhs, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		hntsclhs = systemService.getEntity(HntsclhsEntity.class, hntsclhs.getId());
+		message = "产能分析删除成功";
+		hntsclhsService.delete(hntsclhs);
+		systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+		
+		j.setMsg(message);
+		return j;
+	}
+
+
+	/**
+	 * 添加产能分析
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(params = "save")
+	@ResponseBody
+	public AjaxJson save(HntsclhsEntity hntsclhs, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		if (StringUtil.isNotEmpty(hntsclhs.getId())) {
+			message = "产能分析更新成功";
+			HntsclhsEntity t = hntsclhsService.get(HntsclhsEntity.class, hntsclhs.getId());
+			try {
+				MyBeanUtils.copyBeanNotNull2Bean(hntsclhs, t);
+				hntsclhsService.saveOrUpdate(t);
+				systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
+			} catch (Exception e) {
+				e.printStackTrace();
+				message = "产能分析更新失败";
+			}
+		} else {
+			message = "产能分析添加成功";
+			hntsclhsService.save(hntsclhs);
+			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
+		}
+		j.setMsg(message);
+		return j;
+	}
+	
+	
+	/**
+	 * 导出excel
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	public void exportXls(HttpServletRequest request,HttpServletResponse response,JSONArray array) {
+		
+		List<String> dataList=new ArrayList<String>();
+		if(null != array && array.size()>0){
+			StringBuilder databuilder = new StringBuilder();
+			
+			for (int i = 0; i < array.size(); i++) {
+				JSONObject key = array.getJSONObject(i);
+				
+				databuilder = new StringBuilder();
+					
+				databuilder.append(StringUtil.Null2Blank((String)key.get("chuliaoshijian")));
+				databuilder.append("&^&");
+				databuilder.append(StringUtil.Null2Blank((String)key.get("gongchengmingcheng")));
+				databuilder.append("&^&");
+				databuilder.append(StringUtil.Null2Blank((String)key.get("sigongdidian")));
+				databuilder.append("&^&");
+				databuilder.append(StringUtil.Null2Blank((String)key.get("jiaozuobuwei")));
+				databuilder.append("&^&");
+				databuilder.append(StringUtil.Null2Blank((String)key.get("qiangdudengji")));
+				databuilder.append("&^&");
+				databuilder.append(StringUtil.Null2Blank((String)key.get("peifanghao")));
+				databuilder.append("&^&");
+				databuilder.append(StringUtil.Null2Blank((String)key.get("gujifangshu")));
+				databuilder.append("&^&");
+				
+				dataList.add(databuilder.toString());
+			}
+		}
+			String path=request.getSession().getServletContext().getRealPath("/");
+			String excelName="excel\\"+System.currentTimeMillis()+".xls";
+			File file=new File(path+"export");
+			if(!file.exists()){
+				file.mkdir();
+			}
+			
+			importswsmstjExcel(path+"excel/生产量核算.xls", path+excelName,/*StringUtil.Null2Blank(deptname)*/"", ctBegin+"～"+ctEnd, dataList);
+			try {
+				response.reset();
+				response.setContentType("bin");
+				response.setHeader("Content-Disposition",
+						"attachment; filename=\"" + excelName + "\"");
+				java.io.FileInputStream in = new java.io.FileInputStream(path
+						+ excelName);
+				PrintWriter out = response.getWriter();
+				int i;
+				while ((i = in.read()) != -1) {
+					out.write(i);
+				}
+				in.close();
+		        out.flush();
+		        out.close();
+			} catch (Exception e) {
+			}
+		
+	}
+	
+	public static void importswsmstjExcel(String modelName,String excelName,String bhzmc,
+			String shijian,List<String> dataList){
+		try{
+			//Excel获得文件
+			Workbook wb=Workbook.getWorkbook(new File(modelName)); 
+			//打开一个文件的副本，并且指定数据写回到原文件
+			WritableWorkbook book=Workbook.createWorkbook(new File(excelName), wb);
+			WritableSheet sheet = book.getSheet(0);
+			if (null != bhzmc && bhzmc.equalsIgnoreCase("-请选择拌和站-")) {
+				bhzmc = "";
+			}
+			Label a= (Label)sheet.getWritableCell(0, 1);
+			a.setString(String.format("%s生产量核算", bhzmc));
+			a = (Label)sheet.getWritableCell(0, 2);
+			a.setString(shijian);
+	
+			WritableFont font= new WritableFont(WritableFont.createFont("宋体"),10,WritableFont.NO_BOLD);
+			WritableCellFormat cellFormat2 = new WritableCellFormat(font); 
+			cellFormat2.setBorder(Border.ALL, jxl.format.BorderLineStyle.THIN);
+			 //把水平对齐方式指定为居中 
+			cellFormat2.setAlignment(jxl.format.Alignment.CENTRE); 
+			//把垂直对齐方式指定为居中 
+			cellFormat2.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
+			//设置自动换行
+			cellFormat2.setWrap(true);
+			jxl.write.NumberFormat format = new jxl.write.NumberFormat("#"); 
+			jxl.write.WritableCellFormat wcf = new jxl.write.WritableCellFormat(format);
+			
+			jxl.write.NumberFormat format1 = new jxl.write.NumberFormat("###,##0.00"); 
+			WritableCellFormat cellFormat1 = new WritableCellFormat(font,format1);
+			cellFormat1.setBorder(Border.ALL, jxl.format.BorderLineStyle.THIN);
+			 //把水平对齐方式指定为居中 
+			cellFormat1.setAlignment(jxl.format.Alignment.CENTRE); 
+			//把垂直对齐方式指定为居中 
+			cellFormat1.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
+			//设置自动换行
+			cellFormat1.setWrap(true);
+			
+			for(int j=0;j<dataList.size();j++){
+				String data=(String)dataList.get(j);//获得一条数据
+				String [] dataArray=data.split("\\&\\^\\&");//分解数据
+				for(int k=0;k<dataArray.length;k++){
+					Cell cell = sheet.getCell(k,j+5);
+						if (cell.getType()==CellType.NUMBER) {
+						    jxl.write.Number nb=(jxl.write.Number) cell;
+					        nb.setValue(Double.parseDouble(dataArray[k]));
+						} else {
+							if (cell.getType()==CellType.LABEL) {
+							       Label label=(Label) cell;
+							       label.setString(dataArray[k]);
+							} else {
+								Label label=new Label(k,j+5,dataArray[k]);
+								label.setCellFormat(cellFormat2); 
+								sheet.addCell(label);
+							}
+					}
+				}
+			}
+			//写入数据并关闭文件 
+			book.write();
+			book.close();
+			wb.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 产能分析列表页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "addorupdate")
+	public ModelAndView addorupdate(HntsclhsEntity hntsclhs, HttpServletRequest req) {
+		if (StringUtil.isNotEmpty(hntsclhs.getId())) {
+			hntsclhs = hntsclhsService.getEntity(HntsclhsEntity.class, hntsclhs.getId());
+			req.setAttribute("hntsclhsPage", hntsclhs);
+		}
+		return new ModelAndView("hntsclhs/hntsclhs");
+	}
+
+}

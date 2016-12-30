@@ -1,0 +1,144 @@
+package com.shtoone.qms.entity.bhz;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.SequenceGenerator;
+
+/**   
+ * @Title: Entity
+ * @Description: 接口管理
+ * @author zhangdaihao
+ * @date 2015-06-12 16:37:42
+ * @version V1.0   
+ *
+ */
+@Entity
+@Table(name = "Banhezhanfasong", schema = "")
+@DynamicUpdate(true)
+@DynamicInsert(true)
+@SuppressWarnings("serial")
+public class BanhezhanfasongEntity implements java.io.Serializable {
+	/**id*/
+	private java.lang.Integer id;
+	/**leixing*/
+	private java.lang.String leixing;
+	/**urlname*/
+	private java.lang.String urlname;
+	/**username*/
+	private java.lang.String username;
+	/**password*/
+	private java.lang.String password;
+	/**remark*/
+	private java.lang.String remark;
+	
+	/**
+	 *方法: 取得java.lang.Integer
+	 *@return: java.lang.Integer  id
+	 */
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name ="ID",nullable=false,precision=10,scale=0,length=4)
+	public java.lang.Integer getId(){
+		return this.id;
+	}
+
+	/**
+	 *方法: 设置java.lang.Integer
+	 *@param: java.lang.Integer  id
+	 */
+	public void setId(java.lang.Integer id){
+		this.id = id;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  leixing
+	 */
+	@Column(name ="LEIXING",nullable=true,precision=50,length=50)
+	public java.lang.String getLeixing(){
+		return this.leixing;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  leixing
+	 */
+	public void setLeixing(java.lang.String leixing){
+		this.leixing = leixing;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  urlname
+	 */
+	@Column(name ="URLNAME",nullable=true,precision=500,length=500)
+	public java.lang.String getUrlname(){
+		return this.urlname;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  urlname
+	 */
+	public void setUrlname(java.lang.String urlname){
+		this.urlname = urlname;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  username
+	 */
+	@Column(name ="USERNAME",nullable=true,precision=50,length=50)
+	public java.lang.String getUsername(){
+		return this.username;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  username
+	 */
+	public void setUsername(java.lang.String username){
+		this.username = username;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  password
+	 */
+	@Column(name ="PASSWORD",nullable=true,precision=50,length=50)
+	public java.lang.String getPassword(){
+		return this.password;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  password
+	 */
+	public void setPassword(java.lang.String password){
+		this.password = password;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  remark
+	 */
+	@Column(name ="REMARK",nullable=true,precision=200,length=200)
+	public java.lang.String getRemark(){
+		return this.remark;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  remark
+	 */
+	public void setRemark(java.lang.String remark){
+		this.remark = remark;
+	}
+}

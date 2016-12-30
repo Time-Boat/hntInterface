@@ -1,0 +1,83 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="/context/mytags.jsp"%>
+<div class="easyui-layout" fit="true">
+	<div region="center" style="padding: 1px;">
+		<t:datagrid name="lilunpeibiList" title="理论配合比列表" actionUrl="lilunpeihebiController.do?datagrid" idField="id" fit="true" fitColumns="false">
+			<t:dgCol title="操作" field="opt" frozenColumn="true"></t:dgCol>
+			<t:dgFunOpt funname="lloperationcopyandadd(id)" title="复制并录入"></t:dgFunOpt>
+			<t:dgDelOpt title="删除" url="lilunpeihebiController.do?del&id={id}" />
+		    <t:dgToolBar title="理论配合比录入" icon="icon-add" url="lilunpeihebiController.do?addorupdate" funname="add" width="1200"></t:dgToolBar>
+ 			<t:dgFunOpt funname="lloperationDetailEdit(id)" title="编辑" ></t:dgFunOpt>
+   			<t:dgFunOpt funname="lloperationDetail(id)" title="查看"></t:dgFunOpt>
+			<t:dgCol title="编号" field="id" hidden="false"></t:dgCol>
+			<t:dgCol title="配合比报告编号" field="phbreportId" width="120" frozenColumn="true"></t:dgCol>
+			<t:dgCol title="所属单位" field="userGroup" width="165" replace="${departsReplace}" frozenColumn="true"></t:dgCol>
+			<t:dgCol title="报告日期" field="reportDate" width="70" frozenColumn="true"></t:dgCol>
+			<t:dgCol title="试验结论" field="testResult" width="55" frozenColumn="true"></t:dgCol>
+			<t:dgCol title="试验人员" field="tester" width="55" frozenColumn="true"></t:dgCol>
+			<t:dgCol title="拟使用工程部位" field="gongchengbuwei" ></t:dgCol>
+			<t:dgCol title="混凝土强度等级" field="qiangdudengji" width="90"></t:dgCol>
+<%-- 			<t:dgCol title="水泥用量(kg)" field="shuiniLlphb" ></t:dgCol> --%>
+<%-- 			<t:dgCol title="粉煤灰用量(kg)" field="fenmeihuiLlphb" ></t:dgCol> --%>
+<%-- 			<t:dgCol title="矿粉用量(kg)" field="kuangfenLlphb" ></t:dgCol> --%>
+<%-- 			<t:dgCol title="粗集料用量(kg)" field="xiguliaoLlphb" ></t:dgCol> --%>
+<%-- 			<t:dgCol title="细集料用量(kg)" field="chuguliaoLlphb" ></t:dgCol> --%>
+<%-- 			<t:dgCol title="拌合水用量(kg)" field="banheshuiLlphb" ></t:dgCol> --%>
+<%-- 			<t:dgCol title="外加剂用量(kg)" field="waijiajiLlphb" ></t:dgCol> --%>
+			<t:dgCol title="水胶比(%)" field="shuijiaobiLlphb" width="73"></t:dgCol>
+			<t:dgCol title="胶材用量(kg)" field="jiaocaiLlphb" width="75" ></t:dgCol>
+			<t:dgCol title="砂率(%)" field="shalvLlphb" width="55" ></t:dgCol>
+			<t:dgCol title="7d抗压强度(Mpa)" field="kangyaqiangdu7d" width="100" ></t:dgCol>
+			<t:dgCol title="28d抗压强度(Mpa)" field="kangyaqiangdu28d" width="105" ></t:dgCol>
+			<t:dgCol title="56d抗压强度(Mpa)" field="kangyaqiangdu56d" width="105"></t:dgCol>
+<%-- 			<t:dgCol title="电通量(C)" field="diantongliang"></t:dgCol> --%>
+<%-- 			<t:dgCol title="抗冻性(%)" field="kangdongxing"></t:dgCol> --%>
+<%-- 			<t:dgCol title="氯离子扩散系数(㎡/s)" field="lvkuosanxishu"></t:dgCol> --%>
+		</t:datagrid>
+		<div id="logListtb" style="padding: 3px; height: 30px"><!-- update---Author:赵俊夫  Date:20130507 for：需要加name=searchColums属性 -->
+		<div name="searchColums" style="float: left; padding-right: 15px;">
+			<table cellpadding="0" cellspacing="1" class="formtable">
+				<tr>
+					<td>所属机构:</td>
+					<td><input id="cc_lilunpeibi"  value="${depart.TSPDepart.departname}">
+						<div><input id="ts_lilunpdepartId" name="superGroup" style="display: none;" value="${depart.TSPDepart.id}"></div>
+					</td>
+					<td>报告日期:</td>
+					<td><input id="reportDate_begin" type="text" name="reportDate_begin" class="easyui-datebox" /> 至: 
+						<input id="reportDate_end" type="text" name="reportDate_end" class="easyui-datebox" /></td>	
+   					<td>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="Lilunsearch();" >查询</a></td>
+				</tr>
+			</table>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$('#cc_lilunpeibi').combotree({
+					url : 'departController.do?setPFunction&selfId=${depart.id}&type=3',
+					onClick: function(node){
+						$("#ts_lilunpdepartId").val(node.id);
+					}
+				});
+			});
+			
+			function Lilunsearch(){
+				$('#lilunpeibiList').datagrid('load', {
+					superGroup : $('#ts_lilunpdepartId').val(),
+					reportDate_begin : $("#guige").val(),
+					reportDate_end : $("#reportDate_end").val()
+				});
+			}
+			
+		 	function lloperationDetailEdit(id) {
+				add("理论配合比编辑","lilunpeihebiController.do?addorupdate&id="+id,'functionList',"1200px","500px");
+			}
+		 	
+		 	function lloperationDetail(id) {
+			 	createdetailwindow("理论配合比查看","lilunpeihebiController.do?addorupdate&id="+id,"1200px","500px");
+			}
+		 	
+		 	function lloperationcopyandadd(id) {
+		 		add("理论配合比录入","lilunpeihebiController.do?copyandadd&id="+id,'functionList',"1200px","500px");
+			}
+		</script>
+	</div>
+</div>

@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20131111" releaseVersion="7.0.5">
+<TableDataMap>
+<TableData name="ds_V_Tongji" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="userrgt"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="EndTime"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="StartTime"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userlft"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from V_Tongji where MSTATUS>0 and rgt = lft + 1 and (lft between ${userlft} and ${userrgt}) ${if(len(StartTime)==0,""," and Shiyanriqi >= '"+StartTime+"'")}  ${if(len(EndTime)==0,""," and Shiyanriqi <= '"+EndTime+"'")} order by parentdepartid]]></Query>
+</TableData>
+<TableData name="ds_Total" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="userrgt"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="EndTime"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userlft"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select count(id) as totalbg from V_Tongji where MSTATUS>0 and rgt = lft + 1 and (lft between ${userlft} and ${userrgt})  ${if(len(EndTime)==0,""," and Shiyanriqi <= '"+EndTime+"'")}]]></Query>
+</TableData>
+<TableData name="ds_Totalbuhege" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="userrgt"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="EndTime"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="userlft"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select count(id) as totalbg from V_Tongji where MSTATUS>0 and bgresult=0 and rgt = lft + 1 and (lft between ${userlft} and ${userrgt})  ${if(len(EndTime)==0,""," and Shiyanriqi <= '"+EndTime+"'")}]]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[990600,952500,723900,1409700,1152000,685800,1295400,1152000,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[7200900,5257800,1638300,1943100,2324100,2438400,1981200,2095500,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" s="0">
+<O>
+<![CDATA[上传试验报告总数]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="0" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Total" columnName="totalbg"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="2" r="0" cs="2" s="0">
+<O>
+<![CDATA[不合格总数]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="4" r="0" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_Totalbuhege" columnName="totalbg"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="5" r="0" cs="2" s="0">
+<O>
+<![CDATA[不合格比率]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="7" r="0" s="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=(E1 / B1) * 100]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="0" r="1" cs="8" s="0">
+<O>
+<![CDATA[选定的时间段内]]></O>
+<Expand/>
+</C>
+<C c="0" r="2" rs="2" s="0">
+<O>
+<![CDATA[试验项目]]></O>
+<Expand/>
+</C>
+<C c="1" r="2" rs="2" s="0">
+<O>
+<![CDATA[报告份数]]></O>
+<Expand/>
+</C>
+<C c="2" r="2" cs="2" rs="2" s="0">
+<O>
+<![CDATA[不合格份数]]></O>
+<Expand/>
+</C>
+<C c="4" r="2" rs="2" s="0">
+<O>
+<![CDATA[比例(%)]]></O>
+<Expand/>
+</C>
+<C c="5" r="2" cs="3" s="0">
+<O>
+<![CDATA[小计]]></O>
+<Expand/>
+</C>
+<C c="5" r="3" s="0">
+<O>
+<![CDATA[报告份数]]></O>
+<Expand/>
+</C>
+<C c="6" r="3" s="0">
+<O>
+<![CDATA[不合格份数]]></O>
+<Expand/>
+</C>
+<C c="7" r="3" s="0">
+<O>
+<![CDATA[比例(%)]]></O>
+<Expand/>
+</C>
+<C c="0" r="4" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_V_Tongji" columnName="SYXMMC"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="1" r="4" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_V_Tongji" columnName="id"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.SummaryGrouper">
+<FN>
+<![CDATA[com.fr.data.util.function.CountFunction]]></FN>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="2" r="4" cs="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_V_Tongji" columnName="id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNAME>
+<![CDATA[bgresult]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[0]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.SummaryGrouper">
+<FN>
+<![CDATA[com.fr.data.util.function.CountFunction]]></FN>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="4" r="4" s="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=(C5 / B5) * 100]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="5" r="4" s="1">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(B5)]]></Attributes>
+</O>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="6" r="4" s="1">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(C5)]]></Attributes>
+</O>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="7" r="4" s="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=(G5 / F5) * 100]]></Attributes>
+</O>
+<Expand leftParentDefault="false"/>
+</C>
+<C c="0" r="5" rs="2" s="0">
+<O>
+<![CDATA[标段名称]]></O>
+<CellGUIAttr showAsDefault="true"/>
+<CellPageAttr/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="5" rs="2" s="0">
+<O>
+<![CDATA[试验项目]]></O>
+<Expand/>
+</C>
+<C c="2" r="5" rs="2" s="0">
+<O>
+<![CDATA[报告份数]]></O>
+<Expand/>
+</C>
+<C c="3" r="5" rs="2" s="0">
+<O>
+<![CDATA[不合格份数]]></O>
+<Expand/>
+</C>
+<C c="4" r="5" rs="2" s="0">
+<O>
+<![CDATA[比例(%)]]></O>
+<Expand/>
+</C>
+<C c="5" r="5" cs="3" s="0">
+<O>
+<![CDATA[小计]]></O>
+<Expand/>
+</C>
+<C c="5" r="6" s="0">
+<O>
+<![CDATA[报告份数]]></O>
+<Expand/>
+</C>
+<C c="6" r="6" s="0">
+<O>
+<![CDATA[不合格份数]]></O>
+<Expand/>
+</C>
+<C c="7" r="6" s="0">
+<O>
+<![CDATA[比例(%)]]></O>
+<Expand/>
+</C>
+<C c="0" r="7" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_V_Tongji" columnName="parentdepartid"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.DatabaseDictionary">
+<FormulaDictAttr kiName="ID" viName="departname"/>
+<DBDictAttr tableName="t_s_depart" schemaName="dbo" ki="-1" vi="-1" kiName="ID" viName="departname"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+</Dictionary>
+</Present>
+<Expand dir="0"/>
+</C>
+<C c="1" r="7" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_V_Tongji" columnName="SYXMMC"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="2" r="7" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_V_Tongji" columnName="id"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.SummaryGrouper">
+<FN>
+<![CDATA[com.fr.data.util.function.CountFunction]]></FN>
+</RG>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="3" r="7" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_V_Tongji" columnName="id"/>
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNAME>
+<![CDATA[bgresult]]></CNAME>
+<Compare op="0">
+<O>
+<![CDATA[0]]></O>
+</Compare>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.SummaryGrouper">
+<FN>
+<![CDATA[com.fr.data.util.function.CountFunction]]></FN>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="4" r="7" s="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=(D8 / C8) * 100]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="5" r="7" s="1">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(C8)]]></Attributes>
+</O>
+<Expand leftParentDefault="false" left="A8"/>
+</C>
+<C c="6" r="7" s="1">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=SUM(D8)]]></Attributes>
+</O>
+<Expand leftParentDefault="false" left="A8"/>
+</C>
+<C c="7" r="7" s="2">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=(G8 / F8) * 100]]></Attributes>
+</O>
+<Expand leftParentDefault="false" left="A8"/>
+</C>
+<C c="0" r="8">
+<Expand/>
+</C>
+<C c="1" r="8">
+<Expand/>
+</C>
+<C c="2" r="8">
+<Expand/>
+</C>
+<C c="3" r="8">
+<Expand/>
+</C>
+<C c="0" r="9">
+<Expand/>
+</C>
+<C c="1" r="9">
+<Expand/>
+</C>
+<C c="2" r="9">
+<Expand/>
+</C>
+<C c="0" r="10">
+<Expand/>
+</C>
+<C c="1" r="10">
+<Expand/>
+</C>
+<C c="2" r="10">
+<Expand/>
+</C>
+<C c="0" r="11">
+<Expand/>
+</C>
+<C c="1" r="11">
+<Expand/>
+</C>
+<C c="2" r="11">
+<Expand/>
+</C>
+<C c="0" r="12">
+<Expand/>
+</C>
+<C c="1" r="12">
+<Expand/>
+</C>
+<C c="2" r="12">
+<Expand/>
+</C>
+<C c="0" r="13">
+<Expand/>
+</C>
+<C c="1" r="13">
+<Expand/>
+</C>
+<C c="2" r="13">
+<Expand/>
+</C>
+<C c="0" r="14">
+<Expand/>
+</C>
+<C c="1" r="14">
+<Expand/>
+</C>
+<C c="2" r="14">
+<Expand/>
+</C>
+<C c="3" r="14">
+<Expand/>
+</C>
+<C c="0" r="15">
+<Expand/>
+</C>
+<C c="1" r="15">
+<Expand/>
+</C>
+<C c="2" r="15">
+<Expand/>
+</C>
+<C c="0" r="16">
+<Expand/>
+</C>
+<C c="1" r="16">
+<Expand/>
+</C>
+<C c="2" r="16">
+<Expand/>
+</C>
+<C c="0" r="17">
+<Expand/>
+</C>
+<C c="1" r="17">
+<Expand/>
+</C>
+<C c="2" r="17">
+<Expand/>
+</C>
+<C c="0" r="18">
+<Expand/>
+</C>
+<C c="1" r="18">
+<Expand/>
+</C>
+<C c="2" r="18">
+<Expand/>
+</C>
+<C c="0" r="19">
+<Expand/>
+</C>
+<C c="1" r="19">
+<Expand/>
+</C>
+<C c="2" r="19">
+<Expand/>
+</C>
+<C c="0" r="20">
+<Expand/>
+</C>
+<C c="1" r="20">
+<Expand/>
+</C>
+<C c="2" r="20">
+<Expand/>
+</C>
+<C c="0" r="21">
+<Expand/>
+</C>
+<C c="1" r="21">
+<Expand/>
+</C>
+<C c="2" r="21">
+<Expand/>
+</C>
+<C c="0" r="22">
+<Expand/>
+</C>
+<C c="1" r="22">
+<Expand/>
+</C>
+<C c="2" r="22">
+<Expand/>
+</C>
+<C c="0" r="23">
+<Expand/>
+</C>
+<C c="1" r="23">
+<Expand/>
+</C>
+<C c="2" r="23">
+<Expand/>
+</C>
+<C c="0" r="24">
+<Expand/>
+</C>
+<C c="1" r="24">
+<Expand/>
+</C>
+<C c="2" r="24">
+<Expand/>
+</C>
+<C c="0" r="25">
+<Expand/>
+</C>
+<C c="1" r="25">
+<Expand/>
+</C>
+<C c="2" r="25">
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="false" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<ParameterUI class="com.fr.form.main.parameter.FormParameterUI">
+<Layout class="com.fr.form.ui.container.WAbsoluteLayout">
+<WidgetName name="para"/>
+<WidgetAttr/>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelWTDWrq_c"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[试验日期:]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="19" y="18" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.parameter.FormSubmitButton">
+<WidgetName name="Search_c"/>
+<WidgetAttr/>
+<Text>
+<![CDATA[统计]]></Text>
+<Hotkeys>
+<![CDATA[enter]]></Hotkeys>
+</InnerWidget>
+<BoundsAttr x="471" y="18" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.DateEditor">
+<Listener event="afterinit">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var StartTime= this.options.form.getWidgetByName("StartTime"); 
+var startdate = new Date();
+var m = startdate.getMonth();
+var y = startdate.getFullYear();
+startdate.setMonth(m-1);
+startdate.setDate(26);
+StartTime.setValue(startdate);]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="StartTime"/>
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="99" y="18" width="128" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelWTDW_c"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[～]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="227" y="18" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.DateEditor">
+<Listener event="afterinit">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var EndTime= this.options.form.getWidgetByName("EndTime"); 
+var startdate = new Date();
+startdate.setDate(25);
+EndTime.setValue(startdate);]]></Content>
+</JavaScript>
+</Listener>
+<WidgetName name="EndTime"/>
+<WidgetAttr/>
+<DateAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="307" y="18" width="125" height="21"/>
+</Widget>
+<LCAttr vgap="0" hgap="0"/>
+</Layout>
+<DesignAttr width="1000" height="56"/>
+</ParameterUI>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="80"/>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="2">
+<IM>
+<![CDATA[lO<9(kN.ld@UNU%p%320!n'b-/BYg<,j0G'R/e[g!1sg(hcUmbkA>4,]A#Jgf\q&HQh5@CJR^
+#%qcDHC$>CC+d&"1&_H-0lsXsFK1T_"mO*([&S\i>FDge*$X+HSAEjI.<+:*)B&0KHFSAts#
+%:\MsqC6!%F+WLpd(!M1$r_!8pcf"'QkH`A^Ta:]A~
+]]></IM>
+</Background>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.00]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAF"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

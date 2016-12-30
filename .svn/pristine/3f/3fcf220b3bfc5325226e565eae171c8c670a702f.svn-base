@@ -1,0 +1,449 @@
+package com.shtoone.qms.service.impl.bhz;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.jeecgframework.core.common.dao.jdbc.JdbcDao;
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
+import org.jeecgframework.core.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.shtoone.qms.entity.bhz.HntbhzziduancfgViewEntity;
+import com.shtoone.qms.service.bhz.MaterialServiceI;
+
+@Service
+public class MaterialServiceImpl extends CommonServiceImpl implements
+		MaterialServiceI {
+
+	@Autowired
+	private JdbcDao jdbcDao;
+
+	public JSONObject materiallist(String gongchengmingcheng,String jiaozuobuwei,String qiangdudengji,String startTime,String endTime,
+			Integer userlft,Integer userrgt,DataGrid dataGrid,String shebeibianhao) {
+		
+		String sqlWhere = getSqlWhere(gongchengmingcheng,jiaozuobuwei,qiangdudengji,startTime,endTime,userlft,userrgt,shebeibianhao);
+		// 取出总数据条数（为了分页处理, 如果不用分页，取iCount值的这个处理可以不要）
+		String sqlCnt = "select count(*) from Hntview t";
+		/*
+		 * if (!sqlWhere.isEmpty()) { sqlCnt += " where"; }
+		 */
+		Long iCount = getCountForJdbcParam(sqlCnt, null);
+
+		// 取出当前页的数据
+		StringBuffer sql = new StringBuffer();
+		appendSql(sql);
+		sql.append(" FROM hntview  a, Banhezhanxinxi b ");
+
+		if (!sql.toString().isEmpty()) {
+			sql.append(" where a.shebeibianhao=b.gprsbianhao and " +sqlWhere);
+		}
+		System.out.println(sql.toString() + "-1-");
+
+		// List<HunnintuViewDataEntity> hntview = findListbySql(sql.toString());
+		// for(HunnintuViewDataEntity obj:hntview){
+		// hv.setShi1_Shijizhi(obj.getShi1chazhi());
+		// System.out.println(hv.getShi1_Shijizhi());
+		// }
+		List<Map<String, Object>> mapList = findForJdbc(sql.toString(),
+				dataGrid.getPage(), dataGrid.getRows());
+		// 将结果集转换成页面上对应的数据集
+		Db2Page[] db2Pages = { new Db2Page("Shui1_shijizhi", "shuisj1"),
+				new Db2Page("Shui2_shijizhi", "shuisj2"),
+				new Db2Page("Shuini1_shijizhi", "flsj1"),
+				new Db2Page("Shuini2_shijizhi", "flsj2"),
+				new Db2Page("Kuangfen3_shijizhi", "flsj3"),
+				new Db2Page("Feimeihui4_shijizhi", "flsj4"),
+				new Db2Page("Fenliao5_shijizhi", "flsj5"),
+				new Db2Page("Fenliao6_shijizhi", "flsj6")
+
+				, new Db2Page("Sha1_shijizhi", "glsj1"),
+				new Db2Page("Shi1_shijizhi", "glsj2"),
+				new Db2Page("Shi2_shijizhi", "glsj3"),
+				new Db2Page("Sha2_shijizhi", "glsj4"),
+				new Db2Page("Guliao5_shijizhi", "glsj5")
+
+				, new Db2Page("Waijiaji1_shijizhi", "wjsj1"),
+				new Db2Page("Waijiaji2_shijizhi", "wjsj2"),
+				new Db2Page("Waijiaji3_shijizhi", "wjsj3"),
+				new Db2Page("Waijiaji4_shijizhi", "wjsj4")
+
+				, new Db2Page("Shui1_lilunzhi", "shuill1"),
+				new Db2Page("Shui2_lilunzhi", "shuill2"),
+				new Db2Page("Shuini1_lilunzhi", "flll1"),
+				new Db2Page("Shuini2_lilunzhi", "flll2"),
+				new Db2Page("Kuangfen3_lilunzhi", "flll3"),
+				new Db2Page("Feimeihui4_lilunzhi", "flll4"),
+				new Db2Page("Fenliao5_lilunzhi", "flll5"),
+				new Db2Page("Fenliao6_lilunzhi", "flll6")
+
+				, new Db2Page("Sha1_lilunzhi", "glll1"),
+				new Db2Page("Shi1_lilunzhi", "glll2"),
+				new Db2Page("Shi2_lilunzhi", "glll3"),
+				new Db2Page("Sha2_lilunzhi", "glll4"),
+				new Db2Page("Guliao5_lilunzhi", "glll5")
+
+				, new Db2Page("Waijiaji1_lilunzhi", "wjll1"),
+				new Db2Page("Waijiaji2_lilunzhi", "wjll2"),
+				new Db2Page("Waijiaji3_lilunzhi", "wjll3"),
+				new Db2Page("Waijiaji4_lilunzhi", "wjll4")
+
+				, new Db2Page("Gujifangshu", "gujifangshu"),
+				new Db2Page("Sha1chazhi", "sha1chazhi"),
+				new Db2Page("Sha2chazhi", "sha2chazhi"),
+				new Db2Page("Shi1chazhi", "shi1chazhi"),
+				new Db2Page("Shi2chazhi", "shi2chazhi")
+
+				, new Db2Page("Guliao5chazhi", "guliao5chazhi"),
+				new Db2Page("Shui1chazhi", "shui1chazhi"),
+				new Db2Page("Shui2chazhi", "shui2chazhi"),
+				new Db2Page("Shuini1chazhi", "shuini1chazhi"),
+				new Db2Page("Shuini2chazhi", "shuini2chazhi")
+
+				, new Db2Page("Kuangfen3chazhi", "kuangfen3chazhi"),
+				new Db2Page("Feimeihui4chazhi", "feimeihui4chazhi"),
+				new Db2Page("Fenliao5chazhi", "fenliao5chazhi")
+
+				, new Db2Page("Fenliao6chazhi", "fenliao6chazhi"),
+				new Db2Page("Waijiaji1chazhi", "waijiaji1chazhi"),
+				new Db2Page("Waijiaji2chazhi", "waijiaji2chazhi"),
+				new Db2Page("Waijiaji3chazhi", "waijiaji3chazhi"),
+				new Db2Page("Waijiaji4chazhi", "waijiaji4chazhi")
+
+		};
+		JSONObject jObject = getJsonDatagridEasyUI(mapList, iCount.intValue(),db2Pages);
+		return jObject;
+	}
+
+	// 拼查询条件（where语句）
+	String getSqlWhere(String gongchengmingcheng,String jiaozuobuwei,String qiangdudengji, String startTime, String endTime,
+			Integer userlft,Integer userrgt,String shebeibianhao) {
+		// 拼出条件语句
+		String sqlWhere = "";
+
+		if (StringUtil.isNotEmpty(startTime) && StringUtil.isNotEmpty(endTime)) {
+			if (!sqlWhere.isEmpty()) {
+				sqlWhere += " and";
+			}
+			sqlWhere += " chuliaoshijian between '"
+					+ startTime + "' and '" + endTime + "'";
+		}
+		if (StringUtil.isNotEmpty(gongchengmingcheng) && gongchengmingcheng.length()>0) {
+			if (!sqlWhere.isEmpty()) {
+				sqlWhere += " and";
+			}
+			sqlWhere += " gongchengmingcheng like '%"+gongchengmingcheng+"%'";
+		}
+		if (StringUtil.isNotEmpty(qiangdudengji) && qiangdudengji.length()>0) {
+			if (!sqlWhere.isEmpty()) {
+				sqlWhere += " and";
+			}
+			sqlWhere += " qiangdudengji like '%"+qiangdudengji+"%'";
+		}
+		if (StringUtil.isNotEmpty(jiaozuobuwei) && jiaozuobuwei.length()>0) {
+			if (!sqlWhere.isEmpty()) {
+				sqlWhere += " and";
+			}
+			sqlWhere += " jiaozuobuwei like '%"+jiaozuobuwei+"%'";
+		}
+		if (userlft>0 && userrgt>0) {
+			if (!sqlWhere.isEmpty()) {
+				sqlWhere += " and";
+			}
+			sqlWhere += " lft >= '"+userlft+"' and rgt<= '"+userrgt+"'";
+		}
+		if (StringUtil.isNotEmpty(shebeibianhao)) {
+			if (!sqlWhere.isEmpty()) {
+				sqlWhere += " and";
+			}
+			sqlWhere += " b.gprsbianhao= '"+shebeibianhao+"'";
+		}
+		return sqlWhere;
+	}
+
+	// 材料成本核算
+	public String gethntmaterialhsXml(JSONObject jObject,
+			HntbhzziduancfgViewEntity fieldview) {
+		Iterator it = jObject.keys();
+		JSONArray array = null;
+		while (it.hasNext()) {
+			String key = (String) it.next();
+			if (key.equals("rows")) {
+				array = jObject.getJSONArray(key);
+			}
+
+		}
+
+		StringBuilder strXML = new StringBuilder("");
+		strXML.append("<?xml version='1.0' encoding='utf-8'?>");
+		strXML.append("<chart palette='2' caption='材料成本核算' bgColor='#DAEDFB,#F5F9FF' ");
+		strXML.append(" showValues='0' divLineDecimalPrecision='1' limitsDecimalPrecision='1'");
+		strXML.append(" PYAxisName='实际用量' SYAxisName='误差' numberSuffix='kg'");
+		strXML.append(" SNumberSuffix='%' PNumberSuffix='kg' formatNumberScale='0'>");
+		strXML.append("<categories>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getSha1_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getShi1_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getSha2_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getShi2_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getGuliao5_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getShuini1_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getShuini2_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getKuangfen3_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getFeimeihui4_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getFenliao5_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getShui1_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getShui2_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getWaijiaji1_shijizhi());
+		strXML.append("'/>");
+		strXML.append("<category label='");
+		strXML.append(fieldview.getWaijiaji2_shijizhi());
+		strXML.append("'/>");
+		strXML.append("</categories>");
+
+		for (int i = 0; i < array.size(); i++) {
+			JSONObject key2 = array.getJSONObject(i);
+			strXML.append("<dataset seriesName='实际用量'>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Sha1_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shi1_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shi2_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Sha2_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Guliao5_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shuini1_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shuini2_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Kuangfen3_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Feimeihui4_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Fenliao5_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shui1_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shui2_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Waijiaji1_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Waijiaji2_shijizhi"));
+			strXML.append("'/>");
+			strXML.append("</dataset>");
+
+			strXML.append("<dataset seriesName='理论用量' renderAs='Area' parentYAxis='P' showValues='0'>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Sha1_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shi1_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shi2_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Sha2_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Guliao5_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shuini1_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shuini2_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Kuangfen3_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Feimeihui4_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Fenliao5_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shui1_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shui2_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Waijiaji1_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Waijiaji2_lilunzhi"));
+			strXML.append("'/>");
+			strXML.append("</dataset>");
+
+			strXML.append("<dataset lineThickness='3' seriesName='误差' renderAs='Line' parentYAxis='S' showValues='1'>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Sha1chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shi1chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shi2chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Sha2chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Guliao5chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shuini1chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shuini2chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Kuangfen3chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Feimeihui4chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Fenliao5chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shui1chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Shui2chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Waijiaji1chazhi"));
+			strXML.append("'/>");
+			strXML.append("<set value='");
+			strXML.append(key2.get("Waijiaji2chazhi"));
+			strXML.append("'/>");
+			strXML.append("</dataset>");
+			strXML.append("</chart>");
+		}
+		return strXML.toString();
+	}
+
+	private void appendSql(StringBuffer sql) {
+		sql.append("SELECT SUM(CAST( shui1_shijizhi as numeric(18,3))) AS shuisj1, ");
+		sql.append(" SUM(CAST( shui2_shijizhi as numeric(18,3))) AS shuisj2, ");
+		sql.append(" SUM(CAST( shuini1_shijizhi as numeric(18,3))) AS flsj1, ");
+		sql.append(" SUM(CAST( shuini2_shijizhi as numeric(18,3))) AS flsj2, ");
+		sql.append(" SUM(CAST( kuangfen3_shijizhi as numeric(18,3))) AS flsj3, ");
+		sql.append(" SUM(CAST( feimeihui4_shijizhi as numeric(18,3))) AS flsj4, ");
+		sql.append(" SUM(CAST( fenliao5_shijizhi as numeric(18,3))) AS flsj5, ");
+		sql.append(" SUM(CAST( fenliao6_shijizhi as numeric(18,3))) AS flsj6, ");
+		sql.append(" SUM(CAST( sha1_shijizhi as numeric(18,3))) AS glsj1, ");
+		sql.append(" SUM(CAST( shi1_shijizhi as numeric(18,3))) AS glsj2, ");
+		sql.append(" SUM(CAST( shi2_shijizhi as numeric(18,3))) AS glsj3, ");
+		sql.append(" SUM(CAST( sha2_shijizhi as numeric(18,3))) AS glsj4, ");
+		sql.append(" SUM(CAST( guliao5_shijizhi as numeric(18,3))) AS glsj5, ");
+		sql.append(" SUM(CAST( waijiaji1_shijizhi as numeric(18,3))) AS wjsj1, ");
+		sql.append(" SUM(CAST( waijiaji2_shijizhi as numeric(18,3))) AS wjsj2, ");
+		sql.append(" SUM(CAST( waijiaji3_shijizhi as numeric(18,3))) AS wjsj3, ");
+		sql.append(" SUM(CAST( waijiaji4_shijizhi as numeric(18,3))) AS wjsj4, ");
+		sql.append(" SUM(CAST( shui1_lilunzhi as numeric(18,3))) AS shuill1, ");
+		sql.append(" SUM(CAST( shui2_lilunzhi as numeric(18,3))) AS shuill2, ");
+		sql.append(" SUM(CAST( shuini1_lilunzhi as numeric(18,3))) AS flll1, ");
+		sql.append(" SUM(CAST( shuini2_lilunzhi as numeric(18,3))) AS flll2, ");
+		sql.append(" SUM(CAST( kuangfen3_lilunzhi as numeric(18,3))) AS flll3, ");
+		sql.append(" SUM(CAST( feimeihui4_lilunzhi as numeric(18,3))) AS flll4, ");
+		sql.append(" SUM(CAST( fenliao5_lilunzhi as numeric(18,3))) AS flll5, ");
+		sql.append(" SUM(CAST( fenliao6_lilunzhi as numeric(18,3))) AS flll6, ");
+		sql.append(" SUM(CAST( sha1_lilunzhi as numeric(18,3))) AS glll1, ");
+		sql.append(" SUM(CAST( shi1_lilunzhi as numeric(18,3))) AS glll2, ");
+		sql.append(" SUM(CAST( shi2_lilunzhi as numeric(18,3))) AS glll3, ");
+		sql.append(" SUM(CAST( sha2_lilunzhi as numeric(18,3))) AS glll4, ");
+		sql.append(" SUM(CAST( guliao5_lilunzhi as numeric(18,3))) AS glll5, ");
+		sql.append(" SUM(CAST( waijiaji1_lilunzhi as numeric(18,3))) AS wjll1, ");
+		sql.append(" SUM(CAST( waijiaji2_lilunzhi as numeric(18,3))) AS wjll2, ");
+		sql.append(" SUM(CAST( waijiaji3_lilunzhi as numeric(18,3))) AS wjll3, ");
+		sql.append(" SUM(CAST( waijiaji4_lilunzhi as numeric(18,3))) AS wjll4, ");
+		sql.append(" SUM(CAST( shui1_shijizhi as numeric(18,3)))-SUM(CAST( shui1_lilunzhi as numeric(18,3))) AS shui1chazhi, ");
+		sql.append(" SUM(CAST( shui2_shijizhi as numeric(18,3)))-SUM(CAST( shui2_lilunzhi as numeric(18,3))) AS shui2chazhi, ");
+		sql.append(" SUM(CAST( shuini1_shijizhi as numeric(18,3)))-SUM(CAST( shuini1_lilunzhi as numeric(18,3))) AS shuini1chazhi, ");
+		sql.append(" SUM(CAST( shuini2_shijizhi as numeric(18,3)))-SUM(CAST( shuini2_lilunzhi as numeric(18,3))) AS shuini2chazhi, ");
+		sql.append(" SUM(CAST( kuangfen3_shijizhi as numeric(18,3)))-SUM(CAST( kuangfen3_lilunzhi as numeric(18,3))) AS kuangfen3chazhi, ");
+		sql.append(" SUM(CAST( feimeihui4_shijizhi as numeric(18,3)))-SUM(CAST( feimeihui4_lilunzhi as numeric(18,3))) AS feimeihui4chazhi, ");
+		sql.append(" SUM(CAST( fenliao5_shijizhi as numeric(18,3)))-SUM(CAST( fenliao5_lilunzhi as numeric(18,3))) AS fenliao5chazhi, ");
+		sql.append(" SUM(CAST( fenliao6_shijizhi as numeric(18,3)))-SUM(CAST( fenliao6_lilunzhi as numeric(18,3))) AS fenliao6chazhi, ");
+		sql.append(" SUM(CAST( sha1_shijizhi as numeric(18,3)))-SUM(CAST( sha1_lilunzhi as numeric(18,3))) AS sha1chazhi, ");
+		sql.append(" SUM(CAST( shi1_shijizhi as numeric(18,3)))-SUM(CAST( shi1_lilunzhi as numeric(18,3))) AS shi1chazhi, ");
+		sql.append(" SUM(CAST( shi2_shijizhi as numeric(18,3)))-SUM(CAST( shi2_lilunzhi as numeric(18,3))) AS shi2chazhi, ");
+		sql.append(" SUM(CAST( sha2_shijizhi as numeric(18,3)))-SUM(CAST( sha2_lilunzhi as numeric(18,3))) AS sha2chazhi, ");
+		sql.append(" SUM(CAST( guliao5_shijizhi as numeric(18,3)))-SUM(CAST( guliao5_lilunzhi as numeric(18,3))) AS guliao5chazhi, ");
+		sql.append(" SUM(CAST( waijiaji1_shijizhi as numeric(18,3)))-SUM(CAST( waijiaji1_lilunzhi as numeric(18,3))) AS waijiaji1chazhi, ");
+		sql.append(" SUM(CAST( waijiaji2_shijizhi as numeric(18,3)))-SUM(CAST( waijiaji2_lilunzhi as numeric(18,3))) AS waijiaji2chazhi, ");
+		sql.append(" SUM(CAST( waijiaji3_shijizhi as numeric(18,3)))-SUM(CAST( waijiaji3_lilunzhi as numeric(18,3))) AS waijiaji3chazhi, ");
+		sql.append(" SUM(CAST( waijiaji4_shijizhi as numeric(18,3)))-SUM(CAST( waijiaji4_lilunzhi as numeric(18,3))) AS waijiaji4chazhi, ");
+		sql.append(" SUM(CAST( gujifangshu as numeric(18,3))) AS gujifangshu  ");
+	}
+	
+	public HntbhzziduancfgViewEntity findByGprsbhandleixin(String gprsbh, String leixin) {
+		String queryString = "select model.* from HntbhzziduancfgView as model where model.gprsbianhao='"+gprsbh+"' and model.leixin='"+leixin+"'";
+		List<HntbhzziduancfgViewEntity> hlist =jdbcDao.find(queryString, HntbhzziduancfgViewEntity.class, new HashMap<String, String>());
+		if (hlist.size()>0) {
+			return hlist.get(0);
+		} else {
+			return null;
+		}	
+	}
+	
+	//获取拌和站字段名称
+	public HntbhzziduancfgViewEntity hntfieldnamefindBybh(String gprsbh) {
+		HntbhzziduancfgViewEntity hcfg =  findByGprsbhandleixin(gprsbh, "1");	
+		if (null == hcfg) {
+			hcfg = findByGprsbhandleixin("all", "100");
+		}
+		return hcfg;	
+	}
+	
+}

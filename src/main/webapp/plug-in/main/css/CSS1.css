@@ -1,0 +1,95 @@
+.zise1 {
+	font-family: "新宋体";
+	font-size: 12px;
+	color: #000000;
+}
+.biaoti {
+	font-size: 13px;
+	font-weight: bold;
+	color: #FFFFFF;
+	margin-top:4px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.daohang {
+	font-family: "宋体";
+	font-size: 12px;
+	margin-top:5px;
+	color:#666666
+}
+.wz {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #FFFFFF;
+	margin-top:4px;
+}
+.daohang1 {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #666666;
+	margin-top:3px;
+}
+.yw {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: #CCCCCC;
+}
+.zhengwen {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #333333;
+	line-height: 160%;
+}
+.zhengwen2 {
+	font-family: "新宋体";
+	font-size: 12px;
+	line-height: 200%;
+	color: #666666;
+}
+.zhengwen22 {
+	font-family: "新宋体";
+	font-size: 12px;
+	line-height: 200%;
+	color: #666666;
+}
+.zhengwen1 {
+	font-size: 17px;
+	font-weight: bold;
+	font-family: "宋体";
+	line-height: 160%;
+	color:#000000
+}
+.zhengwen0 {
+	font-size: 17px;
+	font-family: "微软雅黑";
+	line-height: 160%;
+	color:#000000
+}
+.da {
+	font-family: "方正黑体简体";
+	font-size: 20px;
+	color: #000000;
+}
+.da1 {
+	font-family: "方正黑体简体";
+	font-size: 13px;
+	color: #333333;
+	font-weight: bold;
+}
+.zhengwen21 {	
+    font-family: "新宋体";
+	font-size: 13px;
+	color: #333333;
+	line-height: 150%;
+}
+.zhengwen6 {	
+    font-family: "新宋体";
+	font-size: 14px;
+	color: #ff3300;
+	line-height: 150%;
+}
+.zhengwen7 {	
+    font-family: "新宋体";
+	font-size: 12px;
+	color: #ff3300;
+	line-height: 150%;
+}

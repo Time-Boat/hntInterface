@@ -1,0 +1,13 @@
+package com.shtoone.qms.service.impl.bhz;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.shtoone.qms.service.bhz.V_ShebeiInfoServiceI;
+import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
+
+@Service("v_ShebeiInfoService")
+@Transactional
+public class V_ShebeiInfoServiceImpl extends CommonServiceImpl implements V_ShebeiInfoServiceI {
+	
+}

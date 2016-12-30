@@ -1,0 +1,149 @@
+package com.shtoone.qms.controller.bhz;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import org.jeecgframework.core.common.controller.BaseController;
+import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
+import org.jeecgframework.core.common.model.json.AjaxJson;
+import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.constant.Globals;
+import org.jeecgframework.core.util.StringUtil;
+import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.web.system.pojo.base.TSDepart;
+import org.jeecgframework.web.system.service.SystemService;
+import org.jeecgframework.core.util.MyBeanUtils;
+
+import com.shtoone.qms.entity.bhz.SmsinfohntEntity;
+import com.shtoone.qms.service.bhz.SmsinfohntServiceI;
+
+/**   
+ * @Title: Controller
+ * @Description: 混凝土短信通知表
+ * @author zhangdaihao
+ * @date 2015-06-23 11:43:37
+ * @version V1.0   
+ *
+ */
+@Controller
+@RequestMapping("/smsinfohntController")
+public class SmsinfohntController extends BaseController {
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger.getLogger(SmsinfohntController.class);
+
+	@Autowired
+	private SmsinfohntServiceI smsinfohntService;
+	@Autowired
+	private SystemService systemService;
+	private String message;
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+
+	/**
+	 * 混凝土短信通知表列表 页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "smsinfohnt")
+	public ModelAndView smsinfohnt(HttpServletRequest request) {
+		return new ModelAndView("com/shtoone/qms/bhz/smsinfohntList");
+	}
+
+	/**
+	 * easyui AJAX请求数据
+	 * 
+	 * @param request
+	 * @param response
+	 * @param dataGrid
+	 * @param user
+	 */
+
+	@RequestMapping(params = "datagrid")
+	public void datagrid(SmsinfohntEntity smsinfohnt,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+		CriteriaQuery cq = new CriteriaQuery(SmsinfohntEntity.class, dataGrid);
+		//查询条件组装器
+		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, smsinfohnt, request.getParameterMap());
+		this.smsinfohntService.getDataGridReturn(cq, true);
+		TagUtil.datagrid(response, dataGrid);
+	}
+
+	/**
+	 * 删除混凝土短信通知表
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "del")
+	@ResponseBody
+	public AjaxJson del(SmsinfohntEntity smsinfohnt, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		smsinfohnt = systemService.getEntity(SmsinfohntEntity.class, smsinfohnt.getId());
+		message = "混凝土短信通知表删除成功";
+		smsinfohntService.delete(smsinfohnt);
+		systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+		
+		j.setMsg(message);
+		return j;
+	}
+
+
+	/**
+	 * 添加混凝土短信通知表
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(params = "save")
+	@ResponseBody
+	public AjaxJson save(SmsinfohntEntity smsinfohnt, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		if (StringUtil.isNotEmpty(smsinfohnt.getId())) {
+			message = "混凝土短信通知表更新成功";
+			SmsinfohntEntity t = smsinfohntService.get(SmsinfohntEntity.class, smsinfohnt.getId());
+			try {
+				MyBeanUtils.copyBeanNotNull2Bean(smsinfohnt, t);
+				smsinfohntService.saveOrUpdate(t);
+				systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
+			} catch (Exception e) {
+				e.printStackTrace();
+				message = "混凝土短信通知表更新失败";
+			}
+		} else {
+			message = "混凝土短信通知表添加成功";
+			smsinfohntService.save(smsinfohnt);
+			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
+		}
+		j.setMsg(message);
+		return j;
+	}
+
+	/**
+	 * 混凝土短信通知表列表页面跳转
+	 * 
+	 * @return
+	 */
+	@RequestMapping(params = "addorupdate")
+	public ModelAndView addorupdate(SmsinfohntEntity smsinfohnt, HttpServletRequest req) {
+		if (StringUtil.isNotEmpty(smsinfohnt.getId())) {
+			smsinfohnt = smsinfohntService.getEntity(SmsinfohntEntity.class, smsinfohnt.getId());
+			req.setAttribute("smsinfohntPage", smsinfohnt);
+		}
+		return new ModelAndView("com/shtoone/qms/bhz/smsinfohnt");
+	}
+}

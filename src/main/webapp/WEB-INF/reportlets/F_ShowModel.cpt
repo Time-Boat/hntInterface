@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20131111" releaseVersion="7.0.5">
+<TableDataMap>
+<TableData name="ds_shiyianshi" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM dbo.[ShiyanshiInfo]A]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<ServerPrinter/>
+<WebWriteContent>
+<ToolBars/>
+<SelectedColor/>
+<WebWrite isSheet="false"/>
+<UnloadCheck/>
+</WebWriteContent>
+</ReportWebAttr>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[723900,1152000,1152000,1152000,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[762000,4229100,5600700,723900,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="1" r="1" s="0">
+<O>
+<![CDATA[被抽检试验]]></O>
+<Expand/>
+</C>
+<C c="2" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_testrec" columnName="cjshiyanshi_guid"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetName name="F_CJSYS"/>
+<WidgetAttr/>
+<DirectEdit>
+<![CDATA[false]]></DirectEdit>
+<CustomData>
+<![CDATA[false]]></CustomData>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="shiyanshi_guid" viName="F_TRNAME"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[ds_shiyianshi]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.DatabaseDictionary">
+<FormulaDictAttr ki="2" vi="4"/>
+<DBDictAttr tableName="ShiyanshiInfo" schemaName="dbo" ki="2" vi="4" kiName="" viName=""/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[qms]]></DatabaseName>
+</Connection>
+</Dictionary>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="2" s="0">
+<O>
+<![CDATA[报告类型]]></O>
+<Expand/>
+</C>
+<C c="2" r="2" s="1">
+<CellGUIAttr printBackground="false" printContent="false" showAsDefault="true"/>
+<CellPageAttr/>
+<Widget class="com.fr.form.ui.ComboBox">
+<WidgetName name="F_BGLX"/>
+<WidgetAttr/>
+<EMSG>
+<![CDATA[请选择报告类型]]></EMSG>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<DirectEdit>
+<![CDATA[false]]></DirectEdit>
+<CustomData>
+<![CDATA[false]]></CustomData>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="0" value="自检"/>
+<Dict key="1" value="见证"/>
+<Dict key="2" value="监理评检"/>
+<Dict key="3" value="其他"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue/>
+</Widget>
+<Present class="com.fr.base.present.DictPresent">
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="0" value="自检"/>
+<Dict key="1" value="见证"/>
+<Dict key="2" value="监理评检"/>
+<Dict key="3" value="其他"/>
+</CustomDictAttr>
+</Dictionary>
+</Present>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="1" r="3" cs="2">
+<Widget class="com.fr.form.ui.FreeButton">
+<Listener event="click">
+<JavaScript class="com.fr.js.JavaScriptImpl">
+<Parameters>
+<Parameter>
+<Attributes name="usertestid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$usertestid]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="WTID"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$WTID]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="rec_guid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$rec_guid]]></Attributes>
+</O>
+</Parameter>
+<Parameter>
+<Attributes name="shiyanshi_guid"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=$shiyanshi_guid]]></Attributes>
+</O>
+</Parameter>
+</Parameters>
+<Content>
+<![CDATA[var F_BGZT,cjshiyanshi_guid;
+F_BGZT = contentPane.getWidgetByName("F_BGLX").getValue();
+cjshiyanshi_guid = contentPane.getWidgetByName("F_CJSYS").getValue();
+parent.location.href=FR.cjkEncode('${contextPath}/ReportServer?reportlet='+'T_T'+usertestid+'.cpt&op=write&WTID='+WTID+'&F_BGZT='+F_BGZT+'&rec_guid='+rec_guid+'&usertestid='+usertestid+'&cjshiyanshi_guid='+cjshiyanshi_guid+'&shiyanshi_guid='+shiyanshi_guid+'&backurl=${contextPath}/ReportServer?reportlet=F_SYJZBList.cpt');]]></Content>
+</JavaScript>
+</Listener>
+<WidgetAttr/>
+<Text>
+<![CDATA[确定]]></Text>
+</Widget>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<PaperSize width="7200000" height="5760000"/>
+<Margin top="720000" left="720000" bottom="720000" right="720000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Top style="1" color="-16777216"/>
+<Bottom style="1" color="-16777216"/>
+<Left style="1" color="-16777216"/>
+<Right style="1" color="-16777216"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAF"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>

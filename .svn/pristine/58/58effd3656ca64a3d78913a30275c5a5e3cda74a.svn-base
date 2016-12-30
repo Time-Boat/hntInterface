@@ -1,0 +1,140 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="/context/mytags.jsp"%>
+<div class="easyui-layout" fit="true">
+  	<div region="center" style="padding:1px;">
+  		<t:datagrid name="sYclAllList" pagination="true"  fitColumns="false" title="原材料进场登记信息" actionUrl="sYclAllController.do?datagrid" idField="id" fit="true" queryMode="group">
+   			<t:dgCol title="操作" field="opt" frozenColumn="true"></t:dgCol>
+   			<t:dgFunOpt funname="operationsyc(id)" title="复制并录入"></t:dgFunOpt>
+   			<t:dgDelOpt title="删除" url="sYclAllController.do?doDel&id={id}" />
+   			<t:dgToolBar title="录入" icon="icon-add" url="sYclAllController.do?goAdd" funname="add"></t:dgToolBar>
+		    <t:dgToolBar title="批量删除"  icon="icon-remove" url="sYclAllController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
+		    <t:dgFunOpt funname="operationSYcALLEdit(id)" title="编辑" ></t:dgFunOpt>
+		    <t:dgFunOpt funname="operationSYcALL(id)" title="查看"></t:dgFunOpt>
+		    <t:dgCol title="id"  field="id"  hidden="false" ></t:dgCol>
+		    <t:dgCol title="产品批号"  field="picihao"></t:dgCol>
+		    <t:dgCol title="名称"  field="mingcheng"></t:dgCol>
+		    <t:dgCol title="存储地点"  field="cunchudidian"> </t:dgCol>
+		    <t:dgCol title="类型"  field="leixing"  ></t:dgCol>
+		    <t:dgCol title="入库时间"  field="rukushijian" ></t:dgCol>
+		    <t:dgCol title="生产厂家"  field="scchangjia" ></t:dgCol>
+		    <t:dgCol title="产地"  field="chandi" ></t:dgCol>
+		    <t:dgCol title="规格"  field="guige" ></t:dgCol>
+		    <t:dgCol title="型号"  field="xinghao" ></t:dgCol>
+		    <t:dgCol title="进场数量"  field="jcshuliang" ></t:dgCol>
+  			<%--  
+  			<t:dgCol title="总共库存"  field="zgkucun"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
+   			<t:dgCol title="批次"  field="pici"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
+   			<t:dgCol title="生产单位"  field="scdanwei"  hidden="true"  queryMode="group"  width="120"></t:dgCol> 
+   			--%>
+   			<t:dgCol title="取样时间"  field="qyshijian"></t:dgCol>
+   			<t:dgCol title="试验时间"  field="syshijian" ></t:dgCol>
+   			<t:dgCol title="试验人"  field="shiyanren"></t:dgCol>
+<%--  		<t:dgCol title="实验部位"  field="syxingmu"  hidden="true"  queryMode="group"  width="120"></t:dgCol> --%>
+<%--    	<t:dgCol title="检测结论"  field="ycl0"  hidden="true"  queryMode="group"  width="60" sortable="false"></t:dgCol> --%>
+			<%--  	
+			<t:dgCol title="检测结果1"  field="ycl1"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	<t:dgCol title="检测结果2"  field="ycl2"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	<t:dgCol title="检测结果3"  field="ycl3"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	<t:dgCol title="检测结果4"  field="ycl4"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	<t:dgCol title="检测结果5"  field="ycl5"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	<t:dgCol title="检测结果6"  field="ycl6"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	<t:dgCol title="检测结果7"  field="ycl7"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	<t:dgCol title="检测结果8"  field="ycl8"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	<t:dgCol title="检测结果9"  field="ycl9"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	<t:dgCol title="检测结果10"  field="ycl10"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	<t:dgCol title="样品编号"  field="ycl11"  hidden="true"  queryMode="group"  width="40" sortable="false"></t:dgCol>
+		   	--%>
+   			<t:dgCol title="报告时间"  field="ycl12"  hidden="true"   queryMode="group"  width="60" sortable="false" ></t:dgCol>
+   			<t:dgCol title="报告编号"  field="bgbianhao"  hidden="true"  queryMode="group"  width="60" sortable="false"></t:dgCol> 
+  		</t:datagrid>
+    	<div id="sclall">
+    		<table cellpadding="0" cellspacing="1" class="formtable">
+    	<tr>
+    	<td>
+		               所属机构 :</td>
+		<td>	 <input id="cc_syclall"  value="${depart.TSPDepart.departname}" style="height:24px;width:180px;">
+					<div><input id="tspdepartId" name="departid" style="display: none;" value="${depart.TSPDepart.id}"></div>
+		</td>
+		<td>
+			 原材料: 
+				<input id="leixing" type="text" name="leixing"/>
+		</td>
+		<td>
+			 规格: 
+				<!-- <input id="guige" type="text" name="guige"/> -->
+				<select id="guige" name="guige" datatype="*" onchange="qh(this.value)">
+						<option value="">---请选择规格---</option>
+						<c:forEach items="${List}" var="depart">
+							<option value="${depart.selectkey }">${depart.selectkey}</option>
+						</c:forEach>
+						</select>
+		</td>
+		<td>
+			 型号: 
+				<!-- <input id="xinghao" type="text" name="xinghao"/> -->
+				<select id="xinghao" name="xinghao" datatype="*">
+						<option value="">---请选择型号---</option>
+						<c:forEach items="${sList}" var="depart">
+							<option value="${depart.mselectkey }">${depart.mselectkey}</option>
+						</c:forEach>
+						</select>
+		</td>	
+		<td>	<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="sYclAllListsearch();" >查询</a></td>
+		</tr>
+	</table>
+	</div>
+  
+  </div>
+ </div>
+ <script src = "webpage/com/shtoone/qms/bhz/sYclAllList.js"></script>		
+ <script type="text/javascript">
+  $(function() {
+	 $('#cc_syclall').combotree({
+			url : 'departController.do?setPFunction&selfId=${depart.id}',
+			onClick: function(node){
+				$("#tspdepartId").val(node.id);
+			}
+		});
+	});  
+ 
+ 
+ 
+ function sYclAllListsearch() {
+	 $('#sYclAllList').datagrid('load', {
+			leixing : $('#leixing').val(),
+			guige : $("#guige").val(),
+			xinghao : $("#xinghao").val(),
+			biaoduanid :$("#tspdepartId").val()
+		});
+	}
+ 
+ function qh(name){
+	 $.ajax({
+			url:"sYclGuigexinghaomController.do?xinghaolist",
+			type:'post',
+			dataType:"json",
+			data:{
+				name:name 
+			},
+			success:function(data){
+				$('#'+"xinghao").html("");
+				var jsonStr='<option title="-1" selected="selected" value="">--请选择型号--</option>';
+				$.each(data.list,function(i,item){
+					jsonStr+='<option value="'+item.mselectkey+'">'+item.mselectkey+'</option>'
+				});
+				$('#'+"xinghao").append(jsonStr);
+			}
+		});
+	 
+ }
+ 
+ 	function operationSYcALLEdit(id) {
+		add("原材料编辑","sYclAllController.do?goUpdate&id="+id,'functionList',"1200px","500px");
+	}
+ 	function operationsyc(id) {
+		add("原材料录入","sYclAllController.do?copyandadd&id="+id,'functionList',"1200px","500px");
+	}
+	function operationSYcALL(id) {
+	 	createdetailwindow("原材料查看","sYclAllController.do?goUpdate&id="+id,"1200px","500px");
+	}
+ </script>
