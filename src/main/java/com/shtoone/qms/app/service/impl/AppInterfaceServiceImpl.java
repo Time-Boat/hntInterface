@@ -290,7 +290,7 @@ public class AppInterfaceServiceImpl extends CommonServiceImpl implements AppInt
 			if(StringUtil.isNotEmpty(bhjtype)){
 				queryString+=" and gprstype="+bhjtype;
 			}
-			List<BanhezhanxinxiEntity> bhzlist=jdbcDao.find(queryString, BanhezhanxinxiEntity.class, new HashMap<String, String>());
+			List<BanhezhanxinxiEntity> bhzlist = jdbcDao.find(queryString, BanhezhanxinxiEntity.class, new HashMap<String, String>());
 			if(null!=bhzlist&&bhzlist.size()>0){
 				return bhzlist.get(0).getOrderid();
 			}else{

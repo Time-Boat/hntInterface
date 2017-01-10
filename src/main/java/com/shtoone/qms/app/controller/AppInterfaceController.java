@@ -25,6 +25,7 @@ import net.sf.json.JSONObject;
 
 import org.jeecgframework.core.common.controller.BaseController;
 import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
+import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.util.PasswordUtil;
 import org.jeecgframework.web.system.pojo.base.TSDepart;
@@ -454,7 +455,8 @@ public class AppInterfaceController extends BaseController {
 			List<HntMain> returnList = new ArrayList<HntMain>();
 			// 获取组织机构树
 			if (StringUtil.Null2Blank(departId).length() > 0) {
-				CriteriaQuery cq = new CriteriaQuery(TSDepart.class);
+				//查询器，相当于以实体类的形式拼出一个sql语句，通过这条sql查询数据
+				CriteriaQuery cq = new CriteriaQuery(TSDepart.class/*,new DataGrid()*/);
 				cq.eq("TSPDepart.id", departId);
 				cq.add();
 				List<TSDepart> departList = systemService.getListByCriteriaQuery(cq, false);

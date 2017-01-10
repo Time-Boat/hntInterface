@@ -45,8 +45,8 @@ public class SysInterfaceServiceImpl extends CommonServiceImpl implements SysInt
 		String CountSQL="select tj.SYLX AS departname,SUM(CAST(tj.SYSL as int)) AS SYSL,SUM(CAST(tj.BUHEGE as int)) AS BUHEGE,tst.testname " +
 		" from T_tongji_syjView tj join T_SYJZB_TYPE tst on tj.SYLX = tst.testid where 1=1 ";
 		String czpSQL = "select count(*) AS realCount from T_SYJZBRealView where 1=1 and (ISNULL(chuli,'')<>'') ";
-		String sysCountSQL = "select count(*) AS sysCount from ShiyanshiInfo si join t_s_depart ts on ts.id = si.shiyanshi_guid where 1=1";
-		String syjCountSQL = "select count(*) AS syjCount from ShebeiInfo si join t_s_depart ts on ts.id = si.shiyanshi_guid where 1=1";
+		String sysCountSQL = "select count(*) AS sysCount from ShiyanshiInfo si join t_s_depart ts on ts.id = si.shiyanshi_guid where 1=1 ";
+		String syjCountSQL = "select count(*) AS syjCount from ShebeiInfo si join t_s_depart ts on ts.id = si.shiyanshi_guid where 1=1 ";
 		if(StringUtil.isNotEmpty(lft) && StringUtil.isNotEmpty(rgt)){
 			CountSQL+=" and (lft >='"+lft+"' and rgt<='"+rgt+"') ";
 			czpSQL+=" and (lft >='"+lft+"' and rgt<='"+rgt+"') ";
