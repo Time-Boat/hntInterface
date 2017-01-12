@@ -425,7 +425,6 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 					type=funtype;
 				}
 				RecursionDepartById(departxixxList,null,type,newdepartId,funtype);
-				
 			}
 		}
 		departxixxList.addAll(departListTemp);

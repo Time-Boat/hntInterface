@@ -195,9 +195,9 @@ public class AppInterfaceController extends BaseController {
 						try {
 							// 登陆手机类型
 							if (StringUtil.Null2Blank(OSType).length() > 0) {
-								String sql = "update t_s_user set OSType='" + OSType + "' where id='" + user.getId()
-										+ "'";
-								infService.executeSql(sql);
+//								String sql = "update t_s_user set OSType='" + OSType + "' where id='" + user.getId()
+//										+ "'";
+//								infService.executeSql(sql);
 							}
 						} catch (Exception e) {
 						}
@@ -213,9 +213,9 @@ public class AppInterfaceController extends BaseController {
 								List<AppInterfaceHandSetBean> handsetlist = handsetsService
 										.getHandSet(user.getMobilePhone());
 								for (AppInterfaceHandSetBean handsetObj : handsetlist) {
-									String sql = "update handsets set type=" + OSType + " where id="
-											+ handsetObj.getId();
-									infService.executeSql(sql);
+//									String sql = "update handsets set type=" + OSType + " where id="
+//											+ handsetObj.getId();
+//									infService.executeSql(sql);
 
 									handsetObj.setName(xmjc + handsetObj.getName());
 								}
